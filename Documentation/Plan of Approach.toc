@@ -1,0 +1,9 @@
+\contentsline {chapter}{\numberline {1}Background}{2}{}%
+\contentsline {section}{\numberline {1.1}Be Creative}{2}{}%
+\contentsline {section}{\numberline {1.2}The Assignment}{2}{}%
+\contentsline {chapter}{\numberline {2}Project Result}{3}{}%
+\contentsline {chapter}{\numberline {3}Project Activities}{5}{}%
+\contentsline {chapter}{\numberline {4}Project boundaries}{6}{}%
+\contentsline {chapter}{\numberline {5}Milestones}{8}{}%
+\contentsline {chapter}{\numberline {6}Planning}{10}{}%
+\contentsline {chapter}{\numberline {7}Risk Analysis}{12}{}%

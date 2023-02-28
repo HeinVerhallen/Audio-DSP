@@ -16,5 +16,23 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{fontys}{misc}{}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labeltitlesource}{title}
+      \field{title}{Fontys Hogescholen ECG project S4}
+      \field{year}{2022}
+      \verb{urlraw}
+      \verb https://canvas.fontys.nl/courses/10427/files/841193?module_item_id=241968
+      \endverb
+      \verb{url}
+      \verb https://canvas.fontys.nl/courses/10427/files/841193?module_item_id=241968
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
 \endinput
 

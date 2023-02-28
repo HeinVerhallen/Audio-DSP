@@ -1,0 +1,616 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.1) (preloaded format=pdflatex 2023.2.16)  28 FEB 2023 10:27
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**./PlanOfApproach.tex
+(PlanOfApproach.tex
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-02-02>
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/base/report.cls
+Document Class: report 2022/07/02 v1.4n Standard LaTeX document class
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/base/size11.clo
+File: size11.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count185
+\c@chapter=\count186
+\c@section=\count187
+\c@subsection=\count188
+\c@subsubsection=\count189
+\c@paragraph=\count190
+\c@subparagraph=\count191
+\c@figure=\count192
+\c@table=\count193
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+)
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/graphics/graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+)
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/graphics-def/pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen141
+\Gin@req@width=\dimen142
+)
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/gene
+ric/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/gene
+ric/iftex/iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+))
+\Gm@cnth=\count194
+\Gm@cntv=\count195
+\c@Gm@tempcnt=\count196
+\Gm@bindingoffset=\dimen143
+\Gm@wd@mp=\dimen144
+\Gm@odd@mp=\dimen145
+\Gm@even@mp=\dimen146
+\Gm@layoutwidth=\dimen147
+\Gm@layoutheight=\dimen148
+\Gm@layouthoffset=\dimen149
+\Gm@layoutvoffset=\dimen150
+\Gm@dimlist=\toks17
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/geometry/geometry.cfg))
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count197
+\float@exts=\toks18
+\float@box=\box51
+\@float@everytoks=\toks19
+\@floatcapt=\box52
+)
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/biblatex/biblatex.sty
+Package: biblatex 2022/07/12 v3.18b programmable bibliographies (PK/MW)
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/gene
+ric/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/gene
+ric/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/gene
+ric/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count198
+)
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/kvoptions/kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+))
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/logreq/logreq.sty
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count199
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/logreq/logreq.def
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+))
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/base/ifthen.sty
+Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
+)
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/url/url.sty
+\Urlmuskip=\muskip16
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+\c@tabx@nest=\count266
+\c@listtotal=\count267
+\c@listcount=\count268
+\c@liststart=\count269
+\c@liststop=\count270
+\c@citecount=\count271
+\c@citetotal=\count272
+\c@multicitecount=\count273
+\c@multicitetotal=\count274
+\c@instcount=\count275
+\c@maxnames=\count276
+\c@minnames=\count277
+\c@maxitems=\count278
+\c@minitems=\count279
+\c@citecounter=\count280
+\c@maxcitecounter=\count281
+\c@savedcitecounter=\count282
+\c@uniquelist=\count283
+\c@uniquename=\count284
+\c@refsection=\count285
+\c@refsegment=\count286
+\c@maxextratitle=\count287
+\c@maxextratitleyear=\count288
+\c@maxextraname=\count289
+\c@maxextradate=\count290
+\c@maxextraalpha=\count291
+\c@abbrvpenalty=\count292
+\c@highnamepenalty=\count293
+\c@lownamepenalty=\count294
+\c@maxparens=\count295
+\c@parenlevel=\count296
+\blx@tempcnta=\count297
+\blx@tempcntb=\count298
+\blx@tempcntc=\count299
+\c@blx@maxsection=\count300
+\blx@maxsegment@0=\count301
+\blx@notetype=\count302
+\blx@parenlevel@text=\count303
+\blx@parenlevel@foot=\count304
+\blx@sectionciteorder@0=\count305
+\blx@sectionciteorderinternal@0=\count306
+\blx@entrysetcounter=\count307
+\blx@biblioinstance=\count308
+\labelnumberwidth=\skip50
+\labelalphawidth=\skip51
+\biblabelsep=\skip52
+\bibitemsep=\skip53
+\bibnamesep=\skip54
+\bibinitsep=\skip55
+\bibparsep=\skip56
+\bibhang=\skip57
+\blx@bcfin=\read2
+\blx@bcfout=\write3
+\blx@langwohyphens=\language1
+\c@mincomprange=\count309
+\c@maxcomprange=\count310
+\c@mincompwidth=\count311
+Package biblatex Info: Trying to load biblatex default data model...
+Package biblatex Info: ... file 'blx-dm.def' found.
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/biblatex/blx-dm.def
+File: blx-dm.def 2022/07/12 v3.18b biblatex localization (PK/MW)
+)
+Package biblatex Info: Trying to load biblatex style data model...
+Package biblatex Info: ... file 'alphabetic.dbx' not found.
+Package biblatex Info: Trying to load biblatex custom data model...
+Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
+\c@afterword=\count312
+\c@savedafterword=\count313
+\c@annotator=\count314
+\c@savedannotator=\count315
+\c@author=\count316
+\c@savedauthor=\count317
+\c@bookauthor=\count318
+\c@savedbookauthor=\count319
+\c@commentator=\count320
+\c@savedcommentator=\count321
+\c@editor=\count322
+\c@savededitor=\count323
+\c@editora=\count324
+\c@savededitora=\count325
+\c@editorb=\count326
+\c@savededitorb=\count327
+\c@editorc=\count328
+\c@savededitorc=\count329
+\c@foreword=\count330
+\c@savedforeword=\count331
+\c@holder=\count332
+\c@savedholder=\count333
+\c@introduction=\count334
+\c@savedintroduction=\count335
+\c@namea=\count336
+\c@savednamea=\count337
+\c@nameb=\count338
+\c@savednameb=\count339
+\c@namec=\count340
+\c@savednamec=\count341
+\c@translator=\count342
+\c@savedtranslator=\count343
+\c@shortauthor=\count344
+\c@savedshortauthor=\count345
+\c@shorteditor=\count346
+\c@savedshorteditor=\count347
+\c@labelname=\count348
+\c@savedlabelname=\count349
+\c@institution=\count350
+\c@savedinstitution=\count351
+\c@lista=\count352
+\c@savedlista=\count353
+\c@listb=\count354
+\c@savedlistb=\count355
+\c@listc=\count356
+\c@savedlistc=\count357
+\c@listd=\count358
+\c@savedlistd=\count359
+\c@liste=\count360
+\c@savedliste=\count361
+\c@listf=\count362
+\c@savedlistf=\count363
+\c@location=\count364
+\c@savedlocation=\count365
+\c@organization=\count366
+\c@savedorganization=\count367
+\c@origlocation=\count368
+\c@savedoriglocation=\count369
+\c@origpublisher=\count370
+\c@savedorigpublisher=\count371
+\c@publisher=\count372
+\c@savedpublisher=\count373
+\c@language=\count374
+\c@savedlanguage=\count375
+\c@origlanguage=\count376
+\c@savedoriglanguage=\count377
+\c@pageref=\count378
+\c@savedpageref=\count379
+\shorthandwidth=\skip58
+\shortjournalwidth=\skip59
+\shortserieswidth=\skip60
+\shorttitlewidth=\skip61
+\shortauthorwidth=\skip62
+\shorteditorwidth=\skip63
+\locallabelnumberwidth=\skip64
+\locallabelalphawidth=\skip65
+\localshorthandwidth=\skip66
+\localshortjournalwidth=\skip67
+\localshortserieswidth=\skip68
+\localshorttitlewidth=\skip69
+\localshortauthorwidth=\skip70
+\localshorteditorwidth=\skip71
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/biblatex/blx-compat.def
+File: blx-compat.def 2022/07/12 v3.18b biblatex compatibility (PK/MW)
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/biblatex/biblatex.def
+File: biblatex.def 2022/07/12 v3.18b biblatex compatibility (PK/MW)
+\c@textcitecount=\count380
+\c@textcitetotal=\count381
+\c@textcitemaxnames=\count382
+\c@biburlbigbreakpenalty=\count383
+\c@biburlbreakpenalty=\count384
+\c@biburlnumpenalty=\count385
+\c@biburlucpenalty=\count386
+\c@biburllcpenalty=\count387
+\biburlbigskip=\muskip17
+\biburlnumskip=\muskip18
+\biburlucskip=\muskip19
+\biburllcskip=\muskip20
+\c@smartand=\count388
+)
+Package biblatex Info: Trying to load bibliography style 'alphabetic'...
+Package biblatex Info: ... file 'alphabetic.bbx' found.
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/biblatex/bbx/alphabetic.bbx
+File: alphabetic.bbx 2022/07/12 v3.18b biblatex bibliography style (PK/MW)
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/biblatex/bbx/standard.bbx
+File: standard.bbx 2022/07/12 v3.18b biblatex bibliography style (PK/MW)
+\c@bbx:relatedcount=\count389
+\c@bbx:relatedtotal=\count390
+))
+Package biblatex Info: Trying to load citation style 'alphabetic'...
+Package biblatex Info: ... file 'alphabetic.cbx' found.
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/biblatex/cbx/alphabetic.cbx
+File: alphabetic.cbx 2022/07/12 v3.18b biblatex citation style (PK/MW)
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+Package biblatex Info: Redefining '\cites'.
+Package biblatex Info: Redefining '\parencites'.
+Package biblatex Info: Redefining '\smartcites'.
+)
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/biblatex/biblatex.cfg
+File: biblatex.cfg 
+)
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Document encoding is UTF8 ....
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/l3kernel/expl3.sty
+Package: expl3 2023-02-02 L3 programming layer (loader) 
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count391
+\l__pdf_internal_box=\box53
+))
+Package biblatex Info: ... and expl3
+(biblatex)             2023-02-02 L3 programming layer (loader) 
+(biblatex)             is new enough (at least 2020/04/06),
+(biblatex)             setting 'casechanger=expl3'.
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/biblatex/blx-case-expl3.sty
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/l3packages/xparse/xparse.sty
+Package: xparse 2023-01-16 L3 Experimental document command parser
+)
+Package: blx-case-expl3 2022/07/12 v3.18b expl3 case changing code for biblatex
+
+))
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/preprint/authblk.sty
+Package: authblk 2001/02/27 1.3 (PWD)
+\affilsep=\skip72
+\@affilsep=\skip73
+\c@Maxaffil=\count392
+\c@authors=\count393
+\c@affil=\count394
+)
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/titlesec/titlesec.sty
+Package: titlesec 2021/07/05 v2.14 Sectioning titles
+\ttl@box=\box54
+\beforetitleunit=\skip74
+\aftertitleunit=\skip75
+\ttl@plus=\dimen151
+\ttl@minus=\dimen152
+\ttl@toksa=\toks20
+\titlewidth=\dimen153
+\titlewidthlast=\dimen154
+\titlewidthfirst=\dimen155
+)
+\@quotelevel=\count395
+\@quotereset=\count396
+ (PlanOfApproach.aux)
+\openout1 = `PlanOfApproach.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/cont
+ext/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count397
+\scratchdimen=\dimen156
+\scratchbox=\box55
+\nofMPsegments=\count398
+\nofMParguments=\count399
+\everyMPshowfont=\toks21
+\MPscratchCnt=\count400
+\MPscratchDim=\dimen157
+\MPnumerator=\count401
+\makeMPintoPDFobject=\count402
+\everyMPtoPDFconversion=\toks22
+)
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/00miktex/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(71.13188pt, 455.24411pt, 71.13188pt)
+* v-part:(T,H,B)=(71.13188pt, 702.78308pt, 71.13188pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=455.24411pt
+* \textheight=702.78308pt
+* \oddsidemargin=-1.1381pt
+* \evensidemargin=-1.1381pt
+* \topmargin=-38.1381pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=11.0pt
+* \footskip=30.0pt
+* \marginparwidth=50.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/biblatex/lbx/english.lbx
+File: english.lbx 2022/07/12 v3.18b biblatex localization (PK/MW)
+)
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'utf8'.
+\openout3 = `PlanOfApproach.bcf'.
+
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'PlanOfApproach.bbl' found.
+ (PlanOfApproach.bbl)
+Package biblatex Info: Reference section=0 on input line 19.
+Package biblatex Info: Reference segment=0 on input line 19.
+ [1
+
+{/Users/busselommers/Library/Application Support/MiKTeX/texmfs/data/fonts/map/p
+dftex/pdftex.map}]
+(PlanOfApproach.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 3.
+)
+\tf@toc=\write4
+\openout4 = `PlanOfApproach.toc'.
+
+ [1
+
+]
+Chapter 1.
+(Background.tex) [2
+
+]
+Chapter 2.
+(Projectresult.tex
+Underfull \hbox (badness 10000) in paragraph at lines 17--18
+
+ []
+
+[3
+
+] [4]) [5]
+Chapter 3.
+(Projectactivities.tex [6
+
+]) [7]
+Chapter 4.
+(Projectboundaries.tex) [8
+
+]
+Chapter 5.
+(Milestones.tex) [9
+
+]
+Chapter 6.
+(Qualityassurance.tex) [10
+
+]
+Chapter 7.
+(Projectorganisation.tex) [11
+
+]
+Chapter 8.
+(Planning.tex) [12
+
+]
+Chapter 9.
+(Costbenefitoverview.tex) [13
+
+]
+Chapter 10.
+(Riskanalysis.tex
+Underfull \hbox (badness 10000) in paragraph at lines 17--18
+
+ []
+
+<./images//risk.jpg, id=52, 664.4825pt x 616.3025pt>
+File: ./images//risk.jpg Graphic file (type jpg)
+<use ./images//risk.jpg>
+Package pdftex.def Info: ./images//risk.jpg  used on input line 20.
+(pdftex.def)             Requested size: 265.78828pt x 246.51663pt.
+)
+
+LaTeX Warning: Empty bibliography on input line 69.
+
+[14
+
+ <./images//risk.jpg>]
+Appendix A.
+[15
+
+] (PlanOfApproach.aux)
+Package logreq Info: Writing requests to 'PlanOfApproach.run.xml'.
+\openout1 = `PlanOfApproach.run.xml'.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 10238 strings out of 478313
+ 198697 string characters out of 5837989
+ 1863346 words of memory out of 5000000
+ 30274 multiletter control sequences out of 15000+600000
+ 517483 words of font info for 49 fonts, out of 8000000 for 9000
+ 0 hyphenation exceptions out of 8191
+ 63i,7n,68p,689b,801s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </Users/busselommers/Library/Application Support/MiKTeX/texmfs/data/fonts/pk
+/ljfour/jknappen/ec/dpi600/tcrm1095.pk></Users/busselommers/Library/Application
+ Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmbx10.pfb></User
+s/busselommers/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/pu
+blic/amsfonts/cm/cmbx12.pfb></Users/busselommers/Library/Application Support/Mi
+KTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users/busselomme
+rs/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfont
+s/cm/cmr12.pfb></Users/busselommers/Library/Application Support/MiKTeX/texmfs/i
+nstall/fonts/type1/public/amsfonts/cm/cmr17.pfb>
+Output written on PlanOfApproach.pdf (16 pages, 260798 bytes).
+PDF statistics:
+ 89 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+

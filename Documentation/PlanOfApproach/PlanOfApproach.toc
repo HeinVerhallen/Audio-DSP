@@ -1,0 +1,22 @@
+\contentsline {chapter}{\numberline {1}Background}{2}{}%
+\contentsline {chapter}{\numberline {2}Project result}{3}{}%
+\contentsline {section}{\numberline {2.1}Must have (to be confirmed by research)}{3}{}%
+\contentsline {section}{\numberline {2.2}Should have (to be confirmed by research)}{4}{}%
+\contentsline {section}{\numberline {2.3}Could have (to be confirmed by research)}{4}{}%
+\contentsline {section}{\numberline {2.4}Won't have (to be confirmed by research)}{5}{}%
+\contentsline {chapter}{\numberline {3}Project activities}{6}{}%
+\contentsline {section}{\numberline {3.1}Planning}{6}{}%
+\contentsline {section}{\numberline {3.2}Research}{6}{}%
+\contentsline {section}{\numberline {3.3}Designing}{7}{}%
+\contentsline {section}{\numberline {3.4}Testing}{7}{}%
+\contentsline {section}{\numberline {3.5}Writing Documentation}{7}{}%
+\contentsline {section}{\numberline {3.6}Budget tracking}{7}{}%
+\contentsline {chapter}{\numberline {4}Project boundaries}{8}{}%
+\contentsline {chapter}{\numberline {5}Milestones}{9}{}%
+\contentsline {chapter}{\numberline {6}Quality assurance}{10}{}%
+\contentsline {chapter}{\numberline {7}Project organisation}{11}{}%
+\contentsline {chapter}{\numberline {8}Planning}{12}{}%
+\contentsline {chapter}{\numberline {9}Cost-benefit overview}{13}{}%
+\contentsline {chapter}{\numberline {10}Risk Analysis}{14}{}%
+\contentsline {subsubsection}{Scale}{14}{}%
+\contentsline {chapter}{\numberline {A}Appendix A}{15}{}%

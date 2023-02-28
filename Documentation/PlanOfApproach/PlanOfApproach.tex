@@ -1,10 +1,14 @@
 \documentclass[11pt, a4paper]{report}
 \usepackage{graphicx}
-\usepackage{geometry} 
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{geometry}
+\usepackage[backend=biber]{biblatex}
 \usepackage{float}
-\usepackage[backend=biber, style=alphabetic]{biblatex}
 \usepackage{authblk}
+\usepackage{anyfontsize}
+\usepackage[document]{ragged2e}
 \usepackage{titlesec}
+\usepackage[parfill]{parskip}
 \titleformat{\chapter}[hang] 
 {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter:}{1em}{} 
 \geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
@@ -13,30 +17,51 @@
 \addbibresource{bibfolder/ref.bib}
 
 
-
-
 % CHECK https://www.youtube.com/watch?v=ZYvS52511oQ FOR INFO ON SETTINGS FOR biblatex
 
+
 \begin{document}
-\title{%
-  Plan of Approach \\
-  \large Audio digital signal processor \\
-  BeCreative Minor}
-\author{Busse Lommers \\
+\pagestyle{empty}
+\centering
+\fontsize{2cm}{2cm}\selectfont{Plan of Approach} \\
+\vspace{2mm}
+\fontsize{1cm}{1cm}\selectfont Audio digital signal processor \\
+\vspace{2mm}
+\large BeCreative Minor\\
+\normalsize
+\vspace{4cm}
+\includegraphics[width=\linewidth]{3DR_P1_Perspective.png}\\
+\vfill
+\normalsize Busse Lommers \\
 Robin van den Dungen \\
 Mahmud Gürler \\
 Silas Kamphuis \\
 Hein Verhallen \\
 Youri Tils \\
-Ahmed Abdelrahim}
-\affil{Fontys Hogescholen, De Rondom 1, 5612 AP Eindhoven}
-\date{15 februari 2023}
-\maketitle
-% Titel toegevoegd
+Ahmed Abdelrahim \\
+Fontys Hogescholen, De Rondom 1, 5612 AP Eindhoven \\
+\today
+
+\begin{justify}
+
+
+\newpage
 \tableofcontents
+\thispagestyle{empty}
+
+\listoffigures
+\thispagestyle{empty}
+
+\listoftables
+\thispagestyle{empty}
+
+\newpage
+\pagestyle{plain}
+\setcounter{page}{1}
+
 
 \chapter{Background}
-% We can reference this \cite{latex2e}
+We can reference like this: \cite{fontys}
 	\input{Background}
 	
 \chapter{Project result}
@@ -73,9 +98,11 @@ title={Bibliography}
 ]
 
 
+
 \appendix
 
 \chapter{Appendix A}
 
 
+	\end{justify}
 \end{document}

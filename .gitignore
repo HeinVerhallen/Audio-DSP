@@ -29,3 +29,4 @@ Documentation/.DS_Store
 *.lof
 Documentation/PlanOfApproach/PlanOfApproach.pdf
 *.toc
+*.synctex(busy)

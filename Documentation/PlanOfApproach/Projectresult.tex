@@ -1,6 +1,6 @@
 The goal of this project is to research how to make an audio-DSP. This raises the main research question: \textbf{“How to design an audio-DSP?”}. In the process of researching this an actual audio-DSP will be developed. From the main research question the following sub-research questions are derived:
 \begin{itemize} %THIS IS TO MAKE LISTS
-	\setlength\itemsep{-0.2em} %MAKES THE GAP SMALLER BETWEEN 2 ITEMS
+	\setlength\itemsep{-0.3em} %MAKES THE GAP SMALLER BETWEEN 2 ITEMS
 	\item What is the best method for creating digital filters?
 	\item What is the best method for creating digital effects?
 	\item What is the most suitable anti-aliasing filter?
@@ -14,18 +14,21 @@ The goal of this project is to research how to make an audio-DSP. This raises th
 	\item What is the permittable jitter for accurate audio?
 	\item What is the maximum allowable ripple on the reference voltage for the ADC and DAC?
 	\item How much RAM does the system need?
-	\item How much flash does the system need?\\
+	\item How much flash does the system need?
+	\item What power supply topology is best suited for each part of the system? \\
 \end{itemize}
 
 \noindent
 The project is conducted during the minor BeCreative at Fontys. This minor takes 20 weeks and allows the students to have a budget of €300,-. Thus after 20 weeks starting from 6-2-2023 an audio-DSP will be delivered within a budget of €300,-.
+\par
+\noindent
 The audio system has some requirements to specify the final result. These requirements are derived with the “MoSCoW” method. It must be noted that the following requirements will be confirmed by the research that will be conducted.
 
 
 	\section{Must have (to be confirmed by research)}
 	
 \begin{itemize}
-	\setlength\itemsep{-0.2em}
+	\setlength\itemsep{-0.3em}
 	\item Two RCA audio inputs which work on a line level of 4 dBu (±1,74 V).
 	\item Two 6,35 mm TRS plug audio inputs which work on a line level of 4 dBu (±1,74 V).
 	\item Two XLR audio inputs which work on a line level of 22 dBu (±9,75 V).
@@ -44,18 +47,18 @@ The audio system has some requirements to specify the final result. These requir
 	\item The system must work stand alone and be configurable via a basic graphical user interface.
 	\item Effects configurable per output channel at least four different sound effects should be able to be applied to each signal output signal at the same time:
 	\begin{itemize} %BEGIN IN ANOTHER \BEGIN MAKES IT A LIST WITHIN A LIST (DUH)
-		\setlength\itemsep{-0.2em}
+		\setlength\itemsep{-0.3em}
 		\item Distortion
 		\item Reverb
 		\item Gain
 		\item Equalizer 
-		\item Delay of 10 ms
+		\item Delay
 	\end{itemize}
 \end{itemize}
 	
 	\section{Should have (to be confirmed by research)}
 		\begin{itemize}
-		\setlength\itemsep{-0.2em}
+		\setlength\itemsep{-0.3em}
 			\item The system should have a bandwidth (±1 dB) of at least 20 Hz up and till 20 kHz without any filters applied.
 			\item Audio sample rate of at least 96 kHz
 			\item The ADC resolution should be at least 24-bit.
@@ -65,7 +68,7 @@ The audio system has some requirements to specify the final result. These requir
 			\item Low enough jitter to not influence the audio quality to much.
 			\item Filters:
 			\begin{itemize}
-			\setlength\itemsep{-0.2em}
+			\setlength\itemsep{-0.3em}
 				\item Tremelo
 				\item Flanger
 				\item Fuzz
@@ -84,13 +87,13 @@ The audio system has some requirements to specify the final result. These requir
 	
 	\section{Could have (to be confirmed by research)}
 		\begin{itemize}
-		\setlength\itemsep{-0.2em}
+		\setlength\itemsep{-0.3em}
 			\item Audio sample rate of at least 192 kHz
 			\item Touch screen user interface.
 		\end{itemize}
 	
 	\section{Won't have (to be confirmed by research)}
 		\begin{itemize}
-		\setlength\itemsep{-0.2em}
+		\setlength\itemsep{-0.3em}
 			\item Self-made mains power supply.
 		\end{itemize}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.1) (preloaded format=pdflatex 2023.2.16)  28 FEB 2023 10:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.1) (preloaded format=pdflatex 2023.2.16)  28 FEB 2023 12:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -58,6 +58,47 @@ File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
 \Gin@req@width=\dimen142
 )
 (/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/xcolor/xcolor.sty
+Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 227.
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/colortbl/colortbl.sty
+Package: colortbl 2022/06/20 v1.0f Color table columns (DPC)
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/tools/array.sty
+Package: array 2022/03/10 v2.5f Tabular extension package (FMi)
+\col@sep=\dimen143
+\ar@mcellbox=\box51
+\extrarowheight=\dimen144
+\NC@list=\toks17
+\extratabsurround=\skip50
+\backup@length=\skip51
+\ar@cellbox=\box52
+)
+\everycr=\toks18
+\minrowclearance=\skip52
+\rownum=\count194
+)
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1357.
+Package xcolor Info: Model `RGB' extended on input line 1369.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1371.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
+)
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
 x/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 
@@ -69,30 +110,21 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 ric/iftex/iftex.sty
 Package: iftex 2022/02/03 v1.0f TeX engine tests
 ))
-\Gm@cnth=\count194
-\Gm@cntv=\count195
-\c@Gm@tempcnt=\count196
-\Gm@bindingoffset=\dimen143
-\Gm@wd@mp=\dimen144
-\Gm@odd@mp=\dimen145
-\Gm@even@mp=\dimen146
-\Gm@layoutwidth=\dimen147
-\Gm@layoutheight=\dimen148
-\Gm@layouthoffset=\dimen149
-\Gm@layoutvoffset=\dimen150
-\Gm@dimlist=\toks17
+\Gm@cnth=\count195
+\Gm@cntv=\count196
+\c@Gm@tempcnt=\count197
+\Gm@bindingoffset=\dimen145
+\Gm@wd@mp=\dimen146
+\Gm@odd@mp=\dimen147
+\Gm@even@mp=\dimen148
+\Gm@layoutwidth=\dimen149
+\Gm@layoutheight=\dimen150
+\Gm@layouthoffset=\dimen151
+\Gm@layoutvoffset=\dimen152
+\Gm@dimlist=\toks19
 
 (/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
 x/geometry/geometry.cfg))
-(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
-x/float/float.sty
-Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count197
-\float@exts=\toks18
-\float@box=\box51
-\@float@everytoks=\toks19
-\@floatcapt=\box52
-)
 (/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
 x/biblatex/biblatex.sty
 Package: biblatex 2022/07/12 v3.18b programmable bibliographies (PK/MW)
@@ -188,14 +220,14 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 \blx@sectionciteorderinternal@0=\count306
 \blx@entrysetcounter=\count307
 \blx@biblioinstance=\count308
-\labelnumberwidth=\skip50
-\labelalphawidth=\skip51
-\biblabelsep=\skip52
-\bibitemsep=\skip53
-\bibnamesep=\skip54
-\bibinitsep=\skip55
-\bibparsep=\skip56
-\bibhang=\skip57
+\labelnumberwidth=\skip53
+\labelalphawidth=\skip54
+\biblabelsep=\skip55
+\bibitemsep=\skip56
+\bibnamesep=\skip57
+\bibinitsep=\skip58
+\bibparsep=\skip59
+\bibhang=\skip60
 \blx@bcfin=\read2
 \blx@bcfout=\write3
 \blx@langwohyphens=\language1
@@ -209,8 +241,6 @@ Package biblatex Info: ... file 'blx-dm.def' found.
 x/biblatex/blx-dm.def
 File: blx-dm.def 2022/07/12 v3.18b biblatex localization (PK/MW)
 )
-Package biblatex Info: Trying to load biblatex style data model...
-Package biblatex Info: ... file 'alphabetic.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
 \c@afterword=\count312
@@ -281,20 +311,20 @@ Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
 \c@savedoriglanguage=\count377
 \c@pageref=\count378
 \c@savedpageref=\count379
-\shorthandwidth=\skip58
-\shortjournalwidth=\skip59
-\shortserieswidth=\skip60
-\shorttitlewidth=\skip61
-\shortauthorwidth=\skip62
-\shorteditorwidth=\skip63
-\locallabelnumberwidth=\skip64
-\locallabelalphawidth=\skip65
-\localshorthandwidth=\skip66
-\localshortjournalwidth=\skip67
-\localshortserieswidth=\skip68
-\localshorttitlewidth=\skip69
-\localshortauthorwidth=\skip70
-\localshorteditorwidth=\skip71
+\shorthandwidth=\skip61
+\shortjournalwidth=\skip62
+\shortserieswidth=\skip63
+\shorttitlewidth=\skip64
+\shortauthorwidth=\skip65
+\shorteditorwidth=\skip66
+\locallabelnumberwidth=\skip67
+\locallabelalphawidth=\skip68
+\localshorthandwidth=\skip69
+\localshortjournalwidth=\skip70
+\localshortserieswidth=\skip71
+\localshorttitlewidth=\skip72
+\localshortauthorwidth=\skip73
+\localshorteditorwidth=\skip74
 Package biblatex Info: Trying to load compatibility code...
 Package biblatex Info: ... file 'blx-compat.def' found.
 
@@ -322,12 +352,12 @@ File: biblatex.def 2022/07/12 v3.18b biblatex compatibility (PK/MW)
 \biburllcskip=\muskip20
 \c@smartand=\count388
 )
-Package biblatex Info: Trying to load bibliography style 'alphabetic'...
-Package biblatex Info: ... file 'alphabetic.bbx' found.
+Package biblatex Info: Trying to load bibliography style 'numeric'...
+Package biblatex Info: ... file 'numeric.bbx' found.
 
 (/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
-x/biblatex/bbx/alphabetic.bbx
-File: alphabetic.bbx 2022/07/12 v3.18b biblatex bibliography style (PK/MW)
+x/biblatex/bbx/numeric.bbx
+File: numeric.bbx 2022/07/12 v3.18b biblatex bibliography style (PK/MW)
 Package biblatex Info: Trying to load bibliography style 'standard'...
 Package biblatex Info: ... file 'standard.bbx' found.
 
@@ -337,17 +367,18 @@ File: standard.bbx 2022/07/12 v3.18b biblatex bibliography style (PK/MW)
 \c@bbx:relatedcount=\count389
 \c@bbx:relatedtotal=\count390
 ))
-Package biblatex Info: Trying to load citation style 'alphabetic'...
-Package biblatex Info: ... file 'alphabetic.cbx' found.
+Package biblatex Info: Trying to load citation style 'numeric'...
+Package biblatex Info: ... file 'numeric.cbx' found.
 
 (/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
-x/biblatex/cbx/alphabetic.cbx
-File: alphabetic.cbx 2022/07/12 v3.18b biblatex citation style (PK/MW)
+x/biblatex/cbx/numeric.cbx
+File: numeric.cbx 2022/07/12 v3.18b biblatex citation style (PK/MW)
 Package biblatex Info: Redefining '\cite'.
 Package biblatex Info: Redefining '\parencite'.
 Package biblatex Info: Redefining '\footcite'.
 Package biblatex Info: Redefining '\footcitetext'.
 Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\supercite'.
 Package biblatex Info: Redefining '\textcite'.
 Package biblatex Info: Redefining '\textcites'.
 Package biblatex Info: Redefining '\cites'.
@@ -389,61 +420,112 @@ Package: blx-case-expl3 2022/07/12 v3.18b expl3 case changing code for biblatex
 
 ))
 (/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count392
+\float@exts=\toks20
+\float@box=\box54
+\@float@everytoks=\toks21
+\@floatcapt=\box55
+)
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
 x/preprint/authblk.sty
 Package: authblk 2001/02/27 1.3 (PWD)
-\affilsep=\skip72
-\@affilsep=\skip73
-\c@Maxaffil=\count392
-\c@authors=\count393
-\c@affil=\count394
+\affilsep=\skip75
+\@affilsep=\skip76
+\c@Maxaffil=\count393
+\c@authors=\count394
+\c@affil=\count395
+)
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/anyfontsize/anyfontsize.sty
+Package: anyfontsize 2007/11/22 anyfontsize.sty by pts
+)
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/ragged2e/ragged2e.sty
+Package: ragged2e 2022/11/13 v3.2 ragged2e Package
+
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/footmisc/footmisc.sty
+Package: footmisc 2022/03/08 v6.0d a miscellany of footnote facilities
+\FN@temptoken=\toks22
+\footnotemargin=\dimen153
+\@outputbox@depth=\dimen154
+Package footmisc Info: Declaring symbol style bringhurst on input line 695.
+Package footmisc Info: Declaring symbol style chicago on input line 703.
+Package footmisc Info: Declaring symbol style wiley on input line 712.
+Package footmisc Info: Declaring symbol style lamport-robust on input line 723.
+
+Package footmisc Info: Declaring symbol style lamport* on input line 743.
+Package footmisc Info: Declaring symbol style lamport*-robust on input line 764
+.
+)
+\CenteringLeftskip=\skip77
+\RaggedLeftLeftskip=\skip78
+\RaggedRightLeftskip=\skip79
+\CenteringRightskip=\skip80
+\RaggedLeftRightskip=\skip81
+\RaggedRightRightskip=\skip82
+\CenteringParfillskip=\skip83
+\RaggedLeftParfillskip=\skip84
+\RaggedRightParfillskip=\skip85
+\JustifyingParfillskip=\skip86
+\CenteringParindent=\skip87
+\RaggedLeftParindent=\skip88
+\RaggedRightParindent=\skip89
+\JustifyingParindent=\skip90
 )
 (/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
 x/titlesec/titlesec.sty
 Package: titlesec 2021/07/05 v2.14 Sectioning titles
-\ttl@box=\box54
-\beforetitleunit=\skip74
-\aftertitleunit=\skip75
-\ttl@plus=\dimen151
-\ttl@minus=\dimen152
-\ttl@toksa=\toks20
-\titlewidth=\dimen153
-\titlewidthlast=\dimen154
-\titlewidthfirst=\dimen155
+\ttl@box=\box56
+\beforetitleunit=\skip91
+\aftertitleunit=\skip92
+\ttl@plus=\dimen155
+\ttl@minus=\dimen156
+\ttl@toksa=\toks23
+\titlewidth=\dimen157
+\titlewidthlast=\dimen158
+\titlewidthfirst=\dimen159
 )
-\@quotelevel=\count395
-\@quotereset=\count396
+(/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
+x/parskip/parskip.sty
+Package: parskip 2021-03-14 v2.0h non-zero parskip adjustments
+)
+\@quotelevel=\count396
+\@quotereset=\count397
  (PlanOfApproach.aux)
 \openout1 = `PlanOfApproach.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
 
 (/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/cont
 ext/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count397
-\scratchdimen=\dimen156
-\scratchbox=\box55
-\nofMPsegments=\count398
-\nofMParguments=\count399
-\everyMPshowfont=\toks21
-\MPscratchCnt=\count400
-\MPscratchDim=\dimen157
-\MPnumerator=\count401
-\makeMPintoPDFobject=\count402
-\everyMPtoPDFconversion=\toks22
+\scratchcounter=\count398
+\scratchdimen=\dimen160
+\scratchbox=\box57
+\nofMPsegments=\count399
+\nofMParguments=\count400
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count401
+\MPscratchDim=\dimen161
+\MPnumerator=\count402
+\makeMPintoPDFobject=\count403
+\everyMPtoPDFconversion=\toks25
 )
 (/Users/busselommers/Library/Application Support/MiKTeX/texmfs/install/tex/late
 x/epstopdf-pkg/epstopdf-base.sty
@@ -504,13 +586,19 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'PlanOfApproach.bbl' found.
  (PlanOfApproach.bbl)
-Package biblatex Info: Reference section=0 on input line 19.
-Package biblatex Info: Reference segment=0 on input line 19.
+Package biblatex Info: Reference section=0 on input line 23.
+Package biblatex Info: Reference segment=0 on input line 23.
+Package ragged2e Info: ABD: executing \RaggedRight on input line 23.
+<./images//3DR_P1_Perspective.png, id=1, 385.44pt x 175.3752pt>
+File: ./images//3DR_P1_Perspective.png Graphic file (type png)
+<use ./images//3DR_P1_Perspective.png>
+Package pdftex.def Info: ./images//3DR_P1_Perspective.png  used on input line 3
+3.
+(pdftex.def)             Requested size: 455.24411pt x 207.13629pt.
  [1
 
 {/Users/busselommers/Library/Application Support/MiKTeX/texmfs/data/fonts/map/p
-dftex/pdftex.map}]
-(PlanOfApproach.toc
+dftex/pdftex.map} <./images//3DR_P1_Perspective.png>] (PlanOfApproach.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <10.95> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -521,11 +609,29 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \tf@toc=\write4
 \openout4 = `PlanOfApproach.toc'.
 
- [1
+ [2
+
+] (PlanOfApproach.lof)
+\tf@lof=\write5
+\openout5 = `PlanOfApproach.lof'.
+
+
+[3
+
+] (PlanOfApproach.lot)
+\tf@lot=\write6
+\openout6 = `PlanOfApproach.lot'.
+
+ [4
 
 ]
 Chapter 1.
-(Background.tex) [2
+(Background.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 2--65
+
+ []
+
+[1
 
 ]
 Chapter 2.
@@ -534,57 +640,52 @@ Underfull \hbox (badness 10000) in paragraph at lines 17--18
 
  []
 
-[3
+[2
 
-] [4]) [5]
+] [3]) [4]
 Chapter 3.
-(Projectactivities.tex [6
+(Projectactivities.tex [5
 
-]) [7]
+]) [6]
 Chapter 4.
-(Projectboundaries.tex) [8
+(Projectboundaries.tex) [7
 
 ]
 Chapter 5.
-(Milestones.tex) [9
+(Milestones.tex) [8
 
 ]
 Chapter 6.
-(Qualityassurance.tex) [10
+(Qualityassurance.tex) [9
 
 ]
 Chapter 7.
-(Projectorganisation.tex) [11
+(Projectorganisation.tex) [10
 
 ]
 Chapter 8.
-(Planning.tex) [12
+(Planning.tex) [11
 
 ]
 Chapter 9.
-(Costbenefitoverview.tex) [13
+(Costbenefitoverview.tex) [12
 
 ]
 Chapter 10.
 (Riskanalysis.tex
-Underfull \hbox (badness 10000) in paragraph at lines 17--18
+Underfull \hbox (badness 10000) in paragraph at lines 18--19
 
  []
 
-<./images//risk.jpg, id=52, 664.4825pt x 616.3025pt>
-File: ./images//risk.jpg Graphic file (type jpg)
-<use ./images//risk.jpg>
-Package pdftex.def Info: ./images//risk.jpg  used on input line 20.
-(pdftex.def)             Requested size: 265.78828pt x 246.51663pt.
 )
 
-LaTeX Warning: Empty bibliography on input line 69.
+LaTeX Warning: Empty bibliography on input line 94.
 
-[14
+[13
 
- <./images//risk.jpg>]
+]
 Appendix A.
-[15
+[14
 
 ] (PlanOfApproach.aux)
 Package logreq Info: Writing requests to 'PlanOfApproach.run.xml'.
@@ -592,13 +693,13 @@ Package logreq Info: Writing requests to 'PlanOfApproach.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 10238 strings out of 478313
- 198697 string characters out of 5837989
- 1863346 words of memory out of 5000000
- 30274 multiletter control sequences out of 15000+600000
- 517483 words of font info for 49 fonts, out of 8000000 for 9000
+ 11172 strings out of 478313
+ 214984 string characters out of 5837989
+ 1871346 words of memory out of 5000000
+ 31172 multiletter control sequences out of 15000+600000
+ 517782 words of font info for 50 fonts, out of 8000000 for 9000
  0 hyphenation exceptions out of 8191
- 63i,7n,68p,689b,801s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 63i,17n,68p,1205b,801s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/busselommers/Library/Application Support/MiKTeX/texmfs/data/fonts/pk
 /ljfour/jknappen/ec/dpi600/tcrm1095.pk></Users/busselommers/Library/Application
  Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmbx10.pfb></User
@@ -608,9 +709,9 @@ KTeX/texmfs/install/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users/busselomme
 rs/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfont
 s/cm/cmr12.pfb></Users/busselommers/Library/Application Support/MiKTeX/texmfs/i
 nstall/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on PlanOfApproach.pdf (16 pages, 260798 bytes).
+Output written on PlanOfApproach.pdf (18 pages, 227650 bytes).
 PDF statistics:
- 89 PDF objects out of 1000 (max. 8388607)
+ 94 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

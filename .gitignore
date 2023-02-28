@@ -24,3 +24,8 @@ Documentation/PlanOfApproach/Background.log
 Documentation/PlanOfApproach/bibfolder/.DS_Store
 Documentation/PlanOfApproach/.DS_Store
 Documentation/.DS_Store
+*.fdb_latexmk
+*.fls
+*.lof
+Documentation/PlanOfApproach/PlanOfApproach.pdf
+*.toc

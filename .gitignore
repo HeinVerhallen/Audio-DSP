@@ -16,3 +16,4 @@
 *.synctex(busy)
 *.bbl
 *.out
+Documentation/.DS_Store

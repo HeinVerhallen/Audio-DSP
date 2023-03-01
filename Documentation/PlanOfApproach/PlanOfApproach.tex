@@ -2,7 +2,6 @@
 \usepackage{graphicx}
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{geometry}
-\usepackage[backend=biber]{biblatex}
 \usepackage{float}
 \usepackage{authblk}
 \usepackage{anyfontsize}
@@ -23,8 +22,6 @@
 {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter:}{1em}{} 
 \geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
 \graphicspath{ {./images/} }
-
-\addbibresource{bibfolder/ref.bib}
 
 
 % Handy link: https://artofproblemsolving.com/wiki/index.php/LaTeX:Layout
@@ -118,9 +115,9 @@ DAC                   & Digital-to-Analog Converter \\ \hline
 	\input{Riskanalysis}
 
 % Bibliography with heading so it pops up in the table of contents (i don't know why but this is how it works)
-\printbibliography[
-heading=bibintoc,
-title={Bibliography}
-]
+% \printbibliography[
+% heading=bibintoc,
+% title={Bibliography}
+% ]
 	\end{justify}
 \end{document}

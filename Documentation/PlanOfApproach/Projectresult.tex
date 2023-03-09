@@ -25,75 +25,139 @@ The project is conducted during the minor BeCreative at Fontys. This minor takes
 The audio system has some requirements to specify the final result. These requirements are derived with the “MoSCoW” method. It must be noted that the following requirements will be confirmed by the research that will be conducted.
 
 
-	\section{Must have (to be confirmed by research)}
+% 	\section{Must have (to be confirmed by research)}
 	
-\begin{itemize}
-	\setlength\itemsep{-0.3em}
-	\item Two RCA audio inputs which work on a line level of 4 dBu (±1,74 V).
-	\item Two 6,35 mm TRS plug audio inputs which work on a line level of 4 dBu (±1,74 V).
-	\item Two XLR audio inputs which work on a line level of 22 dBu (±9,75 V).
-	\item USB type B audio input
-	\item Two RCA audio outputs which work on a line level of 4 dBu (±1,74 V).
-	\item Two 6,35 mm TRS plug audio outputs which work on a line level of 4 dBu (±1,74 V).
-	\item Four XLR signal outputs work on a line level of 22 dBu (±9,75 V).
-	\item The system has a bandwidth (±3 dB) of at least 20 Hz up and till 20 kHz without any filters applied.
-	\item The system has an audio sample rate of at least 44.1 kHz.
-	\item The ADC resolution should be at least 16-bit.
-	\item The DAC resolution should be at least 16-bit.
-	\item propagation time delay of less than 100 ms without any filters applied.
-	\item User can select what input will be used via an user interface
-	\item User can select up to 4 effects to be active in one channel at the same time
-	\item User can configure each effects
-	\item The system must work stand alone and be configurable via a basic graphical user interface.
-	\item Effects configurable per output channel at least four different sound effects should be able to be applied to each signal output signal at the same time:
-	\begin{itemize} %BEGIN IN ANOTHER \BEGIN MAKES IT A LIST WITHIN A LIST (DUH)
-		\setlength\itemsep{-0.3em}
-		\item Distortion
-		\item Reverb
-		\item Gain
-		\item Equalizer 
-		\item Delay
-	\end{itemize}
-\end{itemize}
+% \begin{itemize}
+% 	\setlength\itemsep{-0.3em}
+% 	\item Two RCA audio inputs which work on a line level of 4 dBu (±1,74 V).
+% 	\item Two 6,35 mm TRS plug audio inputs which work on a line level of 4 dBu (±1,74 V).
+% 	\item Two XLR audio inputs which work on a line level of 22 dBu (±9,75 V).
+% 	\item USB type B audio input
+% 	\item Two RCA audio outputs which work on a line level of 4 dBu (±1,74 V).
+% 	\item Two 6,35 mm TRS plug audio outputs which work on a line level of 4 dBu (±1,74 V).
+% 	\item Four XLR signal outputs work on a line level of 22 dBu (±9,75 V).
+% 	\item The system has a bandwidth (±3 dB) of at least 20 Hz up and till 20 kHz without any filters applied.
+% 	\item The system has an audio sample rate of at least 44.1 kHz.
+% 	\item The ADC resolution should be at least 16-bit.
+% 	\item The DAC resolution should be at least 16-bit.
+% 	\item propagation time delay of less than 100 ms without any filters applied.
+% 	\item User can select what input will be used via an user interface
+% 	\item User can select up to 4 effects to be active in one channel at the same time
+% 	\item User can configure each effects
+% 	\item The system must work stand alone and be configurable via a basic graphical user interface.
+% 	\item Effects configurable per output channel at least four different sound effects should be able to be applied to each signal output signal at the same time:
+% 	\begin{itemize} %BEGIN IN ANOTHER \BEGIN MAKES IT A LIST WITHIN A LIST (DUH)
+% 		\setlength\itemsep{-0.3em}
+% 		\item Distortion
+% 		\item Reverb
+% 		\item Gain
+% 		\item Equalizer 
+% 		\item Delay
+% 	\end{itemize}
+% \end{itemize}
 	
-	\section{Should have (to be confirmed by research)}
+% 	\section{Should have (to be confirmed by research)}
+% 		\begin{itemize}
+% 		\setlength\itemsep{-0.3em}
+% 			\item The system should have a bandwidth (±1 dB) of at least 20 Hz up and till 20 kHz without any filters applied.
+% 			\item Audio sample rate of at least 96 kHz
+% 			\item The ADC resolution should be at least 24-bit.
+% 			\item The DAC resolution should be at least 24-bit.
+% 			\item Six XLR signal outputs work on a line level of 22 dBu (±9,75 V).
+% 			\item User can select up to 10 effects to be active in one channel at the same time.
+% 			\item Low enough jitter to not influence the audio quality to much.
+% 			\item Filters:
+% 			\begin{itemize}
+% 			\setlength\itemsep{-0.3em}
+% 				\item Tremelo
+% 				\item Flanger
+% 				\item Fuzz
+% 				\item Overdrive
+% 				\item Chorus
+% 				\item Compressor
+% 				\item Wah
+% 				\item Looper
+% 				\item Overdrive
+% 				\item Wow and flutter
+% 				\item Modulator 
+% 				\item Echo
+% 				\item Fade in
+% 			\end{itemize}
+% 		\end{itemize}
+	
+% 	\section{Could have (to be confirmed by research)}
+% 		\begin{itemize}
+% 		\setlength\itemsep{-0.3em}
+% 			\item Audio sample rate of at least 192 kHz
+% 			\item Touch screen user interface.
+% 		\end{itemize}
+	
+% 	\section{Won't have (to be confirmed by research)}
+% 		\begin{itemize}
+% 		\setlength\itemsep{-0.3em}
+% 			\item Self-made mains power supply.
+% 		\end{itemize}
+
+	\newpage
+	\section{Requirements}
+	\begin{longtable}{|c|p{10cm}|c|c|}
+		\hline
+		\textbf{ID} & \textbf{Requirement} & \textbf{Priority} & \textbf{Status}\\ \hline 
+		\textbf{U1} & \textbf{Inputs:} \newline
+		•Two RCA audio inputs which work on a line level of 4dBu(±1,74V)\newline
+		•Two 6,35mm TRS plug audio inputs which work on a line level of 4dBu(±1,74V)\newline
+		•Two XLR audio inputs which work on a line level of 22dBu(±9,75)\newline
+		•USB type B audio input & Must & Proposed\\ \hline
+
+		\textbf{U2} & \textbf{Outputs:} \newline
+		•Two RCA audio outputs which work on a line level of 4dBu(±1,74V)\newline
+		•Two 6,35mm TRS plug audio outputs which work on a line level of 4dBu(±1,74V)\newline
+		•Four XLR signal outputs which work on a line level of 22dBu(±9,75)
+		 & Must & Proposed\\ \hline
+
+		\textbf{U3} &The system should have a bandwidth (±3 dB) of at least 20 Hz up and till 20 kHz without any filters applied. 	& Must   & Proposed\\ \hline
+		\textbf{U4} &The system has an Audio sample rate of at least 44.1 kHz 														& Must   & Proposed\\ \hline
+		\textbf{U5} &The ADC and DAC resolution is at least 16-bit 																	& Must   & Proposed\\ \hline
+		\textbf{U6} &The system has a propagation delay of less than 100ms without any filters applied 								& Must   & Proposed\\ \hline
+		\textbf{U7} &User can select what input will be used via a user interface													& Must   & Proposed\\ \hline
+		\textbf{U8} &User can select up to 4 effects to active on one channel at the same time 										& Must   & Proposed\\ \hline
+		\textbf{U9} &User can configure each effect 																				& Must   & Proposed\\ \hline
+		\textbf{U10} &The system must work stand alone and be configurable via a basic graphical user interface 					& Must   & Proposed\\ \hline
+		\textbf{U11} &Effects are configurable per output channel, at least four different sound effects should be able to be applied to each signal output signal at the same time: \newline
 		\begin{itemize}
-		\setlength\itemsep{-0.3em}
-			\item The system should have a bandwidth (±1 dB) of at least 20 Hz up and till 20 kHz without any filters applied.
-			\item Audio sample rate of at least 96 kHz
-			\item The ADC resolution should be at least 24-bit.
-			\item The DAC resolution should be at least 24-bit.
-			\item Six XLR signal outputs work on a line level of 22 dBu (±9,75 V).
-			\item User can select up to 10 effects to be active in one channel at the same time.
-			\item Low enough jitter to not influence the audio quality to much.
-			\item Filters:
-			\begin{itemize}
+			\setlength\itemsep{-0.4em}
+			\item Distortion
+			\item Reverb
+			\item Gain
+			\item Equalizer
+			\item Delay
+		\end{itemize}																												& Must 	 & Proposed\\ \hline
+		\textbf{U12}  &The system should have a bandwidth (±1 dB) of at least 20 Hz up and till 20 kHz without any filters applied 	& Should & Proposed\\ \hline
+		\textbf{U13}  &Audio sample rate of at least 96 kHz 																		& Should & Proposed\\ \hline
+		\textbf{U14} & The ADC and DAC resolution is at least 24-bit. 																& Should & Proposed\\ \hline
+		\textbf{U15} & Six XLR signal outputs work on a line level of 22 dBu (±9,75 V) 												& Should & Proposed\\ \hline
+		\textbf{U16} & User can select up to 10 effects to be active in one channel at the same time. 								& Should & Proposed\\ \hline
+		\textbf{U17} & Low enough jitter to not influence the audio quality too much 												& Should & Proposed\\ \hline
+		\textbf{U18} & Local power supplies for different parts of the system 														& Should & Proposed\\ \hline
+		\textbf{U19} & Low enough jitter to not influence the audio quality too much 												& Should & Proposed\\ \hline
+		\textbf{U20} & Effects:\newline
+		\begin{itemize}
 			\setlength\itemsep{-0.3em}
-				\item Tremelo
-				\item Flanger
-				\item Fuzz
-				\item Overdrive
-				\item Chorus
-				\item Compressor
-				\item Wah
-				\item Looper
-				\item Overdrive
-				\item Wow and flutter
-				\item Modulator 
-				\item Echo
-				\item Fade in
-			\end{itemize}
-		\end{itemize}
-	
-	\section{Could have (to be confirmed by research)}
-		\begin{itemize}
-		\setlength\itemsep{-0.3em}
-			\item Audio sample rate of at least 192 kHz
-			\item Touch screen user interface.
-		\end{itemize}
-	
-	\section{Won't have (to be confirmed by research)}
-		\begin{itemize}
-		\setlength\itemsep{-0.3em}
-			\item Self-made mains power supply.
-		\end{itemize}
+			\item Phaser
+			\item Tremelo
+			\item Flanger
+			\item Fuzz
+			\item Overdrive
+			\item Chorus
+			\item Compressor
+			\item Wah
+			\item Looper
+			\item Wow and flutter
+			\item Modulator
+			\item Echo
+			\item Fade in
+		\end{itemize}																												& Should & Proposed\\ \hline
+		\textbf{U21} & Audio sample rate of at least 192 kHz 																		& Could  & Proposed\\ \hline
+		\textbf{U22} & Touch screen user interface 																					& Could  & Proposed\\ \hline
+		\textbf{U23} & Self-made mains power supply  																				& Won't  & Proposed\\ \hline
+	\end{longtable}

@@ -17,3 +17,5 @@
 *.bbl
 *.out
 Documentation/.DS_Store
+.vscode/settings.json
+PDPs/PDP Youri Tils.docx

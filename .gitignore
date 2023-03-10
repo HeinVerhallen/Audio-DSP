@@ -17,6 +17,5 @@ Documentation/**/*.pdf
 *.synctex(busy)
 *.bbl
 *.out
-Documentation/.DS_Store
-.vscode/settings.json
-PDPs/PDP Youri Tils.docx
+.vscode
+PDPs/*.docx

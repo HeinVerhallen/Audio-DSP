@@ -1,0 +1,36 @@
+\documentclass[11pt, a4paper]{report}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{authblk}
+\usepackage{anyfontsize}
+\usepackage[document]{ragged2e}
+\usepackage{titlesec}
+\usepackage[parfill]{parskip}
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{blindtext}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=black,  %choose some color if you want links to stand out
+}
+\titleformat{\chapter}[hang] 
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter:}{1em}{} 
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+\graphicspath{ {./images/} }
+
+\begin{document}  
+    \input{titlepage.tex}
+
+    \chapter{Background}
+        \input{Background.tex}
+
+    \chapter{Requirements}
+        \input{Requirements.tex}
+    \end{justify}
+\end{document}

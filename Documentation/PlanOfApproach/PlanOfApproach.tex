@@ -2,7 +2,6 @@
 \usepackage{graphicx}
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{geometry}
-\usepackage[backend=biber]{biblatex}
 \usepackage{float}
 \usepackage{authblk}
 \usepackage{anyfontsize}
@@ -12,6 +11,8 @@
 \usepackage{color}   %May be necessary if you want to color links
 \usepackage{hyperref}
 \usepackage{caption}
+\usepackage{tabularx}
+\usepackage{longtable}
 \usepackage{blindtext}
 \hypersetup{
     colorlinks=true, %set true if you want colored links
@@ -23,7 +24,6 @@
 \geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
 \graphicspath{ {./images/} }
 
-\addbibresource{bibfolder/ref.bib}
 
 % Handy link: https://artofproblemsolving.com/wiki/index.php/LaTeX:Layout
 
@@ -62,6 +62,7 @@ Fontys Hogescholen, De Rondom 1, 5612 AP Eindhoven \\
 \listoffigures
 \thispagestyle{empty}
 
+
 \listoftables
 \thispagestyle{empty}
 
@@ -72,18 +73,21 @@ Fontys Hogescholen, De Rondom 1, 5612 AP Eindhoven \\
 \chapter*{Abbreviation List}
 
 \begin{table}[!h]
+	\centering
 \begin{tabular}{|c|c|}
-\hline
+	\hline
 \textbf{Abbreviation} & \textbf{Explanation}        \\ \hline
 DSP                   & Digital Signal Processor    \\ \hline
 ADC                   & Analog-to-Digital Converter \\ \hline
 DAC                   & Digital-to-Analog Converter \\ \hline
 \end{tabular}
+\caption{List of commonly used Abbreviations}
+\label{Abbreviation list}
 \end{table}
 
 \chapter{Background}
 	\input{Background}
-	
+
 \chapter{Project result}
 	\input{Projectresult}
 	
@@ -111,18 +115,10 @@ DAC                   & Digital-to-Analog Converter \\ \hline
 \chapter{Risk Analysis}
 	\input{Riskanalysis}
 
-% Bibliography with heading so it pops up in the table of contents (idkwhy but this is how it works)
-\printbibliography[
-heading=bibintoc,
-title={Bibliography}
-]
-
-
-
-\appendix
-
-\chapter{Appendix A}
-
-
+% Bibliography with heading so it pops up in the table of contents (i don't know why but this is how it works)
+% \printbibliography[
+% heading=bibintoc,
+% title={Bibliography}
+% ]
 	\end{justify}
 \end{document}

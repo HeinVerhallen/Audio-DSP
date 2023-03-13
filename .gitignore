@@ -11,9 +11,11 @@
 *.toc
 *.dvi
 *.run.xml
-*.pdf
+Documentation/**/*.pdf
+!Documentation/Code of Conduct/*.pdf
 *.toc
 *.synctex(busy)
 *.bbl
 *.out
-Documentation/.DS_Store
+.vscode
+PDPs/*.docx

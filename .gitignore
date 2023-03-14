@@ -13,6 +13,7 @@
 *.run.xml
 Documentation/**/*.pdf
 !Documentation/Code of Conduct/*.pdf
+Weekly-blogs/**/*.docx
 *.toc
 *.synctex(busy)
 *.bbl

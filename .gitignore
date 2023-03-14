@@ -17,5 +17,5 @@ Documentation/**/*.pdf
 *.synctex(busy)
 *.bbl
 *.out
-.vscode
+*.vscode
 PDPs/*.docx

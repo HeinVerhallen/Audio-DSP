@@ -11,13 +11,10 @@
 *.toc
 *.dvi
 *.run.xml
-Documentation/**/*.pdf
-!Documentation/Code of Conduct/*.pdf
-Weekly-blogs/**/*.docx
-!Weekly-blogs/Weekly-blog_template.docx
 *.toc
 *.synctex(busy)
 *.bbl
 *.out
 *.vscode
-PDPs/*.docx
+Documentation/**/*.pdf
+!Documentation/Code of Conduct/*.pdf

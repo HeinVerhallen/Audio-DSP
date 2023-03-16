@@ -16,6 +16,7 @@
 *.bbl
 *.out
 *.vscode
+*.bkp
 Documentation/**/*.pdf
 !Documentation/Code of Conduct/*.pdf
 Firmware/**/*.qws

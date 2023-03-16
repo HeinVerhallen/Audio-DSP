@@ -18,3 +18,5 @@
 *.vscode
 Documentation/**/*.pdf
 !Documentation/Code of Conduct/*.pdf
+*.qws
+Quartus Code/db

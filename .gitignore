@@ -18,5 +18,10 @@
 *.vscode
 Documentation/**/*.pdf
 !Documentation/Code of Conduct/*.pdf
-*.qws
-Quartus Code/db
+Firmware/**/*.qws
+Firmware/**/db
+Firmware/**/incremental_db
+Firmware/**/simulation
+Firmware/**/output_files
+Firmware/**/*.rpt
+Firmware/Test_FPGA_routing/c5_pin_model_dump.txt

@@ -5,7 +5,6 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 --  Entity Declaration
 ENTITY ALU3 IS
-	generic ( addr : STD_LOGIC_VECTOR(2 downto 0) := "000");
 	PORT
 	(
 		input : IN STD_LOGIC_VECTOR(3 downto 0);

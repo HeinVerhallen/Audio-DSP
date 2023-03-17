@@ -59,7 +59,13 @@ agreement for further details.
 		(text "output[3..0]" (rect 120 27 163 39)(font "Arial" ))
 		(line (pt 184 32)(pt 168 32)(line_width 3))
 	)
+	(parameter
+		"addr"
+		"000"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
 	(drawing
 		(rectangle (rect 16 16 168 96)(line_width 1))
 	)
+	(annotation_block (parameter)(rect 200 -64 300 16))
 )

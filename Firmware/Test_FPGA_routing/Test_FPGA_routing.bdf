@@ -72,7 +72,7 @@ agreement for further details.
 	(input)
 	(rect 208 328 376 344)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "en[3..0]" (rect 5 0 43 12)(font "Arial" ))
+	(text "en[3..0]" (rect 5 0 42 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -89,6 +89,22 @@ agreement for further details.
 	(rect 696 320 872 336)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "Output[3..0]" (rect 90 0 146 17)(font "Intel Clear" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
+)
+(pin
+	(output)
+	(rect 704 488 880 504)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "out2[3..0]" (rect 90 0 137 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 0 8)(pt 52 8))
@@ -139,9 +155,64 @@ agreement for further details.
 		(text "output[3..0]" (rect 116 27 172 39)(font "Arial" ))
 		(line (pt 184 32)(pt 168 32)(line_width 3))
 	)
+	(parameter
+		"addr"
+		"010"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
 	(drawing
 		(rectangle (rect 16 16 168 96))
 	)
+	(annotation_block (parameter)(rect 488 232 667 270))
+)
+(symbol
+	(rect 488 464 672 576)
+	(text "ALU3" (rect 5 0 32 12)(font "Arial" ))
+	(text "inst5" (rect 8 96 30 113)(font "Intel Clear" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "input[3..0]" (rect 0 0 49 12)(font "Arial" ))
+		(text "input[3..0]" (rect 21 27 70 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "en[3..0]" (rect 0 0 37 12)(font "Arial" ))
+		(text "en[3..0]" (rect 21 43 58 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "nrst" (rect 0 0 18 12)(font "Arial" ))
+		(text "nrst" (rect 21 59 39 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 21 75 35 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 184 32)
+		(output)
+		(text "output[3..0]" (rect 0 0 56 12)(font "Arial" ))
+		(text "output[3..0]" (rect 116 27 172 39)(font "Arial" ))
+		(line (pt 184 32)(pt 168 32)(line_width 3))
+	)
+	(parameter
+		"addr"
+		"001"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(drawing
+		(rectangle (rect 16 16 168 96))
+	)
+	(annotation_block (parameter)(rect 488 416 667 454))
 )
 (connector
 	(pt 672 328)
@@ -151,11 +222,6 @@ agreement for further details.
 (connector
 	(pt 488 376)
 	(pt 456 376)
-)
-(connector
-	(pt 480 328)
-	(pt 480 304)
-	(bus)
 )
 (connector
 	(pt 488 328)
@@ -168,16 +234,8 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(pt 456 392)
-	(pt 376 392)
-)
-(connector
 	(pt 456 376)
 	(pt 456 392)
-)
-(connector
-	(pt 376 360)
-	(pt 488 360)
 )
 (connector
 	(pt 376 336)
@@ -185,12 +243,78 @@ agreement for further details.
 	(bus)
 )
 (connector
+	(pt 488 344)
+	(pt 432 344)
+	(bus)
+)
+(connector
+	(pt 488 496)
+	(pt 480 496)
+	(bus)
+)
+(connector
+	(pt 480 304)
+	(pt 480 328)
+	(bus)
+)
+(connector
+	(pt 480 328)
+	(pt 480 496)
+	(bus)
+)
+(connector
+	(pt 488 512)
+	(pt 432 512)
+	(bus)
+)
+(connector
 	(pt 432 336)
 	(pt 432 344)
 	(bus)
 )
 (connector
-	(pt 488 344)
 	(pt 432 344)
+	(pt 432 512)
 	(bus)
 )
+(connector
+	(pt 488 528)
+	(pt 408 528)
+)
+(connector
+	(pt 408 528)
+	(pt 408 360)
+)
+(connector
+	(pt 376 360)
+	(pt 408 360)
+)
+(connector
+	(pt 408 360)
+	(pt 488 360)
+)
+(connector
+	(pt 488 544)
+	(pt 392 544)
+)
+(connector
+	(pt 392 544)
+	(pt 392 392)
+)
+(connector
+	(pt 456 392)
+	(pt 392 392)
+)
+(connector
+	(pt 392 392)
+	(pt 376 392)
+)
+(connector
+	(pt 672 496)
+	(pt 704 496)
+	(bus)
+)
+(junction (pt 480 328))
+(junction (pt 432 344))
+(junction (pt 408 360))
+(junction (pt 392 392))

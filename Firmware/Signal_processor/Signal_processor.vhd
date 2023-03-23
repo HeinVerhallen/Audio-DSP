@@ -8,13 +8,14 @@ use IEEE.numeric_std.all;
 ENTITY SIGNAL_PROC IS
 	PORT
 	(
-		clk 	: IN STD_LOGIC;							--sample clock
-		nrst 	: IN STD_LOGIC;							--active low reset
+		sample_clk 	: IN STD_LOGIC;						--sample clock
+		sys_clk		: IN STD_LOGIC;						--system clock
+		nrst 		: IN STD_LOGIC;						--active low reset
 
 		input 	: IN STD_LOGIC_VECTOR(23 downto 0);		--audio input
 		output 	: OUT STD_LOGIC_VECTOR(23 downto 0);	--audio output
 
-		data 	: INOUT STD_LOGIC_VECTOR(23 downto 0);	--register data
+		data 	: INOUT STD_LOGIC_VECTOR(24 downto 0);	--register data
 		regSel 	: IN STD_LOGIC_VECTOR(4 downto 0);		--register select
 		enData 	: IN STD_LOGIC;							--enable register data transfer
 		rw 		: IN STD_LOGIC 							--read/write identifier, 0 = write, 1 = read
@@ -54,23 +55,23 @@ ARCHITECTURE ARCH OF SIGNAL_PROC IS
 	subtype t_param is STD_LOGIC_VECTOR(24 downto 0);
 
 	--Effect position registers
-	signal pos_1 : t_param := (phaser & delay & reverb & distortion & wah);
-	signal pos_2 : t_param := (others => '0');
-	signal pos_3 : t_param := (others => '0');
-	signal pos_4 : t_param := (others => '0');
+	constant pos_1 : t_param := (phaser & delay & reverb & distortion & wah);
+	constant pos_2 : t_param := (others => '0');
+	constant pos_3 : t_param := (others => '0');
+	constant pos_4 : t_param := (others => '0');
 
 	--Equalizer band filter registers
-	signal eq_f1 : t_param := (others => '0');
-	signal eq_f2 : t_param := (others => '0');
-	signal eq_f3 : t_param := (others => '0');
-	signal eq_f4 : t_param := (others => '0');
+	constant eq_f1 : t_param := (others => '0');
+	constant eq_f2 : t_param := (others => '0');
+	constant eq_f3 : t_param := (others => '0');
+	constant eq_f4 : t_param := (others => '0');
 
 	--Effect parameter registers
-	signal eff_1 : t_param := (others => '0');
-	signal eff_2 : t_param := (others => '0');
-	signal eff_3 : t_param := (others => '0');
-	signal eff_4 : t_param := (others => '0');
-	signal eff_5 : t_param := (others => '0');
+	constant eff_1 : t_param := (others => '0');
+	constant eff_2 : t_param := (others => '0');
+	constant eff_3 : t_param := (others => '0');
+	constant eff_4 : t_param := (others => '0');
+	constant eff_5 : t_param := (others => '0');
 	
 	--Create memory which houses all registers
 	type t_reg is array (0 to reg_amount - 1) of t_param;
@@ -93,14 +94,46 @@ ARCHITECTURE ARCH OF SIGNAL_PROC IS
 		eff_5);
 
 BEGIN
-	process(nrst, clk)
+	data_transfer : process(nrst, sys_clk, rw)
+		variable tmpRegSel : integer;
+
+	begin
+        if nrst = '0' then
+			data <= "ZZZZZZZZZZZZZZZZZZZZZZZZZ" after 1 ns;
+		elsif rising_edge(sys_clk) then
+            if (enData = '1') then
+                tmpRegSel := to_integer(unsigned(regSel));
+
+                --Selected register is out of range
+                if tmpRegSel > reg_amount - 1 then
+                    --Do nothing
+                elsif (rw = '0') then
+                    --Write register
+                    regs(tmpRegSel) <= data after 1 ns;
+                else 
+                    --Read register
+                    data <= regs(tmpRegSel) after 1 ns;
+                end if;
+            --Disabled so make output high impedance
+            else
+            	data <= "ZZZZZZZZZZZZZZZZZZZZZZZZZ" after 1 ns;
+            end if;
+       	end if;
+
+       	--Write register so make output high impedance
+       	if rw = '0' then
+        	data <= "ZZZZZZZZZZZZZZZZZZZZZZZZZ" after 1 ns;
+      	end if;
+	end process;
+
+	effectloop : process(nrst, sample_clk)
 		variable selEff : STD_LOGIC_VECTOR(4 downto 0);		--selected effect
 		variable tmpInp : STD_LOGIC_VECTOR(23 downto 0);	--temporary processed input
 		
 	begin
 		if nrst = '0' then
 			output <= input after 1 ns;
-		elsif rising_edge(clk) then
+		elsif rising_edge(sample_clk) then
 			--Load input
 			tmpInp := input;
 

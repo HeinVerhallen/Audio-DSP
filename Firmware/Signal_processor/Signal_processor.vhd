@@ -8,28 +8,24 @@ use IEEE.numeric_std.all;
 ENTITY SIGNAL_PROC IS
 	PORT
 	(
-		clk 	: IN STD_LOGIC;
-		nrst 	: IN STD_LOGIC;
+		clk 	: IN STD_LOGIC;							--sample clock
+		nrst 	: IN STD_LOGIC;							--active low reset
 
-		input 	: IN STD_LOGIC_VECTOR(23 downto 0);
-		output 	: OUT STD_LOGIC_VECTOR(23 downto 0);
+		input 	: IN STD_LOGIC_VECTOR(23 downto 0);		--audio input
+		output 	: OUT STD_LOGIC_VECTOR(23 downto 0);	--audio output
 
-		data 	: INOUT STD_LOGIC_VECTOR(23 downto 0);
-		regSel 	: IN STD_LOGIC_VECTOR(4 downto 0);
-		enData 	: IN STD_LOGIC;
-		rw 		: IN STD_LOGIC
+		data 	: INOUT STD_LOGIC_VECTOR(23 downto 0);	--register data
+		regSel 	: IN STD_LOGIC_VECTOR(4 downto 0);		--register select
+		enData 	: IN STD_LOGIC;							--enable register data transfer
+		rw 		: IN STD_LOGIC 							--read/write identifier, 0 = write, 1 = read
 	);
 END SIGNAL_PROC;
 
 
 --  Architecture Body
 ARCHITECTURE ARCH OF SIGNAL_PROC IS
-	--signal nextstate,presentstate : string(1 to 2);
-	--signal temp : STD_LOGIC_VECTOR(3 downto 0);
-	--signal res : STD_LOGIC_VECTOR(3 downto 0);
-	
-	constant reg_amount : integer := 13;
-	constant eff_num : integer := 20;
+	constant reg_amount : integer := 13;	--specify amount of registers in memory
+	constant eff_num : integer := 20;		--specify amount of effects
 
 	subtype t_eff is STD_LOGIC_VECTOR(4 downto 0);
 
@@ -76,89 +72,39 @@ ARCHITECTURE ARCH OF SIGNAL_PROC IS
 	signal eff_4 : t_param := (others => '0');
 	signal eff_5 : t_param := (others => '0');
 	
-	--Create register list
+	--Create memory which houses all registers
 	type t_reg is array (0 to reg_amount - 1) of t_param;
 	signal regs : t_reg := (
+		--Position registers
 		pos_1,
 		pos_2,
 		pos_3,
 		pos_4,
+		--Equalizer registers
 		eq_f1,
 		eq_f2,
 		eq_f3,
 		eq_f4,
+		--Effect parameter registers
 		eff_1,
 		eff_2,
 		eff_3,
 		eff_4,
 		eff_5);
 
-	--type t_state is (init, effect_loop, idle);
-	--signal state : t_state := init;
-	
-	--subtype t_param is STD_LOGIC_VECTOR(24 downto 0);
-
-	--type t_mem is 
-	--	record
-	--		pos1 	: t_param;
-	--		pos2 	: t_param;
-	--		pos3 	: t_param;
-	--		pos4 	: t_param;
-	--		eff_1 	: t_param;
-	--		eff_2 	: t_param;
-	--		eff_3 	: t_param;
-	--		eff_4 	: t_param;
-	--		eff_5 	: t_param;
-	--	end record;
-
-	--signal reg2 : t_mem := (x"0000abc", pos4 => x"0000123", pos2 => wire & distortion & reverb & delay & phaser, others => (others => '0'));
-
-	--signal index : integer range 0 to eff_num - 1 := 0;
-
-	--signal proc_inp : STD_LOGIC_VECTOR(23 downto 0);
-
 BEGIN
-	--load: process(nrst, clk)
-	--begin
-	--	if nrst = '0' then
-	--		state <= init;
-	--	elsif rising_edge(clk) then
-	--		--if index + 1 > eff_num - 1 then
-	--		--	index <= 0 after 1 ns;
-	--		--else
-	--		--	index <= index + 1 after 1 ns;
-	--		--end if;
-
-	--		--Load input
-	--		proc_inp <= input after 1 ns;
-
-	--		--Start effect loop
-	--		--state <= effect_loop after 1 ns;
-	--	end if;
-	--end process;
-
-	processing: process(nrst, clk)--state, proc_inp)
-		--variable n_s : string(1 to 2);
-		--variable tmpEff : STD_LOGIC_VECTOR(4 downto 0);
-		variable selEff : STD_LOGIC_VECTOR(4 downto 0);
-		variable tmpInp : STD_LOGIC_VECTOR(23 downto 0);
-		--variable state : t_state;
+	process(nrst, clk)
+		variable selEff : STD_LOGIC_VECTOR(4 downto 0);		--selected effect
+		variable tmpInp : STD_LOGIC_VECTOR(23 downto 0);	--temporary processed input
 		
 	begin
 		if nrst = '0' then
 			output <= input after 1 ns;
-			--state := init; -- after 1 ns;
 		elsif rising_edge(clk) then
-			--if index + 1 > eff_num - 1 then
-			--	index <= 0 after 1 ns;
-			--else
-			--	index <= index + 1 after 1 ns;
-			--end if;
-
 			--Load input
-			--proc_inp <= input after 1 ns;
 			tmpInp := input;
 
+			--Go through effect loop
 			eff_loop : for i in 0 to eff_num - 1 loop
 				selEff := regs(i / 5)((((i rem 5) * 5) + 4) downto ((i rem 5) * 5));
 
@@ -183,59 +129,12 @@ BEGIN
 					when noise_gate 	=> tmpInp := not tmpInp;
 					when equalizer 		=> tmpInp := not tmpInp;
 					when volume 		=> tmpInp := not tmpInp;
-					when others 		=> null;
+					when others 		=> null; --do nothing
 				end case;
 			end loop eff_loop;
 
+			--Write modified signal to output
 			output <= tmpInp after 1 ns;
-
-			--Start effect loop
-			--state := effect_loop; -- after 1 ns;
 		end if;
-
-		--case state is
-		--	when init => output <= input after 1 ns;
-		--	when effect_loop =>
-		--		--tmpInp := proc_inp;
-
-		--		eff_loop : for i in 0 to eff_num - 1 loop
-		--			selEff := regs(i / 5)((((i rem 5) * 5) + 4) downto ((i rem 5) * 5));
-
-		--			case (selEff) is
-		--				when wire 			=> null; --do nothing
-		--				when distortion 	=> tmpInp := tmpInp(22 downto 0) & '0';
-		--				when reverb 		=> tmpInp := tmpInp - "1";
-		--				when delay 			=> tmpInp := tmpInp - "10";
-		--				when phaser 		=> tmpInp := tmpInp - "11";
-		--				when tremelo 		=> tmpInp := tmpInp - "100";
-		--				when flanger 		=> tmpInp := tmpInp - "101";
-		--				when fuzz 			=> tmpInp := tmpInp + "1";
-		--				when overdrive 		=> tmpInp := tmpInp + "10";
-		--				when chorus 		=> tmpInp := tmpInp + "11";
-		--				when compressor 	=> tmpInp := tmpInp + "100";
-		--				when wah 			=> tmpInp := tmpInp + "101";
-		--				when looper 		=> tmpInp := '0' & tmpInp(23 downto 1);
-		--				when wow_flutter 	=> tmpInp := "00" & tmpInp(23 downto 2);
-		--				when modulator 		=> tmpInp := tmpInp(21 downto 0) & "00";
-		--				when echo 			=> tmpInp := tmpInp(20 downto 0) & "000";
-		--				when fade 			=> tmpInp := tmpInp(19 downto 0) & "0000";
-		--				when noise_gate 	=> tmpInp := not tmpInp;
-		--				when equalizer 		=> tmpInp := not tmpInp;
-		--				when volume 		=> tmpInp := not tmpInp;
-		--				when others 		=> null;
-		--			end case;
-		--		end loop eff_loop;
-
-		--		state := idle; -- after 1 ns;
-                
-		--	when idle => 
-		--		output <= tmpInp after 1 ns;
-
-		--		--if (proc_inp'event) then
-		--		--	state <= effect_loop after 1 ns;
-		--		--	tmpInp := proc_inp;
-		--		--end if;
-        --    when others => null;
-		--end case;
 	end process;
 END ARCH;

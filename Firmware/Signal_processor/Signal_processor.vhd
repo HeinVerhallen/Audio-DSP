@@ -26,7 +26,7 @@ END SIGNAL_PROC;
 --  Architecture Body
 ARCHITECTURE ARCH OF SIGNAL_PROC IS
 	constant reg_amount : integer := 13;	--specify amount of registers in memory
-	constant eff_num : integer := 20;		--specify amount of effects
+	constant eff_num 	: integer := 20;		--specify amount of effects
 
 	subtype t_eff is STD_LOGIC_VECTOR(4 downto 0);
 
@@ -127,13 +127,16 @@ BEGIN
 	end process;
 
 	effectloop : process(nrst, sample_clk)
-		variable selEff : STD_LOGIC_VECTOR(4 downto 0);		--selected effect
-		variable tmpInp : STD_LOGIC_VECTOR(23 downto 0);	--temporary processed input
+		variable selEff : STD_LOGIC_VECTOR(4 downto 0);						--selected effect
+		variable tmpInp : STD_LOGIC_VECTOR(23 downto 0) := (others => '0');	--temporary processed input
 		
 	begin
 		if nrst = '0' then
 			output <= input after 1 ns;
 		elsif rising_edge(sample_clk) then
+			--Write modified signal to output
+			output <= tmpInp after 1 ns;
+
 			--Load input
 			tmpInp := input;
 
@@ -165,9 +168,6 @@ BEGIN
 					when others 		=> null; --do nothing
 				end case;
 			end loop eff_loop;
-
-			--Write modified signal to output
-			output <= tmpInp after 1 ns;
 		end if;
 	end process;
 END ARCH;

@@ -1,0 +1,8 @@
+Opamp usage
+###########################################################################################################################################################################################################################################################################################################################
+The power consumption is mentioned per OpAmp, so use the amound of OpAmps below:
+###########################################################################################################################################################################################################################################################################################################################
+		OPA1632 (single)		LM4562 (dual)			Notes
+		OpAmp		IC		OpAmp		IC
+Front-end	4x		4x		8x		4x		OPA1632 used one time per ADC input channel as AAF (4x), LM4562 used one time per ADC input channel as AAF reference buffer (4x OpAmp). LM4562 used for RCA/jack input buffer (2x OpAmp), LM4562 used as XLR input buffer (2x OpAmp).
+Back-end	6x		6x		2x		1x		OPA1632 used for XLR LPF with buffer, LM4562 used for RCA/jack LPF with buffer.

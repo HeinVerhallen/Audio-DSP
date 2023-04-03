@@ -17,6 +17,9 @@
 *.out
 *.vscode
 *.bkp
+*.raw
+*.fft
+stab.txt
 Documentation/**/*.pdf
 !Documentation/Code of Conduct/*.pdf
 Firmware/**/*.qws

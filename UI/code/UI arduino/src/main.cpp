@@ -14,8 +14,8 @@ int16_t state = 0;
 
 //Function: create a dropdown menu to select between channels
 //Inputs: toggle - a boolean to activate or deactivate the dropdown menu
-//        active
-
+//        active – the current active option as an integer index
+//Outputs: -
 void channelSelect(uint16_t toggle, uint16_t active){
   static int previous = 0;
 
@@ -63,3 +63,9 @@ void loop() {
   }
 }
 
+
+
+
+//Gather all information from the DSP controller
+//Send all information to the screen
+//Create a Function/procedure to load page (meaning all clickable objects in  objects array with their function)

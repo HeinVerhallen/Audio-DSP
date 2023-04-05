@@ -1,0 +1,32 @@
+--
+-- Created:
+--          by - tygtr (tekin Yilmaz global trade releation)
+--          at - 13:08:31 08/18/2018
+--
+--
+
+
+LIBRARY ieee; 
+USE ieee.std_logic_1164.all;
+USE ieee.std_logic_arith.all;
+
+ENTITY sfcontr IS
+   PORT(           
+      clk      : IN     std_logic;
+      nrst     : IN     std_logic;    
+      chsel_c    : OUT    std_logic_vector (7 DOWNTO 0);
+      readadc  : OUT    std_logic;                        
+      shL_c      : OUT    std_logic;
+      shR_c      : OUT    std_logic;    
+      syncadd_c  : OUT    std_logic;            
+      loadpiso_c : OUT    std_logic             
+   );                                            
+
+-- Declarations
+
+END sfcontr ;       
+
+ARCHITECTURE sfcontr OF sfcontr IS
+BEGIN                      
+ 
+END ARCHITECTURE sfcontr;

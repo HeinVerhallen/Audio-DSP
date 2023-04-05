@@ -1,0 +1,36 @@
+--
+-- Created:
+--          by - tygtr (tekin Yilmaz global trade releation)
+--          at - 13:08:31 08/18/2018
+--
+--
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE ieee.std_logic_arith.all;
+
+ENTITY hdb3_1 IS
+   PORT( 
+      bits      : IN     std_logic_vector (3 DOWNTO 0);
+      clk       : IN     std_logic;
+      nrst      : IN     std_logic;
+      syncadd_c : IN     std_logic;
+      LWout     : OUT    std_logic;
+      hmin      : OUT    std_logic;
+      hnul      : OUT    std_logic;
+      hplus     : OUT    std_logic
+   );
+
+-- Declarations
+
+END hdb3_1 ;
+
+ 
+ARCHITECTURE asm OF hdb3_1 IS
+
+
+
+BEGIN
+
+
+ 
+END asm;

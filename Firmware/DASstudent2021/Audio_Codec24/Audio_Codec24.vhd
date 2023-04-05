@@ -1,0 +1,259 @@
+-- Copyright (C) 2017  Intel Corporation. All rights reserved.
+-- Your use of Intel Corporation's design tools, logic functions 
+-- and other software and tools, and its AMPP partner logic 
+-- functions, and any output files from any of the foregoing 
+-- (including device programming or simulation files), and any 
+-- associated documentation or information are expressly subject 
+-- to the terms and conditions of the Intel Program License 
+-- Subscription Agreement, the Intel Quartus Prime License Agreement,
+-- the Intel MegaCore Function License Agreement, or other 
+-- applicable license agreement, including, without limitation, 
+-- that your use is for the sole purpose of programming logic 
+-- devices manufactured by Intel and sold by Intel or its 
+-- authorized distributors.  Please refer to the applicable 
+-- agreement for further details.
+
+-- PROGRAM		"Quartus Prime"
+-- VERSION		"Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition"
+-- CREATED		"Mon Oct 12 12:49:50 2020"
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.all; 
+
+LIBRARY work;
+
+ENTITY Audio_Codec24 IS 
+	PORT
+	(
+		AUD_ADCDAT :  IN  STD_LOGIC;
+		VolDKey2 :  IN  STD_LOGIC;
+		OnOffKey0 :  IN  STD_LOGIC;
+		VolUKey1 :  IN  STD_LOGIC;
+		ResetKey3 :  IN  STD_LOGIC;
+		CLOCK_50 :  IN  STD_LOGIC;
+		FPGA_I2C_SDAT :  INOUT  STD_LOGIC;
+		AUD_BCLK :  INOUT  STD_LOGIC;
+		AUD_DACLRCK :  INOUT  STD_LOGIC;
+		AUD_ADCLRCK :  INOUT  STD_LOGIC;
+		AUD_ADC_PATH :  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
+		AUD_DAC_PATH :  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
+		AUD_DATA_FORMAT :  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
+		AUD_LINE_IN_LC :  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
+		AUD_LINE_IN_RC :  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
+		AUD_POWER :  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
+		AUD_SAMPLE_CTRL :  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
+		AUD_SET_ACTIVE :  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
+		DataL_DAC24 :  IN  STD_LOGIC_VECTOR(23 DOWNTO 0);
+		DataR_DAC24 :  IN  STD_LOGIC_VECTOR(23 DOWNTO 0);
+		AUD_XCK :  OUT  STD_LOGIC;
+		AUD_DACDAT :  OUT  STD_LOGIC;
+		FPGA_I2C_SCLK :  OUT  STD_LOGIC;
+		valid_L :  OUT  STD_LOGIC;
+		valid_R :  OUT  STD_LOGIC;
+		readyL :  OUT  STD_LOGIC;
+		readyR :  OUT  STD_LOGIC;
+		DataL_ADC24 :  OUT  STD_LOGIC_VECTOR(23 DOWNTO 0);
+		DataR_ADC24 :  OUT  STD_LOGIC_VECTOR(23 DOWNTO 0);
+		LEDR :  OUT  STD_LOGIC_VECTOR(9 DOWNTO 0)
+	);
+END Audio_Codec24;
+
+ARCHITECTURE bdf_type OF Audio_Codec24 IS 
+
+COMPONENT keytr
+	PORT(clock : IN STD_LOGIC;
+		 key : IN STD_LOGIC;
+		 key1 : IN STD_LOGIC;
+		 key2 : IN STD_LOGIC;
+		 aanuit : OUT STD_LOGIC;
+		 Vup : OUT STD_LOGIC;
+		 Vdown : OUT STD_LOGIC;
+		 ackonoff : OUT STD_LOGIC
+	);
+END COMPONENT;
+
+COMPONENT clock500
+	PORT(CLOCK : IN STD_LOGIC;
+		 END1 : IN STD_LOGIC;
+		 AANUIT : IN STD_LOGIC;
+		 Vup : IN STD_LOGIC;
+		 Vdown : IN STD_LOGIC;
+		 ackonoff : IN STD_LOGIC;
+		 AUD_ADC_PATH : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 AUD_DAC_PATH : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 AUD_DATA_FORMAT : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 AUD_LINE_IN_LC : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 AUD_LINE_IN_RC : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 AUD_POWER : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 AUD_SAMPLE_CTRL : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 AUD_SET_ACTIVE : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 CLOCK_500 : OUT STD_LOGIC;
+		 GO : OUT STD_LOGIC;
+		 CLOCK_2 : OUT STD_LOGIC;
+		 DATA : OUT STD_LOGIC_VECTOR(23 DOWNTO 0);
+		 LEDR : OUT STD_LOGIC_VECTOR(9 DOWNTO 0)
+	);
+END COMPONENT;
+
+COMPONENT i2c
+	PORT(GO : IN STD_LOGIC;
+		 CLOCK : IN STD_LOGIC;
+		 RESET : IN STD_LOGIC;
+		 I2C_SDAT : INOUT STD_LOGIC;
+		 I2C_DATA : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+		 END1 : OUT STD_LOGIC;
+		 I2C_SCLK : OUT STD_LOGIC
+	);
+END COMPONENT;
+
+COMPONENT debounce
+	PORT(clock : IN STD_LOGIC;
+		 key : IN STD_LOGIC;
+		 KEYON : OUT STD_LOGIC
+	);
+END COMPONENT;
+
+COMPONENT dacwrite
+	PORT(NRST : IN STD_LOGIC;
+		 BCLK : IN STD_LOGIC;
+		 AUD_DACLRCK : IN STD_LOGIC;
+		 START : IN STD_LOGIC;
+		 datain_left : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+		 datain_right : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+		 AUD_DACDAT : OUT STD_LOGIC;
+		 readyL : OUT STD_LOGIC;
+		 readyR : OUT STD_LOGIC
+	);
+END COMPONENT;
+
+COMPONENT dacread
+	PORT(NRST : IN STD_LOGIC;
+		 BCLK : IN STD_LOGIC;
+		 AUD_ADCDAT : IN STD_LOGIC;
+		 AUD_DACLRCK : IN STD_LOGIC;
+		 START : IN STD_LOGIC;
+		 valid_L : OUT STD_LOGIC;
+		 valid_R : OUT STD_LOGIC;
+		 RES_LEFT : OUT STD_LOGIC_VECTOR(23 DOWNTO 0);
+		 RES_RIGHT : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
+	);
+END COMPONENT;
+
+COMPONENT xckdivby4
+	PORT(CLOCK : IN STD_LOGIC;
+		 CLKBCLK : OUT STD_LOGIC
+	);
+END COMPONENT;
+
+SIGNAL	SYNTHESIZED_WIRE_17 :  STD_LOGIC;
+SIGNAL	SYNTHESIZED_WIRE_1 :  STD_LOGIC;
+SIGNAL	SYNTHESIZED_WIRE_2 :  STD_LOGIC;
+SIGNAL	SYNTHESIZED_WIRE_3 :  STD_LOGIC;
+SIGNAL	SYNTHESIZED_WIRE_4 :  STD_LOGIC;
+SIGNAL	SYNTHESIZED_WIRE_5 :  STD_LOGIC;
+SIGNAL	SYNTHESIZED_WIRE_6 :  STD_LOGIC;
+SIGNAL	SYNTHESIZED_WIRE_7 :  STD_LOGIC;
+SIGNAL	SYNTHESIZED_WIRE_8 :  STD_LOGIC;
+SIGNAL	SYNTHESIZED_WIRE_9 :  STD_LOGIC;
+SIGNAL	SYNTHESIZED_WIRE_11 :  STD_LOGIC_VECTOR(23 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_18 :  STD_LOGIC;
+SIGNAL	SYNTHESIZED_WIRE_19 :  STD_LOGIC;
+SIGNAL	SYNTHESIZED_WIRE_16 :  STD_LOGIC;
+
+
+BEGIN 
+AUD_XCK <= SYNTHESIZED_WIRE_16;
+SYNTHESIZED_WIRE_19 <= '1';
+
+
+
+b2v_inst : keytr
+PORT MAP(clock => SYNTHESIZED_WIRE_17,
+		 key => SYNTHESIZED_WIRE_1,
+		 key1 => SYNTHESIZED_WIRE_2,
+		 key2 => SYNTHESIZED_WIRE_3,
+		 aanuit => SYNTHESIZED_WIRE_5,
+		 Vup => SYNTHESIZED_WIRE_6,
+		 Vdown => SYNTHESIZED_WIRE_7,
+		 ackonoff => SYNTHESIZED_WIRE_8);
+
+
+b2v_inst1 : clock500
+PORT MAP(CLOCK => CLOCK_50,
+		 END1 => SYNTHESIZED_WIRE_4,
+		 AANUIT => SYNTHESIZED_WIRE_5,
+		 Vup => SYNTHESIZED_WIRE_6,
+		 Vdown => SYNTHESIZED_WIRE_7,
+		 ackonoff => SYNTHESIZED_WIRE_8,
+		 AUD_ADC_PATH => AUD_ADC_PATH,
+		 AUD_DAC_PATH => AUD_DAC_PATH,
+		 AUD_DATA_FORMAT => AUD_DATA_FORMAT,
+		 AUD_LINE_IN_LC => AUD_LINE_IN_LC,
+		 AUD_LINE_IN_RC => AUD_LINE_IN_RC,
+		 AUD_POWER => AUD_POWER,
+		 AUD_SAMPLE_CTRL => AUD_SAMPLE_CTRL,
+		 AUD_SET_ACTIVE => AUD_SET_ACTIVE,
+		 CLOCK_500 => SYNTHESIZED_WIRE_17,
+		 GO => SYNTHESIZED_WIRE_9,
+		 CLOCK_2 => SYNTHESIZED_WIRE_16,
+		 DATA => SYNTHESIZED_WIRE_11,
+		 LEDR => LEDR);
+
+
+
+b2v_inst19 : i2c
+PORT MAP(GO => SYNTHESIZED_WIRE_9,
+		 CLOCK => SYNTHESIZED_WIRE_17,
+		 RESET => ResetKey3,
+		 I2C_SDAT => FPGA_I2C_SDAT,
+		 I2C_DATA => SYNTHESIZED_WIRE_11,
+		 END1 => SYNTHESIZED_WIRE_4,
+		 I2C_SCLK => FPGA_I2C_SCLK);
+
+
+b2v_inst2 : debounce
+PORT MAP(clock => CLOCK_50,
+		 key => OnOffKey0,
+		 KEYON => SYNTHESIZED_WIRE_1);
+
+
+b2v_inst3 : dacwrite
+PORT MAP(NRST => ResetKey3,
+		 BCLK => SYNTHESIZED_WIRE_18,
+		 START => SYNTHESIZED_WIRE_19,
+		 datain_left => DataL_DAC24,
+		 datain_right => DataR_DAC24,
+		 AUD_DACDAT => AUD_DACDAT,
+		 readyL => readyL,
+		 readyR => readyR);
+
+
+b2v_inst4 : debounce
+PORT MAP(clock => CLOCK_50,
+		 key => VolUKey1,
+		 KEYON => SYNTHESIZED_WIRE_2);
+
+
+b2v_inst5 : debounce
+PORT MAP(clock => CLOCK_50,
+		 key => VolDKey2,
+		 KEYON => SYNTHESIZED_WIRE_3);
+
+
+b2v_inst6 : dacread
+PORT MAP(NRST => ResetKey3,
+		 BCLK => SYNTHESIZED_WIRE_18,
+		 AUD_ADCDAT => AUD_ADCDAT,
+		 START => SYNTHESIZED_WIRE_19,
+		 valid_L => valid_L,
+		 valid_R => valid_R,
+		 RES_LEFT => DataL_ADC24,
+		 RES_RIGHT => DataR_ADC24);
+
+
+b2v_inst8 : xckdivby4
+PORT MAP(CLOCK => SYNTHESIZED_WIRE_16,
+		 CLKBCLK => SYNTHESIZED_WIRE_18);
+
+
+END bdf_type;

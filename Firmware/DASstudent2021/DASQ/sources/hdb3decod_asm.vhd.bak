@@ -1,0 +1,35 @@
+--
+-- Created:
+--          by - tygtr (tekin Yilmaz global trade releation)
+--          at - 13:08:31 08/18/2018
+--
+--
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE ieee.std_logic_arith.all;
+
+ENTITY hdb3decod IS
+   PORT( 
+      nrst  : IN     std_logic;
+      clk   : IN     std_logic;
+      nuls  : IN     std_logic_vector (3 DOWNTO 0);
+      mins  : IN     std_logic_vector (3 DOWNTO 0);
+      pluss : IN     std_logic_vector (3 DOWNTO 0);
+      LWout : OUT    std_logic;
+      LWin  : IN     std_logic;
+      sbits : OUT    std_logic
+   );
+
+-- Declarations
+
+END hdb3decod ;
+ 
+ARCHITECTURE asm OF hdb3decod IS
+
+  
+
+BEGIN
+
+ 
+ 
+END asm;

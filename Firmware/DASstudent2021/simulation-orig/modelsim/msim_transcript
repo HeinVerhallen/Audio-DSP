@@ -1,0 +1,595 @@
+# Reading C:/intelFPGA_lite/17.0/modelsim_ase/tcl/vsim/pref.tcl
+# do testDAS_run_msim_rtl_vhdl.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 10.5b Lib Mapping Utility 2016.10 Oct  5 2016
+# vmap work rtl_work 
+# Copying C:/intelFPGA_lite/17.0/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vcom -93 -work work {C:/temp/DASstudent2021/DASQ/sources/decryptionblock.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:47:55 on Oct 12,2020
+# vcom -reportprogress 300 -93 -work work C:/temp/DASstudent2021/DASQ/sources/decryptionblock.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity decryptionblock
+# -- Compiling architecture decryptionblock of decryptionblock
+# End time: 19:47:55 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/temp/DASstudent2021/DASQ/sources/syncdet.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:47:55 on Oct 12,2020
+# vcom -reportprogress 300 -93 -work work C:/temp/DASstudent2021/DASQ/sources/syncdet.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity syncdet
+# -- Compiling architecture syncdet of syncdet
+# End time: 19:47:55 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/temp/DASstudent2021/DASQ/sources/sfcontr.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:47:55 on Oct 12,2020
+# vcom -reportprogress 300 -93 -work work C:/temp/DASstudent2021/DASQ/sources/sfcontr.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity sfcontr
+# -- Compiling architecture sfcontr of sfcontr
+# End time: 19:47:55 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/temp/DASstudent2021/DASQ/sources/rfcontr.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:47:55 on Oct 12,2020
+# vcom -reportprogress 300 -93 -work work C:/temp/DASstudent2021/DASQ/sources/rfcontr.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity rfcontr
+# -- Compiling architecture rfcontr of rfcontr
+# End time: 19:47:55 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/temp/DASstudent2021/DASQ/sources/mux1.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:47:55 on Oct 12,2020
+# vcom -reportprogress 300 -93 -work work C:/temp/DASstudent2021/DASQ/sources/mux1.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity mux1
+# -- Compiling architecture mux1 of mux1
+# End time: 19:47:55 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/temp/DASstudent2021/DASQ/sources/LWblock_LWblok.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:47:55 on Oct 12,2020
+# vcom -reportprogress 300 -93 -work work C:/temp/DASstudent2021/DASQ/sources/LWblock_LWblok.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity LWblock
+# -- Compiling architecture LWblok of LWblock
+# End time: 19:47:56 on Oct 12,2020, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/temp/DASstudent2021/DASQ/sources/hdb3reg_1_hdb3reg1.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:47:56 on Oct 12,2020
+# vcom -reportprogress 300 -93 -work work C:/temp/DASstudent2021/DASQ/sources/hdb3reg_1_hdb3reg1.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity hdb3reg_1
+# -- Compiling architecture hdb3reg1 of hdb3reg_1
+# End time: 19:47:56 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/temp/DASstudent2021/DASQ/sources/hdb3decod_asm.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:47:56 on Oct 12,2020
+# vcom -reportprogress 300 -93 -work work C:/temp/DASstudent2021/DASQ/sources/hdb3decod_asm.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity hdb3decod
+# -- Compiling architecture asm of hdb3decod
+# End time: 19:47:56 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/temp/DASstudent2021/DASQ/sources/hdb3_1_asm.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:47:56 on Oct 12,2020
+# vcom -reportprogress 300 -93 -work work C:/temp/DASstudent2021/DASQ/sources/hdb3_1_asm.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity hdb3_1
+# -- Compiling architecture asm of hdb3_1
+# End time: 19:47:56 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/temp/DASstudent2021/DASQ/sources/fourbitsE.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:47:56 on Oct 12,2020
+# vcom -reportprogress 300 -93 -work work C:/temp/DASstudent2021/DASQ/sources/fourbitsE.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity fourbitsE
+# -- Compiling architecture fourbitsE of fourbitsE
+# End time: 19:47:56 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/temp/DASstudent2021/DASQ/sources/demux1.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:47:56 on Oct 12,2020
+# vcom -reportprogress 300 -93 -work work C:/temp/DASstudent2021/DASQ/sources/demux1.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity demux1
+# -- Compiling architecture demux1 of demux1
+# End time: 19:47:56 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/temp/DASstudent2021/DASQ/sources/addsync.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:47:56 on Oct 12,2020
+# vcom -reportprogress 300 -93 -work work C:/temp/DASstudent2021/DASQ/sources/addsync.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity addsync
+# -- Compiling architecture asm of addsync
+# End time: 19:47:56 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/temp/DASstudent2021/filesT/CLK2MHZ.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:47:56 on Oct 12,2020
+# vcom -reportprogress 300 -93 -work work C:/temp/DASstudent2021/filesT/CLK2MHZ.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package NUMERIC_STD
+# -- Compiling entity CLK2MHZ
+# -- Compiling architecture CLK2MHZ of CLK2MHZ
+# End time: 19:47:56 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/temp/DASstudent2021/filesT/Initialize.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:47:57 on Oct 12,2020
+# vcom -reportprogress 300 -93 -work work C:/temp/DASstudent2021/filesT/Initialize.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity initialize
+# -- Compiling architecture initialize of initialize
+# End time: 19:47:57 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/temp/DASstudent2021/filesT/DataValid.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:47:57 on Oct 12,2020
+# vcom -reportprogress 300 -93 -work work C:/temp/DASstudent2021/filesT/DataValid.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity DataValid
+# -- Compiling architecture DataValid of DataValid
+# End time: 19:47:57 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/temp/DASstudent2021/DASQ/sources/sipo.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:47:57 on Oct 12,2020
+# vcom -reportprogress 300 -93 -work work C:/temp/DASstudent2021/DASQ/sources/sipo.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity sipo
+# -- Compiling architecture sipo of sipo
+# End time: 19:47:57 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/temp/DASstudent2021/DASQ/sources/encryptionblockL.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:47:57 on Oct 12,2020
+# vcom -reportprogress 300 -93 -work work C:/temp/DASstudent2021/DASQ/sources/encryptionblockL.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity encryptionblock
+# -- Compiling architecture encryptionblock of encryptionblock
+# End time: 19:47:57 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/temp/DASstudent2021/DASQ/sources/piso.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:47:57 on Oct 12,2020
+# vcom -reportprogress 300 -93 -work work C:/temp/DASstudent2021/DASQ/sources/piso.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity piso
+# -- Compiling architecture piso of piso
+# End time: 19:47:58 on Oct 12,2020, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/temp/DASstudent2021/DASQ/sources/hdbdecreg.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:47:58 on Oct 12,2020
+# vcom -reportprogress 300 -93 -work work C:/temp/DASstudent2021/DASQ/sources/hdbdecreg.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity hdbdecreg
+# -- Compiling architecture hdbdecreg of hdbdecreg
+# End time: 19:47:58 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+cd C:/temp/DASstudent2021/simulation
+# reading modelsim.ini
+vcom -reportprogress 300 -work work C:/temp/DASstudent2021/DASQ/DASQ.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:27 on Oct 12,2020
+# vcom -reportprogress 300 -work work C:/temp/DASstudent2021/DASQ/DASQ.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity DASQ
+# -- Compiling architecture bdf_type of DASQ
+# End time: 19:48:27 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work C:/temp/DASstudent2021/DASQ/sources/addsync.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:39 on Oct 12,2020
+# vcom -reportprogress 300 -work work C:/temp/DASstudent2021/DASQ/sources/addsync.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity addsync
+# -- Compiling architecture asm of addsync
+# End time: 19:48:39 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work C:/temp/DASstudent2021/DASQ/sources/decryptionblock.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:39 on Oct 12,2020
+# vcom -reportprogress 300 -work work C:/temp/DASstudent2021/DASQ/sources/decryptionblock.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity decryptionblock
+# -- Compiling architecture decryptionblock of decryptionblock
+# End time: 19:48:39 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work C:/temp/DASstudent2021/DASQ/sources/demux1.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:39 on Oct 12,2020
+# vcom -reportprogress 300 -work work C:/temp/DASstudent2021/DASQ/sources/demux1.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity demux1
+# -- Compiling architecture demux1 of demux1
+# End time: 19:48:39 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work C:/temp/DASstudent2021/DASQ/sources/encryptionblockL.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:39 on Oct 12,2020
+# vcom -reportprogress 300 -work work C:/temp/DASstudent2021/DASQ/sources/encryptionblockL.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity encryptionblock
+# -- Compiling architecture encryptionblock of encryptionblock
+# End time: 19:48:39 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work C:/temp/DASstudent2021/DASQ/sources/fourbitsE.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:39 on Oct 12,2020
+# vcom -reportprogress 300 -work work C:/temp/DASstudent2021/DASQ/sources/fourbitsE.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity fourbitsE
+# -- Compiling architecture fourbitsE of fourbitsE
+# End time: 19:48:40 on Oct 12,2020, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work C:/temp/DASstudent2021/DASQ/sources/hdb3_1_asm.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:40 on Oct 12,2020
+# vcom -reportprogress 300 -work work C:/temp/DASstudent2021/DASQ/sources/hdb3_1_asm.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity hdb3_1
+# -- Compiling architecture asm of hdb3_1
+# End time: 19:48:40 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/hdb3dec.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:40 on Oct 12,2020
+# vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/hdb3dec.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity hdb3dec
+# -- Compiling architecture bdf_type of hdb3dec
+# End time: 19:48:40 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/hdb3decod_asm.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:40 on Oct 12,2020
+# vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/hdb3decod_asm.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity hdb3decod
+# -- Compiling architecture asm of hdb3decod
+# End time: 19:48:40 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/hdb3enc.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:40 on Oct 12,2020
+# vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/hdb3enc.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity hdb3enc
+# -- Compiling architecture bdf_type of hdb3enc
+# End time: 19:48:40 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/hdb3reg_1_hdb3reg1.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:40 on Oct 12,2020
+# vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/hdb3reg_1_hdb3reg1.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity hdb3reg_1
+# -- Compiling architecture hdb3reg1 of hdb3reg_1
+# End time: 19:48:40 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/hdbdecreg.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:40 on Oct 12,2020
+# vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/hdbdecreg.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity hdbdecreg
+# -- Compiling architecture hdbdecreg of hdbdecreg
+# End time: 19:48:40 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/LWblock_LWblok.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:40 on Oct 12,2020
+# vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/LWblock_LWblok.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity LWblock
+# -- Compiling architecture LWblok of LWblock
+# End time: 19:48:40 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/mux1.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:40 on Oct 12,2020
+# vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/mux1.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity mux1
+# -- Compiling architecture mux1 of mux1
+# End time: 19:48:41 on Oct 12,2020, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/piso.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:41 on Oct 12,2020
+# vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/piso.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity piso
+# -- Compiling architecture piso of piso
+# End time: 19:48:41 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/rfcontr.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:41 on Oct 12,2020
+# vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/rfcontr.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity rfcontr
+# -- Compiling architecture rfcontr of rfcontr
+# End time: 19:48:41 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/sfcontr.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:41 on Oct 12,2020
+# vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/sfcontr.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity sfcontr
+# -- Compiling architecture sfcontr of sfcontr
+# End time: 19:48:41 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/sipo.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:41 on Oct 12,2020
+# vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/sipo.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity sipo
+# -- Compiling architecture sipo of sipo
+# End time: 19:48:41 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/syncdet.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:41 on Oct 12,2020
+# vcom -reportprogress 30 -work work C:/temp/DASstudent2021/DASQ/sources/syncdet.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity syncdet
+# -- Compiling architecture syncdet of syncdet
+# End time: 19:48:41 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work C:/temp/DASstudent2021/DASQ/DASQ.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:45 on Oct 12,2020
+# vcom -reportprogress 300 -work work C:/temp/DASstudent2021/DASQ/DASQ.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity DASQ
+# -- Compiling architecture bdf_type of DASQ
+# End time: 19:48:45 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work C:/temp/DASstudent2021/testbench.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:48:55 on Oct 12,2020
+# vcom -reportprogress 300 -work work C:/temp/DASstudent2021/testbench.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity testbench
+# -- Compiling architecture bdf_type of testbench
+# End time: 19:48:55 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work C:/temp/DASstudent2021/testbenchsources/clkdiv.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:49:00 on Oct 12,2020
+# vcom -reportprogress 300 -work work C:/temp/DASstudent2021/testbenchsources/clkdiv.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity clkdiv
+# -- Compiling architecture clkdiv of clkdiv
+# End time: 19:49:00 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work C:/temp/DASstudent2021/testbenchsources/outtest.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:49:01 on Oct 12,2020
+# vcom -reportprogress 300 -work work C:/temp/DASstudent2021/testbenchsources/outtest.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity outtest
+# -- Compiling architecture testout of outtest
+# End time: 19:49:01 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work C:/temp/DASstudent2021/testbenchsources/PASSTHRUS.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:49:02 on Oct 12,2020
+# vcom -reportprogress 300 -work work C:/temp/DASstudent2021/testbenchsources/PASSTHRUS.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity PASSTHRUS
+# -- Compiling architecture PASSTHRUS of PASSTHRUS
+# End time: 19:49:02 on Oct 12,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work C:/temp/DASstudent2021/testbenchsources/testbloks.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 19:49:02 on Oct 12,2020
+# vcom -reportprogress 300 -work work C:/temp/DASstudent2021/testbenchsources/testbloks.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Compiling entity testbloks
+# -- Compiling architecture testblocks of testbloks
+# End time: 19:49:03 on Oct 12,2020, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vsim work.testbench
+# vsim work.testbench 
+# Start time: 19:50:25 on Oct 12,2020
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.testbench(bdf_type)
+# Loading ieee.std_logic_arith(body)
+# Loading work.testbloks(testblocks)
+# Loading work.outtest(testout)
+# Loading work.dasq(bdf_type)
+# Loading work.mux1(mux1)
+# Loading work.sfcontr(sfcontr)
+# Loading work.syncdet(syncdet)
+# Loading work.sipo(sipo)
+# Loading work.demux1(demux1)
+# Loading work.decryptionblock(decryptionblock)
+# Loading work.encryptionblock(encryptionblock)
+# Loading work.rfcontr(rfcontr)
+# Loading work.piso(piso)
+# Loading work.hdb3dec(bdf_type)
+# Loading work.fourbitse(fourbitse)
+# Loading work.hdb3decod(asm)
+# Loading work.lwblock(lwblok)
+# Loading work.hdbdecreg(hdbdecreg)
+# Loading work.hdb3enc(bdf_type)
+# Loading work.hdb3reg_1(hdb3reg1)
+# Loading work.hdb3_1(asm)
+# Loading work.addsync(asm)
+# Loading work.passthrus(passthrus)
+# Loading work.clkdiv(clkdiv)
+# ** Warning: (vsim-8683) Uninitialized out port /testbench/b2v_inst/push_B has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /testbench/b2v_inst/push_A has no driver.
+# This port will contribute value (U) to the signal network.
+do C:/temp/DASstudent2021/simulation/addsignals.do
+# ** Warning: (vsim-8683) Uninitialized out port /testbench/b2v_inst/push_B has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /testbench/b2v_inst/push_A has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Error: (vish-4014) No objects found matching '/testbench/b2v_inst7/loadpiso_c'.
+# Executing ONERROR command at macro C:\temp\DASstudent2021\simulation\addsignals.do line 10
+# ** Error: (vish-4014) No objects found matching '/testbench/b2v_inst7/writeadc'.
+# Executing ONERROR command at macro C:\temp\DASstudent2021\simulation\addsignals.do line 14
+add wave -position insertpoint  \
+sim:/testbench/b2v_inst2/loadpiso_c
+do C:/temp/DASstudent2021/simulation/addsignals.do
+# ** Warning: (vsim-8683) Uninitialized out port /testbench/b2v_inst/push_B has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /testbench/b2v_inst/push_A has no driver.
+# This port will contribute value (U) to the signal network.
+run 90000000
+run 900000000
+# End time: 19:57:48 on Oct 12,2020, Elapsed time: 0:07:23
+# Errors: 6, Warnings: 6

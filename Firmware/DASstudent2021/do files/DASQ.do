@@ -1,0 +1,16 @@
+#DD3 DASQ.do
+restart -f
+
+# 10 MHz klok definieren:
+force clk 1 0, 0 10 -rep 20
+force nrst 0
+run 30
+
+force nrst 1
+force SL24 "110001001111001001011100"
+force SR24 "010101100111000101011011"
+run 1000
+
+force SL24 "110011010110111001100001"
+force SR24 "101101110001000010101100"
+run 3000

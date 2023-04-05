@@ -1,0 +1,41 @@
+--
+-- Created:
+--          by - tygtr (tekin Yilmaz global trade releation)
+--          at - 13:08:31 08/18/2018
+--
+--
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE ieee.std_logic_arith.all;
+
+ENTITY addsync IS
+   PORT( 
+      Lwino    : IN     std_logic;
+      clk      : IN     std_logic;
+      hmino    : IN     std_logic;
+      hnulo    : IN     std_logic;
+      hpluso   : IN     std_logic;
+      nrst     : IN     std_logic;
+      syncaddo : IN     std_logic;
+      mino     : OUT    std_logic;
+      nulo     : OUT    std_logic;
+      pluso    : OUT    std_logic
+   );
+
+-- Declarations
+
+END addsync ;
+
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE ieee.std_logic_arith.all;
+ 
+ARCHITECTURE asm OF addsync IS
+
+
+BEGIN
+
+
+ 
+END asm;

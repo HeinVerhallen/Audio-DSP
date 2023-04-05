@@ -1,0 +1,163 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 16 16 304 288)
+	(text "CLOCK500" (rect 5 0 53 12)(font "Arial" ))
+	(text "inst" (rect 8 256 20 268)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "AUD_LINE_IN_LC[15..0]" (rect 0 0 108 12)(font "Arial" ))
+		(text "AUD_LINE_IN_LC[15..0]" (rect 21 27 129 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "AUD_LINE_IN_RC[15..0]" (rect 0 0 110 12)(font "Arial" ))
+		(text "AUD_LINE_IN_RC[15..0]" (rect 21 43 131 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "AUD_ADC_PATH[15..0]" (rect 0 0 107 12)(font "Arial" ))
+		(text "AUD_ADC_PATH[15..0]" (rect 21 59 128 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 3))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "AUD_DAC_PATH[15..0]" (rect 0 0 107 12)(font "Arial" ))
+		(text "AUD_DAC_PATH[15..0]" (rect 21 75 128 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "AUD_POWER[15..0]" (rect 0 0 90 12)(font "Arial" ))
+		(text "AUD_POWER[15..0]" (rect 21 91 111 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 3))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "AUD_DATA_FORMAT[15..0]" (rect 0 0 130 12)(font "Arial" ))
+		(text "AUD_DATA_FORMAT[15..0]" (rect 21 107 151 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 3))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "AUD_SAMPLE_CTRL[15..0]" (rect 0 0 126 12)(font "Arial" ))
+		(text "AUD_SAMPLE_CTRL[15..0]" (rect 21 123 147 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 3))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "AUD_SET_ACTIVE[15..0]" (rect 0 0 115 12)(font "Arial" ))
+		(text "AUD_SET_ACTIVE[15..0]" (rect 21 139 136 151)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144)(line_width 3))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "CLOCK" (rect 0 0 34 12)(font "Arial" ))
+		(text "CLOCK" (rect 21 155 55 167)(font "Arial" ))
+		(line (pt 0 160)(pt 16 160)(line_width 1))
+	)
+	(port
+		(pt 0 176)
+		(input)
+		(text "END1" (rect 0 0 24 12)(font "Arial" ))
+		(text "END1" (rect 21 171 45 183)(font "Arial" ))
+		(line (pt 0 176)(pt 16 176)(line_width 1))
+	)
+	(port
+		(pt 0 192)
+		(input)
+		(text "AANUIT" (rect 0 0 38 12)(font "Arial" ))
+		(text "AANUIT" (rect 21 187 59 199)(font "Arial" ))
+		(line (pt 0 192)(pt 16 192)(line_width 1))
+	)
+	(port
+		(pt 0 208)
+		(input)
+		(text "Vup" (rect 0 0 17 12)(font "Arial" ))
+		(text "Vup" (rect 21 203 38 215)(font "Arial" ))
+		(line (pt 0 208)(pt 16 208)(line_width 1))
+	)
+	(port
+		(pt 0 224)
+		(input)
+		(text "Vdown" (rect 0 0 28 12)(font "Arial" ))
+		(text "Vdown" (rect 21 219 49 231)(font "Arial" ))
+		(line (pt 0 224)(pt 16 224)(line_width 1))
+	)
+	(port
+		(pt 0 240)
+		(input)
+		(text "ackonoff" (rect 0 0 35 12)(font "Arial" ))
+		(text "ackonoff" (rect 21 235 56 247)(font "Arial" ))
+		(line (pt 0 240)(pt 16 240)(line_width 1))
+	)
+	(port
+		(pt 288 32)
+		(output)
+		(text "CLOCK_500" (rect 0 0 54 12)(font "Arial" ))
+		(text "CLOCK_500" (rect 213 27 267 39)(font "Arial" ))
+		(line (pt 288 32)(pt 272 32)(line_width 1))
+	)
+	(port
+		(pt 288 48)
+		(output)
+		(text "GO" (rect 0 0 14 12)(font "Arial" ))
+		(text "GO" (rect 253 43 267 55)(font "Arial" ))
+		(line (pt 288 48)(pt 272 48)(line_width 1))
+	)
+	(port
+		(pt 288 64)
+		(output)
+		(text "CLOCK_2" (rect 0 0 44 12)(font "Arial" ))
+		(text "CLOCK_2" (rect 223 59 267 71)(font "Arial" ))
+		(line (pt 288 64)(pt 272 64)(line_width 1))
+	)
+	(port
+		(pt 288 80)
+		(output)
+		(text "DATA[23..0]" (rect 0 0 54 12)(font "Arial" ))
+		(text "DATA[23..0]" (rect 213 75 267 87)(font "Arial" ))
+		(line (pt 288 80)(pt 272 80)(line_width 3))
+	)
+	(port
+		(pt 288 96)
+		(output)
+		(text "LEDR[9..0]" (rect 0 0 48 12)(font "Arial" ))
+		(text "LEDR[9..0]" (rect 219 91 267 103)(font "Arial" ))
+		(line (pt 288 96)(pt 272 96)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 272 256)(line_width 1))
+	)
+)

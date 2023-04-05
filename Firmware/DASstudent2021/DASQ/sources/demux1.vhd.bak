@@ -1,0 +1,27 @@
+--
+-- Created:
+--          by - tygtr (tekin Yilmaz global trade releation)
+--          at - 13:08:31 08/18/2018
+--
+--
+LIBRARY ieee;                          
+USE ieee.std_logic_1164.all;      
+USE ieee.std_logic_arith.all;
+ENTITY demux1 IS  
+   PORT(              
+      sbits    : IN     std_logic;
+      chdesel_c : IN     std_logic_vector (7 DOWNTO 0);
+      sorL    : OUT    std_logic;     
+      sorR    : OUT    std_logic           
+   );                                           
+-- Declarations
+END demux1 ;         
+ARCHITECTURE demux1 OF demux1 IS   
+
+-- 1 : left channel audio is selected
+-- 2 : right channel audio is selected
+         
+BEGIN           
+                            
+     
+END ARCHITECTURE demux1;

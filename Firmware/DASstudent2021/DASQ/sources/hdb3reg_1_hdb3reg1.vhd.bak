@@ -1,0 +1,31 @@
+--
+-- Created:
+--          by - tygtr (tekin Yilmaz global trade releation)
+--          at - 13:08:31 08/18/2018
+--
+--
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE ieee.std_logic_arith.all;
+
+ENTITY hdb3reg_1 IS
+   PORT( 
+      clk  : IN     std_logic;
+      nrst : IN     std_logic;
+      so   : IN     std_logic;
+      bits : OUT    std_logic_vector (3 DOWNTO 0)
+   );
+
+-- Declarations
+
+END hdb3reg_1 ;
+
+--
+ARCHITECTURE hdb3reg1 OF hdb3reg_1 IS
+-----------------------------------------------------------------------  
+-- so->LSB->.....MSB (shifts from LSB to MSB)                        --    
+-----------------------------------------------------------------------  
+BEGIN
+
+END ARCHITECTURE hdb3reg1;
+

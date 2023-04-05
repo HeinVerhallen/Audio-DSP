@@ -1,0 +1,986 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/temp/DASstudent2021/simulation
+Eaddsync
+Z1 w1534797084
+Z2 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z4 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+R0
+Z5 8C:/temp/DASstudent2021/DASQ/sources/addsync.vhd
+Z6 FC:/temp/DASstudent2021/DASQ/sources/addsync.vhd
+l0
+L13
+VKK`T84XWDW6[zEo7USXZf1
+!s100 5VjJ7Sk2kgeWY=CL>z4>W0
+Z7 OV;C;10.5b;63
+32
+Z8 !s110 1602524919
+!i10b 1
+Z9 !s108 1602524919.000000
+Z10 !s90 -reportprogress|300|-work|work|C:/temp/DASstudent2021/DASQ/sources/addsync.vhd|
+Z11 !s107 C:/temp/DASstudent2021/DASQ/sources/addsync.vhd|
+!i113 1
+Z12 o-work work
+Z13 tExplicit 1 CvgOpt 0
+Aasm
+DEx4 work 7 addsync 0 22 KK`T84XWDW6[zEo7USXZf1
+R2
+R3
+R4
+l58
+L44
+VXm_H=Si=8dUjACZnfbn@O1
+!s100 hbCL1E70[aDGAk=jhfiGn0
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Eclkdiv
+Z14 w1553514914
+R2
+R3
+R4
+R0
+Z15 8C:/temp/DASstudent2021/testbenchsources/clkdiv.vhd
+Z16 FC:/temp/DASstudent2021/testbenchsources/clkdiv.vhd
+l0
+L14
+V_iOm5Le7m1]BMHC7CO[Nh3
+!s100 KkJ9<42oC@JdWm39MMjXQ1
+R7
+32
+Z17 !s110 1602524940
+!i10b 1
+Z18 !s108 1602524940.000000
+Z19 !s90 -reportprogress|300|-work|work|C:/temp/DASstudent2021/testbenchsources/clkdiv.vhd|
+Z20 !s107 C:/temp/DASstudent2021/testbenchsources/clkdiv.vhd|
+!i113 1
+R12
+R13
+Aclkdiv
+R2
+R3
+R4
+DEx4 work 6 clkdiv 0 22 _iOm5Le7m1]BMHC7CO[Nh3
+l29
+L27
+VlMc:[kPVbkYSVn7e[SnV]2
+!s100 ^ShLS;1^[7aY1_J:;aFoH0
+R7
+32
+R17
+!i10b 1
+R18
+R19
+R20
+!i113 1
+R12
+R13
+Edasq
+Z21 w1602524282
+R3
+R4
+R0
+Z22 8C:/temp/DASstudent2021/DASQ/DASQ.vhd
+Z23 FC:/temp/DASstudent2021/DASQ/DASQ.vhd
+l0
+L25
+VVCVkXXkO;`FONclLjiUH<3
+!s100 Rc[V5Mf9Y5[zGRh<o?RG?3
+R7
+32
+Z24 !s110 1602524925
+!i10b 1
+Z25 !s108 1602524925.000000
+Z26 !s90 -reportprogress|300|-work|work|C:/temp/DASstudent2021/DASQ/DASQ.vhd|
+Z27 !s107 C:/temp/DASstudent2021/DASQ/DASQ.vhd|
+!i113 1
+R12
+R13
+Abdf_type
+R3
+R4
+DEx4 work 4 dasq 0 22 VCVkXXkO;`FONclLjiUH<3
+l187
+L45
+V`P8LXb<@]4nj<2XM2WBac3
+!s100 dji@0<8YdJ@LLcM4@K]_o0
+R7
+32
+R24
+!i10b 1
+R25
+R26
+R27
+!i113 1
+R12
+R13
+Edecryptionblock
+Z28 w1602515582
+R2
+R3
+R4
+R0
+Z29 8C:/temp/DASstudent2021/DASQ/sources/decryptionblock.vhd
+Z30 FC:/temp/DASstudent2021/DASQ/sources/decryptionblock.vhd
+l0
+L14
+Vn<kg>C=GnN?fecP>oTbhB1
+!s100 _necFgCc;izf:48[VFfJV0
+R7
+32
+R8
+!i10b 1
+R9
+Z31 !s90 -reportprogress|300|-work|work|C:/temp/DASstudent2021/DASQ/sources/decryptionblock.vhd|
+Z32 !s107 C:/temp/DASstudent2021/DASQ/sources/decryptionblock.vhd|
+!i113 1
+R12
+R13
+Adecryptionblock
+R2
+R3
+R4
+DEx4 work 15 decryptionblock 0 22 n<kg>C=GnN?fecP>oTbhB1
+l26
+L25
+V9_OR9a7<32`IiR`BS=UW91
+!s100 =D1UZ;O54>zBgnza^P`462
+R7
+32
+R8
+!i10b 1
+R9
+R31
+R32
+!i113 1
+R12
+R13
+Edemux1
+Z33 w1572434990
+R2
+R3
+R4
+R0
+Z34 8C:/temp/DASstudent2021/DASQ/sources/demux1.vhd
+Z35 FC:/temp/DASstudent2021/DASQ/sources/demux1.vhd
+l0
+L4
+V=DHJ>=]nFdFV<g]2f@ThO0
+!s100 IBGLoR]5kodWY9d>^h6Pe0
+R7
+32
+R8
+!i10b 1
+R9
+Z36 !s90 -reportprogress|300|-work|work|C:/temp/DASstudent2021/DASQ/sources/demux1.vhd|
+Z37 !s107 C:/temp/DASstudent2021/DASQ/sources/demux1.vhd|
+!i113 1
+R12
+R13
+Ademux1
+R2
+R3
+R4
+DEx4 work 6 demux1 0 22 =DHJ>=]nFdFV<g]2f@ThO0
+l14
+L13
+Vfka0baWO<ao3JdYBmzYWT3
+!s100 QRoC53j[iVjb6KVkB1A`P2
+R7
+32
+R8
+!i10b 1
+R9
+R36
+R37
+!i113 1
+R12
+R13
+Eencryptionblock
+Z38 w1602516091
+R2
+R3
+R4
+R0
+Z39 8C:/temp/DASstudent2021/DASQ/sources/encryptionblockL.vhd
+Z40 FC:/temp/DASstudent2021/DASQ/sources/encryptionblockL.vhd
+l0
+L14
+VdQegjO8eB^Hf1Qbii__zl3
+!s100 1EN4H03]DL3Kk:1Dhez1I2
+R7
+32
+R8
+!i10b 1
+R9
+Z41 !s90 -reportprogress|300|-work|work|C:/temp/DASstudent2021/DASQ/sources/encryptionblockL.vhd|
+Z42 !s107 C:/temp/DASstudent2021/DASQ/sources/encryptionblockL.vhd|
+!i113 1
+R12
+R13
+Aencryptionblock
+R2
+R3
+R4
+DEx4 work 15 encryptionblock 0 22 dQegjO8eB^Hf1Qbii__zl3
+l26
+L25
+VRzDlSAzd:P;0PQNjfd`[m1
+!s100 hRDF79A`4W6O0Q^NZjgH;0
+R7
+32
+R8
+!i10b 1
+R9
+R41
+R42
+!i113 1
+R12
+R13
+Efourbitse
+Z43 w1534678368
+R2
+R3
+R4
+R0
+Z44 8C:/temp/DASstudent2021/DASQ/sources/fourbitsE.vhd
+Z45 FC:/temp/DASstudent2021/DASQ/sources/fourbitsE.vhd
+l0
+L5
+V=z53CW?=Qb8EG084`hWDM0
+!s100 1B0c0FZmKklHYWeUHf9kE2
+R7
+32
+Z46 !s110 1602524920
+!i10b 1
+R9
+Z47 !s90 -reportprogress|300|-work|work|C:/temp/DASstudent2021/DASQ/sources/fourbitsE.vhd|
+Z48 !s107 C:/temp/DASstudent2021/DASQ/sources/fourbitsE.vhd|
+!i113 1
+R12
+R13
+Afourbitse
+R2
+R3
+R4
+DEx4 work 9 fourbitse 0 22 =z53CW?=Qb8EG084`hWDM0
+l22
+L21
+VS7N[l0C`W9EnIj:LSXk^@2
+!s100 OYl]>RKDIX<W1i;2e>:;N0
+R7
+32
+R46
+!i10b 1
+R9
+R47
+R48
+!i113 1
+R12
+R13
+Ehdb3_1
+Z49 w1534797108
+R2
+R3
+R4
+R0
+Z50 8C:/temp/DASstudent2021/DASQ/sources/hdb3_1_asm.vhd
+Z51 FC:/temp/DASstudent2021/DASQ/sources/hdb3_1_asm.vhd
+l0
+L13
+V_zSaI;N:2AgXD_W6ZNao=3
+!s100 C17nI[1RDBIXn]lfQTze20
+R7
+32
+R46
+!i10b 1
+Z52 !s108 1602524920.000000
+Z53 !s90 -reportprogress|300|-work|work|C:/temp/DASstudent2021/DASQ/sources/hdb3_1_asm.vhd|
+Z54 !s107 C:/temp/DASstudent2021/DASQ/sources/hdb3_1_asm.vhd|
+!i113 1
+R12
+R13
+Aasm
+DEx4 work 6 hdb3_1 0 22 _zSaI;N:2AgXD_W6ZNao=3
+R2
+R3
+R4
+l67
+L42
+V`9L2J6:E`ZHY<I7W:h^go3
+!s100 U]Xa[5DVUCHCl6iL@;_A[1
+R7
+32
+R46
+!i10b 1
+R52
+R53
+R54
+!i113 1
+R12
+R13
+Ehdb3dec
+Z55 w1602522732
+R3
+R4
+R0
+Z56 8C:/temp/DASstudent2021/DASQ/sources/hdb3dec.vhd
+Z57 FC:/temp/DASstudent2021/DASQ/sources/hdb3dec.vhd
+l0
+L25
+VkCXhoW00zW^`<VOz_GHAD3
+!s100 XTSDICPnj>cg]UnYO`3?C1
+R7
+32
+R46
+!i10b 1
+R52
+Z58 !s90 -reportprogress|30|-work|work|C:/temp/DASstudent2021/DASQ/sources/hdb3dec.vhd|
+Z59 !s107 C:/temp/DASstudent2021/DASQ/sources/hdb3dec.vhd|
+!i113 1
+R12
+R13
+Abdf_type
+R3
+R4
+DEx4 work 7 hdb3dec 0 22 kCXhoW00zW^`<VOz_GHAD3
+l84
+L39
+VkkBoX7gK^^7_W]lJlEl6B3
+!s100 nZV8>zemSBh]2W3OicKIP2
+R7
+32
+R46
+!i10b 1
+R52
+R58
+R59
+!i113 1
+R12
+R13
+Ehdb3decod
+Z60 w1534797132
+R2
+R3
+R4
+R0
+Z61 8C:/temp/DASstudent2021/DASQ/sources/hdb3decod_asm.vhd
+Z62 FC:/temp/DASstudent2021/DASQ/sources/hdb3decod_asm.vhd
+l0
+L13
+VOX26Q9[U==11miBPgRE0l0
+!s100 gRfE8HR6;<Y<7olG0QhO=0
+R7
+32
+R46
+!i10b 1
+R52
+Z63 !s90 -reportprogress|30|-work|work|C:/temp/DASstudent2021/DASQ/sources/hdb3decod_asm.vhd|
+Z64 !s107 C:/temp/DASstudent2021/DASQ/sources/hdb3decod_asm.vhd|
+!i113 1
+R12
+R13
+Aasm
+DEx4 work 9 hdb3decod 0 22 OX26Q9[U==11miBPgRE0l0
+R2
+R3
+R4
+l55
+L42
+VHCm=AL:P]THn:=2@I>7;]2
+!s100 jEIOmQ[ab2be88e5CZ@c]3
+R7
+32
+R46
+!i10b 1
+R52
+R63
+R64
+!i113 1
+R12
+R13
+Ehdb3enc
+Z65 w1602519343
+R3
+R4
+R0
+Z66 8C:/temp/DASstudent2021/DASQ/sources/hdb3enc.vhd
+Z67 FC:/temp/DASstudent2021/DASQ/sources/hdb3enc.vhd
+l0
+L25
+VkR^^0LDCC_oknVLdaTF;63
+!s100 JbG<hdM;Q?<9lQnF7GWPI0
+R7
+32
+R46
+!i10b 1
+R52
+Z68 !s90 -reportprogress|30|-work|work|C:/temp/DASstudent2021/DASQ/sources/hdb3enc.vhd|
+Z69 !s107 C:/temp/DASstudent2021/DASQ/sources/hdb3enc.vhd|
+!i113 1
+R12
+R13
+Abdf_type
+R3
+R4
+DEx4 work 7 hdb3enc 0 22 kR^^0LDCC_oknVLdaTF;63
+l64
+L39
+VTak5=T<YGY:G3l0AV8VSf2
+!s100 Z]a1E3Bc8Gle:aN:N@GGT1
+R7
+32
+R46
+!i10b 1
+R52
+R68
+R69
+!i113 1
+R12
+R13
+Ehdb3reg_1
+Z70 w1534797152
+R2
+R3
+R4
+R0
+Z71 8C:/temp/DASstudent2021/DASQ/sources/hdb3reg_1_hdb3reg1.vhd
+Z72 FC:/temp/DASstudent2021/DASQ/sources/hdb3reg_1_hdb3reg1.vhd
+l0
+L14
+Vo1?Y@ZEWZUZFK;lXlXk`[1
+!s100 D?L8<beg5]eH7ZM=KQ5W_3
+R7
+32
+R46
+!i10b 1
+R52
+Z73 !s90 -reportprogress|30|-work|work|C:/temp/DASstudent2021/DASQ/sources/hdb3reg_1_hdb3reg1.vhd|
+Z74 !s107 C:/temp/DASstudent2021/DASQ/sources/hdb3reg_1_hdb3reg1.vhd|
+!i113 1
+R12
+R13
+Ahdb3reg1
+R2
+R3
+R4
+DEx4 work 9 hdb3reg_1 0 22 o1?Y@ZEWZUZFK;lXlXk`[1
+l31
+L27
+Vi;M]^89JW]UoP0P0LoN]H2
+!s100 Od6T[h`]kk^AGBUUJ^nEz2
+R7
+32
+R46
+!i10b 1
+R52
+R73
+R74
+!i113 1
+R12
+R13
+Ehdbdecreg
+Z75 w1602520285
+R2
+R3
+R4
+R0
+Z76 8C:/temp/DASstudent2021/DASQ/sources/hdbdecreg.vhd
+Z77 FC:/temp/DASstudent2021/DASQ/sources/hdbdecreg.vhd
+l0
+L14
+VcU4RZ:Wzl7AhAmUI3gzK31
+!s100 zFHz]>nJeI7oYZ??6a_SG1
+R7
+32
+R46
+!i10b 1
+R52
+Z78 !s90 -reportprogress|30|-work|work|C:/temp/DASstudent2021/DASQ/sources/hdbdecreg.vhd|
+Z79 !s107 C:/temp/DASstudent2021/DASQ/sources/hdbdecreg.vhd|
+!i113 1
+R12
+R13
+Ahdbdecreg
+R2
+R3
+R4
+DEx4 work 9 hdbdecreg 0 22 cU4RZ:Wzl7AhAmUI3gzK31
+l30
+L26
+V?Jn2@BBW6lTLn<DIicHY11
+!s100 Lz1UR9lgFzMnki=FVM5@C0
+R7
+32
+R46
+!i10b 1
+R52
+R78
+R79
+!i113 1
+R12
+R13
+Elwblock
+Z80 w1463326208
+R2
+R3
+R4
+R0
+Z81 8C:/temp/DASstudent2021/DASQ/sources/LWblock_LWblok.vhd
+Z82 FC:/temp/DASstudent2021/DASQ/sources/LWblock_LWblok.vhd
+l0
+L14
+V^WQY=l3:=lTMSR3X?k1mQ1
+!s100 gHhi71bki_GjL3l9lLO1I1
+R7
+32
+R46
+!i10b 1
+R52
+Z83 !s90 -reportprogress|30|-work|work|C:/temp/DASstudent2021/DASQ/sources/LWblock_LWblok.vhd|
+Z84 !s107 C:/temp/DASstudent2021/DASQ/sources/LWblock_LWblok.vhd|
+!i113 1
+R12
+R13
+Alwblok
+R2
+R3
+R4
+DEx4 work 7 lwblock 0 22 ^WQY=l3:=lTMSR3X?k1mQ1
+l27
+L26
+VXmmk>H9mie>UMz991=M9z0
+!s100 _`[S<I2Vcej`<7?ej5hfj0
+R7
+32
+R46
+!i10b 1
+R52
+R83
+R84
+!i113 1
+R12
+R13
+Emux1
+R33
+R2
+R3
+R4
+R0
+Z85 8C:/temp/DASstudent2021/DASQ/sources/mux1.vhd
+Z86 FC:/temp/DASstudent2021/DASQ/sources/mux1.vhd
+l0
+L4
+Vf2a3Kaa^`P`7_Z9jA]Vcc1
+!s100 O4Bb@nI`SWj6^9]_Xl@W30
+R7
+32
+Z87 !s110 1602524921
+!i10b 1
+R52
+Z88 !s90 -reportprogress|30|-work|work|C:/temp/DASstudent2021/DASQ/sources/mux1.vhd|
+Z89 !s107 C:/temp/DASstudent2021/DASQ/sources/mux1.vhd|
+!i113 1
+R12
+R13
+Amux1
+R2
+R3
+R4
+DEx4 work 4 mux1 0 22 f2a3Kaa^`P`7_Z9jA]Vcc1
+l14
+L13
+V?mX49U5Sm6nYFYZ[6;`I23
+!s100 NXL?Wdh:RE=CZ>Z`oBXIA2
+R7
+32
+R87
+!i10b 1
+R52
+R88
+R89
+!i113 1
+R12
+R13
+Eouttest
+Z90 w1553172725
+R2
+R3
+R4
+R0
+Z91 8C:/temp/DASstudent2021/testbenchsources/outtest.vhd
+Z92 FC:/temp/DASstudent2021/testbenchsources/outtest.vhd
+l0
+L14
+V>m19B7K;c0YHB1AMn@=lk1
+!s100 cP^f7VR86lO=VUQ=:Qn8<1
+R7
+32
+Z93 !s110 1602524941
+!i10b 1
+Z94 !s108 1602524941.000000
+Z95 !s90 -reportprogress|300|-work|work|C:/temp/DASstudent2021/testbenchsources/outtest.vhd|
+Z96 !s107 C:/temp/DASstudent2021/testbenchsources/outtest.vhd|
+!i113 1
+R12
+R13
+Atestout
+R2
+R3
+R4
+DEx4 work 7 outtest 0 22 >m19B7K;c0YHB1AMn@=lk1
+l34
+L32
+ViX<9`B>AlMP:V1RJ8VDd?2
+!s100 zl54ZbdDkXOZ>adhR42h=3
+R7
+32
+R93
+!i10b 1
+R94
+R95
+R96
+!i113 1
+R12
+R13
+Epassthrus
+Z97 w1553172626
+R2
+R3
+R4
+R0
+Z98 8C:/temp/DASstudent2021/testbenchsources/PASSTHRUS.vhd
+Z99 FC:/temp/DASstudent2021/testbenchsources/PASSTHRUS.vhd
+l0
+L14
+VA]me^5m_zA9Q<Z7jXlcKN1
+!s100 h=NoFMPhi`]UzB5iDEE0Z3
+R7
+32
+Z100 !s110 1602524942
+!i10b 1
+Z101 !s108 1602524942.000000
+Z102 !s90 -reportprogress|300|-work|work|C:/temp/DASstudent2021/testbenchsources/PASSTHRUS.vhd|
+Z103 !s107 C:/temp/DASstudent2021/testbenchsources/PASSTHRUS.vhd|
+!i113 1
+R12
+R13
+Apassthrus
+R2
+R3
+R4
+DEx4 work 9 passthrus 0 22 A]me^5m_zA9Q<Z7jXlcKN1
+l33
+L31
+V[h><403j_MOc?YH@`TTn83
+!s100 i^T95RUU^?;>9dll<9ZAM2
+R7
+32
+R100
+!i10b 1
+R101
+R102
+R103
+!i113 1
+R12
+R13
+Episo
+Z104 w1602516349
+R2
+R3
+R4
+R0
+Z105 8C:/temp/DASstudent2021/DASQ/sources/piso.vhd
+Z106 FC:/temp/DASstudent2021/DASQ/sources/piso.vhd
+l0
+L14
+VD2Fi4gl5Y`oCNmOhl2eN92
+!s100 YVjeT5=]_aF1_EbK:Ch]X0
+R7
+32
+R87
+!i10b 1
+Z107 !s108 1602524921.000000
+Z108 !s90 -reportprogress|30|-work|work|C:/temp/DASstudent2021/DASQ/sources/piso.vhd|
+Z109 !s107 C:/temp/DASstudent2021/DASQ/sources/piso.vhd|
+!i113 1
+R12
+R13
+Apiso
+R2
+R3
+R4
+DEx4 work 4 piso 0 22 D2Fi4gl5Y`oCNmOhl2eN92
+l35
+L28
+VWb>c1<jA`mG4kPIHC?^cF1
+!s100 hE7NfTWl8FelH3PEgGIhd2
+R7
+32
+R87
+!i10b 1
+R107
+R108
+R109
+!i113 1
+R12
+R13
+Erfcontr
+R33
+R2
+R3
+R4
+R0
+Z110 8C:/temp/DASstudent2021/DASQ/sources/rfcontr.vhd
+Z111 FC:/temp/DASstudent2021/DASQ/sources/rfcontr.vhd
+l0
+L4
+Vz4CbJY<<TN4KZz=N]5bMn3
+!s100 40Zn03f5G=f3Tj?J90MVN2
+R7
+32
+R87
+!i10b 1
+R107
+Z112 !s90 -reportprogress|30|-work|work|C:/temp/DASstudent2021/DASQ/sources/rfcontr.vhd|
+Z113 !s107 C:/temp/DASstudent2021/DASQ/sources/rfcontr.vhd|
+!i113 1
+R12
+R13
+Arfcontr
+R2
+R3
+R4
+DEx4 work 7 rfcontr 0 22 z4CbJY<<TN4KZz=N]5bMn3
+l17
+L16
+VI;WW;YBJbJ<m^JLnPX[3D2
+!s100 ZDzS7iY784FH`A0N]aSgU3
+R7
+32
+R87
+!i10b 1
+R107
+R112
+R113
+!i113 1
+R12
+R13
+Esfcontr
+R33
+R2
+R3
+R4
+R0
+Z114 8C:/temp/DASstudent2021/DASQ/sources/sfcontr.vhd
+Z115 FC:/temp/DASstudent2021/DASQ/sources/sfcontr.vhd
+l0
+L15
+V7cWiH@QfRDZgWNN2DgUci3
+!s100 5C`:0NTIzIAJ4?^fX3TOz0
+R7
+32
+R87
+!i10b 1
+R107
+Z116 !s90 -reportprogress|30|-work|work|C:/temp/DASstudent2021/DASQ/sources/sfcontr.vhd|
+Z117 !s107 C:/temp/DASstudent2021/DASQ/sources/sfcontr.vhd|
+!i113 1
+R12
+R13
+Asfcontr
+R2
+R3
+R4
+DEx4 work 7 sfcontr 0 22 7cWiH@QfRDZgWNN2DgUci3
+l32
+L31
+VFOKQ@d7R>I5^N<EdWD9KG0
+!s100 HeIoc0ino4ZEj`QjN1[XM3
+R7
+32
+R87
+!i10b 1
+R107
+R116
+R117
+!i113 1
+R12
+R13
+Esipo
+Z118 w1602515132
+R2
+R3
+R4
+R0
+Z119 8C:/temp/DASstudent2021/DASQ/sources/sipo.vhd
+Z120 FC:/temp/DASstudent2021/DASQ/sources/sipo.vhd
+l0
+L14
+VN]jECoQ7[Jh@k0_RO`Z@30
+!s100 B24R?fiSZFPoaL=5<Cko80
+R7
+32
+R87
+!i10b 1
+R107
+Z121 !s90 -reportprogress|30|-work|work|C:/temp/DASstudent2021/DASQ/sources/sipo.vhd|
+Z122 !s107 C:/temp/DASstudent2021/DASQ/sources/sipo.vhd|
+!i113 1
+R12
+R13
+Asipo
+R2
+R3
+R4
+DEx4 work 4 sipo 0 22 N]jECoQ7[Jh@k0_RO`Z@30
+l32
+L28
+VfnDjmhVc3iZg1MoJgz7`52
+!s100 5kQ0hXoCFXAV^IK0n4B3U1
+R7
+32
+R87
+!i10b 1
+R107
+R121
+R122
+!i113 1
+R12
+R13
+Esyncdet
+Z123 w1534678552
+R2
+R3
+R4
+R0
+Z124 8C:/temp/DASstudent2021/DASQ/sources/syncdet.vhd
+Z125 FC:/temp/DASstudent2021/DASQ/sources/syncdet.vhd
+l0
+L14
+VgWmJ@HQm]KVgHJ?Pc@2mU3
+!s100 ?cmo21P13`?23Mf2Em5VQ2
+R7
+32
+R87
+!i10b 1
+R107
+Z126 !s90 -reportprogress|30|-work|work|C:/temp/DASstudent2021/DASQ/sources/syncdet.vhd|
+Z127 !s107 C:/temp/DASstudent2021/DASQ/sources/syncdet.vhd|
+!i113 1
+R12
+R13
+Asyncdet
+R2
+R3
+R4
+DEx4 work 7 syncdet 0 22 gWmJ@HQm]KVgHJ?Pc@2mU3
+l27
+L26
+Vo<0I:1C]83[3KILfJbZ>63
+!s100 IV^UZS[m=L]5Hf1_F0GSF0
+R7
+32
+R87
+!i10b 1
+R107
+R126
+R127
+!i113 1
+R12
+R13
+Etestbench
+Z128 w1602524466
+R3
+R4
+R0
+Z129 8C:/temp/DASstudent2021/testbench.vhd
+Z130 FC:/temp/DASstudent2021/testbench.vhd
+l0
+L25
+V>YjX14j0iab_bzUR6T2>83
+!s100 XT?4dj]J1PGa5]FZa4SLb0
+R7
+32
+Z131 !s110 1602524935
+!i10b 1
+Z132 !s108 1602524935.000000
+Z133 !s90 -reportprogress|300|-work|work|C:/temp/DASstudent2021/testbench.vhd|
+Z134 !s107 C:/temp/DASstudent2021/testbench.vhd|
+!i113 1
+R12
+R13
+Abdf_type
+R3
+R4
+DEx4 work 9 testbench 0 22 >YjX14j0iab_bzUR6T2>83
+l115
+L34
+VL>8JO;[R5g:beCLH^oXXO3
+!s100 =;;06?B@>jnJkAkGiUb6Y2
+R7
+32
+R131
+!i10b 1
+R132
+R133
+R134
+!i113 1
+R12
+R13
+Etestbloks
+Z135 w1553514085
+R2
+R3
+R4
+R0
+Z136 8C:/temp/DASstudent2021/testbenchsources/testbloks.vhd
+Z137 FC:/temp/DASstudent2021/testbenchsources/testbloks.vhd
+l0
+L14
+VM43n7i?bl=VQcVkWBEc[?2
+!s100 G8UTG7kgT9o@?8^XK>EKn1
+R7
+32
+Z138 !s110 1602524943
+!i10b 1
+R101
+Z139 !s90 -reportprogress|300|-work|work|C:/temp/DASstudent2021/testbenchsources/testbloks.vhd|
+Z140 !s107 C:/temp/DASstudent2021/testbenchsources/testbloks.vhd|
+!i113 1
+R12
+R13
+Atestblocks
+R2
+R3
+R4
+DEx4 work 9 testbloks 0 22 M43n7i?bl=VQcVkWBEc[?2
+l33
+L30
+V;TWG4e:4`0]S[z>iSgmOS1
+!s100 X>SjSU@9`5lPz6Fm>Hc@l0
+R7
+32
+R138
+!i10b 1
+R101
+R139
+R140
+!i113 1
+R12
+R13

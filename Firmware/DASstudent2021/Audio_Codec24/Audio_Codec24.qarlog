@@ -1,0 +1,28 @@
+Quartus Prime Archive log --	D:/Testing/Audio_Codec24_2020/Audio_Codec24.qarlog
+
+Archive:	D:/Testing/Audio_Codec24_2020/Audio_Codec24.qar
+Date:		Mon Oct 12 14:26:43 2020
+Quartus Prime		17.0.0 Build 595 04/25/2017 SJ Standard Edition
+
+	=========== Files Selected: ===========
+D:/Testing/Audio_Codec24_2020/db/Audio_Codec24_tmp_qic_export/Audio_Codec24.cmp.atm
+D:/Testing/Audio_Codec24_2020/db/Audio_Codec24_tmp_qic_export/Audio_Codec24.cmp.cfm
+D:/Testing/Audio_Codec24_2020/db/Audio_Codec24_tmp_qic_export/Audio_Codec24.cmp.dpi
+D:/Testing/Audio_Codec24_2020/db/Audio_Codec24_tmp_qic_export/Audio_Codec24.cmp.hdbx
+D:/Testing/Audio_Codec24_2020/db/Audio_Codec24_tmp_qic_export/Audio_Codec24.cmp.logdb
+D:/Testing/Audio_Codec24_2020/db/Audio_Codec24_tmp_qic_export/Audio_Codec24.cmp.map.kpt
+D:/Testing/Audio_Codec24_2020/db/Audio_Codec24_tmp_qic_export/Audio_Codec24.cmp.qxp_info
+D:/Testing/Audio_Codec24_2020/db/Audio_Codec24_tmp_qic_export/Audio_Codec24.cmp.rcf
+D:/Testing/Audio_Codec24_2020/db/Audio_Codec24_tmp_qic_export/Audio_Codec24.cmp.scidsc
+D:/Testing/Audio_Codec24_2020/db/Audio_Codec24_tmp_qic_export/Audio_Codec24.map.atm
+D:/Testing/Audio_Codec24_2020/db/Audio_Codec24_tmp_qic_export/Audio_Codec24.map.dpi
+D:/Testing/Audio_Codec24_2020/db/Audio_Codec24_tmp_qic_export/Audio_Codec24.map.hdbx
+D:/Testing/Audio_Codec24_2020/db/Audio_Codec24_tmp_qic_export/Audio_Codec24.map.logdb
+D:/Testing/Audio_Codec24_2020/db/Audio_Codec24_tmp_qic_export/Audio_Codec24.map.map.kpt
+D:/Testing/Audio_Codec24_2020/db/Audio_Codec24_tmp_qic_export/Audio_Codec24.map.qxp_info
+D:/Testing/Audio_Codec24_2020/db/Audio_Codec24_tmp_qic_export/Audio_Codec24.map.scidsc
+D:/Testing/Audio_Codec24_2020/db/Audio_Codec24_tmp_qic_export/qic_export_file_list
+	======= Total: 17 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.

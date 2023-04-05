@@ -1,0 +1,29 @@
+--
+-- Created:
+--          by - tygtr (tekin Yilmaz global trade releation)
+--          at - 13:08:31 08/18/2018
+--
+--
+
+LIBRARY ieee;                          
+USE ieee.std_logic_1164.all;      
+USE ieee.std_logic_arith.all;
+ENTITY mux1 IS          
+   PORT(          
+      chsel_c : IN     std_logic_vector (7 DOWNTO 0);
+      soLo   : IN     std_logic;         
+      soRo   : IN     std_logic;    
+      so    : OUT    std_logic
+   );
+-- Declarations                                  
+END mux1 ;  
+
+
+-- 1 : left channel audio is selected
+-- 2 : right channel audio is selected
+
+                                 
+ARCHITECTURE mux1 OF mux1 IS             
+BEGIN                             
+     
+END ARCHITECTURE mux1;

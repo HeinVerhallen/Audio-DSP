@@ -71,11 +71,11 @@
       )
     )
   )
-  (symbol "MAX17634" (in_bom yes) (on_board yes)
+(symbol "MAX17634C" (in_bom yes) (on_board yes)
     (property "Reference" "IC" (at 10.16 19.05 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "MAX17634" (at 10.16 16.51 0)
+       (property "Value" "MAX17634C" (at 10.16 16.51 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "Package_DFN_QFN:TQFN-20-1EP_4x4mm_P0.5mm_EP2.9x2.9mm" (at 15.24 -33.02 0)
@@ -84,19 +84,19 @@
     (property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/MAX17634A-MAX17634C.pdf" (at 35.56 -35.56 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (symbol "MAX17634_0_1"
+    (symbol "MAX17634C_0_1"
       (rectangle (start -10.16 15.24) (end 10.16 -15.24)
         (stroke (width 0) (type default))
         (fill (type background))
       )
     )
-    (symbol "MAX17634_1_0"
+    (symbol "MAX17634C_1_0"
       (pin no_connect line (at 12.7 8.89 180) (length 2.54)
         (name "NC" (effects (font (size 1.27 1.27))))
         (number "16" (effects (font (size 1.27 1.27))))
       )
     )
-    (symbol "MAX17634_1_1"
+    (symbol "MAX17634C_1_1"
       (pin passive line (at -1.27 -17.78 90) (length 2.54)
         (name "PGND" (effects (font (size 1.27 1.27))))
         (number "1" (effects (font (size 1.27 1.27))))

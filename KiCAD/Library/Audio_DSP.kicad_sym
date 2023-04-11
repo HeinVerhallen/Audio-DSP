@@ -84,8 +84,8 @@
     (property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/MAX17634A-MAX17634C.pdf" (at 21.59 -35.56 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Order" "https://nl.farnell.com/analog-devices/max17634catp/dc-dc-conv-sync-buck-2-2mhz-125deg/dp/3269809?st=max17634c" (at 0 0 0)
-      (effects (font (size 1.27 1.27)))
+    (property "Order" "https://nl.farnell.com/analog-devices/max17634catp/dc-dc-conv-sync-buck-2-2mhz-125deg/dp/3269809?st=max17634c" (at 33.02 -30.48 0)
+      (effects (font (size 1.27 1.27)) hide)
     )
     (symbol "MAX17634C_0_1"
       (rectangle (start -10.16 15.24) (end 10.16 -15.24)

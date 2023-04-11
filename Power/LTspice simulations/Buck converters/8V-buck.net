@@ -10,7 +10,7 @@ R3 N001 Supply 10m
 R4 Vout N008 22k
 R5 N008 N007 3.3k
 D1 0 N004 1N5819
-R§load Vout 0 16
+R§load Vout 0 4
 L1 N004 Vout 15µ Rser=20m
 C5 Vout N007 2.2n
 C7 Vout 0 10µ Rser=20m

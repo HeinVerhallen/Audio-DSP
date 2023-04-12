@@ -1,0 +1,7 @@
+* C:\Users\mgurl\Documents\GitHub\Audio-DSP\Power\LTspice simulations\Buck converters\Draft1.asc
+V1 N001 0 PULSE(0 5 0 1n 1n 100u 200u)
+R1 N002 0 10
+V2 N002 N001 SINE(0 1 100k)
+.tran 1s
+.backanno
+.end

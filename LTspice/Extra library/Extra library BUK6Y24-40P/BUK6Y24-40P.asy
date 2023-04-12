@@ -1,0 +1,29 @@
+Version 4
+SymbolType BLOCK
+LINE Normal -24 16 -24 -48
+LINE Normal -24 -48 -32 -48
+LINE Normal 16 -64 16 -16
+LINE Normal 16 16 16 32
+LINE Normal -16 -48 16 -48
+LINE Normal -16 16 16 16
+LINE Normal -16 -16 -8 -16
+LINE Normal -16 -40 -16 -56
+LINE Normal -16 -8 -16 -24
+LINE Normal -16 24 -16 8
+LINE Normal -8 -20 16 -16
+LINE Normal -8 -12 -8 -20
+LINE Normal 16 -16 -8 -12
+WINDOW 0 64 -32 Bottom 2
+WINDOW 3 112 -16 Top 2
+SYMATTR Value BUK6Y24-40P
+SYMATTR Prefix X
+SYMATTR ModelFile mylib\BUK6Y24-40P.lib
+PIN 16 32 NONE 8
+PINATTR PinName D
+PINATTR SpiceOrder 1
+PIN -32 -48 NONE 8
+PINATTR PinName G
+PINATTR SpiceOrder 2
+PIN 16 -64 NONE 8
+PINATTR PinName S
+PINATTR SpiceOrder 3

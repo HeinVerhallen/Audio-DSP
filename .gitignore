@@ -28,4 +28,5 @@ Firmware/**/simulation
 Firmware/**/output_files/*
 !Firmware/**/output_files/*.sof
 Firmware/**/*.rpt
+Firmware/**/*.vhd.bak
 Firmware/Test_FPGA_routing/c5_pin_model_dump.txt

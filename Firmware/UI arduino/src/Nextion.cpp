@@ -31,14 +31,13 @@ void textField(int component, const char* value, int field){
 }
 
 void changeParameter(const char* component, const char* value, int field){
+  Serial.print(component);
   if(field == 0){
-    Serial.print(component);
     Serial.print(".txt=\"");
     Serial.print(value);
     Serial.print("\"");
     terminate();
   }else if(field == 1){
-    Serial.print(component);
     Serial.print(".bco=");
     Serial.print(value);
     terminate();

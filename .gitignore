@@ -26,6 +26,6 @@ Firmware/**/db
 Firmware/**/incremental_db
 Firmware/**/simulation
 Firmware/**/output_files/*
-!Firmware/**/output_files/*sof
+!Firmware/**/output_files/*.sof
 Firmware/**/*.rpt
 Firmware/Test_FPGA_routing/c5_pin_model_dump.txt

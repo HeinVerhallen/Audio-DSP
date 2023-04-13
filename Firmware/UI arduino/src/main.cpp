@@ -4,8 +4,8 @@
 
 #define empty "WHITE"
 #define black "BLACK"
-#define blue "BLUE"
-#define gray "50712"
+#define highlighted "BLUE"
+#define button "50712"
 
 #define text 0
 #define backcolor 1
@@ -68,16 +68,14 @@ const char* objects[10][6] = {		//array for all clickable objects on the active 
 		
 	};
 
-	int8_t state = 0;
 	int8_t currentPage = 0;
 	int8_t highlight = 0;
 	int8_t lasthighlight = 0;
-	int8_t navMenu = 1;
 	int8_t activeChannel = 0;
 
 void update(){
-	changeParameter(objects[currentPage][lasthighlight], gray, backcolor);
-	changeParameter(objects[currentPage][highlight], blue, backcolor);
+	changeParameter(objects[currentPage][lasthighlight], button, backcolor);
+	changeParameter(objects[currentPage][highlight], highlighted, backcolor);
 	lasthighlight = highlight;
 }
 
@@ -88,11 +86,35 @@ void setup() {
 	update();
 }
 
+//Function: load page specific variables
+//Inputs: page - an integer which represents the desired page
+//Outputs: -
+void loadPage(uint8_t page){
+	switch (page)
+	{
+	case 2:
+		changeParameter(objects[page][1], channels[activeChannel], text); 
+		break;
+	case 7:
+	case 8: 
+	case 9:
+		textField(2,channels[activeChannel],text);
+		break;
+	default:
+		return;
+		break;
+	}
+}
+
+//Function: show the next page on the screen
+//Inputs: newPage - an integer which represents the desired page
+//Outputs: -
 void updatePage(int newPage){
-	currentPage = newPage;
-	highlight = 0;
-	gotoPage(currentPage);
-	update();
+	gotoPage(newPage);	//go to the new page
+	loadPage(newPage);	//load page variables
+	highlight = 0;		//set the first menu option active
+	update();			//update the highlighted option
+	currentPage = newPage;	//set the new page as current page
 }
 
 //Function: create a dropdown menu to select between channels
@@ -105,57 +127,80 @@ void channelSelect(int16_t toggle, int16_t active){
 
   	if(toggle){
 		on=!on;
-		if(on){											//activate or update the dropdown list
-    			for(uint16_t i = 1; i<sizeof(channels)/sizeof(const char*)+1; i++){ //loop through every option in the dropdown list
-      			textField(i, channels[i], text);					//show all options on the screen
+		//activate the dropdown list
+		if(on){
+			//loop through every option in the dropdown list
+    			for(uint16_t i = 1; i<=sizeof(channels)/sizeof(const char*); i++){
+      			textField(i, channels[i-1], text);
     			}
+			//hightlight the active channel
+			changeParameter(objects[2][1],empty,backcolor);
+			textField(active+1, highlighted, backcolor);
+		//deactivate the dropdown list
 		}else{
-			for(uint16_t i = 1; i<sizeof(channels)/sizeof(const char*)+1; i++){
+			//clear all dropdown menu options and set the dropdown menu to the selected channel
+			for(uint16_t i = 1; i<=sizeof(channels)/sizeof(const char*); i++){
 				if(i==1)
-					changeParameter(objects[2][i],channels[activeChannel],0);
+					changeParameter(objects[2][i],channels[active],text);
 				else
 					textField(i,"",0);
 			}
-			textField(previous, empty, 1);
+			//highlight the dropdown menu
+			textField(active+1, empty, backcolor);
+			changeParameter(objects[2][1],highlighted, backcolor);
 		}
-  	} else{											//deactivate the dropdown list
-    		textField(previous+1, empty, backcolor);					//dehighlight the previous selected option
-    		textField(active+1, blue, backcolor);					//highlight the new selected option
+	//deactivate the dropdown list	
+  	} else{
+		//highlight the new selected option
+    		textField(previous+1, empty, backcolor);
+    		textField(active+1, highlighted, backcolor);
   	}
-  	previous = active;                                              		//upate the previous active option
+	//update the previous active option
+  	previous = active;
 }
 
 void loop() {
+	static int8_t navMenu = 1;
+
+	//detect select button press
 	if(S1->debounce()){
-		int function = functions[currentPage][highlight];	//get the function associated with the selected object
-		if(function < back){						//go to the selected page
+		//get the function associated with the selected object
+		int function = functions[currentPage][highlight];
+		//go to the selected page
+		if(function < back){
 			updatePage(function);
-		}else if(function == dropdown){				//Something was selected
+		//toggle the dropdown menu
+		}else if(function == dropdown){
+			channelSelect(1,activeChannel);
 			navMenu = !navMenu;
-			channelSelect(!navMenu,0);
 		}
   	}
+
+	//detect nextoption button press
   	if(S2->debounce() == 1){
+		//check if the menu navigation is enabled
 		if(navMenu){
+			//highlight next menu object
 			highlight= (highlight + 1) % (functions[currentPage][6]);
 			update();
 		}else{
+			//highlight next dropdown menu object
 			activeChannel = (activeChannel+1)%(sizeof(channels)/sizeof(channels[0]));
-			channelSelect(navMenu, activeChannel);
+			channelSelect(0, activeChannel);
 		}
 	}
+
+	//detect previousoption button press
   	if(S3->debounce()){
+		//check if the menu navigation is enabled
 		if(navMenu){
+			//highlight previous menu object
 			highlight = (highlight == 0) ? functions[currentPage][6]-1: highlight-1;
 			update();
 		}else {
-			activeChannel = (activeChannel = 1) ? sizeof(channels)/sizeof(channels[0])-1 : activeChannel-1;
-			channelSelect(navMenu, activeChannel);
+			//highlight previous dropdown menu object
+			activeChannel = (--activeChannel < 0) ? sizeof(channels)/sizeof(channels[0])-1 : activeChannel;
+			channelSelect(0, activeChannel);
 		}
   	}
-}//*/
-
-
-//Gather all information from the DSP controller
-//Send all information to the screen
-//Create a Function/procedure to load page (meaning all clickable objects in  objects array with their function)
+}

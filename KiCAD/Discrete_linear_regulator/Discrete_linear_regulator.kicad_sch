@@ -1015,13 +1015,33 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 0da3e886-0b36-423f-8891-bf7a43f25336)
   )
+  (text "Or +5V" (at 163.83 50.8 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 2de2e562-a8bf-45a4-9f14-d6e12996ba83)
+  )
   (text "Check 857 pinout" (at 17.78 16.51 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 3a71db12-4030-49c4-a1e2-a62f33a530ad)
   )
+  (text "Or -5V" (at 195.58 160.02 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 848d537a-6ebb-4556-bd16-07fc03c61f47)
+  )
+  (text "For +5V:\nRxx = Rxx = xxΩ\nRxx = Rxx = xxΩ" (at 185.42 49.53 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 8ca1c525-2290-49fb-bdea-c59dd69c06c9)
+  )
+  (text "Or -8V" (at 44.45 161.29 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 8feceb33-0955-40ee-8c3d-8db39dcd9b96)
+  )
   (text "10uF instead of 100uF?" (at 17.78 22.86 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid a4f95f73-eb5b-4c7f-b1a8-54fe3a0020ac)
+  )
+  (text "Or +8V" (at 36.83 52.07 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid d07c8200-c15a-4d17-bdc3-2c27495bcc5d)
   )
 
   (symbol (lib_id "Connector_Generic:Conn_01x06") (at 20.32 71.12 0) (mirror y) (unit 1)
@@ -1046,7 +1066,7 @@
     (pin "5" (uuid fb1121e9-f3fb-4090-9320-ec12daaed7ee))
     (pin "6" (uuid 172ac17c-31ae-4692-9fa0-2f07dc3779a9))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "J1") (unit 1)
         )
@@ -1078,7 +1098,7 @@
     (pin "4" (uuid e6dd4c59-68b1-441b-930d-4cb62589e53a))
     (pin "8" (uuid 00f8a25a-c23b-40be-9c13-ba51c14455a8))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "U1") (unit 1)
         )
@@ -1095,7 +1115,7 @@
     (property "Value" "100nF" (at 266.7 76.835 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "" (at 263.8552 78.74 0)
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 263.8552 78.74 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 262.89 74.93 0)
@@ -1104,7 +1124,7 @@
     (pin "1" (uuid 8549e7a3-5713-4e41-a8ad-7d4907771f25))
     (pin "2" (uuid 93659f14-890d-4726-9a4a-396725cc8cd4))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "C3") (unit 1)
         )
@@ -1131,7 +1151,7 @@
     (pin "2" (uuid 045a9f9a-9b92-4151-9133-11405157b5c8))
     (pin "3" (uuid 0820d316-5581-4987-b528-464cd533b641))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "Q7") (unit 1)
         )
@@ -1148,7 +1168,7 @@
     (property "Value" "100nF" (at 266.7 69.215 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "" (at 263.8552 71.12 0)
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 263.8552 71.12 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 262.89 67.31 0)
@@ -1157,7 +1177,7 @@
     (pin "1" (uuid 9ce59ca7-860c-4055-896f-cfe72709db80))
     (pin "2" (uuid fd104bb8-f504-4f43-ac88-ee6c410ed549))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "C1") (unit 1)
         )
@@ -1185,7 +1205,7 @@
     (pin "3" (uuid f17166b0-1ef3-4ed7-a39c-1817efe15675))
     (pin "4" (uuid 9ada58c3-db68-495f-b591-651aca1dcfe4))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "Q1") (unit 1)
         )
@@ -1210,7 +1230,7 @@
     )
     (pin "1" (uuid da1689a3-c5eb-4e19-b363-84684b915bf9))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "#PWR09") (unit 1)
         )
@@ -1237,7 +1257,7 @@
     (pin "2" (uuid 51e1835c-9119-4ff3-93b9-17c0f2ac760a))
     (pin "3" (uuid 2d0a26ce-d0d1-4dd8-abc1-ceb4e4bf745e))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "Q6") (unit 1)
         )
@@ -1269,7 +1289,7 @@
     (pin "4" (uuid 9d159140-8e1f-48da-9116-abcb8466c6a6))
     (pin "8" (uuid 8bede942-0c81-4c91-982e-a3c19e482c6b))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "U1") (unit 3)
         )
@@ -1296,7 +1316,7 @@
     (pin "2" (uuid 273b807f-c9bd-4c5a-81e9-8ff4380c1eff))
     (pin "3" (uuid 26087c29-48e9-45f8-b6f6-1c213d29598c))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "Q3") (unit 1)
         )
@@ -1321,7 +1341,7 @@
     )
     (pin "1" (uuid 167d5fcb-92ff-42b3-bb92-87cc547ac077))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "#PWR02") (unit 1)
         )
@@ -1346,7 +1366,7 @@
     )
     (pin "1" (uuid 49ea97fc-6105-47b8-96ee-ce47fdd58719))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "#PWR06") (unit 1)
         )
@@ -1374,7 +1394,7 @@
     (pin "3" (uuid d0a1702f-9e51-424f-96f6-1ef08968e00f))
     (pin "4" (uuid 49284a7a-cd5e-44e2-9f60-694e7df71ab1))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "Q4") (unit 1)
         )
@@ -1399,7 +1419,7 @@
     )
     (pin "1" (uuid a1f98cd8-47dc-474a-ab8a-61a84f22081d))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "#PWR011") (unit 1)
         )
@@ -1425,7 +1445,7 @@
     (pin "1" (uuid e097a141-3722-4387-a7d9-71534020f82f))
     (pin "2" (uuid 546be072-ec5f-44bd-b21e-928080730c02))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "C2") (unit 1)
         )
@@ -1451,7 +1471,7 @@
     (pin "1" (uuid b372485e-6f66-4f3d-a7b6-0a2426f4e70d))
     (pin "2" (uuid 71888d37-4b98-44b6-b317-926d3967a679))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "C4") (unit 1)
         )
@@ -1476,7 +1496,7 @@
     )
     (pin "1" (uuid e8a36611-929c-41ba-a4b0-f075c7aa1a63))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "#PWR08") (unit 1)
         )
@@ -1501,7 +1521,7 @@
     )
     (pin "1" (uuid 6e4b26b7-f352-4c2a-beb5-22f19d12d3f8))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "#PWR07") (unit 1)
         )
@@ -1526,7 +1546,7 @@
     )
     (pin "1" (uuid b94f71e7-7e26-4f98-b168-40cb090c68af))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "#PWR012") (unit 1)
         )
@@ -1551,7 +1571,7 @@
     )
     (pin "1" (uuid ecc217ec-bb7c-49b6-a812-42fd2bccb796))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "#PWR01") (unit 1)
         )
@@ -1577,7 +1597,7 @@
     (pin "1" (uuid b5b7c686-c623-4615-991f-5f30aefa7060))
     (pin "2" (uuid 98489a7c-81f6-4d21-a6a8-64bac07e78e7))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "D1") (unit 1)
         )
@@ -1605,7 +1625,7 @@
     (pin "3" (uuid d24879b1-cef3-42e8-9e9b-9b095923dd8d))
     (pin "4" (uuid 2feab648-cb92-411f-ba4e-26856b328f2b))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "Q5") (unit 1)
         )
@@ -1631,7 +1651,7 @@
     (pin "1" (uuid 6e3d9f32-2f45-4f65-8f52-3634f82444ae))
     (pin "2" (uuid 6780eb9e-501c-48ef-838a-35f005e3edc7))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "R2") (unit 1)
         )
@@ -1656,7 +1676,7 @@
     )
     (pin "1" (uuid 7fd9e664-c8d6-4da0-aac5-db47ee7887b4))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "#PWR010") (unit 1)
         )
@@ -1688,7 +1708,7 @@
     (pin "4" (uuid 38fe91c7-b77e-486a-891a-4f0006823578))
     (pin "8" (uuid a72ea629-a614-4641-90d0-08ac41d3d914))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "U1") (unit 2)
         )
@@ -1714,7 +1734,7 @@
     (pin "1" (uuid 2173e3f5-720a-4717-aacb-6faa9c9e6c92))
     (pin "2" (uuid 765be16a-f3cd-4c5c-8f46-816b2be50d60))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "D2") (unit 1)
         )
@@ -1739,7 +1759,7 @@
     )
     (pin "1" (uuid 0c632afc-e1c6-4b92-b1e6-cb3e02512919))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "#PWR03") (unit 1)
         )
@@ -1767,7 +1787,7 @@
     (pin "3" (uuid 44004b47-6687-420e-bd0e-4450fb8852a1))
     (pin "4" (uuid 3a0570bb-7ae8-4e1c-a44c-88be48e6f1d3))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "Q8") (unit 1)
         )
@@ -1794,7 +1814,7 @@
     (pin "2" (uuid 9dab4ae3-2ab6-4972-aee2-01494dea495c))
     (pin "3" (uuid 0327635a-a78e-4f78-b8ae-342ea3faf1ce))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "Q2") (unit 1)
         )
@@ -1819,7 +1839,7 @@
     )
     (pin "1" (uuid e2a683f8-600d-4567-8f85-dd6b3a408fe5))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "#PWR04") (unit 1)
         )
@@ -1845,7 +1865,7 @@
     (pin "1" (uuid e3842c5f-52db-4e99-849c-ea93586544c4))
     (pin "2" (uuid 5711cd54-cf45-413d-b98e-9b2e566ccc8a))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "R1") (unit 1)
         )
@@ -1870,7 +1890,7 @@
     )
     (pin "1" (uuid e0d26506-3065-4e93-884f-f0c143ccecb0))
     (instances
-      (project "12V_linear_regulator"
+      (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
           (reference "#PWR05") (unit 1)
         )

@@ -658,15 +658,31 @@
     ],
     [
       "03c234da-ad6d-41dc-b0ec-5880e5376fd2",
-      "DAC CH1_2"
+      "DAC_CH1_2"
     ],
     [
       "05d59304-dfac-45e1-85e6-83cda4d81484",
-      "DAC CH3_4"
+      "DAC_CH3_4"
     ],
     [
       "5bd992f9-4f10-40f4-8ffe-2d7c60250f66",
-      "DAC CH 5_6"
+      "DAC_CH5_6"
+    ],
+    [
+      "4e10d7ae-7c54-4ac5-ac67-e4842ffdf025",
+      "ADC_CH1_2"
+    ],
+    [
+      "b7530516-5ab1-4afa-9366-b30c4f029458",
+      "ADC_CH3_4"
+    ],
+    [
+      "fc272ee1-9060-465b-85c1-b8364d68deb3",
+      "POWER_SUPPLIES"
+    ],
+    [
+      "22c0a18e-6cf4-4154-962a-243bb7c27459",
+      "FPGA"
     ]
   ],
   "text_variables": {}

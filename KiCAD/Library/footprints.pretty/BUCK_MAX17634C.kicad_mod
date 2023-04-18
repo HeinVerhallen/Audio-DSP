@@ -34,8 +34,8 @@
   (pad "1" thru_hole rect (at 2.54 0 270) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (tstamp 2064ab78-125e-4804-a087-5fe5f2533c1c))
   (pad "2" thru_hole oval (at 0 0 270) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (tstamp dbfcf80c-23d7-4632-8924-30e95e8057ce))
   (pad "3" thru_hole oval (at -2.54 0 270) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (tstamp fa8638e5-9cca-4783-ad7b-2f5696dd42c9))
-  (model "C:/Users/robin/OneDrive/Documenten/School/Fontys/Minor/Be creative minor/Git/Audio-DSP/KiCAD/Buck-converter/Generic_Buck_Converter.step"
-    (offset (xyz -108.9 3 125))
+  (model "C:/Users/robin/OneDrive/Documenten/School/Fontys/Minor/Be creative minor/Git/Audio-DSP/KiCAD/Generic_Buck_Converter/Generic_Buck_Converter.step"
+    (offset (xyz -108.9 2.9 125))
     (scale (xyz 1 1 1))
     (rotate (xyz 90 -180 180))
   )

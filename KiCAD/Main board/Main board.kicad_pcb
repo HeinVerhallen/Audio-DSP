@@ -414,7 +414,7 @@
 
   (footprint "Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical" (layer "F.Cu")
     (tstamp 00f37860-b9f3-4093-97a6-9b531b084ad8)
-    (at 103 87 90)
+    (at 115 107 90)
     (descr "JST PH series connector, B3B-PH-K (http://www.jst-mfg.com/product/pdf/eng/ePH.pdf), generated with kicad-footprint-generator")
     (tags "connector JST PH side entry")
     (property "Sheetfile" "Main board.kicad_sch")
@@ -636,7 +636,7 @@
 
   (footprint "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm" (layer "F.Cu")
     (tstamp 0508b55b-d2a6-408f-8b6c-eb6211a8bcf1)
-    (at 105 96)
+    (at 117 116)
     (descr "CP, Radial series, Radial, pin pitch=2.00mm, , diameter=5mm, Electrolytic Capacitor")
     (tags "CP Radial series Radial pin pitch 2.00mm  diameter 5mm Electrolytic Capacitor")
     (property "Sheetfile" "DAC_CH1_2.kicad_sch")
@@ -1254,7 +1254,7 @@
 
   (footprint "Capacitor_SMD:C_0402_1005Metric" (layer "F.Cu")
     (tstamp 0a1ab711-5430-43fa-a238-a3e9e779fe73)
-    (at 96 123 90)
+    (at 121 143 90)
     (descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
     (tags "capacitor")
     (property "Sheetfile" "DAC_CH1_2.kicad_sch")
@@ -2046,7 +2046,7 @@
 
   (footprint "Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical" (layer "F.Cu")
     (tstamp 10808511-5931-4081-aa94-7e2cfef3f481)
-    (at 158 87 90)
+    (at 191 107 90)
     (descr "JST PH series connector, B3B-PH-K (http://www.jst-mfg.com/product/pdf/eng/ePH.pdf), generated with kicad-footprint-generator")
     (tags "connector JST PH side entry")
     (property "Sheetfile" "Main board.kicad_sch")
@@ -4002,7 +4002,7 @@
 
   (footprint "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical" (layer "F.Cu")
     (tstamp 206d7b2e-bbcd-4c19-8953-934e803b399d)
-    (at 96 86 90)
+    (at 108 106 90)
     (descr "JST PH series connector, B2B-PH-K (http://www.jst-mfg.com/product/pdf/eng/ePH.pdf), generated with kicad-footprint-generator")
     (tags "connector JST PH side entry")
     (property "Sheetfile" "Main board.kicad_sch")
@@ -4106,7 +4106,7 @@
 
   (footprint "MountingHole:MountingHole_3.5mm_Pad_Via" (layer "F.Cu")
     (tstamp 215e710c-86cb-4b83-a2e4-7f4c2cd6c819)
-    (at 55 245)
+    (at 55 220)
     (descr "Mounting Hole 3.5mm")
     (tags "mounting hole 3.5mm")
     (property "Sheetfile" "Main board.kicad_sch")
@@ -4153,7 +4153,7 @@
 
   (footprint "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm" (layer "F.Cu")
     (tstamp 2242e23e-c4c3-42b1-ba78-1de1d465acfd)
-    (at 101 96 180)
+    (at 113 116 180)
     (descr "CP, Radial series, Radial, pin pitch=2.00mm, , diameter=5mm, Electrolytic Capacitor")
     (tags "CP Radial series Radial pin pitch 2.00mm  diameter 5mm Electrolytic Capacitor")
     (property "Sheetfile" "DAC_CH1_2.kicad_sch")
@@ -4435,7 +4435,7 @@
 
   (footprint "Audio DSP:LIN_REG_±xxV" (layer "F.Cu")
     (tstamp 236cad80-a4eb-424c-ad4b-3bdf578e6cba)
-    (at 131 106.35 90)
+    (at 156 126.35 90)
     (property "Sheetfile" "POWER_SUPPLIES.kicad_sch")
     (property "Sheetname" "POWER_SUPPLIES")
     (property "ki_description" "LIN_REG_±12V")
@@ -4888,7 +4888,7 @@
 
   (footprint "Resistor_SMD:R_0805_2012Metric" (layer "F.Cu")
     (tstamp 254e6b94-1c5d-41d3-8d93-4d38004891a4)
-    (at 96 91 90)
+    (at 108 111 90)
     (descr "Resistor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
     (tags "resistor")
     (property "Sheetfile" "DAC_CH1_2.kicad_sch")
@@ -5266,7 +5266,7 @@
 
   (footprint "Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical" (layer "F.Cu")
     (tstamp 290ef973-0085-4af0-b99b-21e1c64d7958)
-    (at 75 87 90)
+    (at 87 107 90)
     (descr "JST PH series connector, B3B-PH-K (http://www.jst-mfg.com/product/pdf/eng/ePH.pdf), generated with kicad-footprint-generator")
     (tags "connector JST PH side entry")
     (property "Sheetfile" "Main board.kicad_sch")
@@ -5758,7 +5758,7 @@
 
   (footprint "Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical" (layer "F.Cu")
     (tstamp 367aecdd-7f13-4ebb-b062-2aef532b75e7)
-    (at 89 87 90)
+    (at 101 107 90)
     (descr "JST PH series connector, B3B-PH-K (http://www.jst-mfg.com/product/pdf/eng/ePH.pdf), generated with kicad-footprint-generator")
     (tags "connector JST PH side entry")
     (property "Sheetfile" "Main board.kicad_sch")
@@ -6878,7 +6878,7 @@
 
   (footprint "Package_SO:SSOP-28_5.3x10.2mm_P0.65mm" (layer "F.Cu")
     (tstamp 40736dcf-654c-4016-8835-06870e8f5c78)
-    (at 162 98)
+    (at 195 118)
     (descr "28-Lead Plastic Shrink Small Outline (SS)-5.30 mm Body [SSOP] (see Microchip Packaging Specification 00000049BS.pdf)")
     (tags "SSOP 0.65")
     (property "Sheetfile" "ADC_CH1_2.kicad_sch")
@@ -6995,7 +6995,7 @@
 
   (footprint "Audio-DSP:BUCK_MAX17634C_xxV" (layer "F.Cu")
     (tstamp 41c29d5a-b67a-4558-84e5-adf64bcf79e6)
-    (at 190 222.38 -90)
+    (at 215 207.38 -90)
     (property "Sheetfile" "POWER_SUPPLIES.kicad_sch")
     (property "Sheetname" "POWER_SUPPLIES")
     (property "ki_description" "BUCK_15V_MAX17634C")
@@ -7100,7 +7100,7 @@
 
   (footprint "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical" (layer "F.Cu")
     (tstamp 42b9651b-a478-4004-ba8a-b4d65d7ffcfe)
-    (at 187 86 90)
+    (at 220 106 90)
     (descr "JST PH series connector, B2B-PH-K (http://www.jst-mfg.com/product/pdf/eng/ePH.pdf), generated with kicad-footprint-generator")
     (tags "connector JST PH side entry")
     (property "Sheetfile" "Main board.kicad_sch")
@@ -7204,7 +7204,7 @@
 
   (footprint "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" (layer "F.Cu")
     (tstamp 42d83ec0-f799-41dd-9cb0-bc45619b7a9f)
-    (at 103 102)
+    (at 115 122)
     (descr "SOIC, 8 Pin (JEDEC MS-012AA, https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/soic_narrow-r/r_8.pdf), generated with kicad-footprint-generator ipc_gullwing_generator.py")
     (tags "SOIC SO")
     (property "Sheetfile" "DAC_CH1_2.kicad_sch")
@@ -8182,7 +8182,7 @@
 
   (footprint "Package_SO:SSOP-28_5.3x10.2mm_P0.65mm" (layer "F.Cu")
     (tstamp 576626fa-066c-4582-b20f-4f70c2e30f4a)
-    (at 184.4 97.95)
+    (at 217.4 117.95)
     (descr "28-Lead Plastic Shrink Small Outline (SS)-5.30 mm Body [SSOP] (see Microchip Packaging Specification 00000049BS.pdf)")
     (tags "SSOP 0.65")
     (property "Sheetfile" "ADC_CH3_4.kicad_sch")
@@ -8635,7 +8635,7 @@
 
   (footprint "MountingHole:MountingHole_3.5mm_Pad_Via" (layer "F.Cu")
     (tstamp 5b73eb5b-b629-4c38-9012-d9414f10b451)
-    (at 80 165)
+    (at 90 165)
     (descr "Mounting Hole 3.5mm")
     (tags "mounting hole 3.5mm")
     (property "Sheetfile" "Main board.kicad_sch")
@@ -8898,7 +8898,7 @@
 
   (footprint "MountingHole:MountingHole_3.5mm_Pad_Via" (layer "F.Cu")
     (tstamp 62d5817a-aa85-4c12-99ff-2c12bcd7fe3a)
-    (at 195 165)
+    (at 235 165)
     (descr "Mounting Hole 3.5mm")
     (tags "mounting hole 3.5mm")
     (property "Sheetfile" "Main board.kicad_sch")
@@ -8945,7 +8945,7 @@
 
   (footprint "Audio DSP:LIN_REG_±xxV" (layer "F.Cu")
     (tstamp 62ffbf1a-ca3b-4136-932c-65eccb2eb71f)
-    (at 140 125.35 90)
+    (at 165 145.35 90)
     (property "Sheetfile" "POWER_SUPPLIES.kicad_sch")
     (property "Sheetname" "POWER_SUPPLIES")
     (property "ki_description" "LIN_REG_±12V")
@@ -9950,7 +9950,7 @@
 
   (footprint "Capacitor_SMD:C_0402_1005Metric" (layer "F.Cu")
     (tstamp 6e9d4326-c3fb-4347-8b8f-2f4db7154f8c)
-    (at 110 121 90)
+    (at 135 141 90)
     (descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
     (tags "capacitor")
     (property "Sheetfile" "DAC_CH1_2.kicad_sch")
@@ -10950,7 +10950,7 @@
 
   (footprint "MountingHole:MountingHole_3.5mm_Pad_Via" (layer "F.Cu")
     (tstamp 767dadde-5083-4f51-9eab-d241d57afdac)
-    (at 140 85)
+    (at 165 105)
     (descr "Mounting Hole 3.5mm")
     (tags "mounting hole 3.5mm")
     (property "Sheetfile" "Main board.kicad_sch")
@@ -11279,7 +11279,7 @@
 
   (footprint "MountingHole:MountingHole_3.5mm_Pad_Via" (layer "F.Cu")
     (tstamp 7773c3ed-7693-46c1-a31a-0fd24d714b89)
-    (at 195 245)
+    (at 235 220)
     (descr "Mounting Hole 3.5mm")
     (tags "mounting hole 3.5mm")
     (property "Sheetfile" "Main board.kicad_sch")
@@ -11716,7 +11716,7 @@
 
   (footprint "Capacitor_SMD:C_0402_1005Metric" (layer "F.Cu")
     (tstamp 7c175135-1a53-4dec-8c9e-e6e4666de977)
-    (at 110 125 90)
+    (at 135 145 90)
     (descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
     (tags "capacitor")
     (property "Sheetfile" "DAC_CH1_2.kicad_sch")
@@ -12094,7 +12094,7 @@
 
   (footprint "MountingHole:MountingHole_3.5mm_Pad_Via" (layer "F.Cu")
     (tstamp 7fefc006-81eb-46fb-9599-d76a0d82a30a)
-    (at 135 245)
+    (at 135 220)
     (descr "Mounting Hole 3.5mm")
     (tags "mounting hole 3.5mm")
     (property "Sheetfile" "Main board.kicad_sch")
@@ -14145,7 +14145,7 @@
 
   (footprint "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm" (layer "F.Cu")
     (tstamp 9ff78457-5de0-4a9a-bee2-05ebf2b0f3f4)
-    (at 81 125.95 180)
+    (at 106 145.95 180)
     (descr "TSSOP, 24 Pin (JEDEC MO-153 Var AD https://www.jedec.org/document_search?search_api_views_fulltext=MO-153), generated with kicad-footprint-generator ipc_gullwing_generator.py")
     (tags "TSSOP SO")
     (property "Sheetfile" "DAC_CH3_4.kicad_sch")
@@ -15342,7 +15342,7 @@
 
   (footprint "Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical" (layer "F.Cu")
     (tstamp a9c5dcf8-adc5-4d5b-b894-fc2444c055ed)
-    (at 68 87 90)
+    (at 80 107 90)
     (descr "JST PH series connector, B3B-PH-K (http://www.jst-mfg.com/product/pdf/eng/ePH.pdf), generated with kicad-footprint-generator")
     (tags "connector JST PH side entry")
     (property "Sheetfile" "Main board.kicad_sch")
@@ -16062,7 +16062,7 @@
 
   (footprint "Resistor_SMD:R_0805_2012Metric" (layer "F.Cu")
     (tstamp b550e4cb-cc1d-43cf-a3a6-6b4b97562615)
-    (at 109 91 90)
+    (at 121 111 90)
     (descr "Resistor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
     (tags "resistor")
     (property "Sheetfile" "DAC_CH1_2.kicad_sch")
@@ -16116,7 +16116,7 @@
 
   (footprint "Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical" (layer "F.Cu")
     (tstamp b5af7028-bfd8-4f96-9499-3eb2370ba5db)
-    (at 165 87 90)
+    (at 198 107 90)
     (descr "JST PH series connector, B3B-PH-K (http://www.jst-mfg.com/product/pdf/eng/ePH.pdf), generated with kicad-footprint-generator")
     (tags "connector JST PH side entry")
     (property "Sheetfile" "Main board.kicad_sch")
@@ -16338,7 +16338,7 @@
 
   (footprint "Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical" (layer "F.Cu")
     (tstamp b6c65bc0-d6aa-43f0-9342-a90edba9da8d)
-    (at 82 87 90)
+    (at 94 107 90)
     (descr "JST PH series connector, B3B-PH-K (http://www.jst-mfg.com/product/pdf/eng/ePH.pdf), generated with kicad-footprint-generator")
     (tags "connector JST PH side entry")
     (property "Sheetfile" "Main board.kicad_sch")
@@ -16614,7 +16614,7 @@
 
   (footprint "Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical" (layer "F.Cu")
     (tstamp b91e6a85-7588-4084-b564-4f938ed17823)
-    (at 115 87 90)
+    (at 127 107 90)
     (descr "JST PH series connector, B3B-PH-K (http://www.jst-mfg.com/product/pdf/eng/ePH.pdf), generated with kicad-footprint-generator")
     (tags "connector JST PH side entry")
     (property "Sheetfile" "Main board.kicad_sch")
@@ -16890,7 +16890,7 @@
 
   (footprint "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm" (layer "F.Cu")
     (tstamp bbaa7325-6ccc-4281-a9ba-6cf35892dc20)
-    (at 102 125.65 180)
+    (at 127 145.65 180)
     (descr "TSSOP, 24 Pin (JEDEC MO-153 Var AD https://www.jedec.org/document_search?search_api_views_fulltext=MO-153), generated with kicad-footprint-generator ipc_gullwing_generator.py")
     (tags "TSSOP SO")
     (property "Sheetfile" "DAC_CH1_2.kicad_sch")
@@ -18175,7 +18175,7 @@
 
   (footprint "Connector_PinHeader_2.54mm:PinHeader_2x20_P2.54mm_Vertical" (layer "F.Cu")
     (tstamp c79046a8-0da7-4297-a736-09f75644ff97)
-    (at 57.46 177.14)
+    (at 55 160)
     (descr "Through hole straight pin header, 2x20, 2.54mm pitch, double rows")
     (tags "Through hole pin header THT 2x20 2.54mm double row")
     (property "Sheetfile" "FPGA.kicad_sch")
@@ -19531,7 +19531,7 @@
 
   (footprint "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical" (layer "F.Cu")
     (tstamp d27bc8b6-c702-452d-a566-ca5ea69f88e2)
-    (at 181 86 90)
+    (at 214 106 90)
     (descr "JST PH series connector, B2B-PH-K (http://www.jst-mfg.com/product/pdf/eng/ePH.pdf), generated with kicad-footprint-generator")
     (tags "connector JST PH side entry")
     (property "Sheetfile" "Main board.kicad_sch")
@@ -19851,7 +19851,7 @@
 
   (footprint "Audio-DSP:BUCK_MAX17634C_xxV" (layer "F.Cu")
     (tstamp dc63dba4-c7b4-4b61-a8df-afa6213f8715)
-    (at 175 222.46 -90)
+    (at 200 207.46 -90)
     (property "Sheetfile" "POWER_SUPPLIES.kicad_sch")
     (property "Sheetname" "POWER_SUPPLIES")
     (property "ki_description" "BUCK_12V_MAX17634C")
@@ -20064,7 +20064,7 @@
 
   (footprint "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm" (layer "F.Cu")
     (tstamp e859baf8-77d5-4c43-87ff-79e290565333)
-    (at 61 126 180)
+    (at 86 146 180)
     (descr "TSSOP, 24 Pin (JEDEC MO-153 Var AD https://www.jedec.org/document_search?search_api_views_fulltext=MO-153), generated with kicad-footprint-generator ipc_gullwing_generator.py")
     (tags "TSSOP SO")
     (property "Sheetfile" "DAC_CH5_6.kicad_sch")
@@ -20275,7 +20275,7 @@
 
   (footprint "Audio-DSP:BUCK_MAX17634C_xxV" (layer "F.Cu")
     (tstamp ec417875-11a6-428e-9f05-02c7620f5193)
-    (at 160 222.46 -90)
+    (at 185 207.46 -90)
     (property "Sheetfile" "POWER_SUPPLIES.kicad_sch")
     (property "Sheetname" "POWER_SUPPLIES")
     (property "ki_description" "BUCK_8V_MAX17634C")
@@ -20380,7 +20380,7 @@
 
   (footprint "Connector_PinHeader_2.54mm:PinHeader_2x20_P2.54mm_Vertical" (layer "F.Cu")
     (tstamp ec4cd607-f035-4cc3-9db5-c63a908b9fb0)
-    (at 69.66 177.14)
+    (at 69.66 160)
     (descr "Through hole straight pin header, 2x20, 2.54mm pitch, double rows")
     (tags "Through hole pin header THT 2x20 2.54mm double row")
     (property "Sheetfile" "FPGA.kicad_sch")
@@ -20524,7 +20524,7 @@
 
   (footprint "Audio DSP:LIN_REG_±xxV" (layer "F.Cu")
     (tstamp ec5905cc-e6c4-41d6-976c-726e4c83ca2b)
-    (at 122 126.35 90)
+    (at 147 146.35 90)
     (property "Sheetfile" "POWER_SUPPLIES.kicad_sch")
     (property "Sheetname" "POWER_SUPPLIES")
     (property "ki_description" "LIN_REG_±5V")
@@ -21259,7 +21259,7 @@
 
   (footprint "Audio DSP:LIN_REG_±xxV" (layer "F.Cu")
     (tstamp f070cbfa-cc9d-4177-8772-ce70806baff2)
-    (at 149 106.35 90)
+    (at 174 126.35 90)
     (property "Sheetfile" "POWER_SUPPLIES.kicad_sch")
     (property "Sheetname" "POWER_SUPPLIES")
     (property "ki_description" "LIN_REG_±5V")
@@ -21430,7 +21430,7 @@
 
   (footprint "Audio-DSP:BUCK_MAX17634C_xxV" (layer "F.Cu")
     (tstamp f26c6fcd-02f8-4490-b564-2b0705d1311a)
-    (at 145 222.46 -90)
+    (at 170 207.46 -90)
     (property "Sheetfile" "POWER_SUPPLIES.kicad_sch")
     (property "Sheetname" "POWER_SUPPLIES")
     (property "ki_description" "BUCK_5V_MAX17634C")
@@ -21925,7 +21925,7 @@
 
   (footprint "MountingHole:MountingHole_3.5mm_Pad_Via" (layer "F.Cu")
     (tstamp f92ae07f-5c4f-4f4d-a1f8-60a8cdc40a46)
-    (at 195 85)
+    (at 235 105)
     (descr "Mounting Hole 3.5mm")
     (tags "mounting hole 3.5mm")
     (property "Sheetfile" "Main board.kicad_sch")
@@ -22308,7 +22308,7 @@
 
   (footprint "MountingHole:MountingHole_3.5mm_Pad_Via" (layer "F.Cu")
     (tstamp fc4627c1-5b6d-414c-b0cb-dc228a5860de)
-    (at 56.856155 86.856155)
+    (at 55 105)
     (descr "Mounting Hole 3.5mm")
     (tags "mounting hole 3.5mm")
     (property "Sheetfile" "Main board.kicad_sch")
@@ -22409,7 +22409,7 @@
 
   (footprint "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical" (layer "F.Cu")
     (tstamp fc99191e-4732-4a6e-b962-0393530f3b1f)
-    (at 109 86 90)
+    (at 121 106 90)
     (descr "JST PH series connector, B2B-PH-K (http://www.jst-mfg.com/product/pdf/eng/ePH.pdf), generated with kicad-footprint-generator")
     (tags "connector JST PH side entry")
     (property "Sheetfile" "Main board.kicad_sch")
@@ -22795,7 +22795,7 @@
 
   (footprint "Capacitor_SMD:C_0402_1005Metric" (layer "B.Cu")
     (tstamp dcded93d-95f2-4f64-ac03-e17c8823d0fb)
-    (at 103 104 -90)
+    (at 115 124 -90)
     (descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
     (tags "capacitor")
     (property "Sheetfile" "DAC_CH1_2.kicad_sch")
@@ -22849,7 +22849,7 @@
 
   (footprint "Capacitor_SMD:C_0402_1005Metric" (layer "B.Cu")
     (tstamp eff95721-cb3b-4f44-a710-d220532ee12a)
-    (at 103 100 -90)
+    (at 115 120 -90)
     (descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
     (tags "capacitor")
     (property "Sheetfile" "DAC_CH1_2.kicad_sch")
@@ -22901,41 +22901,41 @@
     )
   )
 
-  (gr_arc (start 200 245) (mid 198.535534 248.535534) (end 195 250)
+  (gr_arc (start 240 220) (mid 238.535534 223.535534) (end 235 225)
     (stroke (width 0.1) (type default)) (layer "Edge.Cuts") (tstamp 10da44cb-d106-474f-aa26-01c49fd6aaea))
-  (gr_arc (start 55 250) (mid 51.464466 248.535534) (end 50 245)
+  (gr_arc (start 55 225) (mid 51.464466 223.535534) (end 50 220)
     (stroke (width 0.1) (type default)) (layer "Edge.Cuts") (tstamp 10e8e641-5e17-4d12-86c0-c3adc2a0645b))
-  (gr_line (start 50 245) (end 50 85)
+  (gr_line (start 50 220) (end 50 105)
     (stroke (width 0.1) (type default)) (layer "Edge.Cuts") (tstamp 2012b9d4-c736-4b95-ab41-e8a27c9397b4))
-  (gr_arc (start 50 85) (mid 51.464466 81.464466) (end 55 80)
+  (gr_arc (start 50 105) (mid 51.464466 101.464466) (end 55 100)
     (stroke (width 0.1) (type default)) (layer "Edge.Cuts") (tstamp 24bd8041-f560-400d-a287-6b2bb995742e))
-  (gr_line (start 195 250) (end 55 250)
+  (gr_line (start 235 225) (end 55 225)
     (stroke (width 0.1) (type default)) (layer "Edge.Cuts") (tstamp 33fcd4e2-8442-4af9-a300-9c05dec71a0d))
-  (gr_line (start 55 80) (end 195 80)
+  (gr_line (start 55 100) (end 235 100)
     (stroke (width 0.1) (type default)) (layer "Edge.Cuts") (tstamp 8c34672b-1ab8-496b-b7ac-e5de9d069156))
-  (gr_line (start 200 85) (end 200 245)
+  (gr_line (start 240 105) (end 240 220)
     (stroke (width 0.1) (type default)) (layer "Edge.Cuts") (tstamp 9de09e6a-de2a-48af-b7e9-222a91978b16))
-  (gr_arc (start 195 80) (mid 198.535534 81.464466) (end 200 85)
+  (gr_arc (start 235 100) (mid 238.535534 101.464466) (end 240 105)
     (stroke (width 0.1) (type default)) (layer "Edge.Cuts") (tstamp b543a8e0-7788-4101-a75d-e289d3f6be9d))
-  (gr_text "Update stackup and constrain manager" (at 40 260) (layer "F.Cu") (tstamp 1490b7c8-25ff-4eff-a857-b148eee38cda)
+  (gr_text "Update stackup and constrain manager" (at 50 235) (layer "F.Cu") (tstamp 1490b7c8-25ff-4eff-a857-b148eee38cda)
     (effects (font (size 3 3) (thickness 0.5) bold) (justify left bottom))
   )
-  (gr_text "GPIO 1" (at 67 230) (layer "F.Mask") (tstamp 01b497b6-1ebb-43de-927e-98bc663fb3f1)
+  (gr_text "GPIO 1" (at 67 215) (layer "F.Mask") (tstamp 01b497b6-1ebb-43de-927e-98bc663fb3f1)
     (effects (font (size 1.5 1.5) (thickness 0.3) bold) (justify left bottom))
   )
-  (gr_text "+5V" (at 142 235) (layer "F.Mask") (tstamp 0af667b0-243d-417b-91bf-6f98413021fb)
+  (gr_text "+5V" (at 167 220) (layer "F.Mask") (tstamp 0af667b0-243d-417b-91bf-6f98413021fb)
     (effects (font (size 1.5 1.5) (thickness 0.3) bold) (justify left bottom))
   )
-  (gr_text "+15V" (at 187 235) (layer "F.Mask") (tstamp 1d068c07-ec55-4516-860c-52a2d26e1b69)
+  (gr_text "+15V" (at 212 220) (layer "F.Mask") (tstamp 1d068c07-ec55-4516-860c-52a2d26e1b69)
     (effects (font (size 1.5 1.5) (thickness 0.3) bold) (justify left bottom))
   )
-  (gr_text "+8V" (at 157 235) (layer "F.Mask") (tstamp 66fdaa00-98b8-4340-aebb-3da52f372edb)
+  (gr_text "+8V" (at 182 220) (layer "F.Mask") (tstamp 66fdaa00-98b8-4340-aebb-3da52f372edb)
     (effects (font (size 1.5 1.5) (thickness 0.3) bold) (justify left bottom))
   )
-  (gr_text "+12V" (at 172 235) (layer "F.Mask") (tstamp f78ee343-176e-4a6e-a627-44440dbc19eb)
+  (gr_text "+12V" (at 197 220) (layer "F.Mask") (tstamp f78ee343-176e-4a6e-a627-44440dbc19eb)
     (effects (font (size 1.5 1.5) (thickness 0.3) bold) (justify left bottom))
   )
-  (gr_text "GPIO 0" (at 55 230) (layer "F.Mask") (tstamp fd311b36-aabd-4305-82fa-0a97ff2b9da2)
+  (gr_text "GPIO 0" (at 55 215) (layer "F.Mask") (tstamp fd311b36-aabd-4305-82fa-0a97ff2b9da2)
     (effects (font (size 1.5 1.5) (thickness 0.3) bold) (justify left bottom))
   )
 
@@ -22945,10 +22945,10 @@
     (fill (thermal_gap 0.5) (thermal_bridge_width 0.5))
     (polygon
       (pts
-        (xy 50 250)
-        (xy 50 80)
-        (xy 200 80)
-        (xy 200 250)
+        (xy 50 225)
+        (xy 50 100)
+        (xy 240 100)
+        (xy 240 225)
       )
     )
   )

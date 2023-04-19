@@ -1378,14 +1378,14 @@
     (property "Datasheet" "http://www.ti.com/lit/ds/symlink/lm4562.pdf" (at 110.49 149.86 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 65d4d31e-6591-44c7-8263-9369f1a1a0d1))
-    (pin "2" (uuid a6aad0bc-a6c6-4492-bb60-eac78b974b9d))
-    (pin "3" (uuid 19a1f474-7210-46ce-b93b-c8ef4a9c333c))
+    (pin "1" (uuid 65d4d31e-6591-44c7-8263-9369f1a1a0d2))
+    (pin "2" (uuid a6aad0bc-a6c6-4492-bb60-eac78b974b9e))
+    (pin "3" (uuid 19a1f474-7210-46ce-b93b-c8ef4a9c333d))
     (pin "5" (uuid e11ebbc4-59aa-46a5-bdea-6655dbbabb0c))
     (pin "6" (uuid fb8350c2-73c0-4a35-a109-1845cb18ba63))
     (pin "7" (uuid baf9be15-c254-48ac-9412-3c1d09868399))
-    (pin "4" (uuid 190d9fad-8515-402d-ab5c-47a36c4082d7))
-    (pin "8" (uuid f06ed68b-bef4-4f95-a5ba-2dff38bc6390))
+    (pin "4" (uuid 190d9fad-8515-402d-ab5c-47a36c4082d8))
+    (pin "8" (uuid f06ed68b-bef4-4f95-a5ba-2dff38bc6391))
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/4e10d7ae-7c54-4ac5-ac67-e4842ffdf025"

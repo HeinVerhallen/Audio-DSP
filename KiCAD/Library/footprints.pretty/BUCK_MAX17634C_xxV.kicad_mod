@@ -1,11 +1,11 @@
-(footprint "BUCK_MAX17634C" (version 20221018) (generator pcbnew)
+(footprint "BUCK_MAX17634C_xxV" (version 20221018) (generator pcbnew)
   (layer "F.Cu")
   (attr through_hole)
   (fp_text reference "REF**" (at 0 2.3 unlocked) (layer "F.SilkS") hide
       (effects (font (size 1 1) (thickness 0.1)))
     (tstamp 94c0bb52-5867-45c4-923a-31635600e4c8)
   )
-  (fp_text value "BUCK_MAX17634C" (at 0.1 -2.7 unlocked) (layer "F.Fab")
+  (fp_text value "BUCK_MAX17634C_xxV" (at 0.1 -2.7 unlocked) (layer "F.Fab")
       (effects (font (size 1 1) (thickness 0.15)))
     (tstamp 0cf8fbff-c4fa-48e2-af53-cdae620db048)
   )

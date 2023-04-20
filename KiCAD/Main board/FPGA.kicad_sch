@@ -487,7 +487,7 @@
   (symbol (lib_id "power:GND") (at 66.04 90.17 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 1a56b6f3-65ff-4c3c-a52a-a659535cea92)
-    (property "Reference" "#PWR0101" (at 66.04 96.52 0)
+    (property "Reference" "#PWR0171" (at 66.04 96.52 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 66.04 95.25 0)
@@ -503,7 +503,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/22c0a18e-6cf4-4154-962a-243bb7c27459"
-          (reference "#PWR0101") (unit 1)
+          (reference "#PWR0171") (unit 1)
         )
       )
     )
@@ -512,13 +512,13 @@
   (symbol (lib_id "Connector_Generic:Conn_02x20_Odd_Even") (at 55.88 63.5 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 537aaa1e-297a-4877-b00b-96a58c8daadc)
-    (property "Reference" "J10" (at 57.15 35.56 0)
+    (property "Reference" "J13" (at 57.15 38.1 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "GPIO 0" (at 57.15 38.1 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_2x20_P2.54mm_Vertical" (at 55.88 63.5 0)
+    (property "Footprint" "" (at 55.88 63.5 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 55.88 63.5 0)
@@ -567,7 +567,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/22c0a18e-6cf4-4154-962a-243bb7c27459"
-          (reference "J10") (unit 1)
+          (reference "J13") (unit 1)
         )
       )
     )
@@ -576,13 +576,13 @@
   (symbol (lib_id "Connector_Generic:Conn_02x20_Odd_Even") (at 110.49 64.77 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 852e40d2-eb6d-48e4-b926-2bc4696d5259)
-    (property "Reference" "J11" (at 111.76 36.83 0)
+    (property "Reference" "J14" (at 111.76 39.37 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "GPIO 1" (at 111.76 39.37 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_2x20_P2.54mm_Vertical" (at 110.49 64.77 0)
+    (property "Footprint" "" (at 110.49 64.77 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 110.49 64.77 0)
@@ -631,7 +631,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/22c0a18e-6cf4-4154-962a-243bb7c27459"
-          (reference "J11") (unit 1)
+          (reference "J14") (unit 1)
         )
       )
     )
@@ -640,7 +640,7 @@
   (symbol (lib_id "power:GND") (at 120.65 91.44 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid c9c21d30-45f5-4028-840a-14313a3dfcdf)
-    (property "Reference" "#PWR0102" (at 120.65 97.79 0)
+    (property "Reference" "#PWR0170" (at 120.65 97.79 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 120.65 96.52 0)
@@ -656,7 +656,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/22c0a18e-6cf4-4154-962a-243bb7c27459"
-          (reference "#PWR0102") (unit 1)
+          (reference "#PWR0170") (unit 1)
         )
       )
     )

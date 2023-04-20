@@ -424,7 +424,7 @@
   (symbol (lib_id "power:GND") (at 190.5 111.76 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 0d13d9b2-d138-452d-9ec6-62c08bbbc7e0)
-    (property "Reference" "#PWR073" (at 190.5 118.11 0)
+    (property "Reference" "#PWR0165" (at 190.5 118.11 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 190.5 115.57 0)
@@ -440,7 +440,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/fc272ee1-9060-465b-85c1-b8364d68deb3"
-          (reference "#PWR073") (unit 1)
+          (reference "#PWR0165") (unit 1)
         )
       )
     )
@@ -449,7 +449,7 @@
   (symbol (lib_id "power:GND") (at 121.92 130.81 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 13cd6aa4-313d-4755-a428-20d0e3c7a1c3)
-    (property "Reference" "#PWR098" (at 121.92 137.16 0)
+    (property "Reference" "#PWR0163" (at 121.92 137.16 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 121.92 134.62 0)
@@ -465,7 +465,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/fc272ee1-9060-465b-85c1-b8364d68deb3"
-          (reference "#PWR098") (unit 1)
+          (reference "#PWR0163") (unit 1)
         )
       )
     )
@@ -498,7 +498,7 @@
           (reference "U23") (unit 1)
         )
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/fc272ee1-9060-465b-85c1-b8364d68deb3"
-          (reference "U25") (unit 1)
+          (reference "U13") (unit 1)
         )
       )
     )
@@ -507,7 +507,7 @@
   (symbol (lib_id "power:GND") (at 190.5 52.07 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 19c3e3b3-d533-440a-9c2f-cd69ffd3f3dc)
-    (property "Reference" "#PWR051" (at 190.5 58.42 0)
+    (property "Reference" "#PWR0168" (at 190.5 58.42 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 190.5 55.88 0)
@@ -523,7 +523,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/fc272ee1-9060-465b-85c1-b8364d68deb3"
-          (reference "#PWR051") (unit 1)
+          (reference "#PWR0168") (unit 1)
         )
       )
     )
@@ -559,7 +559,7 @@
   (symbol (lib_id "power:GND") (at 121.92 50.8 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 23a31258-18f9-43c9-808a-89230c018e9c)
-    (property "Reference" "#PWR0100" (at 121.92 57.15 0)
+    (property "Reference" "#PWR0161" (at 121.92 57.15 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 121.92 54.61 0)
@@ -575,7 +575,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/fc272ee1-9060-465b-85c1-b8364d68deb3"
-          (reference "#PWR0100") (unit 1)
+          (reference "#PWR0161") (unit 1)
         )
       )
     )
@@ -611,7 +611,7 @@
   (symbol (lib_id "power:+12VA") (at 203.2 97.79 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 394ffb02-0ad1-4e16-b280-dfbc2fbdb7a4)
-    (property "Reference" "#PWR0112" (at 203.2 101.6 0)
+    (property "Reference" "#PWR0166" (at 203.2 101.6 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+12VA" (at 203.2 93.98 0)
@@ -627,7 +627,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/fc272ee1-9060-465b-85c1-b8364d68deb3"
-          (reference "#PWR0112") (unit 1)
+          (reference "#PWR0166") (unit 1)
         )
       )
     )
@@ -636,7 +636,7 @@
   (symbol (lib_id "power:GND") (at 121.92 104.14 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 421e6102-aaf3-4c14-9e3b-b4d0663ad823)
-    (property "Reference" "#PWR097" (at 121.92 110.49 0)
+    (property "Reference" "#PWR0162" (at 121.92 110.49 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 121.92 107.95 0)
@@ -652,7 +652,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/fc272ee1-9060-465b-85c1-b8364d68deb3"
-          (reference "#PWR097") (unit 1)
+          (reference "#PWR0162") (unit 1)
         )
       )
     )
@@ -685,7 +685,7 @@
           (reference "U24") (unit 1)
         )
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/fc272ee1-9060-465b-85c1-b8364d68deb3"
-          (reference "U26") (unit 1)
+          (reference "U15") (unit 1)
         )
       )
     )
@@ -718,7 +718,7 @@
           (reference "U23") (unit 1)
         )
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/fc272ee1-9060-465b-85c1-b8364d68deb3"
-          (reference "U23") (unit 1)
+          (reference "U12") (unit 1)
         )
       )
     )
@@ -754,7 +754,7 @@
   (symbol (lib_id "power:GND") (at 190.5 80.01 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 65bf3ce4-d990-46b9-a308-b5c5eb9f0321)
-    (property "Reference" "#PWR072" (at 190.5 86.36 0)
+    (property "Reference" "#PWR0167" (at 190.5 86.36 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 190.5 83.82 0)
@@ -770,7 +770,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/fc272ee1-9060-465b-85c1-b8364d68deb3"
-          (reference "#PWR072") (unit 1)
+          (reference "#PWR0167") (unit 1)
         )
       )
     )
@@ -779,7 +779,7 @@
   (symbol (lib_id "power:GND") (at 190.5 139.7 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 96f72667-40cf-4315-b9cd-015d3ef8f237)
-    (property "Reference" "#PWR0111" (at 190.5 146.05 0)
+    (property "Reference" "#PWR0169" (at 190.5 146.05 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 190.5 143.51 0)
@@ -795,7 +795,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/fc272ee1-9060-465b-85c1-b8364d68deb3"
-          (reference "#PWR0111") (unit 1)
+          (reference "#PWR0169") (unit 1)
         )
       )
     )
@@ -855,7 +855,7 @@
           (reference "U24") (unit 1)
         )
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/fc272ee1-9060-465b-85c1-b8364d68deb3"
-          (reference "U24") (unit 1)
+          (reference "U14") (unit 1)
         )
       )
     )
@@ -864,7 +864,7 @@
   (symbol (lib_id "power:GND") (at 121.92 77.47 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid cc011c07-6b23-4981-9eec-e07b8ffd5bb4)
-    (property "Reference" "#PWR099" (at 121.92 83.82 0)
+    (property "Reference" "#PWR0164" (at 121.92 83.82 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 121.92 81.28 0)
@@ -880,7 +880,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/fc272ee1-9060-465b-85c1-b8364d68deb3"
-          (reference "#PWR099") (unit 1)
+          (reference "#PWR0164") (unit 1)
         )
       )
     )

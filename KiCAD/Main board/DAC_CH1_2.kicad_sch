@@ -2831,8 +2831,8 @@
     (pin "7" (uuid 89bf4076-5542-47f0-9dea-dec44b5d40cf))
     (pin "8" (uuid 17505f52-e363-4cb9-9848-debff2d14672))
     (pin "9" (uuid ba091cb4-573a-410c-ab61-ca67cf3169c0))
-    (pin "3" (uuid 3a286156-fef7-49a6-bac3-e73b9345ad3a))
-    (pin "6" (uuid 5f6024ac-b53e-4e1d-b035-0bc6da6af02d))
+    (pin "3" (uuid 3a286156-fef7-49a6-bac3-e73b9345ad3b))
+    (pin "6" (uuid 5f6024ac-b53e-4e1d-b035-0bc6da6af02e))
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/03c234da-ad6d-41dc-b0ec-5880e5376fd2"
@@ -4535,13 +4535,13 @@
     (property "Datasheet" "https://eu.mouser.com/ProductDetail/Texas-Instruments/OPA1632DGNR?qs=7nS3%252BbEUL6t46Xk02kKOHg%3D%3D" (at 104.14 245.11 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
-    (pin "1" (uuid f222a7cf-f1a0-48f0-9a7d-c51470d41b22))
-    (pin "2" (uuid 33769a2c-964d-419e-959d-4ab5d9800ade))
-    (pin "4" (uuid 3eb8f0b0-f5b9-452e-ad8f-69e16173996b))
-    (pin "5" (uuid 5dcf6b36-099c-43ea-8654-adeccbe23ee8))
-    (pin "7" (uuid 99c486e0-301c-41b0-8083-10a23b129224))
-    (pin "8" (uuid 8e2accd1-ad79-492e-8592-75a282b91757))
-    (pin "9" (uuid bbd32905-dea2-4715-a7cc-957132003d38))
+    (pin "1" (uuid f222a7cf-f1a0-48f0-9a7d-c51470d41b23))
+    (pin "2" (uuid 33769a2c-964d-419e-959d-4ab5d9800adf))
+    (pin "4" (uuid 3eb8f0b0-f5b9-452e-ad8f-69e16173996c))
+    (pin "5" (uuid 5dcf6b36-099c-43ea-8654-adeccbe23ee9))
+    (pin "7" (uuid 99c486e0-301c-41b0-8083-10a23b129225))
+    (pin "8" (uuid 8e2accd1-ad79-492e-8592-75a282b91758))
+    (pin "9" (uuid bbd32905-dea2-4715-a7cc-957132003d39))
     (pin "3" (uuid 8e0868c4-bd28-4816-8b05-243140489e9c))
     (pin "6" (uuid 0e2a9235-0934-42f2-9197-95f71d6000d4))
     (instances

@@ -263,7 +263,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 30.48 105.41 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 00000000-0000-0000-0000-0000642fb268)
-    (property "Reference" "J1" (at 32.5628 97.3582 0)
+    (property "Reference" "J1" (at 30.48 100.33 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Conn_01x03" (at 32.5628 99.6696 0)
@@ -290,8 +290,8 @@
   (symbol (lib_id "Connector_Generic:Conn_01x02") (at 36.83 44.45 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 021df6c2-edbd-47b3-a390-bf8d03ce4d11)
-    (property "Reference" "J13" (at 34.798 45.0763 0)
-      (effects (font (size 1.27 1.27)) (justify left))
+    (property "Reference" "J3" (at 36.83 41.91 0)
+      (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Conn_01x02" (at 34.798 46.9973 0)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -307,7 +307,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "J13") (unit 1)
+          (reference "J3") (unit 1)
         )
       )
     )
@@ -316,7 +316,7 @@
   (symbol (lib_id "power:GND") (at 365.76 177.8 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 0f4058be-bd85-45fa-9cf3-f88068929ac6)
-    (property "Reference" "#PWR049" (at 359.41 177.8 0)
+    (property "Reference" "#PWR0105" (at 359.41 177.8 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 363.22 177.8 90)
@@ -332,7 +332,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "#PWR049") (unit 1)
+          (reference "#PWR0105") (unit 1)
         )
       )
     )
@@ -341,7 +341,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 370.84 90.17 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 13a6c34d-efc4-4f35-bd79-f4a527408b87)
-    (property "Reference" "J6" (at 373.38 88.9 0)
+    (property "Reference" "J9" (at 370.84 85.09 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Conn_01x03" (at 378.46 91.44 0)
@@ -359,7 +359,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "J6") (unit 1)
+          (reference "J9") (unit 1)
         )
       )
     )
@@ -368,8 +368,8 @@
   (symbol (lib_id "Connector_Generic:Conn_01x02") (at 316.23 38.1 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 17686da8-efcf-4570-bd03-4fbbd5708cd8)
-    (property "Reference" "J3" (at 318.262 38.7263 0)
-      (effects (font (size 1.27 1.27)) (justify left))
+    (property "Reference" "J6" (at 316.23 35.56 0)
+      (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Conn_01x02" (at 318.262 40.6473 0)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -385,7 +385,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "J3") (unit 1)
+          (reference "J6") (unit 1)
         )
       )
     )
@@ -394,8 +394,8 @@
   (symbol (lib_id "Mechanical:MountingHole_Pad") (at 342.9 232.41 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 18c2240e-5292-4d56-8e48-cf126610f168)
-    (property "Reference" "H7" (at 345.44 230.505 0)
-      (effects (font (size 1.27 1.27)) (justify left))
+    (property "Reference" "H7" (at 342.9 226.06 0)
+      (effects (font (size 1.27 1.27)))
     )
     (property "Value" "MountingHole_Pad" (at 345.44 233.045 0)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -419,7 +419,7 @@
   (symbol (lib_id "power:GND") (at 342.9 246.38 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1b48a85a-ffdc-495e-946d-d14879c19d96)
-    (property "Reference" "#PWR0110" (at 342.9 252.73 0)
+    (property "Reference" "#PWR0112" (at 342.9 252.73 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 342.9 250.19 0)
@@ -435,7 +435,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "#PWR0110") (unit 1)
+          (reference "#PWR0112") (unit 1)
         )
       )
     )
@@ -444,8 +444,8 @@
   (symbol (lib_id "Mechanical:MountingHole_Pad") (at 317.5 220.98 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 1f73fc50-eff0-4824-8cd1-5b8e123cac65)
-    (property "Reference" "H2" (at 320.04 219.075 0)
-      (effects (font (size 1.27 1.27)) (justify left))
+    (property "Reference" "H2" (at 317.5 214.63 0)
+      (effects (font (size 1.27 1.27)))
     )
     (property "Value" "MountingHole_Pad" (at 320.04 221.615 0)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -469,7 +469,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 30.48 124.46 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 25f8d802-970e-43e3-a567-7f4fb3b01261)
-    (property "Reference" "J12" (at 32.5628 116.4082 0)
+    (property "Reference" "J2" (at 30.48 119.38 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Conn_01x03" (at 32.5628 118.7196 0)
@@ -487,7 +487,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "J12") (unit 1)
+          (reference "J2") (unit 1)
         )
       )
     )
@@ -496,7 +496,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 316.23 48.26 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 38363973-f06b-4728-909c-6ea940d8f1ce)
-    (property "Reference" "J4" (at 320.04 46.99 0)
+    (property "Reference" "J7" (at 316.23 43.18 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Conn_01x03" (at 325.12 48.26 0)
@@ -514,7 +514,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "J4") (unit 1)
+          (reference "J7") (unit 1)
         )
       )
     )
@@ -523,7 +523,7 @@
   (symbol (lib_id "power:GND") (at 317.5 223.52 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 3a8fae8d-674c-49f9-a181-a6796e4dfebe)
-    (property "Reference" "#PWR0105" (at 317.5 229.87 0)
+    (property "Reference" "#PWR0107" (at 317.5 229.87 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 317.5 227.33 0)
@@ -539,7 +539,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "#PWR0105") (unit 1)
+          (reference "#PWR0107") (unit 1)
         )
       )
     )
@@ -548,8 +548,8 @@
   (symbol (lib_id "Connector_Generic:Conn_01x02") (at 316.23 55.88 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 43948b54-5d85-4cf7-84bf-184c3fd72566)
-    (property "Reference" "J5" (at 318.262 56.5063 0)
-      (effects (font (size 1.27 1.27)) (justify left))
+    (property "Reference" "J8" (at 316.23 53.34 0)
+      (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Conn_01x02" (at 318.262 58.4273 0)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -565,7 +565,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "J5") (unit 1)
+          (reference "J8") (unit 1)
         )
       )
     )
@@ -574,7 +574,7 @@
   (symbol (lib_id "power:GND") (at 317.5 246.38 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 4730c263-7431-4aa7-89cb-5a853cec79fa)
-    (property "Reference" "#PWR0109" (at 317.5 252.73 0)
+    (property "Reference" "#PWR0108" (at 317.5 252.73 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 317.5 250.19 0)
@@ -590,7 +590,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "#PWR0109") (unit 1)
+          (reference "#PWR0108") (unit 1)
         )
       )
     )
@@ -599,8 +599,8 @@
   (symbol (lib_id "Mechanical:MountingHole_Pad") (at 342.9 243.84 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 59905dd1-9721-4a40-8442-76233a12ce86)
-    (property "Reference" "H8" (at 345.44 241.935 0)
-      (effects (font (size 1.27 1.27)) (justify left))
+    (property "Reference" "H8" (at 342.9 237.49 0)
+      (effects (font (size 1.27 1.27)))
     )
     (property "Value" "MountingHole_Pad" (at 345.44 244.475 0)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -624,7 +624,7 @@
   (symbol (lib_id "power:GND") (at 342.9 212.09 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6a23306f-e84e-4c65-a447-fb6ebeb949b1)
-    (property "Reference" "#PWR0104" (at 342.9 218.44 0)
+    (property "Reference" "#PWR0106" (at 342.9 218.44 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 342.9 215.9 0)
@@ -640,7 +640,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "#PWR0104") (unit 1)
+          (reference "#PWR0106") (unit 1)
         )
       )
     )
@@ -649,8 +649,8 @@
   (symbol (lib_id "Mechanical:MountingHole_Pad") (at 342.9 209.55 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 7f11ccf4-71f8-4ddd-b87a-e82e088790eb)
-    (property "Reference" "H5" (at 345.44 207.645 0)
-      (effects (font (size 1.27 1.27)) (justify left))
+    (property "Reference" "H5" (at 342.9 203.2 0)
+      (effects (font (size 1.27 1.27)))
     )
     (property "Value" "MountingHole_Pad" (at 345.44 210.185 0)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -674,7 +674,7 @@
   (symbol (lib_id "power:GND") (at 365.76 90.17 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 868181a8-4df3-4cd5-916f-03bf7268467f)
-    (property "Reference" "#PWR012" (at 359.41 90.17 0)
+    (property "Reference" "#PWR0103" (at 359.41 90.17 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 363.22 90.17 90)
@@ -690,7 +690,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "#PWR012") (unit 1)
+          (reference "#PWR0103") (unit 1)
         )
       )
     )
@@ -699,7 +699,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 370.84 120.65 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 890fa7a2-ea2b-459a-b29d-e2b35bd54384)
-    (property "Reference" "J8" (at 374.65 119.38 0)
+    (property "Reference" "J10" (at 370.84 115.57 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Conn_01x03" (at 379.73 120.65 0)
@@ -717,7 +717,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "J8") (unit 1)
+          (reference "J10") (unit 1)
         )
       )
     )
@@ -726,7 +726,7 @@
   (symbol (lib_id "power:GND") (at 365.76 120.65 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8d16addb-f376-41df-abbb-44a8a0926a41)
-    (property "Reference" "#PWR017" (at 359.41 120.65 0)
+    (property "Reference" "#PWR0104" (at 359.41 120.65 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 363.22 120.65 90)
@@ -742,7 +742,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "#PWR017") (unit 1)
+          (reference "#PWR0104") (unit 1)
         )
       )
     )
@@ -751,8 +751,8 @@
   (symbol (lib_id "Mechanical:MountingHole_Pad") (at 317.5 232.41 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 90b411b3-845d-4123-aaf9-43421e0bcd56)
-    (property "Reference" "H3" (at 320.04 230.505 0)
-      (effects (font (size 1.27 1.27)) (justify left))
+    (property "Reference" "H3" (at 317.5 226.06 0)
+      (effects (font (size 1.27 1.27)))
     )
     (property "Value" "MountingHole_Pad" (at 320.04 233.045 0)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -776,7 +776,7 @@
   (symbol (lib_id "power:GND") (at 311.15 48.26 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 9289b6fa-7dcf-4421-bf6f-b357722aa897)
-    (property "Reference" "#PWR026" (at 304.8 48.26 0)
+    (property "Reference" "#PWR0102" (at 304.8 48.26 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 308.61 48.26 90)
@@ -792,7 +792,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "#PWR026") (unit 1)
+          (reference "#PWR0102") (unit 1)
         )
       )
     )
@@ -801,7 +801,7 @@
   (symbol (lib_id "power:GND") (at 342.9 223.52 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 94120f4d-d623-417c-beb9-22226e179aad)
-    (property "Reference" "#PWR0106" (at 342.9 229.87 0)
+    (property "Reference" "#PWR0113" (at 342.9 229.87 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 342.9 227.33 0)
@@ -817,7 +817,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "#PWR0106") (unit 1)
+          (reference "#PWR0113") (unit 1)
         )
       )
     )
@@ -826,8 +826,8 @@
   (symbol (lib_id "Mechanical:MountingHole_Pad") (at 342.9 220.98 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid a0be0680-e8b3-419c-938e-bef8f9bdddb0)
-    (property "Reference" "H6" (at 345.44 219.075 0)
-      (effects (font (size 1.27 1.27)) (justify left))
+    (property "Reference" "H6" (at 342.9 214.63 0)
+      (effects (font (size 1.27 1.27)))
     )
     (property "Value" "MountingHole_Pad" (at 345.44 221.615 0)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -851,7 +851,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 370.84 177.8 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a83e0c31-16ac-4a7c-9ad0-a2b4047e7169)
-    (property "Reference" "J9" (at 374.65 176.53 0)
+    (property "Reference" "J12" (at 370.84 172.72 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Conn_01x03" (at 379.73 177.8 0)
@@ -869,7 +869,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "J9") (unit 1)
+          (reference "J12") (unit 1)
         )
       )
     )
@@ -878,7 +878,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 316.23 30.48 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ad42dd61-b09d-4c44-95af-93980c80cd1c)
-    (property "Reference" "J2" (at 318.77 29.21 0)
+    (property "Reference" "J5" (at 316.23 25.4 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Conn_01x03" (at 323.85 31.75 0)
@@ -896,7 +896,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "J2") (unit 1)
+          (reference "J5") (unit 1)
         )
       )
     )
@@ -905,7 +905,7 @@
   (symbol (lib_id "power:GND") (at 317.5 234.95 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b29bc266-927a-4243-87da-df161901d851)
-    (property "Reference" "#PWR0107" (at 317.5 241.3 0)
+    (property "Reference" "#PWR0109" (at 317.5 241.3 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 317.5 238.76 0)
@@ -921,7 +921,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "#PWR0107") (unit 1)
+          (reference "#PWR0109") (unit 1)
         )
       )
     )
@@ -930,8 +930,8 @@
   (symbol (lib_id "Mechanical:MountingHole_Pad") (at 317.5 243.84 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid b52a9d0f-416d-470d-8012-6b803404f98d)
-    (property "Reference" "H4" (at 320.04 241.935 0)
-      (effects (font (size 1.27 1.27)) (justify left))
+    (property "Reference" "H4" (at 317.5 237.49 0)
+      (effects (font (size 1.27 1.27)))
     )
     (property "Value" "MountingHole_Pad" (at 320.04 244.475 0)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -955,8 +955,8 @@
   (symbol (lib_id "Mechanical:MountingHole_Pad") (at 317.5 209.55 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid b9767943-c518-44b4-a669-7c3612d99f57)
-    (property "Reference" "H1" (at 320.04 207.645 0)
-      (effects (font (size 1.27 1.27)) (justify left))
+    (property "Reference" "H1" (at 317.5 203.2 0)
+      (effects (font (size 1.27 1.27)))
     )
     (property "Value" "MountingHole_Pad" (at 320.04 210.185 0)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -980,7 +980,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 370.84 147.32 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid bb67321e-759f-49ad-9a26-040103134ef9)
-    (property "Reference" "J7" (at 373.38 146.05 0)
+    (property "Reference" "J11" (at 370.84 142.24 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Conn_01x03" (at 378.46 148.59 0)
@@ -998,7 +998,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "J7") (unit 1)
+          (reference "J11") (unit 1)
         )
       )
     )
@@ -1007,7 +1007,7 @@
   (symbol (lib_id "power:GND") (at 365.76 147.32 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c5aec282-791f-4efc-b157-027b59f67320)
-    (property "Reference" "#PWR024" (at 359.41 147.32 0)
+    (property "Reference" "#PWR0110" (at 359.41 147.32 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 363.22 147.32 90)
@@ -1023,7 +1023,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "#PWR024") (unit 1)
+          (reference "#PWR0110") (unit 1)
         )
       )
     )
@@ -1032,8 +1032,8 @@
   (symbol (lib_id "Connector_Generic:Conn_01x02") (at 36.83 55.88 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid da095e96-ff8b-49af-a79e-7899b6250652)
-    (property "Reference" "J14" (at 34.798 56.5063 0)
-      (effects (font (size 1.27 1.27)) (justify left))
+    (property "Reference" "J4" (at 36.83 53.34 0)
+      (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Conn_01x02" (at 34.798 58.4273 0)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -1049,7 +1049,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "J14") (unit 1)
+          (reference "J4") (unit 1)
         )
       )
     )
@@ -1058,7 +1058,7 @@
   (symbol (lib_id "power:GND") (at 311.15 30.48 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid daf2c1a9-3d80-4672-bba1-d3a75cc27464)
-    (property "Reference" "#PWR025" (at 304.8 30.48 0)
+    (property "Reference" "#PWR0101" (at 304.8 30.48 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 308.61 30.48 90)
@@ -1074,7 +1074,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "#PWR025") (unit 1)
+          (reference "#PWR0101") (unit 1)
         )
       )
     )
@@ -1083,7 +1083,7 @@
   (symbol (lib_id "power:GND") (at 317.5 212.09 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid dda46c20-5d3d-4e96-abb4-6d392c811a18)
-    (property "Reference" "#PWR0103" (at 317.5 218.44 0)
+    (property "Reference" "#PWR0114" (at 317.5 218.44 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 317.5 215.9 0)
@@ -1099,7 +1099,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "#PWR0103") (unit 1)
+          (reference "#PWR0114") (unit 1)
         )
       )
     )
@@ -1108,7 +1108,7 @@
   (symbol (lib_id "power:GND") (at 342.9 234.95 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ee229e03-57fc-4e4c-80cf-bda65a820f1d)
-    (property "Reference" "#PWR0108" (at 342.9 241.3 0)
+    (property "Reference" "#PWR0111" (at 342.9 241.3 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 342.9 238.76 0)
@@ -1124,7 +1124,7 @@
     (instances
       (project "Main board"
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324"
-          (reference "#PWR0108") (unit 1)
+          (reference "#PWR0111") (unit 1)
         )
       )
     )

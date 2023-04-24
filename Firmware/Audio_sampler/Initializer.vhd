@@ -27,7 +27,7 @@ Architecture arch of initializer is
     constant reg_ROUT           : std_logic_vector(15 downto 0) := x"0665"; --x"0665"; -- -20dB
     constant reg_ADC_path       : std_logic_vector(15 downto 0) := x"0850";
     constant reg_DAC_path       : std_logic_vector(15 downto 0) := x"0a06";
-    constant reg_data_format    : std_logic_vector(15 downto 0) := x"0e4a"; --x"0e4a";
+    constant reg_data_format    : std_logic_vector(15 downto 0) := x"0e0a"; --x"0e4a";
     constant reg_sample_ctrl    : std_logic_vector(15 downto 0) := x"1000";
     constant reg_activate       : std_logic_vector(15 downto 0) := x"1201";
     constant reg_power_init     : std_logic_vector(15 downto 0) := x"0c10";

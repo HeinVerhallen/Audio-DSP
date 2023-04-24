@@ -15,7 +15,7 @@
 
 -- PROGRAM		"Quartus Prime"
 -- VERSION		"Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition"
--- CREATED		"Thu Apr 13 18:12:50 2023"
+-- CREATED		"Mon Apr 24 16:43:51 2023"
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all; 
@@ -27,9 +27,15 @@ ENTITY Audio_sampler IS
 	(
 		clk_50 :  IN  STD_LOGIC;
 		nrst :  IN  STD_LOGIC;
+		ADC_DAT :  IN  STD_LOGIC;
+		BCLK :  IN  STD_LOGIC;
+		DAC_LRCK :  IN  STD_LOGIC;
+		ADC_LRCK :  IN  STD_LOGIC;
 		SDA :  INOUT  STD_LOGIC;
 		SCL :  INOUT  STD_LOGIC;
 		ack_err :  OUT  STD_LOGIC;
+		DAC_DAT :  OUT  STD_LOGIC;
+		MCLK :  OUT  STD_LOGIC;
 		data_read :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0)
 	);
 END Audio_sampler;
@@ -54,6 +60,27 @@ GENERIC (bus_clk : INTEGER;
 	);
 END COMPONENT;
 
+COMPONENT clk_div
+GENERIC (div : INTEGER
+			);
+	PORT(clk_in : IN STD_LOGIC;
+		 nrst : IN STD_LOGIC;
+		 clk_out : OUT STD_LOGIC
+	);
+END COMPONENT;
+
+COMPONENT i2s_encoder
+GENERIC (d_width : INTEGER
+			);
+	PORT(nrst : IN STD_LOGIC;
+		 sck : IN STD_LOGIC;
+		 ws : IN STD_LOGIC;
+		 data_left : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+		 data_right : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+		 sd : OUT STD_LOGIC
+	);
+END COMPONENT;
+
 COMPONENT initializer
 	PORT(clk : IN STD_LOGIC;
 		 nrst : IN STD_LOGIC;
@@ -65,11 +92,25 @@ COMPONENT initializer
 	);
 END COMPONENT;
 
+COMPONENT i2s_decoder
+GENERIC (d_width : INTEGER
+			);
+	PORT(nrst : IN STD_LOGIC;
+		 sck : IN STD_LOGIC;
+		 ws : IN STD_LOGIC;
+		 sd : IN STD_LOGIC;
+		 data_left : OUT STD_LOGIC_VECTOR(23 DOWNTO 0);
+		 data_right : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
+	);
+END COMPONENT;
+
 SIGNAL	addr :  STD_LOGIC_VECTOR(6 DOWNTO 0);
 SIGNAL	busy :  STD_LOGIC;
 SIGNAL	data :  STD_LOGIC_VECTOR(7 DOWNTO 0);
 SIGNAL	ena :  STD_LOGIC;
 SIGNAL	rw :  STD_LOGIC;
+SIGNAL	SYNTHESIZED_WIRE_0 :  STD_LOGIC_VECTOR(23 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_1 :  STD_LOGIC_VECTOR(23 DOWNTO 0);
 
 
 BEGIN 
@@ -93,6 +134,25 @@ PORT MAP(clk => clk_50,
 		 data_rd => data_read);
 
 
+b2v_inst11 : clk_div
+GENERIC MAP(div => 4
+			)
+PORT MAP(clk_in => clk_50,
+		 nrst => nrst,
+		 clk_out => MCLK);
+
+
+b2v_inst15 : i2s_encoder
+GENERIC MAP(d_width => 24
+			)
+PORT MAP(nrst => nrst,
+		 sck => BCLK,
+		 ws => DAC_LRCK,
+		 data_left => SYNTHESIZED_WIRE_0,
+		 data_right => SYNTHESIZED_WIRE_1,
+		 sd => DAC_DAT);
+
+
 b2v_inst3 : initializer
 PORT MAP(clk => clk_50,
 		 nrst => nrst,
@@ -101,6 +161,17 @@ PORT MAP(clk => clk_50,
 		 rw => rw,
 		 addr => addr,
 		 data => data);
+
+
+b2v_inst9 : i2s_decoder
+GENERIC MAP(d_width => 24
+			)
+PORT MAP(nrst => nrst,
+		 sck => BCLK,
+		 ws => ADC_LRCK,
+		 sd => ADC_DAT,
+		 data_left => SYNTHESIZED_WIRE_0,
+		 data_right => SYNTHESIZED_WIRE_1);
 
 
 END bdf_type;

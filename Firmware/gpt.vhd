@@ -15,6 +15,7 @@ architecture Behavioral of i2s_encoder is
 
     signal bit_cnt : integer range 0 to 47 := 0;
     signal data    : std_logic_vector(47 downto 0) := (others => '0');
+    signal bck     : std_logic := '0';
 
 begin
 
@@ -36,7 +37,8 @@ begin
             else
                 ws <= '0';
             end if;
-            sck <= not sck;
+            bck <= not bck;
+            sck <= bck;
             sd <= data(47);
             data <= data(46 downto 0) & '0';
         end if;

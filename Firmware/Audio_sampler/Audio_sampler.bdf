@@ -4,25 +4,25 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 2020  Intel Corporation. All rights reserved.
+Copyright (C) 2017  Intel Corporation. All rights reserved.
 Your use of Intel Corporation's design tools, logic functions 
-and other software and tools, and any partner logic 
+and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
 to the terms and conditions of the Intel Program License 
 Subscription Agreement, the Intel Quartus Prime License Agreement,
-the Intel FPGA IP License Agreement, or other applicable license
-agreement, including, without limitation, that your use is for
-the sole purpose of programming logic devices manufactured by
-Intel and sold by Intel or its authorized distributors.  Please
-refer to the applicable agreement for further details, at
-https://fpgasoftware.intel.com/eula.
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
 */
 (header "graphic" (version "1.4"))
 (pin
 	(input)
-	(rect 408 336 584 352)
+	(rect 104 424 280 440)
 	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
 	(text "clk_50" (rect 9 0 40 12)(font "Arial" ))
 	(pt 176 8)
@@ -38,7 +38,7 @@ https://fpgasoftware.intel.com/eula.
 )
 (pin
 	(input)
-	(rect 408 352 584 368)
+	(rect 104 440 280 456)
 	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
 	(text "nrst" (rect 9 0 27 12)(font "Arial" ))
 	(pt 176 8)
@@ -53,8 +53,72 @@ https://fpgasoftware.intel.com/eula.
 	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
 )
 (pin
+	(input)
+	(rect 120 216 288 232)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "ADC_DAT" (rect 5 0 52 17)(font "Intel Clear" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(pin
+	(input)
+	(rect 120 104 288 120)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "BCLK" (rect 5 0 34 12)(font "Arial" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(pin
+	(input)
+	(rect 120 120 288 136)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "DAC_LRCK" (rect 5 0 60 17)(font "Intel Clear" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(pin
+	(input)
+	(rect 120 200 288 216)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "ADC_LRCK" (rect 5 0 60 17)(font "Intel Clear" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(pin
 	(output)
-	(rect 1168 432 1344 448)
+	(rect 928 520 1104 536)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "ack_err" (rect 90 0 126 12)(font "Arial" ))
 	(pt 0 8)
@@ -70,7 +134,7 @@ https://fpgasoftware.intel.com/eula.
 )
 (pin
 	(output)
-	(rect 1168 416 1344 432)
+	(rect 928 504 1104 520)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "data_read[7..0]" (rect 90 0 164 12)(font "Arial" ))
 	(pt 0 8)
@@ -85,8 +149,40 @@ https://fpgasoftware.intel.com/eula.
 	)
 )
 (pin
+	(output)
+	(rect 984 88 1160 104)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "DAC_DAT" (rect 90 0 140 12)(font "Arial" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
+)
+(pin
+	(output)
+	(rect 632 328 808 344)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "MCLK" (rect 90 0 119 17)(font "Intel Clear" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
+)
+(pin
 	(bidir)
-	(rect 1168 448 1344 464)
+	(rect 928 536 1104 552)
 	(text "BIDIR" (rect 1 0 25 10)(font "Arial" (font_size 6)))
 	(text "SDA" (rect 90 0 113 12)(font "Arial" ))
 	(pt 0 8)
@@ -103,7 +199,7 @@ https://fpgasoftware.intel.com/eula.
 )
 (pin
 	(bidir)
-	(rect 1168 464 1344 480)
+	(rect 928 552 1104 568)
 	(text "BIDIR" (rect 1 0 25 10)(font "Arial" (font_size 6)))
 	(text "SCL" (rect 90 0 111 12)(font "Arial" ))
 	(pt 0 8)
@@ -119,7 +215,7 @@ https://fpgasoftware.intel.com/eula.
 	(text "VCC" (rect 4 7 24 17)(font "Arial" (font_size 6)))
 )
 (symbol
-	(rect 920 376 1120 520)
+	(rect 680 464 880 608)
 	(text "i2c_master" (rect 5 0 59 12)(font "Arial" ))
 	(text "inst" (rect 8 128 25 140)(font "Arial" ))
 	(port
@@ -168,21 +264,21 @@ https://fpgasoftware.intel.com/eula.
 		(pt 200 32)
 		(output)
 		(text "busy" (rect 0 0 24 12)(font "Arial" ))
-		(text "busy" (rect 159 27 179 39)(font "Arial" ))
+		(text "busy" (rect 159 27 183 39)(font "Arial" ))
 		(line (pt 200 32)(pt 184 32))
 	)
 	(port
 		(pt 200 48)
 		(output)
 		(text "data_rd[7..0]" (rect 0 0 62 12)(font "Arial" ))
-		(text "data_rd[7..0]" (rect 127 43 179 55)(font "Arial" ))
+		(text "data_rd[7..0]" (rect 127 43 189 55)(font "Arial" ))
 		(line (pt 200 48)(pt 184 48)(line_width 3))
 	)
 	(port
 		(pt 200 64)
 		(output)
 		(text "ack_error" (rect 0 0 46 12)(font "Arial" ))
-		(text "ack_error" (rect 141 59 179 71)(font "Arial" ))
+		(text "ack_error" (rect 141 59 187 71)(font "Arial" ))
 		(line (pt 200 64)(pt 184 64))
 	)
 	(port
@@ -212,10 +308,45 @@ https://fpgasoftware.intel.com/eula.
 	(drawing
 		(rectangle (rect 16 16 184 128))
 	)
-	(annotation_block (parameter)(rect 1120 312 1320 376))
+	(annotation_block (parameter)(rect 880 400 1080 464))
 )
 (symbol
-	(rect 664 408 824 520)
+	(rect 440 304 592 384)
+	(text "clk_div" (rect 5 0 40 12)(font "Arial" ))
+	(text "inst11" (rect 8 64 36 81)(font "Intel Clear" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk_in" (rect 0 0 28 12)(font "Arial" ))
+		(text "clk_in" (rect 21 27 49 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "nrst" (rect 0 0 18 12)(font "Arial" ))
+		(text "nrst" (rect 21 43 39 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 152 32)
+		(output)
+		(text "clk_out" (rect 0 0 35 12)(font "Arial" ))
+		(text "clk_out" (rect 102 27 137 39)(font "Arial" ))
+		(line (pt 152 32)(pt 136 32))
+	)
+	(parameter
+		"div"
+		"4"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 136 64))
+	)
+	(annotation_block (parameter)(rect 592 264 768 304))
+)
+(symbol
+	(rect 424 496 584 608)
 	(text "initializer" (rect 5 0 46 12)(font "Arial" ))
 	(text "inst3" (rect 8 96 31 108)(font "Arial" ))
 	(port
@@ -272,171 +403,325 @@ https://fpgasoftware.intel.com/eula.
 	)
 )
 (symbol
-	(rect 896 592 1080 704)
-	(text "i2s_block" (rect 5 0 51 12)(font "Arial" ))
-	(text "inst2" (rect 8 96 30 113)(font "Intel Clear" ))
+	(rect 432 144 640 256)
+	(text "i2s_decoder" (rect 5 0 64 12)(font "Arial" ))
+	(text "inst9" (rect 8 96 31 108)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
-		(text "reset_n" (rect 0 0 36 12)(font "Arial" ))
-		(text "reset_n" (rect 21 27 57 39)(font "Arial" ))
+		(text "nrst" (rect 0 0 18 12)(font "Arial" ))
+		(text "nrst" (rect 21 27 39 39)(font "Arial" ))
 		(line (pt 0 32)(pt 16 32))
 	)
 	(port
 		(pt 0 48)
 		(input)
-		(text "bit_clk" (rect 0 0 31 12)(font "Arial" ))
-		(text "bit_clk" (rect 21 43 52 55)(font "Arial" ))
+		(text "sck" (rect 0 0 17 12)(font "Arial" ))
+		(text "sck" (rect 21 43 38 55)(font "Arial" ))
 		(line (pt 0 48)(pt 16 48))
 	)
 	(port
 		(pt 0 64)
 		(input)
-		(text "lr_clk" (rect 0 0 25 12)(font "Arial" ))
-		(text "lr_clk" (rect 21 59 46 71)(font "Arial" ))
+		(text "ws" (rect 0 0 12 12)(font "Arial" ))
+		(text "ws" (rect 21 59 33 71)(font "Arial" ))
 		(line (pt 0 64)(pt 16 64))
 	)
 	(port
 		(pt 0 80)
 		(input)
-		(text "s_data_in" (rect 0 0 47 12)(font "Arial" ))
-		(text "s_data_in" (rect 21 75 68 87)(font "Arial" ))
+		(text "sd" (rect 0 0 11 12)(font "Arial" ))
+		(text "sd" (rect 21 75 32 87)(font "Arial" ))
 		(line (pt 0 80)(pt 16 80))
 	)
 	(port
-		(pt 184 32)
+		(pt 208 32)
 		(output)
-		(text "s_data_out" (rect 0 0 54 12)(font "Arial" ))
-		(text "s_data_out" (rect 118 27 172 39)(font "Arial" ))
-		(line (pt 184 32)(pt 168 32))
+		(text "data_left[d_width-1..0]" (rect 0 0 109 12)(font "Arial" ))
+		(text "data_left[d_width-1..0]" (rect 95 27 204 39)(font "Arial" ))
+		(line (pt 208 32)(pt 192 32)(line_width 3))
+	)
+	(port
+		(pt 208 48)
+		(output)
+		(text "data_right[d_width-1..0]" (rect 0 0 114 12)(font "Arial" ))
+		(text "data_right[d_width-1..0]" (rect 91 43 205 55)(font "Arial" ))
+		(line (pt 208 48)(pt 192 48)(line_width 3))
 	)
 	(parameter
-		"DATA_WIDTH"
-		"16"
+		"d_width"
+		"32"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 168 96))
+		(rectangle (rect 16 16 192 96))
 	)
-	(annotation_block (parameter)(rect 1080 552 1272 592))
+	(annotation_block (parameter)(rect 432 32 601 70))
+)
+(symbol
+	(rect 744 64 944 208)
+	(text "i2s_encoder" (rect 5 0 64 12)(font "Arial" ))
+	(text "inst15" (rect 8 128 37 140)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "nrst" (rect 0 0 18 12)(font "Arial" ))
+		(text "nrst" (rect 21 27 39 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "sck" (rect 0 0 17 12)(font "Arial" ))
+		(text "sck" (rect 21 43 38 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "ws" (rect 0 0 12 12)(font "Arial" ))
+		(text "ws" (rect 21 59 33 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "data_left[d_width-1..0]" (rect 0 0 109 12)(font "Arial" ))
+		(text "data_left[d_width-1..0]" (rect 21 75 130 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "data_right[d_width-1..0]" (rect 0 0 114 12)(font "Arial" ))
+		(text "data_right[d_width-1..0]" (rect 21 91 135 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 3))
+	)
+	(port
+		(pt 200 32)
+		(output)
+		(text "sd" (rect 0 0 11 12)(font "Arial" ))
+		(text "sd" (rect 170 27 181 39)(font "Arial" ))
+		(line (pt 200 32)(pt 184 32))
+	)
+	(parameter
+		"d_width"
+		"32"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 184 128))
+	)
+	(annotation_block (parameter)(rect 744 16 913 54))
 )
 (connector
-	(pt 624 360)
-	(pt 624 456)
+	(pt 664 432)
+	(pt 664 496)
 )
 (connector
-	(pt 624 456)
-	(pt 664 456)
+	(pt 680 496)
+	(pt 664 496)
 )
 (connector
-	(pt 664 440)
-	(pt 648 440)
+	(pt 680 512)
+	(pt 648 512)
 )
 (connector
-	(pt 648 440)
-	(pt 648 344)
+	(pt 648 512)
+	(pt 648 448)
 )
 (connector
-	(pt 904 344)
-	(pt 904 408)
+	(pt 880 496)
+	(pt 904 496)
 )
 (connector
-	(pt 920 408)
-	(pt 904 408)
+	(pt 904 496)
+	(pt 904 624)
 )
 (connector
-	(pt 920 424)
-	(pt 888 424)
+	(pt 408 624)
+	(pt 408 560)
 )
 (connector
-	(pt 888 424)
-	(pt 888 360)
+	(pt 424 560)
+	(pt 408 560)
 )
 (connector
-	(pt 1120 408)
-	(pt 1144 408)
+	(pt 880 560)
+	(pt 928 560)
 )
 (connector
-	(pt 1144 408)
-	(pt 1144 536)
+	(pt 880 544)
+	(pt 928 544)
 )
 (connector
-	(pt 648 536)
-	(pt 648 472)
+	(pt 880 528)
+	(pt 928 528)
 )
 (connector
-	(pt 664 472)
-	(pt 648 472)
-)
-(connector
-	(pt 1120 472)
-	(pt 1168 472)
-)
-(connector
-	(pt 1120 456)
-	(pt 1168 456)
-)
-(connector
-	(pt 1120 440)
-	(pt 1168 440)
-)
-(connector
-	(pt 1120 424)
-	(pt 1168 424)
+	(pt 880 512)
+	(pt 928 512)
 	(bus)
 )
 (connector
-	(text "ena" (rect 857 424 874 441)(font "Intel Clear" ))
-	(pt 920 440)
-	(pt 824 440)
-)
-(connector
-	(text "rw" (rect 866 456 877 473)(font "Intel Clear" ))
-	(pt 920 472)
-	(pt 824 472)
-)
-(connector
-	(text "data[7..0]" (rect 872 472 916 489)(font "Intel Clear" ))
-	(pt 920 488)
-	(pt 824 488)
+	(text "data[7..0]" (rect 632 560 676 577)(font "Intel Clear" ))
+	(pt 680 576)
+	(pt 584 576)
 	(bus)
 )
 (connector
-	(text "addr[6..0]" (rect 857 440 901 457)(font "Intel Clear" ))
-	(pt 920 456)
-	(pt 824 456)
+	(text "busy" (rect 592 608 614 625)(font "Intel Clear" ))
+	(pt 904 624)
+	(pt 408 624)
+)
+(connector
+	(pt 384 544)
+	(pt 424 544)
+)
+(connector
+	(pt 408 528)
+	(pt 424 528)
+)
+(connector
+	(text "ena" (rect 617 512 634 529)(font "Intel Clear" ))
+	(pt 584 528)
+	(pt 680 528)
+)
+(connector
+	(text "addr[6..0]" (rect 617 528 661 545)(font "Intel Clear" ))
+	(pt 584 544)
+	(pt 680 544)
 	(bus)
 )
 (connector
-	(text "busy" (rect 832 520 854 537)(font "Intel Clear" ))
-	(pt 1144 536)
-	(pt 648 536)
+	(text "rw" (rect 626 544 637 561)(font "Intel Clear" ))
+	(pt 584 560)
+	(pt 680 560)
 )
 (connector
-	(pt 576 344)
-	(pt 584 344)
+	(pt 408 432)
+	(pt 664 432)
 )
 (connector
-	(pt 584 344)
-	(pt 648 344)
+	(pt 384 448)
+	(pt 648 448)
 )
 (connector
-	(pt 648 344)
-	(pt 904 344)
+	(pt 280 448)
+	(pt 384 448)
 )
 (connector
-	(pt 576 360)
-	(pt 584 360)
+	(pt 280 432)
+	(pt 408 432)
 )
 (connector
-	(pt 584 360)
-	(pt 624 360)
+	(pt 432 224)
+	(pt 288 224)
 )
 (connector
-	(pt 624 360)
-	(pt 888 360)
+	(pt 288 208)
+	(pt 432 208)
 )
-(junction (pt 648 344))
-(junction (pt 624 360))
-(junction (pt 584 344))
-(junction (pt 584 360))
+(connector
+	(pt 432 176)
+	(pt 384 176)
+)
+(connector
+	(pt 384 448)
+	(pt 384 544)
+)
+(connector
+	(pt 688 192)
+	(pt 688 160)
+	(bus)
+)
+(connector
+	(pt 744 160)
+	(pt 688 160)
+	(bus)
+)
+(connector
+	(pt 664 176)
+	(pt 664 144)
+	(bus)
+)
+(connector
+	(pt 744 144)
+	(pt 664 144)
+	(bus)
+)
+(connector
+	(pt 744 128)
+	(pt 288 128)
+)
+(connector
+	(pt 744 96)
+	(pt 384 96)
+)
+(connector
+	(pt 384 96)
+	(pt 384 176)
+)
+(connector
+	(pt 432 192)
+	(pt 408 192)
+)
+(connector
+	(pt 408 112)
+	(pt 408 192)
+)
+(connector
+	(pt 288 112)
+	(pt 408 112)
+)
+(connector
+	(pt 408 112)
+	(pt 744 112)
+)
+(connector
+	(pt 592 336)
+	(pt 632 336)
+)
+(connector
+	(pt 440 352)
+	(pt 384 352)
+)
+(connector
+	(pt 384 176)
+	(pt 384 352)
+)
+(connector
+	(pt 384 352)
+	(pt 384 448)
+)
+(connector
+	(pt 440 336)
+	(pt 408 336)
+)
+(connector
+	(pt 408 336)
+	(pt 408 432)
+)
+(connector
+	(pt 408 432)
+	(pt 408 528)
+)
+(connector
+	(pt 640 192)
+	(pt 688 192)
+	(bus)
+)
+(connector
+	(pt 640 176)
+	(pt 664 176)
+	(bus)
+)
+(connector
+	(pt 944 96)
+	(pt 984 96)
+)
+(junction (pt 408 432))
+(junction (pt 384 448))
+(junction (pt 384 176))
+(junction (pt 408 112))
+(junction (pt 384 352))

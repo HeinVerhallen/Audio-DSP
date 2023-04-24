@@ -21,17 +21,22 @@ Architecture arch of initializer is
     type machine is (ready, dat1, dat2, disable, stop, idle);
     signal state : machine;
 
-    constant reg_LIN            : std_logic_vector(15 downto 0) := x"011f";
-    constant reg_RIN            : std_logic_vector(15 downto 0) := x"031f";
+    constant reg_LIN            : std_logic_vector(15 downto 0) := x"011f"; --x"011f"; -- +12dB
+    constant reg_RIN            : std_logic_vector(15 downto 0) := x"011f"; --x"031f"; -- +12dB
+    constant reg_LOUT           : std_logic_vector(15 downto 0) := x"0465"; --x"0465"; -- -20dB
+    constant reg_ROUT           : std_logic_vector(15 downto 0) := x"0665"; --x"0665"; -- -20dB
     constant reg_ADC_path       : std_logic_vector(15 downto 0) := x"0850";
     constant reg_DAC_path       : std_logic_vector(15 downto 0) := x"0a06";
-    constant reg_power          : std_logic_vector(15 downto 0) := x"0c00";
-    constant reg_data_format    : std_logic_vector(15 downto 0) := x"0e4a";
+    constant reg_data_format    : std_logic_vector(15 downto 0) := x"0e4a"; --x"0e4a";
     constant reg_sample_ctrl    : std_logic_vector(15 downto 0) := x"1000";
     constant reg_activate       : std_logic_vector(15 downto 0) := x"1201";
+    constant reg_power_init     : std_logic_vector(15 downto 0) := x"0c10";
+    constant reg_power_on       : std_logic_vector(15 downto 0) := x"0c00";
 
-    type t_registerData is array (0 to 7) of std_logic_vector(15 downto 0);
-    constant regData : t_registerData := (reg_LIN, reg_RIN, reg_ADC_path, reg_DAC_path, reg_power, reg_data_format, reg_sample_ctrl, reg_activate);
+    
+    constant regLength : integer := 10;
+    type t_registerData is array (0 to regLength) of std_logic_vector(15 downto 0);
+    constant regData : t_registerData := (reg_power_init, reg_LIN, reg_RIN, reg_LOUT, reg_ROUT, reg_ADC_path, reg_DAC_path, reg_data_format, reg_sample_ctrl, reg_activate, reg_power_on);
 Begin
     process(clk, nrst)
         variable index : integer := 0;
@@ -72,7 +77,7 @@ Begin
                         state <= ready;
 
                         index := index + 1;
-                        if index > 7 then
+                        if index > regLength then
                             state <= idle;
                         end if;
                     end if;

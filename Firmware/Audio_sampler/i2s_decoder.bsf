@@ -21,7 +21,7 @@ agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 200 128)
+	(rect 16 16 224 128)
 	(text "i2s_decoder" (rect 5 0 53 12)(font "Arial" ))
 	(text "inst" (rect 8 96 20 108)(font "Arial" ))
 	(port
@@ -53,20 +53,26 @@ agreement for further details.
 		(line (pt 0 80)(pt 16 80)(line_width 1))
 	)
 	(port
-		(pt 184 32)
+		(pt 208 32)
 		(output)
-		(text "data_left[23..0]" (rect 0 0 59 12)(font "Arial" ))
-		(text "data_left[23..0]" (rect 104 27 163 39)(font "Arial" ))
-		(line (pt 184 32)(pt 168 32)(line_width 3))
+		(text "data_left[d_width-1..0]" (rect 0 0 84 12)(font "Arial" ))
+		(text "data_left[d_width-1..0]" (rect 103 27 187 39)(font "Arial" ))
+		(line (pt 208 32)(pt 192 32)(line_width 3))
 	)
 	(port
-		(pt 184 48)
+		(pt 208 48)
 		(output)
-		(text "data_right[23..0]" (rect 0 0 63 12)(font "Arial" ))
-		(text "data_right[23..0]" (rect 100 43 163 55)(font "Arial" ))
-		(line (pt 184 48)(pt 168 48)(line_width 3))
+		(text "data_right[d_width-1..0]" (rect 0 0 89 12)(font "Arial" ))
+		(text "data_right[d_width-1..0]" (rect 98 43 187 55)(font "Arial" ))
+		(line (pt 208 48)(pt 192 48)(line_width 3))
 	)
+	(parameter
+		"d_width"
+		"24"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 168 96)(line_width 1))
+		(rectangle (rect 16 16 192 96)(line_width 1))
 	)
+	(annotation_block (parameter)(rect 224 -64 324 16))
 )

@@ -66,7 +66,6 @@ set_location_assignment PIN_J12 -to SCL
 set_location_assignment PIN_K12 -to SDA
 set_location_assignment PIN_V16 -to ack_err
 set_global_assignment -name VHDL_FILE clk_div.vhd
-set_global_assignment -name VHDL_FILE i2s_encoder_v2.vhd
 set_global_assignment -name VHDL_FILE i2s_decoder.vhd
 set_global_assignment -name BDF_FILE Audio_sampler.bdf
 set_global_assignment -name VHDL_FILE i2c_master.vhd

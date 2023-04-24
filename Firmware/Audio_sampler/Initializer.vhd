@@ -27,16 +27,17 @@ Architecture arch of initializer is
     constant reg_ROUT           : std_logic_vector(15 downto 0) := x"0665"; --x"0665"; -- -20dB
     constant reg_ADC_path       : std_logic_vector(15 downto 0) := x"0850";
     constant reg_DAC_path       : std_logic_vector(15 downto 0) := x"0a06";
-    constant reg_data_format    : std_logic_vector(15 downto 0) := x"0e0a"; --x"0e4a";
+    constant reg_data_format    : std_logic_vector(15 downto 0) := x"0e4e"; --x"0e4a";
     constant reg_sample_ctrl    : std_logic_vector(15 downto 0) := x"1000";
     constant reg_activate       : std_logic_vector(15 downto 0) := x"1201";
     constant reg_power_init     : std_logic_vector(15 downto 0) := x"0c10";
     constant reg_power_on       : std_logic_vector(15 downto 0) := x"0c00";
-
+    constant reg_reset_true     : std_logic_vector(15 downto 0) := x"1e00";
+    constant reg_reset_false    : std_logic_vector(15 downto 0) := x"1fff";
     
-    constant regLength : integer := 10;
+    constant regLength : integer := 12;
     type t_registerData is array (0 to regLength) of std_logic_vector(15 downto 0);
-    constant regData : t_registerData := (reg_power_init, reg_LIN, reg_RIN, reg_LOUT, reg_ROUT, reg_ADC_path, reg_DAC_path, reg_data_format, reg_sample_ctrl, reg_activate, reg_power_on);
+    constant regData : t_registerData := (reg_power_init, reg_reset_true, reg_reset_false, reg_LIN, reg_RIN, reg_LOUT, reg_ROUT, reg_ADC_path, reg_DAC_path, reg_data_format, reg_sample_ctrl, reg_activate, reg_power_on);
 Begin
     process(clk, nrst)
         variable index : integer := 0;

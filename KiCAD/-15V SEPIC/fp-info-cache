@@ -1,4 +1,4 @@
-21675548771107124
+21677231115253747
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -90202,6 +90202,13 @@ BUCK_MAX17634C_xxV
 3
 3
 footprints
+DO-221AC
+SOD-123
+SOD-123
+0
+2
+2
+footprints
 LIN_REG_±xxV
 
 
@@ -90220,7 +90227,7 @@ TSSOP-20-1EP_4.4x6.5mm_P0.65mm_EP2.75x3.85mm
 TSSOP, 20 Pin (https://pdfserv.maximintegrated.com/package_dwgs/21-100132.PDF), generated with kicad-footprint-generator ipc_gullwing_generator.py
 TSSOP SO
 0
-25
+37
 21
 footprints
 VSSOP-8_3.0x3.0mm_P0.65_TP1.8x1.5

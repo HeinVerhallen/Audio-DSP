@@ -4,34 +4,34 @@ USE ieee.std_logic_unsigned.all;
 
 ENTITY initializer IS
   PORT(
-    clk       : IN     STD_LOGIC;                    --system clock
-    nrst      : IN     STD_LOGIC;                    --active low reset
-    busy      : IN     STD_LOGIC;                    --indicates transaction in progress
-    ena       : OUT    STD_LOGIC;                    --latch in command
-    addr      : OUT    STD_LOGIC_VECTOR(6 DOWNTO 0); --address of target slave
-    rw        : OUT    STD_LOGIC;                    --'0' is write, '1' is read
-    data      : OUT    STD_LOGIC_VECTOR(7 DOWNTO 0) --data to write to slave
+    clk       : IN     STD_LOGIC;                       --system clock
+    nrst      : IN     STD_LOGIC;                       --active low reset
+    busy      : IN     STD_LOGIC;                       --indicates transaction in progress
+    ena       : OUT    STD_LOGIC;                       --latch in command
+    addr      : OUT    STD_LOGIC_VECTOR(6 DOWNTO 0);    --address of target slave
+    rw        : OUT    STD_LOGIC;                       --'0' is write, '1' is read
+    data      : OUT    STD_LOGIC_VECTOR(7 DOWNTO 0)     --data to write to slave
   );
 END initializer;
 
 
 Architecture arch of initializer is
     constant address : std_logic_vector(6 downto 0) := "0011010";
-    --TYPE machine IS(ready, start, command, slv_ack1, wr, slv_ack2, mstr_ack, stop); --needed states
+    
     type machine is (ready, dat1, dat2, disable, stop, idle);
     signal state : machine;
 
-    constant reg_LIN            : std_logic_vector(15 downto 0) := x"011f"; --x"011f"; -- +12dB
-    constant reg_RIN            : std_logic_vector(15 downto 0) := x"011f"; --x"031f"; -- +12dB
-    constant reg_LOUT           : std_logic_vector(15 downto 0) := x"0465"; --x"0465"; -- -20dB
-    constant reg_ROUT           : std_logic_vector(15 downto 0) := x"0665"; --x"0665"; -- -20dB
-    constant reg_ADC_path       : std_logic_vector(15 downto 0) := x"0850";
-    constant reg_DAC_path       : std_logic_vector(15 downto 0) := x"0a06";
-    constant reg_data_format    : std_logic_vector(15 downto 0) := x"0e4a"; --x"0e4a";
-    constant reg_sample_ctrl    : std_logic_vector(15 downto 0) := x"101c"; --x"1000";
-    constant reg_activate       : std_logic_vector(15 downto 0) := x"1201";
-    constant reg_power_init     : std_logic_vector(15 downto 0) := x"0c10";
-    constant reg_power_on       : std_logic_vector(15 downto 0) := x"0c00";
+    constant reg_LIN            : std_logic_vector(15 downto 0) := x"011f"; -- +12dB input gain, disable mute, enable simultaneous load
+    constant reg_RIN            : std_logic_vector(15 downto 0) := x"011f"; -- +12dB input gain, disable mute, enable simultaneous load
+    constant reg_LOUT           : std_logic_vector(15 downto 0) := x"0465"; -- -20dB output gain, disable zero cross detection and simultaneous load
+    constant reg_ROUT           : std_logic_vector(15 downto 0) := x"0665"; -- -20dB output gain, disable zero cross detection and simultaneous load
+    constant reg_ADC_path       : std_logic_vector(15 downto 0) := x"0850"; --disable boost, mute, bypass and sidetone, line input select to ADC, select DAC, -9dB side tone attenuation
+    constant reg_DAC_path       : std_logic_vector(15 downto 0) := x"0a06"; --disable boost, mute, bypass and sidetone, line input select to ADC, select DAC, -9dB side tone attenuation
+    constant reg_data_format    : std_logic_vector(15 downto 0) := x"0e4a"; --i2s-format, 24-bit, enable master mode
+    constant reg_sample_ctrl    : std_logic_vector(15 downto 0) := x"101c"; --96kHz
+    constant reg_activate       : std_logic_vector(15 downto 0) := x"1201"; --activate sampling
+    constant reg_power_init     : std_logic_vector(15 downto 0) := x"0c10"; --all power on except OUTPD
+    constant reg_power_on       : std_logic_vector(15 downto 0) := x"0c00"; --all power on
     
     constant regLength : integer := 10;
     type t_registerData is array (0 to regLength) of std_logic_vector(15 downto 0);

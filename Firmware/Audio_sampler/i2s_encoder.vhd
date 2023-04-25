@@ -16,46 +16,53 @@ entity i2s_encoder is
 end i2s_encoder;
 
 architecture Behavioral of i2s_encoder is
+    signal l_data_int : std_logic_vector(d_width-1 downto 0);   --internal left audio data
+    signal r_data_int : std_logic_vector(d_width-1 downto 0);   --internal right audio data
+
     type t_machine is (ready, wr_l, wr_r);
-    signal machine : t_machine := ready;
+    signal machine : t_machine := ready;    --state machine
 
-    signal l_data_int : std_logic_vector(d_width-1 downto 0);
-    signal r_data_int : std_logic_vector(d_width-1 downto 0);
-
-    signal bit_cnt : integer := 0;
+    signal bit_cnt : integer := 0;          --bit counter
 
 begin
     process(sck, nrst)
     begin
         if nrst = '0' then 
+            --Reset state machine and bit counter
             machine <= ready;
             bit_cnt <= 0;
         elsif falling_edge(sck) then
             case machine is
+                --Write left audio
                 when wr_l =>
+                    --Have all bits been written
                     if bit_cnt < d_width then
-                        bit_cnt     <= bit_cnt + 1;
-                        l_data_int  <= l_data_int(r_data_int'high - 1 downto 0) & '0'; 
-                        sd          <= l_data_int(l_data_int'high);
+                        bit_cnt     <= bit_cnt + 1;                                     --increment bit counter
+                        l_data_int  <= l_data_int(r_data_int'high - 1 downto 0) & '0';  --shift internal left audio data to the left
+                        sd          <= l_data_int(l_data_int'high);                     --output MSB of internal left audio data to serial data output
                     end if;
                     r_data_int  <= data_right;
+                --Write right audio
                 when wr_r =>
+                    --Have all bits been written
                     if bit_cnt < d_width then
-                        bit_cnt     <= bit_cnt + 1;
-                        r_data_int  <= r_data_int(r_data_int'high - 1 downto 0) & '0';
-                        sd          <= r_data_int(r_data_int'high);
+                        bit_cnt     <= bit_cnt + 1;                                     --increment bit counter
+                        r_data_int  <= r_data_int(r_data_int'high - 1 downto 0) & '0';  --shift internal right audio data to the left
+                        sd          <= r_data_int(r_data_int'high);                     --output MSB of internal right audio data to serial data output
                     end if;
                     l_data_int  <= data_left;
                 when others =>
                     null;
             end case;
             
+            --Left audio data is selected and not already writing left audio data
             if ws = '0' and machine /= wr_l then
-                bit_cnt     <= 0;
-                machine     <= wr_l;    -- write left channel
+                bit_cnt     <= 0;       --reset bit counter
+                machine     <= wr_l;    --set state to write left channel
+            --Right audio data is selected and not already writing right audio data
             elsif ws = '1' and machine /= wr_r then
-                bit_cnt     <= 0;
-                machine     <= wr_r;    -- write right channel
+                bit_cnt     <= 0;       --reset bit counter
+                machine     <= wr_r;    --set state to write right channel
             end if;
         end if;
     end process;

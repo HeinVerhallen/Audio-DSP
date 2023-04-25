@@ -4,14 +4,16 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity i2s_decoder is
     GENERIC(
-        d_width     : integer := 24);                               --data width
+        d_width     : integer := 24);                           --data width
     Port ( 
-        nrst        : in  std_logic;                                --active-low reset
-        sck         : in std_logic;                                 --serial clock
-        ws          : in std_logic;                                 --left right audio word select
-        sd          : in std_logic;                                 --serial data
-        data_left   : out  std_logic_vector(d_width-1 downto 0);    --left audio data
-        data_right  : out  std_logic_vector(d_width-1 downto 0)     --right audio data
+        nrst        : in  std_logic;                            --active-low reset
+        sck         : in  std_logic;                            --serial clock
+        ws          : in  std_logic;                            --left right audio word select
+        sd          : in  std_logic;                            --serial data
+        data_left   : out std_logic_vector(d_width-1 downto 0); --left audio data
+        data_right  : out std_logic_vector(d_width-1 downto 0)  --right audio data
+        --valid_left  : out std_logic;                            --left audio valid check
+        --valid_right : out std_logic                             --right audio valid check
         );                    
 end i2s_decoder;
 
@@ -41,6 +43,10 @@ begin
                         l_data_int  <= l_data_int(l_data_int'high - 1 downto 0) & sd;   --shift serial data in internal left audio data
                         data_right  <= r_data_int;                                      --output right audio data
                     end if;
+
+                    ----Write valid checks
+                    --valid_left  <= '0';
+                    --valid_right <= '1';
                 --Read right audio
                 when rd_r =>
                     --Have all bits been read
@@ -49,6 +55,10 @@ begin
                         r_data_int  <= r_data_int(r_data_int'high - 1 downto 0) & sd;   --shift serial data in internal right audio data
                         data_left   <= l_data_int;                                      --output left audio data
                     end if;
+
+                    ----Write valid checks
+                    --valid_left  <= '1';
+                    --valid_right <= '0';
                 when others =>
                     null;
             end case;

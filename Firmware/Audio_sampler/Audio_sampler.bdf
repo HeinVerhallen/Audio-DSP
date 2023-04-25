@@ -72,7 +72,7 @@ agreement for further details.
 	(input)
 	(rect 120 104 288 120)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "BCLK" (rect 5 0 34 12)(font "Arial" ))
+	(text "BCLK" (rect 5 0 33 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -88,7 +88,7 @@ agreement for further details.
 	(input)
 	(rect 120 120 288 136)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "DAC_LRCK" (rect 5 0 60 17)(font "Intel Clear" ))
+	(text "DAC_LRCK" (rect 5 0 59 17)(font "Intel Clear" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -104,7 +104,7 @@ agreement for further details.
 	(input)
 	(rect 120 200 288 216)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "ADC_LRCK" (rect 5 0 60 17)(font "Intel Clear" ))
+	(text "ADC_LRCK" (rect 5 0 59 17)(font "Intel Clear" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -374,28 +374,28 @@ agreement for further details.
 		(pt 160 32)
 		(output)
 		(text "ena" (rect 0 0 17 12)(font "Arial" ))
-		(text "ena" (rect 125 27 139 39)(font "Arial" ))
+		(text "ena" (rect 125 27 142 39)(font "Arial" ))
 		(line (pt 160 32)(pt 144 32))
 	)
 	(port
 		(pt 160 48)
 		(output)
 		(text "addr[6..0]" (rect 0 0 47 12)(font "Arial" ))
-		(text "addr[6..0]" (rect 100 43 139 55)(font "Arial" ))
+		(text "addr[6..0]" (rect 100 43 147 55)(font "Arial" ))
 		(line (pt 160 48)(pt 144 48)(line_width 3))
 	)
 	(port
 		(pt 160 64)
 		(output)
 		(text "rw" (rect 0 0 10 12)(font "Arial" ))
-		(text "rw" (rect 131 59 139 71)(font "Arial" ))
+		(text "rw" (rect 131 59 141 71)(font "Arial" ))
 		(line (pt 160 64)(pt 144 64))
 	)
 	(port
 		(pt 160 80)
 		(output)
 		(text "data[7..0]" (rect 0 0 47 12)(font "Arial" ))
-		(text "data[7..0]" (rect 100 75 139 87)(font "Arial" ))
+		(text "data[7..0]" (rect 100 75 147 87)(font "Arial" ))
 		(line (pt 160 80)(pt 144 80)(line_width 3))
 	)
 	(drawing
@@ -450,7 +450,7 @@ agreement for further details.
 	)
 	(parameter
 		"d_width"
-		"32"
+		"24"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
@@ -506,7 +506,7 @@ agreement for further details.
 	)
 	(parameter
 		"d_width"
-		"32"
+		"24"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing

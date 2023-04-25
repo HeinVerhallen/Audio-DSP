@@ -35,27 +35,27 @@ begin
                 when wr_l =>
                     if bit_cnt < d_width then
                         bit_cnt     <= bit_cnt + 1;
+                        l_data_int  <= l_data_int(r_data_int'high - 1 downto 0) & '0'; 
                         sd          <= l_data_int(l_data_int'high);
-                        l_data_int  <= l_data_int(r_data_int'high - 1 downto 0) & '0';
                     end if;
+                    r_data_int  <= data_right;
                 when wr_r =>
                     if bit_cnt < d_width then
                         bit_cnt     <= bit_cnt + 1;
-                        sd          <= r_data_int(r_data_int'high);
                         r_data_int  <= r_data_int(r_data_int'high - 1 downto 0) & '0';
+                        sd          <= r_data_int(r_data_int'high);
                     end if;
+                    l_data_int  <= data_left;
                 when others =>
                     null;
             end case;
             
             if ws = '0' and machine /= wr_l then
+                bit_cnt     <= 0;
                 machine     <= wr_l;    -- write left channel
-                r_data_int  <= data_right;
-                bit_cnt     <= 0;
             elsif ws = '1' and machine /= wr_r then
-                machine     <= wr_r;    -- write right channel
-                l_data_int  <= data_left;
                 bit_cnt     <= 0;
+                machine     <= wr_r;    -- write right channel
             end if;
         end if;
     end process;

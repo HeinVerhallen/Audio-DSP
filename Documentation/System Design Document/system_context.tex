@@ -4,7 +4,7 @@
     \label{fig:sys-context-top}
 \end{figure}
 
-After the system requirement document has been aproved, the system context diagram could be made (see figure \ref*{fig:sys-context-top}).
+After the system requirement document has been aproved, the system context diagram could be made (see figure \ref{fig:sys-context-top}).
 The block called "Audio DSP" is the heart of the system.
 This block represents the controller and thus the FPGA core.
 This system context design diagram fulfills all the requirements, including the should and could haves.
@@ -29,7 +29,7 @@ The user is also able to rearrange the position of effects in the effects loop p
     \label{fig:sys-context-audio-dsp}
 \end{figure}
 
-The Audio-DSP block is made in the digital domain of the system (see figure \ref*{fig:sys-context-audio-dsp}). 
+The Audio-DSP block is made in the digital domain of the system (see figure \ref{fig:sys-context-audio-dsp}). 
 Therefore this block will be made in the FPGA. Each analogue input signal needs to be sampled in order for the system to be able to process the data. 
 Thus each analogue input signal has a sampler block. The USB input signal has an USB decoder block as a sampler. 
 

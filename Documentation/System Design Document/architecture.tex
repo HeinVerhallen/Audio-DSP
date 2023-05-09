@@ -1,7 +1,7 @@
 The lower level design of the system are explained in the architecture design of the system. 
 
 \section{Audio-DSP}
-\begin{figure}[h]
+\begin{figure}[ht]
     \includegraphics[width=\linewidth]{Audio-DSP architecture.png}\\    
     \caption{Top-level architecture of audio-DSP}
     \label{fig:arch-top}
@@ -23,7 +23,7 @@ To select the RCA or 6.35mm jack input a 2-bit select line is used.
 
 In order for the signal processor to modify the signal with various digital effects, memory is needed.
 This memory is stored inside the signal processor block itself. 
-To acces and modify the memory some kind of communication protocol had to be chosen in order for the controller to configure the effect parameters.
+To access and modify the memory some kind of communication protocol had to be chosen in order for the controller to configure the effect parameters.
 For this a register based memory has been chosen.
 
 Looking at the system requirements it is known that the user is able to adjust the position of each effect in the effects loop.
@@ -52,7 +52,7 @@ This means the register size will be 25 bits.
 %     \label{fig:reg-position}
 % \end{wrapfigure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.4\textwidth]{Position register design}
     \caption{Effect loop position 0 to 4 register}
@@ -88,7 +88,7 @@ With a clock of 50MHz the sample must be modified and loaded into the output wit
 \textbf{!!!This could be different according to the new design I just made - 28/04/2023 Youri !!! }\\
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \includegraphics[width=\linewidth]{Signal processor architecture}
     \caption{Signal processor architecture}
     \label{fig:arch-signal-processor}
@@ -96,7 +96,7 @@ With a clock of 50MHz the sample must be modified and loaded into the output wit
 
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \includegraphics[width=\linewidth]{Effect processor architecture}
     \caption{Effect processor architecture}
     \label{fig:arch-effect-processor}

@@ -40,19 +40,18 @@ It is undesired that every signal processor memory will be read or written const
 
 
 \subsection{Signal processor}
-The signal processor has to load a new sample into the effect loop and the previous modified sample to the output on the sample frequency. The sample frequency of the Audio-DSP is 192kHz. This means that the signal processor has $\frac{1}{192 \cdot 10^3} \approx 5 \mu s$ to process the sample. With a clock of 50MHz the sample must be modified and loaded into the output within $\frac{50 \cdot 10^6}{192 \cdot 10^3}=260$ clock ticks.
-% \textbf{!!!This could be different according to the new design I just made - 28/04/2023 Youri !!! }\\
-
-When a sample has been loaded into the signal processor, it is fed into the effect processor manager (see \ref{fig:arch-signal-processor}). The effect processor manager houses multiple effects processor in series. The sample will go through these effect processors. Each effect processor can be configured to be a certain effect (see \ref{fig:arch-effect-processor}). Because the system has at least twenty effects, the amount of bits the selector needs is 5 bits.
-
-Each effect modifies the signal by applying a transfer function to the sample. The variables in that transfer function are configured by the user via the user interface. Therefore the effect processors needs to get the variables from the controller block, which gets the variables from the register bank. After the sample has gone through all the 
-
 \begin{figure}[ht]
     \includegraphics[width=\linewidth]{Signal processor architecture}
     \caption{Signal processor architecture}
     \label{fig:arch-signal-processor}
 \end{figure}
 
+The signal processor has to load a new sample into the effect loop and the previous modified sample to the output on the sample frequency. The sample frequency of the Audio-DSP is 192kHz. This means that the signal processor has $\frac{1}{192 \cdot 10^3} \approx 5 \mu s$ to process the sample. With a clock of 50MHz the sample must be modified and loaded into the output within $\frac{50 \cdot 10^6}{192 \cdot 10^3}=260$ clock ticks.
+% \textbf{!!!This could be different according to the new design I just made - 28/04/2023 Youri !!! }\\
+
+When a sample has been loaded into the signal processor, it is fed into the effect processor manager (see \ref{fig:arch-signal-processor}). The effect processor manager houses multiple effects processor in series. The sample will go through these effect processors. Each effect processor can be configured to be a certain effect (see \ref{fig:arch-effect-processor}). Because the system has at least twenty effects, the amount of bits the selector needs is 5 bits.
+
+Each effect modifies the signal by applying a transfer function to the sample. The variables in that transfer function are configured by the user via the user interface. Therefore the effect processors needs to get the variables from the controller block, which gets the variables from the register bank. After the sample has gone through all the effect processors the modified sample waits before it is shifted out of the signal processor. 
 
 
 \begin{figure}[ht]

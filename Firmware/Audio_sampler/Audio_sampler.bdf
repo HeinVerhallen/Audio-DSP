@@ -72,7 +72,7 @@ agreement for further details.
 	(input)
 	(rect 120 104 288 120)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "BCLK" (rect 5 0 34 12)(font "Arial" ))
+	(text "BCLK" (rect 5 0 33 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -88,7 +88,7 @@ agreement for further details.
 	(input)
 	(rect 120 120 288 136)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "DAC_LRCK" (rect 5 0 60 17)(font "Intel Clear" ))
+	(text "DAC_LRCK" (rect 5 0 59 17)(font "Intel Clear" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -104,7 +104,7 @@ agreement for further details.
 	(input)
 	(rect 120 200 288 216)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "ADC_LRCK" (rect 5 0 60 17)(font "Intel Clear" ))
+	(text "ADC_LRCK" (rect 5 0 59 17)(font "Intel Clear" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -374,89 +374,33 @@ agreement for further details.
 		(pt 160 32)
 		(output)
 		(text "ena" (rect 0 0 17 12)(font "Arial" ))
-		(text "ena" (rect 125 27 139 39)(font "Arial" ))
+		(text "ena" (rect 125 27 142 39)(font "Arial" ))
 		(line (pt 160 32)(pt 144 32))
 	)
 	(port
 		(pt 160 48)
 		(output)
 		(text "addr[6..0]" (rect 0 0 47 12)(font "Arial" ))
-		(text "addr[6..0]" (rect 100 43 139 55)(font "Arial" ))
+		(text "addr[6..0]" (rect 100 43 147 55)(font "Arial" ))
 		(line (pt 160 48)(pt 144 48)(line_width 3))
 	)
 	(port
 		(pt 160 64)
 		(output)
 		(text "rw" (rect 0 0 10 12)(font "Arial" ))
-		(text "rw" (rect 131 59 139 71)(font "Arial" ))
+		(text "rw" (rect 131 59 141 71)(font "Arial" ))
 		(line (pt 160 64)(pt 144 64))
 	)
 	(port
 		(pt 160 80)
 		(output)
 		(text "data[7..0]" (rect 0 0 47 12)(font "Arial" ))
-		(text "data[7..0]" (rect 100 75 139 87)(font "Arial" ))
+		(text "data[7..0]" (rect 100 75 147 87)(font "Arial" ))
 		(line (pt 160 80)(pt 144 80)(line_width 3))
 	)
 	(drawing
 		(rectangle (rect 16 16 144 96))
 	)
-)
-(symbol
-	(rect 432 144 640 256)
-	(text "i2s_decoder" (rect 5 0 64 12)(font "Arial" ))
-	(text "inst9" (rect 8 96 31 108)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "nrst" (rect 0 0 18 12)(font "Arial" ))
-		(text "nrst" (rect 21 27 39 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "sck" (rect 0 0 17 12)(font "Arial" ))
-		(text "sck" (rect 21 43 38 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "ws" (rect 0 0 12 12)(font "Arial" ))
-		(text "ws" (rect 21 59 33 71)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64))
-	)
-	(port
-		(pt 0 80)
-		(input)
-		(text "sd" (rect 0 0 11 12)(font "Arial" ))
-		(text "sd" (rect 21 75 32 87)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80))
-	)
-	(port
-		(pt 208 32)
-		(output)
-		(text "data_left[d_width-1..0]" (rect 0 0 109 12)(font "Arial" ))
-		(text "data_left[d_width-1..0]" (rect 95 27 204 39)(font "Arial" ))
-		(line (pt 208 32)(pt 192 32)(line_width 3))
-	)
-	(port
-		(pt 208 48)
-		(output)
-		(text "data_right[d_width-1..0]" (rect 0 0 114 12)(font "Arial" ))
-		(text "data_right[d_width-1..0]" (rect 91 43 205 55)(font "Arial" ))
-		(line (pt 208 48)(pt 192 48)(line_width 3))
-	)
-	(parameter
-		"d_width"
-		"32"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 192 96))
-	)
-	(annotation_block (parameter)(rect 432 32 601 70))
 )
 (symbol
 	(rect 744 64 944 208)
@@ -501,18 +445,74 @@ agreement for further details.
 		(pt 200 32)
 		(output)
 		(text "sd" (rect 0 0 11 12)(font "Arial" ))
-		(text "sd" (rect 170 27 181 39)(font "Arial" ))
+		(text "sd" (rect 170 27 179 39)(font "Arial" ))
 		(line (pt 200 32)(pt 184 32))
 	)
 	(parameter
 		"d_width"
-		"32"
+		"24"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
 		(rectangle (rect 16 16 184 128))
 	)
 	(annotation_block (parameter)(rect 744 16 913 54))
+)
+(symbol
+	(rect 432 144 640 256)
+	(text "i2s_decoder" (rect 5 0 64 12)(font "Arial" ))
+	(text "inst9" (rect 8 96 31 108)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "nrst" (rect 0 0 18 12)(font "Arial" ))
+		(text "nrst" (rect 21 27 39 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "sck" (rect 0 0 17 12)(font "Arial" ))
+		(text "sck" (rect 21 43 38 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "ws" (rect 0 0 12 12)(font "Arial" ))
+		(text "ws" (rect 21 59 33 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "sd" (rect 0 0 11 12)(font "Arial" ))
+		(text "sd" (rect 21 75 32 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 208 32)
+		(output)
+		(text "data_left[d_width-1..0]" (rect 0 0 109 12)(font "Arial" ))
+		(text "data_left[d_width-1..0]" (rect 95 27 187 39)(font "Arial" ))
+		(line (pt 208 32)(pt 192 32)(line_width 3))
+	)
+	(port
+		(pt 208 48)
+		(output)
+		(text "data_right[d_width-1..0]" (rect 0 0 114 12)(font "Arial" ))
+		(text "data_right[d_width-1..0]" (rect 91 43 187 55)(font "Arial" ))
+		(line (pt 208 48)(pt 192 48)(line_width 3))
+	)
+	(parameter
+		"d_width"
+		"24"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 192 96))
+	)
+	(annotation_block (parameter)(rect 432 32 601 70))
 )
 (connector
 	(pt 664 432)

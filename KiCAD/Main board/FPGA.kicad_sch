@@ -454,7 +454,7 @@
     (effects (font (size 1.27 1.27) bold) (justify left bottom))
     (uuid 58b63160-f99b-4f54-bc48-359ac8bc944b)
   )
-  (text "Check symbol and footprint" (at 76.2 35.56 0)
+  (text "Check symbol and footprint with someone else" (at 76.2 35.56 0)
     (effects (font (size 1.27 1.27) (color 255 0 0 1)) (justify left bottom))
     (uuid b09e8494-7135-4135-b751-2523384d38f5)
   )

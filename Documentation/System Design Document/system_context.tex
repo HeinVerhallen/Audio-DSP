@@ -9,6 +9,9 @@ After the system requirement document has been approved, the system context diag
 With a user interface the user is able to configure the effect parameters, equalizer settings and volume of each channel. The user is also able to rearrange the position of effects in the effects loop per channel.
 
 \section{Front-end}
+
+The front end block Is a physical representation of how the front end of the system will function (see figure 2.2). The user will be able to use four different type of connectors to connect to the audio DSP, these connections are: RCA, XLR, 6.35mm jack and USB. The user will be able to select on the user interface witch connector will be used. The analogue signal will than be filtered and modified to meet the specifications of the input of the ADC. Than the ADC will convert the signal to the digital domain where it can be used for signal processing. 
+
 \begin{figure}[ht]
     \includegraphics[width=\linewidth]{System context-front-end.png}
     \caption{System context diagram of front-end design}
@@ -29,6 +32,9 @@ After the sampler blocks each sampled signal goes to six channels with each a 5 
 After the signal has been modified by the signal processor block it will be fed out of the FPGA to the back-end of the system.
 
 \section{Back-end}
+
+The back end block is a physical representation of how the back end of the system will function (see figure 2.4). The user will be able to use three outputs for the signal. These connections are: RCA, XLR and 6.35mm jack. The user will be able to select the right output in the user interface. There will be six output channels. Four are only XLR and two will have to option to be either XLR, RCA or 6.35mm jack. After the FPGA has processed the signal it will be converted back to analogue using a DAC, then the signal will be filtered and buffered to meet the specifications of the selected connectors.
+
 \begin{figure}[ht]
     \includegraphics[width=\linewidth]{System context-back-end.png}
     \caption{System context diagram of back-end}

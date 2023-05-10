@@ -1488,7 +1488,7 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 8feceb33-0955-40ee-8c3d-8db39dcd9b96)
   )
-  (text "input buffer C for LM4562?\n" (at 246.38 59.69 0)
+  (text "input decoupling capacitor for LM4562\n" (at 240.03 60.96 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 9259c0ca-0de2-4004-9199-b54723d35acc)
   )
@@ -2246,11 +2246,11 @@
     (pin "1" (uuid d7e753fb-1708-4052-aa26-b9d4d1db94ea))
     (pin "2" (uuid e8ebe534-df74-42a0-9bf0-3e6bdac86ee0))
     (pin "3" (uuid 1f1409d6-2fd7-4c75-aa08-741cafc5410a))
-    (pin "5" (uuid b45ddcad-1d51-4301-aac9-b019a4e97eb9))
-    (pin "6" (uuid 7d32f12c-b6fc-4853-9325-69f9504499d2))
-    (pin "7" (uuid 836a0eb0-12d7-4d0e-8a42-978d10e0ddbd))
-    (pin "4" (uuid e6dd4c59-68b1-441b-930d-4cb62589e53a))
-    (pin "8" (uuid 00f8a25a-c23b-40be-9c13-ba51c14455a8))
+    (pin "5" (uuid b45ddcad-1d51-4301-aac9-b019a4e97eba))
+    (pin "6" (uuid 7d32f12c-b6fc-4853-9325-69f9504499d3))
+    (pin "7" (uuid 836a0eb0-12d7-4d0e-8a42-978d10e0ddbe))
+    (pin "4" (uuid e6dd4c59-68b1-441b-930d-4cb62589e53b))
+    (pin "8" (uuid 00f8a25a-c23b-40be-9c13-ba51c14455a9))
     (instances
       (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"

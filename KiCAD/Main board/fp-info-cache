@@ -1,4 +1,4 @@
-21581170842737303
+21582854565438825
 Audio-DSP
 BUCK_MAX17634C_xxV
 
@@ -28,12 +28,19 @@ LIN_REG_±xxV
 6
 6
 Audio-DSP
+NetTie-2_SMD_Pad0.3mm
+
+
+0
+2
+2
+Audio-DSP
 SEPIC_-15V_LT3579
 
 
 0
-0
-0
+4
+4
 Audio-DSP
 TQFN-20-1EP_4x4mm_P0.5mm_EP2.9x2.9mm_ThermalVias_(JLCPCB_Compatible)
 TQFN, 20 Pin (https://pdfserv.maximintegrated.com/package_dwgs/21-100172.PDF), generated with kicad-footprint-generator ipc_noLead_generator.py

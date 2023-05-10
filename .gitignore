@@ -21,6 +21,7 @@
 *.fft
 stab.txt
 !Documentation/Code of Conduct/*.pdf
+Documentation/**/*.pdf
 Firmware/**/*.qws
 Firmware/**/db
 Firmware/**/incremental_db

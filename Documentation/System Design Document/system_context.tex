@@ -15,7 +15,7 @@ With a user interface the user is able to configure the effect parameters, equal
     \label{fig:system-context-front-end}
 \end{figure}
 
-The front end block Is a physical representation of how the front end of the system will function (see figure \ref{fig:system-context-front-end}). The user will be able to use four different type of connectors to connect to the audio DSP, these connections are: RCA, XLR, 6.35mm jack and USB. The user will be able to select on the user interface witch connector will be used. The analogue signal will than be filtered and modified to meet the specifications of the input of the ADC. Than the ADC will convert the signal to the digital domain where it can be used for signal processing. 
+The front end block Is a physical representation of how the front end of the system will function (see figure \ref{fig:system-context-front-end}). The user will be able to use four different type of connectors to connect to the audio-DSP, these connections are: RCA, XLR, 6.35mm jack and USB. The user will be able to select on the user interface witch connector will be used. The analogue signal will than be filtered and modified to meet the specifications of the input of the ADC. Than the ADC will convert the signal to the digital domain where it can be used for signal processing. 
 
 \section{Audio-DSP}
 \begin{figure}[ht]
@@ -40,9 +40,7 @@ After the signal has been modified by the signal processor block it will be fed 
 The back end block is a physical representation of how the back end of the system will function (see figure \ref{fig:system-context-back-end}). The user will be able to use three outputs for the signal. These connections are: RCA, XLR and 6.35mm jack. The user will be able to select the right output in the user interface. There will be six output channels. Four are only XLR and two will have to option to be either XLR, RCA or 6.35mm jack. After the FPGA has processed the signal it will be converted back to analogue using a DAC, then the signal will be filtered and buffered to meet the specifications of the selected connectors.
 
 \section{Interfacing}
-
-As described in the System Requirements Document (SRD), the audio DSP must incorporate multiple input and output connectors.
-
+As described in the System Requirements Document (SRD), the audio DSP must include multiple input and output connectors and a user friendly user interface (UI).
 \subsection{Inputs}
 The system includes the following inputs:
 \begin{itemize}
@@ -67,3 +65,19 @@ Output channels 1 and 2 provide the most flexibility as each channel features a 
 \end{itemize}
 
 \subsection{User interface}
+Through the UI, the following settings can be configured by the user:
+\begin{itemize}
+    \item Input selection between RCA or jack for CH1 and CH2.
+    \item Channel routing, determining which input is used by each output.
+    \item The number and types of filters used can be adjusted.
+    \item The filter coefficients can be set.
+    \item Outputs can be muted or unmuted.
+\end{itemize}
+
+\subsection{Overview}
+A black box representation of the audio-DSP is shown in figure \ref{fig:Black-box-rep}. The diagram illustrates the audio DSP's connections to the outside world, providing the highest-level overview of the system through the black box diagram.
+\begin{figure}[ht]
+    \includegraphics[width=\linewidth]{Black_box_representation.png}
+    \caption{Black box representation}
+    \label{fig:Black-box-rep}
+\end{figure}

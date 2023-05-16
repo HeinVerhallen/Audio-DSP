@@ -4,20 +4,20 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 2017  Intel Corporation. All rights reserved.
+Copyright (C) 2020  Intel Corporation. All rights reserved.
 Your use of Intel Corporation's design tools, logic functions 
-and other software and tools, and its AMPP partner logic 
+and other software and tools, and any partner logic 
 functions, and any output files from any of the foregoing 
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
 to the terms and conditions of the Intel Program License 
 Subscription Agreement, the Intel Quartus Prime License Agreement,
-the Intel MegaCore Function License Agreement, or other 
-applicable license agreement, including, without limitation, 
-that your use is for the sole purpose of programming logic 
-devices manufactured by Intel and sold by Intel or its 
-authorized distributors.  Please refer to the applicable 
-agreement for further details.
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
 */
 (header "graphic" (version "1.4"))
 (pin
@@ -35,6 +35,7 @@ agreement for further details.
 		(line (pt 117 12)(pt 121 8))
 	)
 	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
+	(annotation_block (location)(rect 40 440 104 464))
 )
 (pin
 	(input)
@@ -51,6 +52,7 @@ agreement for further details.
 		(line (pt 117 12)(pt 121 8))
 	)
 	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
+	(annotation_block (location)(rect 40 456 104 480))
 )
 (pin
 	(input)
@@ -67,6 +69,7 @@ agreement for further details.
 		(line (pt 109 12)(pt 113 8))
 	)
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+	(annotation_block (location)(rect 64 232 120 256))
 )
 (pin
 	(input)
@@ -83,6 +86,7 @@ agreement for further details.
 		(line (pt 109 12)(pt 113 8))
 	)
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+	(annotation_block (location)(rect 64 120 120 144))
 )
 (pin
 	(input)
@@ -99,6 +103,7 @@ agreement for further details.
 		(line (pt 109 12)(pt 113 8))
 	)
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+	(annotation_block (location)(rect 64 136 120 160))
 )
 (pin
 	(input)
@@ -115,10 +120,11 @@ agreement for further details.
 		(line (pt 109 12)(pt 113 8))
 	)
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+	(annotation_block (location)(rect 64 216 120 240))
 )
 (pin
 	(output)
-	(rect 928 520 1104 536)
+	(rect 1176 520 1352 536)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "ack_err" (rect 90 0 126 12)(font "Arial" ))
 	(pt 0 8)
@@ -131,10 +137,11 @@ agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
+	(annotation_block (location)(rect 1352 536 1416 560))
 )
 (pin
 	(output)
-	(rect 928 504 1104 520)
+	(rect 1176 504 1352 520)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "data_read[7..0]" (rect 90 0 164 12)(font "Arial" ))
 	(pt 0 8)
@@ -163,6 +170,7 @@ agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
+	(annotation_block (location)(rect 1160 104 1216 128))
 )
 (pin
 	(output)
@@ -179,12 +187,65 @@ agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
+	(annotation_block (location)(rect 808 344 864 368))
+)
+(pin
+	(output)
+	(rect 1008 712 1184 728)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "data_read6[7..0]" (rect 90 0 167 17)(font "Intel Clear" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
 )
 (pin
 	(bidir)
-	(rect 928 536 1104 552)
+	(rect 1176 536 1352 552)
 	(text "BIDIR" (rect 1 0 25 10)(font "Arial" (font_size 6)))
 	(text "SDA" (rect 90 0 113 12)(font "Arial" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 56 4)(pt 78 4))
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 56 12)(pt 78 12))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 78 12)(pt 82 8))
+		(line (pt 56 4)(pt 52 8))
+		(line (pt 52 8)(pt 56 12))
+	)
+	(text "VCC" (rect 4 7 24 17)(font "Arial" (font_size 6)))
+	(annotation_block (location)(rect 1352 552 1416 576))
+)
+(pin
+	(bidir)
+	(rect 1176 552 1352 568)
+	(text "BIDIR" (rect 1 0 25 10)(font "Arial" (font_size 6)))
+	(text "SCL" (rect 90 0 111 12)(font "Arial" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 56 4)(pt 78 4))
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 56 12)(pt 78 12))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 78 12)(pt 82 8))
+		(line (pt 56 4)(pt 52 8))
+		(line (pt 52 8)(pt 56 12))
+	)
+	(text "VCC" (rect 4 7 24 17)(font "Arial" (font_size 6)))
+	(annotation_block (location)(rect 1352 568 1416 592))
+)
+(pin
+	(bidir)
+	(rect 1008 680 1184 696)
+	(text "BIDIR" (rect 1 0 25 10)(font "Arial" (font_size 6)))
+	(text "SCL7" (rect 90 0 114 17)(font "Intel Clear" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 56 4)(pt 78 4))
@@ -199,9 +260,26 @@ agreement for further details.
 )
 (pin
 	(bidir)
-	(rect 928 552 1104 568)
+	(rect 1008 664 1184 680)
 	(text "BIDIR" (rect 1 0 25 10)(font "Arial" (font_size 6)))
-	(text "SCL" (rect 90 0 111 12)(font "Arial" ))
+	(text "SDA8" (rect 90 0 115 17)(font "Intel Clear" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 56 4)(pt 78 4))
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 56 12)(pt 78 12))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 78 12)(pt 82 8))
+		(line (pt 56 4)(pt 52 8))
+		(line (pt 52 8)(pt 56 12))
+	)
+	(text "VCC" (rect 4 7 24 17)(font "Arial" (font_size 6)))
+)
+(pin
+	(bidir)
+	(rect 1016 752 1192 768)
+	(text "BIDIR" (rect 1 0 25 10)(font "Arial" (font_size 6)))
+	(text "SDA9" (rect 90 0 115 17)(font "Intel Clear" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 56 4)(pt 78 4))
@@ -445,7 +523,7 @@ agreement for further details.
 		(pt 200 32)
 		(output)
 		(text "sd" (rect 0 0 11 12)(font "Arial" ))
-		(text "sd" (rect 170 27 179 39)(font "Arial" ))
+		(text "sd" (rect 170 27 181 39)(font "Arial" ))
 		(line (pt 200 32)(pt 184 32))
 	)
 	(parameter
@@ -494,14 +572,14 @@ agreement for further details.
 		(pt 208 32)
 		(output)
 		(text "data_left[d_width-1..0]" (rect 0 0 109 12)(font "Arial" ))
-		(text "data_left[d_width-1..0]" (rect 95 27 187 39)(font "Arial" ))
+		(text "data_left[d_width-1..0]" (rect 95 27 204 39)(font "Arial" ))
 		(line (pt 208 32)(pt 192 32)(line_width 3))
 	)
 	(port
 		(pt 208 48)
 		(output)
 		(text "data_right[d_width-1..0]" (rect 0 0 114 12)(font "Arial" ))
-		(text "data_right[d_width-1..0]" (rect 91 43 187 55)(font "Arial" ))
+		(text "data_right[d_width-1..0]" (rect 91 43 205 55)(font "Arial" ))
 		(line (pt 208 48)(pt 192 48)(line_width 3))
 	)
 	(parameter
@@ -513,6 +591,84 @@ agreement for further details.
 		(rectangle (rect 16 16 192 96))
 	)
 	(annotation_block (parameter)(rect 432 32 601 70))
+)
+(symbol
+	(rect 680 640 960 784)
+	(text "I2C" (rect 5 0 22 12)(font "Arial" ))
+	(text "inst2" (rect 8 128 30 145)(font "Intel Clear" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 21 27 35 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "enable" (rect 0 0 31 12)(font "Arial" ))
+		(text "enable" (rect 21 43 52 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "reset" (rect 0 0 24 12)(font "Arial" ))
+		(text "reset" (rect 21 59 45 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "I2C_ADDRESS[6..0]" (rect 0 0 102 12)(font "Arial" ))
+		(text "I2C_ADDRESS[6..0]" (rect 21 75 123 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "I2C_DATA[7..0]" (rect 0 0 77 12)(font "Arial" ))
+		(text "I2C_DATA[7..0]" (rect 21 91 98 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 3))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "I2C_RW" (rect 0 0 42 12)(font "Arial" ))
+		(text "I2C_RW" (rect 21 107 63 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112))
+	)
+	(port
+		(pt 280 48)
+		(output)
+		(text "SCL" (rect 0 0 21 12)(font "Arial" ))
+		(text "SCL" (rect 242 43 263 55)(font "Arial" ))
+		(line (pt 280 48)(pt 264 48))
+	)
+	(port
+		(pt 280 64)
+		(output)
+		(text "I2C_BUSY" (rect 0 0 54 12)(font "Arial" ))
+		(text "I2C_BUSY" (rect 214 59 268 71)(font "Arial" ))
+		(line (pt 280 64)(pt 264 64))
+	)
+	(port
+		(pt 280 80)
+		(output)
+		(text "DATA_READ[7..0]" (rect 0 0 90 12)(font "Arial" ))
+		(text "DATA_READ[7..0]" (rect 183 75 273 87)(font "Arial" ))
+		(line (pt 280 80)(pt 264 80)(line_width 3))
+	)
+	(port
+		(pt 280 32)
+		(bidir)
+		(text "SDA" (rect 0 0 23 12)(font "Arial" ))
+		(text "SDA" (rect 238 27 261 39)(font "Arial" ))
+		(line (pt 280 32)(pt 264 32))
+	)
+	(drawing
+		(rectangle (rect 16 16 264 128))
+	)
 )
 (connector
 	(pt 664 432)
@@ -547,34 +703,6 @@ agreement for further details.
 	(pt 408 560)
 )
 (connector
-	(pt 880 560)
-	(pt 928 560)
-)
-(connector
-	(pt 880 544)
-	(pt 928 544)
-)
-(connector
-	(pt 880 528)
-	(pt 928 528)
-)
-(connector
-	(pt 880 512)
-	(pt 928 512)
-	(bus)
-)
-(connector
-	(text "data[7..0]" (rect 632 560 676 577)(font "Intel Clear" ))
-	(pt 680 576)
-	(pt 584 576)
-	(bus)
-)
-(connector
-	(text "busy" (rect 592 608 614 625)(font "Intel Clear" ))
-	(pt 904 624)
-	(pt 408 624)
-)
-(connector
 	(pt 384 544)
 	(pt 424 544)
 )
@@ -583,36 +711,12 @@ agreement for further details.
 	(pt 424 528)
 )
 (connector
-	(text "ena" (rect 617 512 634 529)(font "Intel Clear" ))
-	(pt 584 528)
-	(pt 680 528)
-)
-(connector
-	(text "addr[6..0]" (rect 617 528 661 545)(font "Intel Clear" ))
-	(pt 584 544)
-	(pt 680 544)
-	(bus)
-)
-(connector
-	(text "rw" (rect 626 544 637 561)(font "Intel Clear" ))
-	(pt 584 560)
-	(pt 680 560)
-)
-(connector
 	(pt 408 432)
 	(pt 664 432)
 )
 (connector
-	(pt 384 448)
-	(pt 648 448)
-)
-(connector
 	(pt 280 448)
 	(pt 384 448)
-)
-(connector
-	(pt 280 432)
-	(pt 408 432)
 )
 (connector
 	(pt 432 224)
@@ -720,8 +824,158 @@ agreement for further details.
 	(pt 944 96)
 	(pt 984 96)
 )
+(connector
+	(pt 680 672)
+	(pt 304 672)
+)
+(connector
+	(pt 304 672)
+	(pt 304 432)
+)
+(connector
+	(pt 280 432)
+	(pt 304 432)
+)
+(connector
+	(pt 304 432)
+	(pt 408 432)
+)
+(connector
+	(pt 680 688)
+	(pt 600 688)
+)
+(connector
+	(pt 600 688)
+	(pt 600 528)
+)
+(connector
+	(pt 584 528)
+	(pt 600 528)
+)
+(connector
+	(text "ena" (rect 617 512 634 529)(font "Intel Clear" ))
+	(pt 600 528)
+	(pt 680 528)
+)
+(connector
+	(pt 680 704)
+	(pt 624 704)
+)
+(connector
+	(pt 624 704)
+	(pt 624 448)
+)
+(connector
+	(pt 384 448)
+	(pt 624 448)
+)
+(connector
+	(pt 624 448)
+	(pt 648 448)
+)
+(connector
+	(text "<<__$DEF_ALIAS116>>" (rect 617 704 729 721)(font "Intel Clear" )(invisible))
+	(pt 680 720)
+	(pt 592 720)
+	(bus)
+)
+(connector
+	(pt 592 544)
+	(pt 592 720)
+	(bus)
+)
+(connector
+	(pt 584 544)
+	(pt 592 544)
+	(bus)
+)
+(connector
+	(text "addr[6..0]" (rect 617 528 661 545)(font "Intel Clear" ))
+	(pt 592 544)
+	(pt 680 544)
+	(bus)
+)
+(connector
+	(pt 648 560)
+	(pt 648 752)
+)
+(connector
+	(pt 680 752)
+	(pt 648 752)
+)
+(connector
+	(text "rw" (rect 626 544 637 561)(font "Intel Clear" ))
+	(pt 584 560)
+	(pt 648 560)
+)
+(connector
+	(pt 648 560)
+	(pt 680 560)
+)
+(connector
+	(pt 680 736)
+	(pt 608 736)
+	(bus)
+)
+(connector
+	(pt 608 736)
+	(pt 608 576)
+	(bus)
+)
+(connector
+	(pt 584 576)
+	(pt 608 576)
+	(bus)
+)
+(connector
+	(text "data[7..0]" (rect 632 560 676 577)(font "Intel Clear" ))
+	(pt 608 576)
+	(pt 680 576)
+	(bus)
+)
+(connector
+	(pt 880 528)
+	(pt 1176 528)
+)
+(connector
+	(pt 880 512)
+	(pt 1176 512)
+	(bus)
+)
+(connector
+	(pt 880 544)
+	(pt 1176 544)
+)
+(connector
+	(pt 880 560)
+	(pt 1176 560)
+)
+(connector
+	(pt 960 720)
+	(pt 1008 720)
+	(bus)
+)
+(connector
+	(pt 960 672)
+	(pt 1008 672)
+)
+(connector
+	(pt 960 688)
+	(pt 1008 688)
+)
+(connector
+	(text "busy" (rect 592 608 614 625)(font "Intel Clear" ))
+	(pt 408 624)
+	(pt 904 624)
+)
 (junction (pt 408 432))
 (junction (pt 384 448))
 (junction (pt 384 176))
 (junction (pt 408 112))
 (junction (pt 384 352))
+(junction (pt 304 432))
+(junction (pt 600 528))
+(junction (pt 624 448))
+(junction (pt 592 544))
+(junction (pt 648 560))
+(junction (pt 608 576))

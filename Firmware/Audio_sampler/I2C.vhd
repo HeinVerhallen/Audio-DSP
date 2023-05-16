@@ -34,7 +34,7 @@ begin
     if reset = '1' then 
             SDA <= '1';
             SCL <= '1';
-            shift_add <= "0000000";
+            SHIFT_ADD <= "0000000";
             SHIFT_DAT <= "00000000";
             incount <= x"0";
             present <= IDLE;
@@ -52,7 +52,7 @@ if (clk'event and clk = '0') then  -- checks if clk is chaning AND the status
             if enable = '1' then
                 I2C_BUSY <= '1';
                 SDA <='0'; 
-                shift_add <= I2C_ADDRESS; 	--Loads the address bits
+                SHIFT_ADD <= I2C_ADDRESS; 	--Loads the address bits
                 SHIFT_DAT <= I2C_DATA; 	 	--loads the Data bits
                 SIG_RW <= I2C_RW;   --loads the Read write bit
                 present <= ADDR;    
@@ -65,8 +65,8 @@ if (clk'event and clk = '0') then  -- checks if clk is chaning AND the status
             if incount < x"7" then 													--Check variable ''incount' if address/RW are less then 7 
                 I2C_BUSY <= '1';             									-- Indicates system is busy 
                 SCL <= '0';                  									-- clk signal'0'
-                SDA <= shift_add(6);         									-- SDA shifted to '6' Which is the MSB
-                shift_add(6 downto 0) <= shift_add(5 downto 0) & 'U' ;	-- SDA shifted to the left and setting the LSB as U 
+                SDA <= SHIFT_ADD(6);         									-- SDA shifted to '6' Which is the MSB
+                SHIFT_ADD(6 downto 0) <= SHIFT_ADD(5 downto 0) & 'U' ;	-- SDA shifted to the left and setting the LSB as U 
                 incount <= incount + 1;                                 -- Increment counter by 1
                 present <= TEMP1;                                       -- SET tempor1 TO PRESENT 
 
@@ -144,7 +144,7 @@ if (clk'event and clk = '0') then  -- checks if clk is chaning AND the status
             
 
         WHEN R_DATA => --Read data
-                if incount < x"8" then --Reads of the slave comand data
+                if incount < x"8" then      --Reads of the slave comand data
                     SCL <= '1';
                     shift_dat(7 downto 0) <= shift_dat(6 downto 0) & SDA;
                     incount <= incount + 1;

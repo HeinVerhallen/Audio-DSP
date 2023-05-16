@@ -1,4 +1,4 @@
-21677232619741514
+21678915121662916
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -90201,6 +90201,13 @@ BUCK_MAX17634C_xxV
 0
 3
 3
+footprints
+DE1-SoC
+
+
+0
+80
+80
 footprints
 DO-221AC
 SOD-123

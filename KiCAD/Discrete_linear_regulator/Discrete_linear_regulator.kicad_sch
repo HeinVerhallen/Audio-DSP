@@ -2350,7 +2350,7 @@
     )
   )
 
-  (symbol (lib_id "Audio_DSP:LM4562") (at 130.81 111.76 0) (mirror x) (unit 1)
+  (symbol (lib_id "Audio_DSP:LM4562") (at 130.81 111.76 0) (mirror x) (unit 2)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 969e5698-38d2-40f5-ab54-d6441070e128)
     (property "Reference" "U1" (at 132.08 120.65 0)
@@ -2376,7 +2376,7 @@
     (instances
       (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
-          (reference "U1") (unit 1)
+          (reference "U1") (unit 2)
         )
       )
     )
@@ -2939,7 +2939,7 @@
     )
   )
 
-  (symbol (lib_id "Audio_DSP:LM4562") (at 130.81 76.2 0) (unit 2)
+  (symbol (lib_id "Audio_DSP:LM4562") (at 130.81 76.2 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ee6f5ef3-174a-47b6-9fb1-11a8edabef02)
     (property "Reference" "U1" (at 132.08 67.31 0)
@@ -2965,7 +2965,7 @@
     (instances
       (project "Discrete_linear_regulator"
         (path "/19504711-657f-4df2-b2e9-322b7e64e4f7"
-          (reference "U1") (unit 2)
+          (reference "U1") (unit 1)
         )
       )
     )

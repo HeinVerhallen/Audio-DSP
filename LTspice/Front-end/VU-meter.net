@@ -1,0 +1,19 @@
+* C:\Users\robin\OneDrive\Documenten\School\Fontys\Minor\Be creative minor\Git\Audio-DSP\LTspice\Front-end\VU-meter.asc
+XU1 N005 N001 +15VD -15VD N003 LT6220
+V1 +15VD 0 15
+V2 0 -15VD 15
+XU2 N004 N002 +15VD -15VD VRECT LT6220
+R1 N005 Audio 100k
+C1 N001 N003 47p
+D1 N001 N003 1N4148
+D2 N003 N004 1N4148
+R2 N004 0 10k
+R3 N002 N001 10k
+R4 VRECT N002 10k
+V3 Audio 0 SINE(0 1 1k)
+.model D D
+.lib C:\Users\robin\OneDrive\Documenten\LTspiceXVII\lib\cmp\standard.dio
+.tran 0 4m 0
+.lib LTC4.LIB
+.backanno
+.end

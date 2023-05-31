@@ -44,7 +44,7 @@
   (pad "5" thru_hole oval (at -3.81 0 270) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (tstamp d2fc17dd-63cc-4840-8b40-747f4869aea6))
   (pad "6" thru_hole oval (at -6.35 0 270) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (tstamp 35045956-3143-484c-95ac-8f88841f6d5d))
   (model "${CUSTOM_3D_MODELS}/Discrete_linear_regulator.step"
-    (offset (xyz -75 3 80.1))
+    (offset (xyz -149 2.9 112.6))
     (scale (xyz 1 1 1))
     (rotate (xyz -90 0 0))
   )

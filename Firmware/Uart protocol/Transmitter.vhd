@@ -12,15 +12,16 @@ PORT(
 END Transmitter;
 
 ARCHITECTURE behaviour OF Transmitter IS
-VARIABLE buf : std_logic_vector( 7 DOWNTO 0);
-VARIABLE counter: integer := 0;
 BEGIN
 PROCESS( Uartclk )
+VARIABLE buf : std_logic_vector( 7 DOWNTO 0);
+VARIABLE counter: integer := 0;
 BEGIN
 	IF rising_edge(Uartclk) THEN
 		IF counter = 0 AND Dataready = '1' THEN
 			counter := 9;
 			buf := Byte;
+			ready <= '0';
 			--start condition
 			Tx <= '0';
 		ELSIF counter = 1 THEN

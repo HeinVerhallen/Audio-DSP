@@ -111,7 +111,7 @@ void loadPage(uint8_t page){
 //Outputs: -
 void updatePage(int newPage){
 	gotoPage(newPage);	//go to the new page
-	loadPage(newPage);	//load page variables
+	//loadPage(newPage);	//load page variables
 	highlight = 0;		//set the first menu option active
 	update();			//update the highlighted option
 	currentPage = newPage;	//set the new page as current page
@@ -159,7 +159,36 @@ void channelSelect(int16_t toggle, int16_t active){
   	previous = active;
 }
 
+byte buffer[16];
+int dataReceived = 0;
+
+void uartReceive(){
+	static int index = 0;
+	while(Serial.available()){
+		byte incoming = Serial.read();
+		buffer[index++] = incoming;
+		if(incoming == 255 && buffer[index-2]==255 && buffer[index-3]==255){
+
+			index = 0;
+			dataReceived = 1;
+		}
+	}
+}
+
 void loop() {
+	uartReceive();
+	if(dataReceived){
+		int command = buffer[0];
+		int page = buffer[1];
+		int id = buffer[2]-2;
+
+		if(command == 101){
+			updatePage(functions[page][id]);
+		}
+		dataReceived = 0;
+		memset(buffer,0,16);
+	}
+
 	static int8_t navMenu = 1;
 
 	//detect select button press

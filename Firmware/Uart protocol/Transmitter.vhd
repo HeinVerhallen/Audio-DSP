@@ -26,9 +26,20 @@ BEGIN
 			Tx <= '0';
 		ELSIF counter = 1 THEN
 			TX <= '1';
+			counter:= counter - 1;
+			--repeated start
+			IF Dataready = '1' THEN
+				ready <= '0';
+				counter := 9;
+				--start condition
+				TX <= '0';
+			END IF;
+		ELSIF counter = 2 THEN
+			Tx <= buf(0);
+			buf := '0' & buf(7 downto 1);
 			ready <= '1';
 			counter:= counter - 1;
-		ELSIF counter > 1 THEN
+		ELSIF counter > 2 AND counter <= 9 THEN
 			--send data bits LSB first
 			Tx <= buf(0);
 			buf := '0' & buf(7 downto 1);

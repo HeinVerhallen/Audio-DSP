@@ -4,6 +4,11 @@
 
   (paper "A4")
 
+  (title_block
+    (title "AUDIO-DSP_MAIN_BOARD")
+    (rev "R01")
+  )
+
   (lib_symbols
     (symbol "Audio-DSP:+12VA2" (power) (in_bom no) (on_board no)
       (property "Reference" "#PWR" (at 0 -2.54 0)
@@ -1283,10 +1288,14 @@
     (uuid fe06c864-f3a6-494a-8279-5d3318064521)
   )
 
-  (text "-Use Panasonic 0805 ERA series for audio path resistors\n-Use C0G MLCC capacitors for audio path capacitors"
-    (at 176.53 17.78 0)
+  (text "Adress=2" (at 59.69 95.25 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 98c34be6-4e13-42f4-8a22-42163133ee41)
+  )
+  (text "Combine I2C busses of the DACs?\nOtherwise they can get the same adress."
+    (at 44.45 107.95 0)
     (effects (font (size 1.27 1.27) (color 200 0 200 1)) (justify left bottom))
-    (uuid 75d64ac4-12fe-4874-8b3d-1feda85a792e)
+    (uuid c3d0e690-7fa8-47ac-8037-22c4d8382f82)
   )
 
   (hierarchical_label "SDA_DAC_CH5_6" (shape bidirectional) (at 33.02 80.01 180) (fields_autoplaced)

@@ -4,6 +4,11 @@
 
   (paper "A4")
 
+  (title_block
+    (title "AUDIO-DSP_MAIN_BOARD")
+    (rev "R01")
+  )
+
   (lib_symbols
     (symbol "Audio-DSP:+12VA1" (power) (in_bom no) (on_board no)
       (property "Reference" "#PWR" (at 0 -2.54 0)
@@ -1492,21 +1497,16 @@
   )
 
   (rectangle (start 93.98 35.56) (end 147.32 191.77)
-    (stroke (width 0) (type dash))
+    (stroke (width 0) (type dash) (color 100 100 100 1))
     (fill (type none))
     (uuid b6c0c469-c241-424b-a12c-7de7f0598f4b)
   )
   (rectangle (start 13.97 13.97) (end 92.71 163.83)
-    (stroke (width 0) (type dash))
+    (stroke (width 0) (type dash) (color 100 100 100 1))
     (fill (type none))
     (uuid d56ef89e-3e53-4672-9c3b-11a494542e5c)
   )
 
-  (text "Check all regulator symbols and footprints with someone else"
-    (at 93.98 34.29 0)
-    (effects (font (size 1.27 1.27) (color 200 0 200 1)) (justify left bottom))
-    (uuid 186b5f9e-466f-409f-8d96-68fe739cf0a9)
-  )
   (text "Add thermal pad to pin 4 for cooling" (at 116.84 189.23 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 1e9ab2b8-5329-42fe-8d2c-9505d7eb996e)

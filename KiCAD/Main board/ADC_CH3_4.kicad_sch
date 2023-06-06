@@ -6,6 +6,7 @@
 
   (title_block
     (title "AUDIO-DSP_MAIN_BOARD")
+    (date "2023-06-06")
     (rev "R01")
   )
 
@@ -2325,6 +2326,11 @@
     (stroke (width 0) (type default))
     (uuid 6bfb897e-4415-4963-a826-4a7c7b8d92d6)
   )
+  (polyline (pts (xy 363.855 126.365) (xy 363.855 132.715))
+    (stroke (width 0) (type default))
+    (uuid 6d5b654f-da24-4021-a547-1e3e7bf485bd)
+  )
+
   (wire (pts (xy 204.47 90.17) (xy 59.69 90.17))
     (stroke (width 0) (type default))
     (uuid 714ca05d-d24c-4344-a1ba-15156bd2ac11)
@@ -2879,11 +2885,6 @@
     (stroke (width 0) (type default))
     (uuid cc7babe2-f0b7-47f7-825f-32c670f8fa95)
   )
-  (polyline (pts (xy 356.235 126.365) (xy 356.235 132.715))
-    (stroke (width 0) (type default))
-    (uuid cc91cbb4-1a3a-417b-81e6-152df055eecb)
-  )
-
   (wire (pts (xy 290.83 118.11) (xy 304.8 118.11))
     (stroke (width 0) (type default))
     (uuid cde3ff29-71f1-47eb-ab43-e17eeeb47da7)
@@ -3117,9 +3118,21 @@
     (uuid ff656eec-3d92-43f5-94d7-b727c62a5d50)
   )
 
+  (text "Charge glitch reservoir\nfor the ADC" (at 289.56 62.23 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 47f51210-7e4a-4b2f-b649-bf1dd68de53a)
+  )
   (text "Difference amplifier\ngain of 1/15" (at 63.5 135.89 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 5d8f1172-c0cb-4265-a7e6-7242e6c58f46)
+  )
+  (text "Charge glitch reservoir\nfor the ADC" (at 292.1 153.67 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 63797bcd-02bd-4c9c-bd0a-763175f875f3)
+  )
+  (text "QUAD mode" (at 364.49 130.175 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 6d10359b-9127-4a87-8e23-b53dfc74fefb)
   )
   (text "Place these isolation\nresistors as close to\nthe audio signal\nas possible."
     (at 63.5 57.15 0)
@@ -3143,11 +3156,6 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 77c3c058-89e7-49bf-bd45-2448705cbcbf)
   )
-  (text "Add 0R resistors to be able to change some settings?\n-Sample freq->OSRX\n-bits->OSRX"
-    (at 326.39 140.97 0)
-    (effects (font (size 1.27 1.27) (color 200 0 200 1)) (justify left bottom))
-    (uuid 815b8af4-7824-4ce6-a2df-3cf5d0db8dc9)
-  )
   (text "HPF active" (at 356.87 117.475 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 91cd0665-ff56-4919-ba05-ae495425bd7c)
@@ -3166,17 +3174,14 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid a9b8c001-7efa-4ae8-adaf-9642007f4c79)
   )
+  (text "These resistors make it\nfairly easy to change\nthe mode of the ADC in\ncase this is needed to\ncomply with the firmware.\nThe resistors can be\ndesoldered and the OSRx\npins can be connected\nwith a wire to GND."
+    (at 353.06 152.4 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid b4e6b4b3-ad60-447c-b24b-d7607b30c9fa)
+  )
   (text "I2S format" (at 356.87 121.285 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid b612c676-1e52-42d9-a6e1-24d10b0712ca)
-  )
-  (text "Check symbol and footprint with someone else" (at 302.26 149.86 0)
-    (effects (font (size 1.27 1.27) (color 200 0 200 1)) (justify left bottom))
-    (uuid b9c5266e-296e-4cc1-b42a-8fe08a680b2a)
-  )
-  (text "QUAD mode" (at 356.87 130.175 0)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid bf4b4ca1-ecb8-473a-94b4-ea2f91ff5d14)
   )
   (text "Difference amplifier\ngain of 1/15" (at 63.5 22.86 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -3556,6 +3561,38 @@
         )
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/b7530516-5ab1-4afa-9366-b30c4f029458"
           (reference "U45") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Device:R") (at 349.25 132.08 90) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 0aeae2ed-8dc3-407e-80c9-f683272e4b69)
+    (property "Reference" "R33" (at 349.25 139.7 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "0R" (at 349.25 132.08 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 349.25 133.858 90)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 349.25 132.08 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 7070b1da-87c1-4367-acb3-7fc7ba841b82))
+    (pin "2" (uuid 10af219a-b3e5-4384-b4a6-fedcb53af376))
+    (instances
+      (project "Main board"
+        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/03c234da-ad6d-41dc-b0ec-5880e5376fd2"
+          (reference "R33") (unit 1)
+        )
+        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/4e10d7ae-7c54-4ac5-ac67-e4842ffdf025"
+          (reference "R181") (unit 1)
+        )
+        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/b7530516-5ab1-4afa-9366-b30c4f029458"
+          (reference "R214") (unit 1)
         )
       )
     )
@@ -4218,37 +4255,6 @@
     )
   )
 
-  (symbol (lib_id "Audio_DSP:+3V3D1") (at 345.44 132.08 270) (unit 1)
-    (in_bom no) (on_board no) (dnp no)
-    (uuid 21c0250f-3a11-4fc6-a55a-76d784b87747)
-    (property "Reference" "#PWR0100" (at 342.9 132.08 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "+3V3D1" (at 347.98 132.08 90)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "" (at 345.44 132.08 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 345.44 132.08 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 0cbb25e4-8c8c-49db-8305-e4f0f17c4404))
-    (instances
-      (project "Main board"
-        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/fc272ee1-9060-465b-85c1-b8364d68deb3"
-          (reference "#PWR0100") (unit 1)
-        )
-        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/4e10d7ae-7c54-4ac5-ac67-e4842ffdf025"
-          (reference "#PWR0177") (unit 1)
-        )
-        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/b7530516-5ab1-4afa-9366-b30c4f029458"
-          (reference "#PWR0212") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "Audio-DSP:LM4562") (at 213.36 90.17 0) (unit 2)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 2447cb72-1f65-4656-b128-e18feaf234ae)
@@ -4761,6 +4767,38 @@
     )
   )
 
+  (symbol (lib_id "Device:R") (at 349.25 127 90) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 2fe3f1de-d39d-4fa7-a225-e281e5abefcb)
+    (property "Reference" "R33" (at 349.25 134.62 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "0R" (at 349.25 127 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 349.25 128.778 90)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 349.25 127 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid f1895147-80c2-4c5e-a1f3-a9ddb7140089))
+    (pin "2" (uuid 4eb88ae4-72d6-41ef-af18-2808255ae363))
+    (instances
+      (project "Main board"
+        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/03c234da-ad6d-41dc-b0ec-5880e5376fd2"
+          (reference "R33") (unit 1)
+        )
+        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/4e10d7ae-7c54-4ac5-ac67-e4842ffdf025"
+          (reference "R124") (unit 1)
+        )
+        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/b7530516-5ab1-4afa-9366-b30c4f029458"
+          (reference "R182") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "Device:R") (at 55.88 236.22 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 30bc2a13-8120-4eb7-a33f-b25de046d9dc)
@@ -4962,6 +5000,37 @@
         )
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/b7530516-5ab1-4afa-9366-b30c4f029458"
           (reference "U41") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Audio_DSP:+3V3D1") (at 353.06 127 270) (unit 1)
+    (in_bom no) (on_board no) (dnp no)
+    (uuid 3b50c86a-8b49-4809-944d-49f906f78435)
+    (property "Reference" "#PWR0100" (at 350.52 127 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+3V3D1" (at 355.6 127 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "" (at 353.06 127 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 353.06 127 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 7af0f422-c09b-4082-9192-e8017c9b665e))
+    (instances
+      (project "Main board"
+        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/fc272ee1-9060-465b-85c1-b8364d68deb3"
+          (reference "#PWR0100") (unit 1)
+        )
+        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/4e10d7ae-7c54-4ac5-ac67-e4842ffdf025"
+          (reference "#PWR0175") (unit 1)
+        )
+        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/b7530516-5ab1-4afa-9366-b30c4f029458"
+          (reference "#PWR0210") (unit 1)
         )
       )
     )
@@ -5955,37 +6024,6 @@
     )
   )
 
-  (symbol (lib_id "Audio_DSP:+3V3D1") (at 345.44 127 270) (unit 1)
-    (in_bom no) (on_board no) (dnp no)
-    (uuid 6268641b-5c1c-4c62-a8b6-698a7a3e5f53)
-    (property "Reference" "#PWR0100" (at 342.9 127 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "+3V3D1" (at 347.98 127 90)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "" (at 345.44 127 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 345.44 127 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 50ff7589-8c27-4a95-bef3-c9f457f3c0cd))
-    (instances
-      (project "Main board"
-        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/fc272ee1-9060-465b-85c1-b8364d68deb3"
-          (reference "#PWR0100") (unit 1)
-        )
-        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/4e10d7ae-7c54-4ac5-ac67-e4842ffdf025"
-          (reference "#PWR0175") (unit 1)
-        )
-        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/b7530516-5ab1-4afa-9366-b30c4f029458"
-          (reference "#PWR0210") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "Audio_DSP:+15VD1") (at 199.39 217.17 0) (unit 1)
     (in_bom no) (on_board no) (dnp no) (fields_autoplaced)
     (uuid 64722f77-4167-4feb-879f-ac12a3da054b)
@@ -6236,37 +6274,6 @@
         )
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/b7530516-5ab1-4afa-9366-b30c4f029458"
           (reference "C152") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Audio_DSP:+3V3D1") (at 345.44 129.54 270) (unit 1)
-    (in_bom no) (on_board no) (dnp no)
-    (uuid 6a249811-4aa8-4e2a-95f6-f83d1a0f5bc6)
-    (property "Reference" "#PWR0100" (at 342.9 129.54 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "+3V3D1" (at 347.98 129.54 90)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "" (at 345.44 129.54 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 345.44 129.54 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 7f4e25ac-65df-4b22-869a-8fc9d20fcca0))
-    (instances
-      (project "Main board"
-        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/fc272ee1-9060-465b-85c1-b8364d68deb3"
-          (reference "#PWR0100") (unit 1)
-        )
-        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/4e10d7ae-7c54-4ac5-ac67-e4842ffdf025"
-          (reference "#PWR0176") (unit 1)
-        )
-        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/b7530516-5ab1-4afa-9366-b30c4f029458"
-          (reference "#PWR0211") (unit 1)
         )
       )
     )
@@ -6524,6 +6531,37 @@
         )
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/b7530516-5ab1-4afa-9366-b30c4f029458"
           (reference "U30") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Audio_DSP:+3V3D1") (at 353.06 129.54 270) (unit 1)
+    (in_bom no) (on_board no) (dnp no)
+    (uuid 79526590-7b88-45d8-b859-4145362ba01c)
+    (property "Reference" "#PWR0100" (at 350.52 129.54 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+3V3D1" (at 355.6 129.54 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "" (at 353.06 129.54 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 353.06 129.54 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 7eb2e0d6-75e5-4627-a0ad-d802a04e5f66))
+    (instances
+      (project "Main board"
+        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/fc272ee1-9060-465b-85c1-b8364d68deb3"
+          (reference "#PWR0100") (unit 1)
+        )
+        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/4e10d7ae-7c54-4ac5-ac67-e4842ffdf025"
+          (reference "#PWR0176") (unit 1)
+        )
+        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/b7530516-5ab1-4afa-9366-b30c4f029458"
+          (reference "#PWR0211") (unit 1)
         )
       )
     )
@@ -9124,6 +9162,38 @@
     )
   )
 
+  (symbol (lib_id "Device:R") (at 349.25 129.54 90) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid c7c82554-f8a9-4ae4-924f-528ddeea6410)
+    (property "Reference" "R33" (at 349.25 137.16 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "0R" (at 349.25 129.54 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 349.25 131.318 90)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 349.25 129.54 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 32fd67eb-57bd-49a7-b321-6e8fb595cfb3))
+    (pin "2" (uuid 7ca004a4-6663-46f0-b123-3e43c5799ed2))
+    (instances
+      (project "Main board"
+        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/03c234da-ad6d-41dc-b0ec-5880e5376fd2"
+          (reference "R33") (unit 1)
+        )
+        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/4e10d7ae-7c54-4ac5-ac67-e4842ffdf025"
+          (reference "R125") (unit 1)
+        )
+        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/b7530516-5ab1-4afa-9366-b30c4f029458"
+          (reference "R213") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "Device:R") (at 144.78 165.1 0) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c7d29463-fbdd-4aca-9fd7-1a123e84b517)
@@ -9988,6 +10058,37 @@
         )
         (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/b7530516-5ab1-4afa-9366-b30c4f029458"
           (reference "#PWR0228") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Audio_DSP:+3V3D1") (at 353.06 132.08 270) (unit 1)
+    (in_bom no) (on_board no) (dnp no)
+    (uuid eb54270f-a1a2-4faa-bbff-65753a273873)
+    (property "Reference" "#PWR0100" (at 350.52 132.08 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+3V3D1" (at 355.6 132.08 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "" (at 353.06 132.08 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 353.06 132.08 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 0d1bd245-328b-4995-a668-8589425bc7b7))
+    (instances
+      (project "Main board"
+        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/fc272ee1-9060-465b-85c1-b8364d68deb3"
+          (reference "#PWR0100") (unit 1)
+        )
+        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/4e10d7ae-7c54-4ac5-ac67-e4842ffdf025"
+          (reference "#PWR0177") (unit 1)
+        )
+        (path "/2f8cbac6-fd11-4240-8e40-3bb6952a0324/b7530516-5ab1-4afa-9366-b30c4f029458"
+          (reference "#PWR0212") (unit 1)
         )
       )
     )

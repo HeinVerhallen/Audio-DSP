@@ -914,11 +914,6 @@
     (uuid fc8d961b-5b3e-457f-9cc0-a284f04bb8cc)
   )
 
-  (text "-Checken of deze pin assignment mogelijk is dmv een test programma?\n-Checken hoe erg de crosstalk aanwezig is dmv een test programma?"
-    (at 107.95 116.84 0)
-    (effects (font (size 1.27 1.27) (color 200 0 200 1)) (justify left bottom))
-    (uuid 076f0c7e-0aed-4504-8f59-58860621d134)
-  )
   (text "I2S ADC CH1_2" (at 135.89 31.75 0)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 0afa75ce-7df0-4285-ad20-f367c161b454)
@@ -940,7 +935,7 @@
     (uuid 4ce3f8d7-469d-4168-bca4-5abeb0967a71)
   )
   (text "USB port of DE1-SOC board can be used as USB audio input."
-    (at 107.95 124.46 0)
+    (at 12.7 78.74 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 70dfb9d2-cd4f-4ef9-af93-7b9eb1717a3b)
   )

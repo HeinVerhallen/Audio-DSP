@@ -2773,7 +2773,7 @@
     (property "Value" "NetTie_2" (at 165.1 144.145 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Footprint" "Audio-DSP:NetTie-2_SMD_Pad0.3mm" (at 163.83 142.24 0)
+    (property "Footprint" "NetTie:NetTie-2_SMD_Pad0.5mm" (at 163.83 142.24 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 163.83 142.24 0)

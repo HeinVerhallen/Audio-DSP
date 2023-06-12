@@ -747,10 +747,6 @@
     (uuid fee2fe66-1a3d-45f1-bd6a-6d1d2010a6c5)
   )
 
-  (text "Just a note" (at 177.8 171.45 0)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid 4b43422a-b6f9-4161-9ce6-886ef3f93c07)
-  )
   (text "FPGA power" (at 215.9 138.43 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 638d78b0-3c0a-43f2-8f30-747d56ec29c4)
@@ -759,23 +755,14 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 67736b3a-20bc-4a99-9aac-8a68c216eae0)
   )
-  (text "Let all custom symbols and footprints be checked by someone else to decrease the chance of errors."
-    (at 72.39 158.75 0)
-    (effects (font (size 1.27 1.27) (thickness 0.254) bold (color 255 0 0 1)) (justify left bottom))
+  (text "Let all custom symbols and footprints be reviewed by someone else to decrease the chance of errors."
+    (at 41.91 161.29 0)
+    (effects (font (size 2.54 2.54) (thickness 0.254) bold (color 255 0 0 1)) (justify left bottom))
     (uuid 693aca75-df4c-473a-b609-249bfd61ebc0)
   )
   (text "DC in" (at 22.86 138.43 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 94cd8312-866f-4a41-84f4-bdd25274fd24)
-  )
-  (text "Point of attention" (at 177.8 168.91 0)
-    (effects (font (size 1.27 1.27) (color 200 0 200 1)) (justify left bottom))
-    (uuid d5f221e1-8c9e-49be-aec7-23f00a372d46)
-  )
-  (text "Panasonic ERA-8A series for audio path resistors\nC0G MLCC capacitors for audio path capacitors"
-    (at 177.8 180.34 0)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid d78725e9-3f4d-4987-9fe9-d6c8d9f9b356)
   )
   (text "Internal power lines are not routed\non this page to keep it more clear."
     (at 109.22 147.32 0)

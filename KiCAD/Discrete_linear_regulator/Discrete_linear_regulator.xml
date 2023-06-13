@@ -1,0 +1,824 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>C:\Users\mgurl\Documents\GitHub\Audio-DSP\KiCAD\Discrete_linear_regulator\Discrete_linear_regulator.kicad_sch</source>
+    <date>25/05/2023 12:39:21</date>
+    <tool>Eeschema 7.0.1</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>Discrete_linear_regulator.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="C1">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Murata-Electronics/GRM155R71H104KE14D?qs=sGAEpiMZZMvsSlwiRhF8qkiosXznb836lYH0b0rR9OM%3D</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>15f58c03-d818-4f84-bad0-8d4a0e5987d8</tstamps>
+    </comp>
+    <comp ref="C2">
+      <value>100p</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/KEMET/CBR04C101J5GACAUTO?qs=By6Nw2ByBD2z15b9CQ8m6A%3D%3D</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6ae446cd-ca05-4b75-b7f6-f0cf8e0f6232</tstamps>
+    </comp>
+    <comp ref="C3">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Murata-Electronics/GRM155R71H104KE14D?qs=sGAEpiMZZMvsSlwiRhF8qkiosXznb836lYH0b0rR9OM%3D</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1489fd3f-b10d-4139-9965-951c6534dd17</tstamps>
+    </comp>
+    <comp ref="C4">
+      <value>100n</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Murata-Electronics/GRM155R71H104KE14D?qs=sGAEpiMZZMvsSlwiRhF8qkiosXznb836lYH0b0rR9OM%3D</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>70dbe49e-4b9a-4f1d-8c93-eef7f979de6c</tstamps>
+    </comp>
+    <comp ref="C5">
+      <value>100u</value>
+      <footprint>Capacitor_THT:CP_Radial_D8.0mm_P3.50mm</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Rubycon/25ML100MEFC8X7?qs=T3oQrply3y%252BTg1YES5rCUw%3D%3D</datasheet>
+      <libsource lib="Device" part="C_Polarized" description="Polarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Polarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ee61f0e9-c94c-4273-88e0-3cd4a9c4a29a</tstamps>
+    </comp>
+    <comp ref="C6">
+      <value>100u</value>
+      <footprint>Capacitor_THT:CP_Radial_D8.0mm_P3.50mm</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Rubycon/25ML100MEFC8X7?qs=T3oQrply3y%252BTg1YES5rCUw%3D%3D</datasheet>
+      <libsource lib="Device" part="C_Polarized" description="Polarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Polarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>541f77c5-7a0e-409d-a0df-608490f7079b</tstamps>
+    </comp>
+    <comp ref="C9">
+      <value>10u</value>
+      <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Samsung-Electro-Mechanics/CL32B106KBJNNNE?qs=349EhDEZ59rXK%2FOM74I5cg%3D%3D&amp;gclid=CjwKCAjwl6OiBhA2EiwAuUwWZYy_GgbSQvb2SQzcmFnxlRRdnYGql9iLX97MLmeCLFSWBB0pCR7pTBoCje8QAvD_BwE</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f1557234-ceee-4ef9-aa14-9487c744be89</tstamps>
+    </comp>
+    <comp ref="C10">
+      <value>100u</value>
+      <footprint>Capacitor_THT:CP_Radial_D8.0mm_P3.50mm</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Rubycon/25ML100MEFC8X7?qs=T3oQrply3y%252BTg1YES5rCUw%3D%3D</datasheet>
+      <libsource lib="Device" part="C_Polarized" description="Polarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Polarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>59b75cb7-c4ea-4139-a274-c717ec02f473</tstamps>
+    </comp>
+    <comp ref="C11">
+      <value>100u</value>
+      <footprint>Capacitor_THT:CP_Radial_D8.0mm_P3.50mm</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Rubycon/25ML100MEFC8X7?qs=T3oQrply3y%252BTg1YES5rCUw%3D%3D</datasheet>
+      <libsource lib="Device" part="C_Polarized" description="Polarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Polarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>27d555d3-95be-4557-b918-f226af600f11</tstamps>
+    </comp>
+    <comp ref="C12">
+      <value>100u</value>
+      <footprint>Capacitor_THT:CP_Radial_D8.0mm_P3.50mm</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Rubycon/25ML100MEFC8X7?qs=T3oQrply3y%252BTg1YES5rCUw%3D%3D</datasheet>
+      <libsource lib="Device" part="C_Polarized" description="Polarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Polarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4afc8ded-4f76-4b2f-9363-9f6b12f73872</tstamps>
+    </comp>
+    <comp ref="C13">
+      <value>10u</value>
+      <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Samsung-Electro-Mechanics/CL32B106KBJNNNE?qs=349EhDEZ59rXK%2FOM74I5cg%3D%3D&amp;gclid=CjwKCAjwl6OiBhA2EiwAuUwWZYy_GgbSQvb2SQzcmFnxlRRdnYGql9iLX97MLmeCLFSWBB0pCR7pTBoCje8QAvD_BwE</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4e476843-2732-45ae-9d07-8e78cf7500d3</tstamps>
+    </comp>
+    <comp ref="C14">
+      <value>100n</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Murata-Electronics/GRM155R71H104KE14D?qs=sGAEpiMZZMvsSlwiRhF8qkiosXznb836lYH0b0rR9OM%3D</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9493895f-2d13-4403-9c90-848f26e4a32c</tstamps>
+    </comp>
+    <comp ref="C15">
+      <value>100p</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/KEMET/CBR04C101J5GACAUTO?qs=By6Nw2ByBD2z15b9CQ8m6A%3D%3D</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a9e7239f-b827-4308-ba20-92b4477440ae</tstamps>
+    </comp>
+    <comp ref="C16">
+      <value>100u</value>
+      <footprint>Capacitor_THT:CP_Radial_D8.0mm_P3.50mm</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Rubycon/25ML100MEFC8X7?qs=T3oQrply3y%252BTg1YES5rCUw%3D%3D</datasheet>
+      <libsource lib="Device" part="C_Polarized" description="Polarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Polarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a3740bb9-d9c5-428e-adc8-0417fd9239a7</tstamps>
+    </comp>
+    <comp ref="D1">
+      <value>LED</value>
+      <footprint>LED_SMD:LED_0805_2012Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Broadcom-Avago/HSMH-C170?qs=YDL0qNrpDT6b21G9HrN9ig%3D%3D</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Light emitting diode"/>
+      <property name="ki_keywords" value="LED diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a44c5d9b-a9ee-41d6-8bc3-d96b23296c99</tstamps>
+    </comp>
+    <comp ref="D3">
+      <value>LED</value>
+      <footprint>LED_SMD:LED_0805_2012Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Broadcom-Avago/HSMH-C170?qs=YDL0qNrpDT6b21G9HrN9ig%3D%3D</datasheet>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Light emitting diode"/>
+      <property name="ki_keywords" value="LED diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>5719730c-448c-4676-9f6a-03bb4a21b674</tstamps>
+    </comp>
+    <comp ref="J1">
+      <value>Conn_01x06</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Horizontal</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x06" description="Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>067c2a87-c8ea-4604-bbd8-3332b6d1a091</tstamps>
+    </comp>
+    <comp ref="Q1">
+      <value>PZT2222AT3G</value>
+      <footprint>Package_TO_SOT_SMD:SOT-223</footprint>
+      <datasheet>https://nl.farnell.com/on-semiconductor/pzt2222at3g/transistor-bipol-npn-40v-sot-223/dp/2533342?st=pzt2222a</datasheet>
+      <libsource lib="Audio_DSP" part="PZT2222AT3G" description=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1e8248bb-eaf3-4ed9-8500-5fd065dca525</tstamps>
+    </comp>
+    <comp ref="Q2">
+      <value>BC857</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <libsource lib="Transistor_BJT" part="BC857" description="0.1A Ic, 45V Vce, PNP Transistor, SOT-23"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="0.1A Ic, 45V Vce, PNP Transistor, SOT-23"/>
+      <property name="ki_keywords" value="PNP transistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e6953811-df12-4438-836a-9c7976c775a7</tstamps>
+    </comp>
+    <comp ref="Q3">
+      <value>BC857</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <libsource lib="Transistor_BJT" part="BC857" description="0.1A Ic, 45V Vce, PNP Transistor, SOT-23"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="0.1A Ic, 45V Vce, PNP Transistor, SOT-23"/>
+      <property name="ki_keywords" value="PNP transistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>3f3fe39a-bb68-48f1-9b05-c04f60bd9454</tstamps>
+    </comp>
+    <comp ref="Q4">
+      <value>PZT2222AT3G</value>
+      <footprint>Package_TO_SOT_SMD:SOT-223</footprint>
+      <datasheet>https://nl.farnell.com/on-semiconductor/pzt2222at3g/transistor-bipol-npn-40v-sot-223/dp/2533342?st=pzt2222a</datasheet>
+      <libsource lib="Audio_DSP" part="PZT2222AT3G" description=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4b09ba68-b537-4a66-ba8a-e716d8608347</tstamps>
+    </comp>
+    <comp ref="Q5">
+      <value>PZT2907AT3G</value>
+      <footprint>Package_TO_SOT_SMD:SOT-223</footprint>
+      <datasheet>https://nl.farnell.com/on-semiconductor/pzt2907at3g/transistor-bipol-pnp-60v-sot-223/dp/2533343?st=pzt2907a</datasheet>
+      <libsource lib="Audio_DSP" part="PZT2907AT3G" description=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c5e9ab06-4fcd-40d1-a900-0860727625c0</tstamps>
+    </comp>
+    <comp ref="Q8">
+      <value>PZT2907AT3G</value>
+      <footprint>Package_TO_SOT_SMD:SOT-223</footprint>
+      <datasheet>https://nl.farnell.com/on-semiconductor/pzt2907at3g/transistor-bipol-pnp-60v-sot-223/dp/2533343?st=pzt2907a</datasheet>
+      <libsource lib="Audio_DSP" part="PZT2907AT3G" description=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>dfcdf70d-2fba-4239-be8b-75b4ce7f1e5c</tstamps>
+    </comp>
+    <comp ref="Q10">
+      <value>BC857</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <libsource lib="Transistor_BJT" part="BC857" description="0.1A Ic, 45V Vce, PNP Transistor, SOT-23"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="0.1A Ic, 45V Vce, PNP Transistor, SOT-23"/>
+      <property name="ki_keywords" value="PNP transistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>03c93af4-e070-49e1-b7bb-cac2bb77c7e5</tstamps>
+    </comp>
+    <comp ref="Q11">
+      <value>BC857</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <libsource lib="Transistor_BJT" part="BC857" description="0.1A Ic, 45V Vce, PNP Transistor, SOT-23"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="0.1A Ic, 45V Vce, PNP Transistor, SOT-23"/>
+      <property name="ki_keywords" value="PNP transistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>72b2c213-c5ab-43a9-bde9-b91bece27a91</tstamps>
+    </comp>
+    <comp ref="R1">
+      <value>820R</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/YAGEO/RT0402FRE07820RL?qs=iFuT%252BolKbR7tOecAWZmkmw%3D%3D</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f4d26a21-756d-42a8-8830-27195e37bf65</tstamps>
+    </comp>
+    <comp ref="R2">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Vishay-Dale/CRCW040210K0FKEDC?qs=E3Y5ESvWgWPiNLcGzwCGPg%3D%3D</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c72ffd42-1c16-4ea7-8c3d-b0dd3f2c8e68</tstamps>
+    </comp>
+    <comp ref="R3">
+      <value>47R</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/YAGEO/RT0402FRE0747RL?qs=sGAEpiMZZMvdGkrng054t0q%2FxTkBpeSrrs0gjydReCc%3D</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>bd209685-17df-401d-bbcc-02ce9b3f3def</tstamps>
+    </comp>
+    <comp ref="R4">
+      <value>100R</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/YAGEO/RT0402FRE07100RL?qs=sGAEpiMZZMvdGkrng054t%252BKCHBXLTLydY05E6nMrbFY%3D</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e65b328c-1918-4706-ad59-ede77a27b4ae</tstamps>
+    </comp>
+    <comp ref="R5">
+      <value>100k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Vishay-Dale/CRCW0402100KFKEDC?qs=E3Y5ESvWgWPiKlL6PvtQMQ%3D%3D</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ee0c007c-6799-402f-aa9b-8662de1a3518</tstamps>
+    </comp>
+    <comp ref="R6">
+      <value>6K8</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Susumu/RG1005P-682-D-T10?qs=v5GkGT6DDHhLDDYpYvRXHQ%3D%3D</datasheet>
+      <fields>
+        <field name="Datasheet2">https://nl.mouser.com/ProductDetail/Susumu/RG1005P-272-D-T10?qs=y7y%2FNpWpM9kYXyOrAmBBBw%3D%3D</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Datasheet2" value="https://nl.mouser.com/ProductDetail/Susumu/RG1005P-272-D-T10?qs=y7y%2FNpWpM9kYXyOrAmBBBw%3D%3D"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>eafe064b-60b2-4e3b-8802-46a643ba6df7</tstamps>
+    </comp>
+    <comp ref="R7">
+      <value>1K2</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Susumu/RR0510P-122-D?qs=nCAm%252BcMdy9x80DxeUz5E6w%3D%3D</datasheet>
+      <fields>
+        <field name="Datasheet2">https://nl.mouser.com/ProductDetail/Susumu/RG1005P-272-D-T10?qs=y7y%2FNpWpM9kYXyOrAmBBBw%3D%3D</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Datasheet2" value="https://nl.mouser.com/ProductDetail/Susumu/RG1005P-272-D-T10?qs=y7y%2FNpWpM9kYXyOrAmBBBw%3D%3D"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>fbbcd418-1905-48fb-ac55-8028fbb6a296</tstamps>
+    </comp>
+    <comp ref="R8">
+      <value>100R</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/YAGEO/RT0402FRE07100RL?qs=sGAEpiMZZMvdGkrng054t%252BKCHBXLTLydY05E6nMrbFY%3D</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>caeac083-9d42-49fb-becc-319045f16bba</tstamps>
+    </comp>
+    <comp ref="R9">
+      <value>100k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Vishay-Dale/CRCW0402100KFKEDC?qs=E3Y5ESvWgWPiKlL6PvtQMQ%3D%3D</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d98fe862-9fac-452e-8dfd-3f040b71f36a</tstamps>
+    </comp>
+    <comp ref="R10">
+      <value>47R</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/YAGEO/RT0402FRE0747RL?qs=sGAEpiMZZMvdGkrng054t0q%2FxTkBpeSrrs0gjydReCc%3D</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>45f52d8d-2f3a-4ee2-b2b3-f148a41f183f</tstamps>
+    </comp>
+    <comp ref="R11">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Vishay-Dale/CRCW040210K0FKEDC?qs=E3Y5ESvWgWPiNLcGzwCGPg%3D%3D</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0d82dd45-bfd3-4664-9107-8c8118248b65</tstamps>
+    </comp>
+    <comp ref="R12">
+      <value>820R</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/YAGEO/RT0402FRE07820RL?qs=iFuT%252BolKbR7tOecAWZmkmw%3D%3D</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>5545ed01-48ad-4193-98f8-069248c48103</tstamps>
+    </comp>
+    <comp ref="R13">
+      <value>6K8</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Susumu/RG1005P-682-D-T10?qs=v5GkGT6DDHhLDDYpYvRXHQ%3D%3D</datasheet>
+      <fields>
+        <field name="Datasheet2">https://nl.mouser.com/ProductDetail/Susumu/RG1005P-272-D-T10?qs=y7y%2FNpWpM9kYXyOrAmBBBw%3D%3D</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Datasheet2" value="https://nl.mouser.com/ProductDetail/Susumu/RG1005P-272-D-T10?qs=y7y%2FNpWpM9kYXyOrAmBBBw%3D%3D"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e24dfde6-c502-428d-85df-2737086f2283</tstamps>
+    </comp>
+    <comp ref="R14">
+      <value>1K2</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Susumu/RR0510P-122-D?qs=nCAm%252BcMdy9x80DxeUz5E6w%3D%3D</datasheet>
+      <fields>
+        <field name="Datasheet2">https://nl.mouser.com/ProductDetail/Susumu/RG1005P-272-D-T10?qs=y7y%2FNpWpM9kYXyOrAmBBBw%3D%3D</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Datasheet2" value="https://nl.mouser.com/ProductDetail/Susumu/RG1005P-272-D-T10?qs=y7y%2FNpWpM9kYXyOrAmBBBw%3D%3D"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <property name="ki_description" value="Resistor"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c18703e8-ea33-4819-9b28-8818997fb040</tstamps>
+    </comp>
+    <comp ref="U1">
+      <value>LM4562</value>
+      <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
+      <datasheet>https://nl.farnell.com/texas-instruments/lm4562max-nopb/audio-amplifier-55mhz-20v-us-soic/dp/3004534?st=lm4562</datasheet>
+      <libsource lib="Audio_DSP" part="LM4562" description=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="Discrete_linear_regulator.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>969e5698-38d2-40f5-ab54-d6441070e128 ee6f5ef3-174a-47b6-9fb1-11a8edabef02 3f247697-a819-474c-831d-9a24ee83630c</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Audio_DSP" part="LM4562">
+      <docs>https://nl.farnell.com/texas-instruments/lm4562max-nopb/audio-amplifier-55mhz-20v-us-soic/dp/3004534?st=lm4562</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LM4562</field>
+        <field name="Footprint">Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</field>
+        <field name="Datasheet">https://nl.farnell.com/texas-instruments/lm4562max-nopb/audio-amplifier-55mhz-20v-us-soic/dp/3004534?st=lm4562</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="output"/>
+        <pin num="2" name="-" type="input"/>
+        <pin num="3" name="+" type="input"/>
+        <pin num="4" name="V-" type="power_in"/>
+        <pin num="5" name="+" type="input"/>
+        <pin num="6" name="-" type="input"/>
+        <pin num="7" name="" type="output"/>
+        <pin num="8" name="V+" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="Audio_DSP" part="PZT2222AT3G">
+      <docs>https://nl.farnell.com/on-semiconductor/pzt2222at3g/transistor-bipol-npn-40v-sot-223/dp/2533342?st=pzt2222a</docs>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">PZT2222AT3G</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-223</field>
+        <field name="Datasheet">https://nl.farnell.com/on-semiconductor/pzt2222at3g/transistor-bipol-npn-40v-sot-223/dp/2533342?st=pzt2222a</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="input"/>
+        <pin num="2" name="" type="passive"/>
+        <pin num="3" name="" type="passive"/>
+        <pin num="4" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Audio_DSP" part="PZT2907AT3G">
+      <docs>https://nl.farnell.com/on-semiconductor/pzt2907at3g/transistor-bipol-pnp-60v-sot-223/dp/2533343?st=pzt2907a</docs>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">PZT2907AT3G</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-223</field>
+        <field name="Datasheet">https://nl.farnell.com/on-semiconductor/pzt2907at3g/transistor-bipol-pnp-60v-sot-223/dp/2533343?st=pzt2907a</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="input"/>
+        <pin num="2" name="" type="passive"/>
+        <pin num="3" name="" type="passive"/>
+        <pin num="4" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic" part="Conn_01x06">
+      <description>Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x06</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="C">
+      <description>Unpolarized capacitor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="C_Polarized">
+      <description>Polarized capacitor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>CP_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C_Polarized</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="LED">
+      <description>Light emitting diode</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>LED*</fp>
+        <fp>LED_SMD:*</fp>
+        <fp>LED_THT:*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R">
+      <description>Resistor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Transistor_BJT" part="BC857">
+      <description>0.1A Ic, 45V Vce, PNP Transistor, SOT-23</description>
+      <docs>https://www.onsemi.com/pub/Collateral/BC860-D.pdf</docs>
+      <footprints>
+        <fp>SOT?23*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">BC857</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
+        <field name="Datasheet">https://www.onsemi.com/pub/Collateral/BC860-D.pdf</field>
+      </fields>
+      <pins>
+        <pin num="1" name="B" type="input"/>
+        <pin num="2" name="E" type="passive"/>
+        <pin num="3" name="C" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Audio_DSP">
+      <uri>C:/Users/mgurl/Documents/GitHub/Audio-DSP/KiCAD/Library/Audio_DSP.kicad_sym</uri>
+    </library>
+    <library logical="Connector_Generic">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Connector_Generic.kicad_sym</uri>
+    </library>
+    <library logical="Device">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Device.kicad_sym</uri>
+    </library>
+    <library logical="Transistor_BJT">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Transistor_BJT.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="+12V">
+      <node ref="C10" pin="1" pintype="passive"/>
+      <node ref="J1" pin="4" pinfunction="Pin_4" pintype="passive"/>
+      <node ref="Q4" pin="3" pintype="passive"/>
+      <node ref="R6" pin="1" pintype="passive"/>
+    </net>
+    <net code="2" name="+15V">
+      <node ref="J1" pin="6" pinfunction="Pin_6" pintype="passive"/>
+      <node ref="Q1" pin="2" pintype="passive"/>
+      <node ref="Q1" pin="4" pintype="passive"/>
+      <node ref="R4" pin="1" pintype="passive"/>
+    </net>
+    <net code="3" name="-12V">
+      <node ref="C16" pin="2" pintype="passive"/>
+      <node ref="J1" pin="3" pinfunction="Pin_3" pintype="passive"/>
+      <node ref="Q5" pin="3" pintype="passive"/>
+      <node ref="R13" pin="1" pintype="passive"/>
+    </net>
+    <net code="4" name="-15V">
+      <node ref="J1" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="Q8" pin="2" pintype="passive"/>
+      <node ref="Q8" pin="4" pintype="passive"/>
+      <node ref="R8" pin="1" pintype="passive"/>
+    </net>
+    <net code="5" name="GND">
+      <node ref="C1" pin="2" pintype="passive"/>
+      <node ref="C10" pin="2" pintype="passive"/>
+      <node ref="C11" pin="1" pintype="passive"/>
+      <node ref="C12" pin="1" pintype="passive"/>
+      <node ref="C13" pin="2" pintype="passive"/>
+      <node ref="C14" pin="2" pintype="passive"/>
+      <node ref="C16" pin="1" pintype="passive"/>
+      <node ref="C3" pin="1" pintype="passive"/>
+      <node ref="C4" pin="2" pintype="passive"/>
+      <node ref="C5" pin="2" pintype="passive"/>
+      <node ref="C6" pin="2" pintype="passive"/>
+      <node ref="C9" pin="2" pintype="passive"/>
+      <node ref="D1" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="D3" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="J1" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="J1" pin="5" pinfunction="Pin_5" pintype="passive"/>
+      <node ref="R11" pin="1" pintype="passive"/>
+      <node ref="R14" pin="2" pintype="passive"/>
+      <node ref="R2" pin="1" pintype="passive"/>
+      <node ref="R5" pin="1" pintype="passive"/>
+      <node ref="R7" pin="2" pintype="passive"/>
+      <node ref="R9" pin="1" pintype="passive"/>
+    </net>
+    <net code="6" name="Net-(C2-Pad2)">
+      <node ref="C2" pin="2" pintype="passive"/>
+      <node ref="Q4" pin="1" pintype="input"/>
+      <node ref="U1" pin="7" pintype="output"/>
+    </net>
+    <net code="7" name="Net-(C5-Pad1)">
+      <node ref="C5" pin="1" pintype="passive"/>
+      <node ref="R3" pin="1" pintype="passive"/>
+      <node ref="R4" pin="2" pintype="passive"/>
+      <node ref="R5" pin="2" pintype="passive"/>
+    </net>
+    <net code="8" name="Net-(C6-Pad1)">
+      <node ref="C6" pin="1" pintype="passive"/>
+      <node ref="Q1" pin="1" pintype="input"/>
+      <node ref="R3" pin="2" pintype="passive"/>
+    </net>
+    <net code="9" name="Net-(C11-Pad2)">
+      <node ref="C11" pin="2" pintype="passive"/>
+      <node ref="R10" pin="1" pintype="passive"/>
+      <node ref="R8" pin="2" pintype="passive"/>
+      <node ref="R9" pin="2" pintype="passive"/>
+    </net>
+    <net code="10" name="Net-(C12-Pad2)">
+      <node ref="C12" pin="2" pintype="passive"/>
+      <node ref="Q8" pin="1" pintype="input"/>
+      <node ref="R10" pin="2" pintype="passive"/>
+    </net>
+    <net code="11" name="Net-(C15-Pad2)">
+      <node ref="C15" pin="2" pintype="passive"/>
+      <node ref="Q5" pin="1" pintype="input"/>
+      <node ref="U1" pin="1" pintype="output"/>
+    </net>
+    <net code="12" name="Net-(D1-A)">
+      <node ref="C4" pin="1" pintype="passive"/>
+      <node ref="D1" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="Q3" pin="3" pinfunction="C" pintype="passive"/>
+      <node ref="U1" pin="6" pinfunction="-" pintype="input"/>
+    </net>
+    <net code="13" name="Net-(D3-K)">
+      <node ref="C14" pin="1" pintype="passive"/>
+      <node ref="D3" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="Q11" pin="3" pinfunction="C" pintype="passive"/>
+      <node ref="U1" pin="2" pinfunction="-" pintype="input"/>
+    </net>
+    <net code="14" name="Net-(Q2-B)">
+      <node ref="Q2" pin="1" pinfunction="B" pintype="input"/>
+      <node ref="Q3" pin="2" pinfunction="E" pintype="passive"/>
+      <node ref="R1" pin="2" pintype="passive"/>
+    </net>
+    <net code="15" name="Net-(Q2-C)">
+      <node ref="Q2" pin="3" pinfunction="C" pintype="passive"/>
+      <node ref="Q3" pin="1" pinfunction="B" pintype="input"/>
+      <node ref="R2" pin="2" pintype="passive"/>
+    </net>
+    <net code="16" name="Net-(Q10-B)">
+      <node ref="Q10" pin="1" pinfunction="B" pintype="input"/>
+      <node ref="Q11" pin="2" pinfunction="E" pintype="passive"/>
+      <node ref="R12" pin="2" pintype="passive"/>
+    </net>
+    <net code="17" name="Net-(Q10-C)">
+      <node ref="Q10" pin="3" pinfunction="C" pintype="passive"/>
+      <node ref="Q11" pin="1" pinfunction="B" pintype="input"/>
+      <node ref="R11" pin="2" pintype="passive"/>
+    </net>
+    <net code="18" name="Net-(U1A-+)">
+      <node ref="C15" pin="1" pintype="passive"/>
+      <node ref="R13" pin="2" pintype="passive"/>
+      <node ref="R14" pin="1" pintype="passive"/>
+      <node ref="U1" pin="3" pinfunction="+" pintype="input"/>
+    </net>
+    <net code="19" name="Net-(U1B-+)">
+      <node ref="C2" pin="1" pintype="passive"/>
+      <node ref="R6" pin="2" pintype="passive"/>
+      <node ref="R7" pin="1" pintype="passive"/>
+      <node ref="U1" pin="5" pinfunction="+" pintype="input"/>
+    </net>
+    <net code="20" name="V+">
+      <node ref="C1" pin="1" pintype="passive"/>
+      <node ref="C9" pin="1" pintype="passive"/>
+      <node ref="Q1" pin="3" pintype="passive"/>
+      <node ref="Q2" pin="2" pinfunction="E" pintype="passive"/>
+      <node ref="Q4" pin="2" pintype="passive"/>
+      <node ref="Q4" pin="4" pintype="passive"/>
+      <node ref="R1" pin="1" pintype="passive"/>
+      <node ref="U1" pin="8" pinfunction="V+" pintype="power_in"/>
+    </net>
+    <net code="21" name="V-">
+      <node ref="C13" pin="1" pintype="passive"/>
+      <node ref="C3" pin="2" pintype="passive"/>
+      <node ref="Q10" pin="2" pinfunction="E" pintype="passive"/>
+      <node ref="Q5" pin="2" pintype="passive"/>
+      <node ref="Q5" pin="4" pintype="passive"/>
+      <node ref="Q8" pin="3" pintype="passive"/>
+      <node ref="R12" pin="1" pintype="passive"/>
+      <node ref="U1" pin="4" pinfunction="V-" pintype="power_in"/>
+    </net>
+  </nets>
+</export>

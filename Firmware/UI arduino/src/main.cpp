@@ -178,7 +178,7 @@ void uartReceive(){
 void loop() {
 	uartReceive();
 	if(dataReceived){
-		int command = buffer[0];
+		int command = buffer[0];	
 		int page = buffer[1];
 		int id = buffer[2]-2;
 

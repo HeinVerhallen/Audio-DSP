@@ -3,7 +3,7 @@
 // 
 
 #include "Button.h"
-#include <Arduino.h>;
+#include <Arduino.h>
 
 Button::Button(int pin) {
     btnPin = pin;

@@ -468,7 +468,7 @@
       "idf": "",
       "netlist": "",
       "specctra_dsn": "",
-      "step": "Generic_Buck_Converter.step",
+      "step": "../Library/3D/Generic_Buck_Converter.step",
       "vrml": "Generic_Buck_Converter.wrl"
     },
     "page_layout_descr_file": ""

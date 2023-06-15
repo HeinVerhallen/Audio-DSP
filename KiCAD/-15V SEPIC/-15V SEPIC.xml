@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>C:\Users\silas\OneDrive\Documents\GitHub\Audio-DSP\KiCAD\-15V SEPIC\-15V SEPIC.kicad_sch</source>
-    <date>4/26/2023 12:55:58 PM</date>
+    <date>5/16/2023 11:01:22 AM</date>
     <tool>Eeschema 7.0.2</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -27,6 +27,7 @@
     <comp ref="C1">
       <value>100n</value>
       <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Murata-Electronics/GRM155R71H104KE14D?qs=sGAEpiMZZMvsSlwiRhF8qkiosXznb836lYH0b0rR9OM%3D</datasheet>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="-15V SEPIC.kicad_sch"/>
@@ -38,6 +39,7 @@
     <comp ref="C2">
       <value>10u</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Samsung-Electro-Mechanics/CL32B106KBJNNNE?qs=349EhDEZ59rXK%2FOM74I5cg%3D%3D</datasheet>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="-15V SEPIC.kicad_sch"/>
@@ -49,6 +51,7 @@
     <comp ref="C3">
       <value>10u</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Samsung-Electro-Mechanics/CL32B106KBJNNNE?qs=349EhDEZ59rXK%2FOM74I5cg%3D%3D</datasheet>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="-15V SEPIC.kicad_sch"/>
@@ -82,6 +85,7 @@
     <comp ref="C6">
       <value>10u</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Samsung-Electro-Mechanics/CL32B106KBJNNNE?qs=349EhDEZ59rXK%2FOM74I5cg%3D%3D</datasheet>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="-15V SEPIC.kicad_sch"/>
@@ -93,6 +97,7 @@
     <comp ref="C7">
       <value>10u</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Samsung-Electro-Mechanics/CL32B106KBJNNNE?qs=349EhDEZ59rXK%2FOM74I5cg%3D%3D</datasheet>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="-15V SEPIC.kicad_sch"/>
@@ -104,6 +109,7 @@
     <comp ref="C8">
       <value>10u</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Samsung-Electro-Mechanics/CL32B106KBJNNNE?qs=349EhDEZ59rXK%2FOM74I5cg%3D%3D</datasheet>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="-15V SEPIC.kicad_sch"/>
@@ -115,6 +121,7 @@
     <comp ref="C9">
       <value>10u</value>
       <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Samsung-Electro-Mechanics/CL32B106KBJNNNE?qs=349EhDEZ59rXK%2FOM74I5cg%3D%3D</datasheet>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="-15V SEPIC.kicad_sch"/>
@@ -137,6 +144,7 @@
     <comp ref="C11">
       <value>100n</value>
       <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://nl.mouser.com/ProductDetail/Murata-Electronics/GRM155R71H104KE14D?qs=sGAEpiMZZMvsSlwiRhF8qkiosXznb836lYH0b0rR9OM%3D</datasheet>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="-15V SEPIC.kicad_sch"/>
@@ -157,15 +165,15 @@
       <tstamps>5db4ca2a-c826-42dd-a52a-6aa6690b06fd</tstamps>
     </comp>
     <comp ref="J1">
-      <value>Conn_01x04_Pin</value>
+      <value>Conn_01x04</value>
       <footprint>Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal</footprint>
-      <libsource lib="Connector" part="Conn_01x04_Pin" description="Generic connector, single row, 01x04, script generated"/>
+      <libsource lib="Connector_Generic" part="Conn_01x04" description="Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="-15V SEPIC.kicad_sch"/>
-      <property name="ki_description" value="Generic connector, single row, 01x04, script generated"/>
+      <property name="ki_description" value="Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <property name="ki_keywords" value="connector"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>79195360-420e-475a-a1c1-2214a0f156bf</tstamps>
+      <tstamps>676eedcd-d826-493f-95ac-934c1a14e01f</tstamps>
     </comp>
     <comp ref="L1">
       <value>L_Coupled 744871004</value>
@@ -311,24 +319,6 @@
         <pin num="4" name="4" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Connector" part="Conn_01x04_Pin">
-      <description>Generic connector, single row, 01x04, script generated</description>
-      <docs>~</docs>
-      <footprints>
-        <fp>Connector*:*_1x??_*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">J</field>
-        <field name="Value">Conn_01x04_Pin</field>
-        <field name="Datasheet">~</field>
-      </fields>
-      <pins>
-        <pin num="1" name="Pin_1" type="passive"/>
-        <pin num="2" name="Pin_2" type="passive"/>
-        <pin num="3" name="Pin_3" type="passive"/>
-        <pin num="4" name="Pin_4" type="passive"/>
-      </pins>
-    </libpart>
     <libpart lib="Connector" part="TestPoint">
       <description>test point</description>
       <docs>~</docs>
@@ -343,6 +333,24 @@
       </fields>
       <pins>
         <pin num="1" name="1" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic" part="Conn_01x04">
+      <description>Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x04</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="Device" part="C">
@@ -399,10 +407,13 @@
   </libparts>
   <libraries>
     <library logical="Audio_DSP">
-      <uri>C:\Users\silas\OneDrive\Documents\GitHub\Audio-DSP\KiCAD\Library\Audio_DSP.lib</uri>
+      <uri>C:/Users/silas/OneDrive/Documents/GitHub/Audio-DSP/KiCAD/Library/Audio_DSP.lib</uri>
     </library>
     <library logical="Connector">
       <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Connector.kicad_sym</uri>
+    </library>
+    <library logical="Connector_Generic">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Connector_Generic.kicad_sym</uri>
     </library>
     <library logical="Device">
       <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Device.kicad_sym</uri>

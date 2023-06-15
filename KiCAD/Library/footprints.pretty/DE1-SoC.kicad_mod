@@ -148,7 +148,7 @@
   (pad "1(GPIO_0)" thru_hole circle (at 8.89 -24.13 180) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (tstamp 4a93bc50-fa11-41c1-83c6-f57fd748f888))
   (pad "1(GPIO_1)" thru_hole circle (at -11.43 -24.13 180) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (tstamp 360e6d9d-4cb5-4fc3-b315-c2539dfbf40d))
   (pad "2(GPIO_0)" thru_hole circle (at 11.43 -24.13 180) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (tstamp a9f63a89-1412-4ea3-87eb-36bf6fbf6eac))
-  (pad "2(GPIO_2)" thru_hole circle (at -8.89 -24.13 180) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (tstamp cdad3352-812c-44f3-9d7f-1275526786df))
+  (pad "2(GPIO_1)" thru_hole circle (at -8.89 -24.13 180) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (tstamp cdad3352-812c-44f3-9d7f-1275526786df))
   (pad "3(GPIO_0)" thru_hole circle (at 8.89 -21.59 180) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (tstamp 00382254-5ffa-44af-856b-d35677fd6b42))
   (pad "3(GPIO_1)" thru_hole circle (at -11.43 -21.59 180) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (tstamp 26a763bd-e43c-4967-926a-9fe2e4f7f055))
   (pad "4(GPIO_0)" thru_hole circle (at 11.43 -21.59 180) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (tstamp 9b95cb13-1ac3-4f6b-b050-3018bc6cf2ea))

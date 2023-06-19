@@ -15,7 +15,7 @@
 
 -- PROGRAM		"Quartus Prime"
 -- VERSION		"Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition"
--- CREATED		"Wed Jun 14 11:44:07 2023"
+-- CREATED		"Fri Jun 16 13:27:45 2023"
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all; 
@@ -26,7 +26,9 @@ ENTITY test IS
 	PORT
 	(
 		Clk :  IN  STD_LOGIC;
-		TXActive :  OUT  STD_LOGIC
+		RX :  IN  STD_LOGIC;
+		TXActive :  OUT  STD_LOGIC;
+		TX :  OUT  STD_LOGIC
 	);
 END test;
 
@@ -60,7 +62,6 @@ SIGNAL	LoadByte :  STD_LOGIC;
 SIGNAL	RXData :  STD_LOGIC_VECTOR(7 DOWNTO 0);
 SIGNAL	TXData :  STD_LOGIC_VECTOR(7 DOWNTO 0);
 SIGNAL	TXDone :  STD_LOGIC;
-SIGNAL	SYNTHESIZED_WIRE_0 :  STD_LOGIC;
 
 
 BEGIN 
@@ -69,12 +70,12 @@ BEGIN
 
 b2v_inst : uartblock
 PORT MAP(Clk => Clk,
-		 RX => SYNTHESIZED_WIRE_0,
+		 RX => RX,
 		 LoadByte => LoadByte,
 		 TXData => TXData,
 		 Dataready => Dataready,
 		 TXActive => TXActive,
-		 TX => SYNTHESIZED_WIRE_0,
+		 TX => TX,
 		 TXDone => TXDone,
 		 RXData => RXData);
 

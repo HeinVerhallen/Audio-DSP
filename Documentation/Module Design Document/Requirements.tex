@@ -1,4 +1,71 @@
 \section{Functional specifications}
 
+The audio system has some requirements to specify the final result. These requirements are derived with the “MoSCoW” method. It must be noted that the following requirements will be confirmed by the research that will be conducted.
+
+	\newpage
+	\subsection{Requirements}
+	\begin{longtable}{|c|p{10cm}|c|c|}
+		\hline
+		\textbf{ID} & \textbf{Requirement} & \textbf{Priority} & \textbf{Status}\\ \hline 
+		\textbf{U1} & \textbf{Inputs:} \newline
+		•Two RCA audio inputs which work on a line level of 4dBu(±1,74V)\newline
+		•Two 6,35mm TRS plug audio inputs which work on a line level of 4dBu(±1,74V)\newline
+		•Two XLR audio inputs which work on a line level of 22dBu(±9,75)\newline
+		•USB type B audio input & Must & Proposed\\ \hline
+
+		\textbf{U2} & \textbf{Outputs:} \newline
+		•Two RCA audio outputs which work on a line level of 4dBu(±1,74V)\newline
+		•Two 6,35mm TRS plug audio outputs which work on a line level of 4dBu(±1,74V)\newline
+		•Four XLR signal outputs which work on a line level of 22dBu(±9,75)
+		 & Must & Proposed\\ \hline
+
+		\textbf{U3} &The system should have a bandwidth (±3 dB) of at least 20 Hz up and till 20 kHz without any filters applied. 	& Must   & Proposed\\ \hline
+		\textbf{U4} &The system has an Audio sample rate of at least 44.1 kHz 														& Must   & Proposed\\ \hline
+		\textbf{U5} &The ADC and DAC resolution is at least 16-bit 																	& Must   & Proposed\\ \hline
+		\textbf{U6} &The system has a propagation delay of less than 100ms without any filters applied 								& Must   & Proposed\\ \hline
+		\textbf{U7} &User can select what input will be used via a user interface													& Must   & Proposed\\ \hline
+		\textbf{U8} &User can select up to 4 effects to active on one channel at the same time 										& Must   & Proposed\\ \hline
+		\textbf{U9} &User can configure each effect 																				& Must   & Proposed\\ \hline
+		\textbf{U10} &The system must work stand alone and be configurable via a basic graphical user interface 					& Must   & Proposed\\ \hline
+		\textbf{U11} &Effects are configurable per output channel, at least four different sound effects should be able to be applied to each signal output signal at the same time: \newline
+		\begin{itemize}
+			\setlength\itemsep{-0.4em}
+			\item Distortion
+			\item Reverb
+			\item Gain
+			\item Equalizer
+			\item Delay
+		\end{itemize}																												& Must 	 & Proposed\\ \hline
+		\textbf{U12}  &The system should have a bandwidth (±1 dB) of at least 20 Hz up and till 20 kHz without any filters applied 	& Should & Proposed\\ \hline
+		\textbf{U13}  &Audio sample rate of at least 96 kHz 																		& Should & Proposed\\ \hline
+		\textbf{U14} & The ADC and DAC resolution is at least 24-bit. 																& Should & Proposed\\ \hline
+		\textbf{U15} & Six XLR signal outputs work on a line level of 22 dBu (±9,75 V) 												& Should & Proposed\\ \hline
+		\textbf{U16} & User can select up to 10 effects to be active in one channel at the same time. 								& Should & Proposed\\ \hline
+		\textbf{U17} & Low enough jitter to not influence the audio quality too much 												& Should & Proposed\\ \hline
+		\textbf{U18} & Local power supplies for different parts of the system 														& Should & Proposed\\ \hline
+		\textbf{U19} & Low enough jitter to not influence the audio quality too much 												& Should & Proposed\\ \hline
+		\textbf{U20} & Effects:\newline
+		\begin{itemize}
+			\setlength\itemsep{-0.3em}
+			\item Phaser
+			\item Tremelo
+			\item Flanger
+			\item Fuzz
+			\item Overdrive
+			\item Chorus
+			\item Compressor
+			\item Wah
+			\item Looper
+			\item Wow and flutter
+			\item Modulator
+			\item Echo
+			\item Fade in
+		\end{itemize}																												& Should & Proposed\\ \hline
+		\textbf{U21} & Audio sample rate of at least 192 kHz 																		& Could  & Proposed\\ \hline
+		\textbf{U22} & Touch screen user interface 																					& Could  & Proposed\\ \hline
+		\textbf{U23} & Self-made mains power supply  																				& Won't  & Proposed\\ \hline
+	\end{longtable}
+
+    
 \section{Non-functional specifications}
 

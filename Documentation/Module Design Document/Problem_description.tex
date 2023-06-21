@@ -1,21 +1,119 @@
 \section{Background}
 %BACKGROUND
-When it comes to listening to music, it is crucial that the speakers are appropriately calibrated to both the surrounding environment and the position of the listener. This calibration is essential in order to achieve the best possible listening experience since sound pressure varies depending on the frequency at specific locations, characterized by nodes and antinodes. These nodes and antinodes shift throughout the space depending on the frequency. As a high fidelity (Hi-Fi) music listener, it is desirable to have the sound from all speakers reach you simultaneously. However, speakers are often not optimally positioned due to certain physical characteristics of the room. In cases where the speakers are not properly aligned with the surrounding environment, a digital signal processor (DSP) can be utilized to rectify this issue. A DSP is a specialized processor designed specifically for digital signal processing.
 
-\noindent In the audio realm, DSPs are employed to optimize sound systems. Since perfect speakers do not exist, all speakers inherently possess certain imperfections. However, a DSP can compensate for these imperfections and provide corrective measures. Additionally, DSPs are frequently utilized to enhance the dynamics of sound and imbue it with a distinct character or sensation.
+\noindent In the audio realm, digital signal processors (DSP) are employed to optimize sound systems. Since perfect speakers do not exist, all speakers inherently possess certain imperfections. However, a DSP can compensate for these imperfections and provide corrective measures. Additionally, DSPs are frequently utilized to enhance the dynamics of sound and imbue it with a distinct character or sensation.
 
 \noindent As a group, we have chosen to develop an audio DSP for the BeCreative minor because we are eager to learn how audio DSPs function and how to create one ourselves. Our ultimate goal is to be able to utilize this audio DSP to enhance the listening experience of music by correcting for speaker imperfections and applying specific presets. The system must meet the requirements outlined in the System Requirements Document (SRD), but what is most important to us is the opportunity for learning and acquiring valuable knowledge throughout the process.
 
 
 \section{Problem description}
 
+\noindent When it comes to listening to music, it is crucial that the speakers are appropriately calibrated to both the surrounding environment and the position of the listener. This calibration is essential in order to achieve the best possible listening experience since sound pressure varies depending on the frequency at specific locations, characterized by nodes and antinodes. These nodes and antinodes shift throughout the space depending on the frequency. As a high fidelity (Hi-Fi) music listener, it is desirable to have the sound from all speakers reach you simultaneously. However, speakers are often not optimally positioned due to certain physical characteristics of the room. In cases where the speakers are not properly aligned with the surrounding environment, a digital signal processor can be utilized to rectify this issue. A DSP is a specialized processor designed specifically for digital signal processing.
+
 \section{Project goals}
 
+The goal of this project was to research how to make an audio-DSP. This raised the main research question: \textbf{“How to design an audio-DSP?”}. In the process of researching this an actual audio-DSP has been developed. From the main research question the following sub-research questions were derived:
+\begin{itemize} %THIS IS TO MAKE LISTS
+	\setlength\itemsep{-0.3em} %MAKES THE GAP SMALLER BETWEEN 2 ITEMS
+	\item What is the best method for creating digital filters?
+	\item What is the best method for creating digital effects?
+	\item What is the most suitable anti-aliasing filter?
+	\item What is the optimal needed roll-off for the anti-aliasing filter for a given bandwidth such that the noise can be negligible?
+	\item What is the minimum sample frequency needed to capture the desired frequency spectrum?
+	\item What is the minimum frequency range to be sampled to achieve sufficient detailed audio?
+	\item What is the lowest allowable noise for decent audio?
+	\item What analog to digital converter (ADC) resolution is needed such that the quantization error and noise level are on par?
+	\item What ADC and digital to analog converter (DAC) architecture is most suitable for this application?
+	\item What kind of processor is most suitable for this application?
+	\item What is the permittable jitter for accurate audio?
+	\item What is the maximum allowable ripple on the reference voltage for the ADC and DAC?
+	\item How much RAM does the system need?
+	\item How much flash does the system need?
+	\item What power supply topology is best suited for each part of the system? \\
+\end{itemize}
+
+
+
+\par
+\noindent
+The audio system has some requirements to specify the final result. These requirements are derived with the “MoSCoW” method. It must be noted that the following requirements will be confirmed by the research that will be conducted.
+
+	\newpage
+	\section{Requirements}
+	\begin{longtable}{|c|p{10cm}|c|c|}
+		\hline
+		\textbf{ID} & \textbf{Requirement} & \textbf{Priority} & \textbf{Status}\\ \hline 
+		\textbf{U1} & \textbf{Inputs:} \newline
+		•Two RCA audio inputs which work on a line level of 4dBu(±1,74V)\newline
+		•Two 6,35mm TRS plug audio inputs which work on a line level of 4dBu(±1,74V)\newline
+		•Two XLR audio inputs which work on a line level of 22dBu(±9,75)\newline
+		•USB type B audio input & Must & Proposed\\ \hline
+
+		\textbf{U2} & \textbf{Outputs:} \newline
+		•Two RCA audio outputs which work on a line level of 4dBu(±1,74V)\newline
+		•Two 6,35mm TRS plug audio outputs which work on a line level of 4dBu(±1,74V)\newline
+		•Four XLR signal outputs which work on a line level of 22dBu(±9,75)
+		 & Must & Proposed\\ \hline
+
+		\textbf{U3} &The system should have a bandwidth (±3 dB) of at least 20 Hz up and till 20 kHz without any filters applied. 	& Must   & Proposed\\ \hline
+		\textbf{U4} &The system has an Audio sample rate of at least 44.1 kHz 														& Must   & Proposed\\ \hline
+		\textbf{U5} &The ADC and DAC resolution is at least 16-bit 																	& Must   & Proposed\\ \hline
+		\textbf{U6} &The system has a propagation delay of less than 100ms without any filters applied 								& Must   & Proposed\\ \hline
+		\textbf{U7} &User can select what input will be used via a user interface													& Must   & Proposed\\ \hline
+		\textbf{U8} &User can select up to 4 effects to active on one channel at the same time 										& Must   & Proposed\\ \hline
+		\textbf{U9} &User can configure each effect 																				& Must   & Proposed\\ \hline
+		\textbf{U10} &The system must work stand alone and be configurable via a basic graphical user interface 					& Must   & Proposed\\ \hline
+		\textbf{U11} &Effects are configurable per output channel, at least four different sound effects should be able to be applied to each signal output signal at the same time: \newline
+		\begin{itemize}
+			\setlength\itemsep{-0.4em}
+			\item Distortion
+			\item Reverb
+			\item Gain
+			\item Equalizer
+			\item Delay
+		\end{itemize}																												& Must 	 & Proposed\\ \hline
+		\textbf{U12}  &The system should have a bandwidth (±1 dB) of at least 20 Hz up and till 20 kHz without any filters applied 	& Should & Proposed\\ \hline
+		\textbf{U13}  &Audio sample rate of at least 96 kHz 																		& Should & Proposed\\ \hline
+		\textbf{U14} & The ADC and DAC resolution is at least 24-bit. 																& Should & Proposed\\ \hline
+		\textbf{U15} & Six XLR signal outputs work on a line level of 22 dBu (±9,75 V) 												& Should & Proposed\\ \hline
+		\textbf{U16} & User can select up to 10 effects to be active in one channel at the same time. 								& Should & Proposed\\ \hline
+		\textbf{U17} & Low enough jitter to not influence the audio quality too much 												& Should & Proposed\\ \hline
+		\textbf{U18} & Local power supplies for different parts of the system 														& Should & Proposed\\ \hline
+		\textbf{U19} & Low enough jitter to not influence the audio quality too much 												& Should & Proposed\\ \hline
+		\textbf{U20} & Effects:\newline
+		\begin{itemize}
+			\setlength\itemsep{-0.3em}
+			\item Phaser
+			\item Tremelo
+			\item Flanger
+			\item Fuzz
+			\item Overdrive
+			\item Chorus
+			\item Compressor
+			\item Wah
+			\item Looper
+			\item Wow and flutter
+			\item Modulator
+			\item Echo
+			\item Fade in
+		\end{itemize}																												& Should & Proposed\\ \hline
+		\textbf{U21} & Audio sample rate of at least 192 kHz 																		& Could  & Proposed\\ \hline
+		\textbf{U22} & Touch screen user interface 																					& Could  & Proposed\\ \hline
+		\textbf{U23} & Self-made mains power supply  																				& Won't  & Proposed\\ \hline
+	\end{longtable}
+
 \section{Project scope}
+
+The project is conducted during the minor BeCreative at Fontys. This minor took 20 weeks and allowed the students to have a budget of €300,-. Thus after 20 weeks starting from 6-2-2023 an audio-DSP has been delivered within a budget of €300,-.
+\par Weekly meetings were conducted with the project's assessor to keep the research and tasks on track.
 
 \section{Boundary condition}
 
 \section{Project approach}
 
+The project is guided by a system of dividing tasks, having weekly meetings, and keeping each other up-to-date by asking questions outside of meetings. Research is devided and cohering tasks are assigned.
+
 \section{Verification method}
+
+At the end of the semester there should be a working audio DSP capable of the must-have requirements. 
 

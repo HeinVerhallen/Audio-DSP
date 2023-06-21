@@ -1,11 +1,3 @@
-----------------------------------------------------------------------
--- File Downloaded from http://www.nandland.com
-----------------------------------------------------------------------
--- This file contains the UART Receiver.  This receiver is able to
--- receive 8 bits of serial data, one start bit, one stop bit,
--- and no parity bit.  When receive is complete rx_dv will be
--- driven high for one clock cycle.
--- 
 -- Set Generic CLKS_PER_BIT as follows:
 -- g_CLKS_PER_BIT = (Frequency of Clk)/(Frequency of UART)
 -- Example: 25 MHz Clock, 115200 baud UART
@@ -100,7 +92,7 @@ begin
         -- Receive Stop bit.  Stop bit = 1
         when RX_Stop_Bit =>
           -- Wait CLKS_PER_BIT-1 clock cycles for Stop bit to finish
-          if Clk_Count < CLKS_PER_BIT-1 then
+          if Clk_Count < CLKS_PER_BIT - 1 then
             Clk_Count <= Clk_Count + 1;
             SM_Main   <= RX_Stop_Bit;
           else

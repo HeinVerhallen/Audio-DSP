@@ -6,7 +6,7 @@ use IEEE.math_real.all;
 
 entity BPF_filter is
     GENERIC(
-        d_width     : integer := 24;
+        d_width     : integer := 8;
         freq_sample : integer := 192000;
         freq_res    : integer := 400;                         --resonance frequency
         gain        : integer := 1);
@@ -40,28 +40,93 @@ architecture Behavioral of BPF_filter is
     signal test_real    : real := -20480.5364;
 
     function compress (
-        a       : in unsigned;
-        d_width : in integer
+        a       : in unsigned;  --Value to be compressed
+        d_width : in integer    --The size where the input value needs to be compressed to
     ) return unsigned is
-        variable result         : unsigned(a'length-1 downto 0);
-        variable temp_mirror    : unsigned(0 to a'length-1);
-        variable max            : unsigned(d_width-1 downto 0) := (others => '1');
-    begin
-        if (a > max) then
-            report "Is larger!";
+        constant max            : unsigned(d_width-1 downto 0) := (others => '1');  --minimal value for input value to be shifted
 
+        variable temp_mirror    : unsigned(0 to a'length-1);        --mirrored temp value
+        variable shiftVal       : unsigned(a'length-1 downto 0);    --value that the input needs to be shifted
+
+        variable temp_result    : unsigned(a'length*2-1 downto 0);  --temporary result
+        variable result         : unsigned(d_width-1 downto 0);     --final result
+    begin
+        --Input is larger than maximum 
+        if (a > max) then
+            --Mirror input
             for i in 0 to a'length-1 loop
                 temp_mirror(i) := a(i);
             end loop;
 
-            result := resize(a * (temp_mirror and not (temp_mirror - "1")), a'length);
-            report "result: " & integer'image(to_integer(result));
+            --Compute amount of shifts for the value to line up correctly
+            shiftVal := temp_mirror and not (temp_mirror - "1");
+
+            --Shift input value by computed shift value
+            temp_result := a * shiftVal;
+
+            --Resize and set d_width amount of MSB to result
+            result := resize(temp_result(a'length-1 downto a'length-d_width), d_width);
         else
-            report "Is smaller!";
-            result(a'length-1 downto a'length-d_width) := a(d_width-1 downto 0);
+            --Set d_width amount of input bits to result
+            result := a(d_width-1 downto 0);
         end if;
 
-        return result(a'length-1 downto a'length-d_width);
+        return result;
+    end compress;
+
+    function compress (
+        a       : in signed;    --Value to be compressed
+        d_width : in integer    --The size where the input value needs to be compressed to
+    ) return signed is
+        constant max_signed     : unsigned(d_width-2 downto 0) := (others => '1');  --minimal value for a negative valued input to be shifted
+        constant max_unsigned   : unsigned(d_width-1 downto 0) := (others => '1');  --minimal value for a positive valued input to be shifted
+
+        variable temp_a         : unsigned(a'length-1 downto 0);    --temporary input value
+        variable temp_mirror    : unsigned(0 to a'length-1);        --mirrored temp value
+        variable shiftVal       : unsigned(a'length-1 downto 0);    --value that the input needs to be shifted
+
+        variable temp_result    : signed(a'length*2-1 downto 0);    --temporary result
+        variable result         : signed(d_width-1 downto 0);       --final result
+    begin
+        --Convert signed input to unsigned value
+        temp_a := unsigned(a);
+
+        --If signed make unsigned
+        if (temp_a(a'left) = '1') then 
+            temp_a := (not temp_a) + 1; 
+        end if;
+
+        if ((a(a'left) = '0' and temp_a > max_unsigned) or (a(a'left) = '1' and temp_a > max_signed)) then
+            --Mirror temp
+            for i in 0 to a'length-1 loop
+                temp_mirror(i) := temp_a(i);
+            end loop;
+
+            --Compute amount of shifts for the value to line up correctly
+            shiftVal := ((temp_mirror and not (temp_mirror - 1)) / 2);
+
+            --Correct for zero value
+            if (shiftVal < 1) then
+                shiftVal := shiftVal + 1;
+            end if;
+
+            --Shift input value by computed shift value
+            temp_result := a * signed(shiftVal);
+
+            --Resize and set d_width amount of MSB to result
+            result := resize(temp_result(a'length-1 downto a'length-d_width), d_width);
+        --Input is signed
+        elsif a(a'left) = '1' then
+            --Set d_width amount of input bits to result
+            result := a(d_width-1 downto 0);
+
+        --Input is unsigned
+        else
+            --Set d_width amount of input bits minus sign position bit to result
+            result := '0' & a(d_width-2 downto 0);
+        end if;
+
+        return result;
     end compress;
 
 begin
@@ -149,7 +214,7 @@ begin
             temp_state(i) := coef_Ad(i*2)*state(0) + coef_Ad(i*2+1)*state(1) ;--+ coef_Bd(i)*signed(d_in);
             temp_state(i) := temp_state(i) / 32768;
             --temp_state(i) := temp_state(i)/2 + (temp_state(i) - ((temp_state(i)/2) * 2));-- temp_state(i)(0);
-            state(i) <= signed(compress(unsigned(temp_state(i)), 32));
+            --state(i) <= signed(compress(unsigned(temp_state(i)), 32));
         end loop;
 
         --output <= std_logic_vector(compress(unsigned(temp_state(1)), d_width));

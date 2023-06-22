@@ -21,9 +21,8 @@
 *.fft
 stab.txt
 
-!Documentation/Module Design Document/images/*.pdf
 Documentation/**/*.pdf
-
+!Documentation/Module Design Document/images/*.pdf
 
 Firmware/**/*.qws
 Firmware/**/db

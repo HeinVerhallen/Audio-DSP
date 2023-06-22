@@ -26,6 +26,8 @@ Finally, the digitized data is sent to the FPGA through the $I^2S$ protocol, whe
 \end{figure}
 
 \subsection{Audio-DSP}
+During the development process, we came to the conclusion that the desired system could not be realized with the chosen hardware and system requirements. This is because the first design did the processing of the effects with the Fast Fourier Transform. Because the Fast Fourier Transform (FFT) requires all the samples from a certain time window at once, it takes the time window amount of time to process. This caused the latency of the system to get so large that it would not meet the requirement of 100ms propagation delay. Other than that it would not meet the requirement, it is also very complex to design the processing of the system with the FFT.
+
 \begin{figure}[ht]
     \includegraphics[width=\linewidth]{20230622_Audio-DSP design_redesign-Audio-DSP.png}\\    
     \caption{Top-level architecture of audio-DSP}
@@ -67,17 +69,44 @@ To make sure that the signal processor modifies the input sample correctly it is
     \label{fig:arch-signal-processor}
 \end{figure}
 
-The signal processor has to load a new sample into the effect loop and the previous modified sample to the output on the sample frequency. The sample frequency of the Audio-DSP is 192kHz. This means that the signal processor has $\frac{1}{192 \cdot 10^3} \approx 5 \mu s$ to process the sample. With a clock of 50MHz the sample must be modified and loaded into the output within $\frac{50 \cdot 10^6}{192 \cdot 10^3}=260$ clock ticks.
+As seen in figure \ref{fig:arch-signal-processor} all the effects are wired in series. Therefore it is needed to have some kind of handshake between each effect block to indicate if the effect can do its processing on the input data. The only thing the effect block needs to know is whether the input data is available to start the computation inside the effect. Therefore each block has an available input and output line. 
 
-When a sample has been loaded into the signal processor, it is fed into the effect processor manager (see figure \ref{fig:arch-signal-processor}). The effect processor manager houses multiple effects processor in series. The sample will go through these effect processors. Each effect processor can be configured to be a certain effect (see figure \ref{fig:arch-effect-processor}). Because the system has at least twenty effects, the amount of bits the selector needs is 5 bits.
 
-Each effect modifies the signal by applying a transfer function to the sample. The variables in that transfer function are configured by the user via the user interface. Therefore the effect processors needs to get the variables from the controller block, which gets the variables from the register bank. After the sample has gone through all the effect processors the modified sample waits before it is shifted out of the signal processor. 
+
+\subsubsection{Effect parameters}
+The implemented effects are the following:
+
+\begin{itemize}
+    \setlength\itemsep{-0.3em} %MAKES THE GAP SMALLER BETWEEN 2 ITEMS
+    \item Distortion (gain)
+    \item Delay
+    \item Reverb
+    \item Equalizer
+\end{itemize}
+
+The distortion effect works by amplifying the input signal with a gain and clipping the amplified signal at a certain level to obtain saturation. This saturation level is hardcoded in the effect. The gain can be adjusted by the user. Therefore the distortion effect only has one parameter, namely gain.
+
+The delay effect works by adding a previous sample to the current sample creating the effect of delaying a signal. For this the delay time is a necessary parameter. The amount of time the delay lasts is configured by the feedback parameter. This simply feedbacks the output signal back to the input with a factor that causes the delayed signal to die out eventually. Another parameter used in delay effects is the mix parameter. This parameter configures the level of the delayed signal in relation to the original signal. Therefore the parameters this effects needs are: delay time, feedback and mix. 
+
+The reverb effect works nearly identical to the delay effect but it has a feedback loop that causes the signal to decay over time. This results in the effect of reverberation. The effect can be heard in large empty rooms when you for instance clap with your hands and hear the clap reflect back from the walls. To emulate this effect the necessary parameters are the length of the reverb, which represents how long it takes for the signal to decay. Another parameter is the size of the room that it needs to emulate. This represents the time it takes for the delayed signal to reverb back from the walls. Thus the reverb effect has two parameters: length and size.
+
+To implement the equalizer effect there are different approaches. As explained in the beginning of this chapter the first approach was to implement the effects with FFT, which would make the implementation of an equalizer much easier as you could simply modify the magnitudes of every frequency in the transformed spectrum to your liking. But because this approach has been canceled another very powerful and extremely fast mathematical method is chosen to implement the equalizer effect. The chosen method is state-space. With state-space a multiple order system can by simplified into multiple first order equations. With state-space a physical system can be represented by a set of inputs and outputs with a set of state variables related by first-order differential equations. 
+
+Making an equalizer effect can be seen as adding up different band-pass filters. Thus to make the equalizer filter it is much simpler to represent a band-pass filter with state-space and change the state variables according to the desired frequency of the band-pass filter. To do this a physical system should be converted to state-space. The simplest system for making a band-pass filter in electronics is by having a low-pass filter in series with a buffer and a high-pass filter (see figure \ref{fig:bpf-circuit}). The calculations needed to achieve the state-space notation of this circuit can be seen in appendix ???.
 
 \begin{figure}[ht]
-    \includegraphics[width=\linewidth]{Effect processor architecture}
-    \caption{Effect processor architecture}
-    \label{fig:arch-effect-processor}
+    \includegraphics[width=\linewidth]{BandPassFilter_circuit.jpg}
+    \caption{Band-pass filter circuit with $f_{resonance}=\frac{1}{2\pi RC}\ where\ C=C1=C2,\ R=R1=R2,\ R3=\infty\Omega\ and\ R4=0\Omega$}
+    \label{fig:bpf-circuit}
 \end{figure}
+
+The band-pass filter circuit has a roll-off of 20dB per decade. This directly effects the amount of band-pass filters we can fit within the frequency range of 20Hz to 20KHz. To optimally distribute the different band-pass filters with different resonance frequencies the maximum amount of band-pass filters is four. 
+
+% The signal processor has to load a new sample into the effect loop and the previous modified sample to the output on the sample frequency. The sample frequency of the Audio-DSP is 192kHz. This means that the signal processor has $\frac{1}{192 \cdot 10^3} \approx 5 \mu s$ to process the sample. With a clock of 50MHz the sample must be modified and loaded into the output within $\frac{50 \cdot 10^6}{192 \cdot 10^3}=260$ clock ticks.
+
+% When a sample has been loaded into the signal processor, it is fed into the effect processor manager (see figure \ref{fig:arch-signal-processor}). The effect processor manager houses multiple effects processor in series. The sample will go through these effect processors. Each effect processor can be configured to be a certain effect (see figure \ref{fig:arch-effect-processor}). Because the system has at least twenty effects, the amount of bits the selector needs is 5 bits.
+
+% Each effect modifies the signal by applying a transfer function to the sample. The variables in that transfer function are configured by the user via the user interface. Therefore the effect processors needs to get the variables from the controller block, which gets the variables from the register bank. After the sample has gone through all the effect processors the modified sample waits before it is shifted out of the signal processor. 
 
 \subsection{Back-end}
 The architecture design of the back-end of the Audio-DSP is shown in figure \ref{fig:arch-back-end}. The processed data is sent from the FPGA to the DACs via the I2S protocol. The back-end consists of three stereo DACs, which, like the front-end, can be used as six separate mono channels depending on the user's preferences. Similar to the front-end, the I2S connections in the back-end are equipped with EMI reduction resistors due to the relatively high data rate.

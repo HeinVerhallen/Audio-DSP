@@ -28,6 +28,7 @@ Finally, the digitized data is sent to the FPGA through the $I^2S$ protocol, whe
 \subsection{Audio-DSP}
 During the development process, we came to the conclusion that the desired system could not be realized with the chosen hardware and system requirements. This is because the first design did the processing of the effects with the Fast Fourier Transform. Because the Fast Fourier Transform (FFT) requires all the samples from a certain time window at once, it takes the time window amount of time to process. This caused the latency of the system to get so large that it would not meet the requirement of 100ms propagation delay. Other than that it would not meet the requirement, it is also very complex to design the processing of the system with the FFT.
 
+\subsubsection{Audio-DSP top-level}
 \begin{figure}[ht]
     \includegraphics[width=\linewidth]{20230622_Audio-DSP design_redesign-Audio-DSP.png}\\    
     \caption{Top-level architecture of audio-DSP}
@@ -69,9 +70,7 @@ To make sure that the signal processor modifies the input sample correctly it is
     \label{fig:arch-signal-processor}
 \end{figure}
 
-As seen in figure \ref{fig:arch-signal-processor} all the effects are wired in series. Therefore it is needed to have some kind of handshake between each effect block to indicate if the effect can do its processing on the input data. The only thing the effect block needs to know is whether the input data is available to start the computation inside the effect. Therefore each block has an available input and output line. 
-
-
+As seen in figure \ref{fig:arch-signal-processor} all the effects are wired in series. Therefore it is needed to have some kind of handshake between each effect block to indicate if the effect can do its processing on the input data. The only thing the effect block needs to know is whether the input data is available to start the computation inside the effect. Therefore each block has an available input and output line. When the i\_avail signal goes high, the effect block starts the computation. When the computation is finished in the effect block, the o\_avail signal will be set high for a short time so the next effect block can start the computation.
 
 \subsubsection{Effect parameters}
 The implemented effects are the following:
@@ -100,7 +99,52 @@ Making an equalizer effect can be seen as adding up different band-pass filters.
     \label{fig:bpf-circuit}
 \end{figure}
 
-The band-pass filter circuit has a roll-off of 20dB per decade. This directly effects the amount of band-pass filters we can fit within the frequency range of 20Hz to 20KHz. To optimally distribute the different band-pass filters with different resonance frequencies the maximum amount of band-pass filters is four. 
+By having multiple band-pass filters with different cut-off frequencies the frequency spectrum is divided into individual bands, like and equalizer. The interval between these filter bands is normally described in octaves. Most commonly each filter bank is positioned at each octave as seen in figure \ref{fig:filter-banks-octave}. The shown filter bands have quite a large roll-off of approximately 40 per decade. Which means this system has band-pass filters of the fourth order. The simple band-pass circuit that this system uses is a first order band-pass filter, which therefore has a roll-off of 20dB per decade. 
+
+\begin{figure}[ht]
+    \includegraphics[width=\linewidth]{filter-banks-centered-at-octave.jpg}
+    \caption{four symmetrical band-pass filters centered at each octave}
+    \label{fig:filter-banks-octave}
+\end{figure}
+
+It is chosen that for simplicity of the design that the band-pass filters cross their neighboring band-pass filter at approximately -6dB. This results in a smooth transition between the band-pass filters. To achieve this the neighboring band-pass filter should have a resonance frequency that is two octaves higher than the current one.
+
+The system has a frequency range of 20Hz to 20KHz. It is unnecessary to set the resonance frequency of the two outer band-pass filters to these outer ranges of the spectrum as these frequencies cannot be heard by most humans. Therefore it is chosen to choose the outer band-pass filter frequencies such that the magnitude at the outer ranges of the spectrum is also -6dB. Thus the most left band-pass filter has a resonance frequency that is an octave higher than the lowest frequency, $2\cdot20Hz=40Hz$. And the most right band-pass filter has a resonance frequency that is an octave lower than the highest frequency, $\frac{1}{2}\cdot20KHz=10KHz$.
+
+Now that the outer resonance frequencies are known it is possible to calculate how many band-pass filters are able to fit between these frequencies. It is known that the distance between the resonance frequencies of neighboring band-pass filters is two octaves. The equation for computing the factor to equally distribute the resonance frequencies is as follows: 
+
+\begin{equation}
+    factor=\sqrt[N-1]{\frac{f_{high}}{f_{low}}}
+\end{equation}
+
+The value that is unknown in N. So the equation for N is as follows: 
+
+\begin{equation}
+    N=\frac{\ln\frac{f_{high}}{f_{low}}}{\ln{factor}}+1\rightarrow N=\frac{\ln\frac{10KHz}{40Hz}}{\ln{4}}+1\approx 5
+\end{equation}
+
+So with with a distance of two octaves between each band it is possible to have 5 band-pass filters within the frequency spectrum. The resulting resonance frequencies of the band-pass filters are thus: 
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \# & Resonance frequency [Hz]\\
+        \hline
+        1 & 40\\
+        \hline
+        2 & 160\\
+        \hline
+        3 & 640\\
+        \hline
+        4 & 2560\\
+        \hline
+        5 & 10240\\
+        \hline
+    \end{tabular}
+    \caption{Band-pass filter resonance frequencies}
+    \label{table:bpf-filters-frequencies}
+\end{table}
 
 % The signal processor has to load a new sample into the effect loop and the previous modified sample to the output on the sample frequency. The sample frequency of the Audio-DSP is 192kHz. This means that the signal processor has $\frac{1}{192 \cdot 10^3} \approx 5 \mu s$ to process the sample. With a clock of 50MHz the sample must be modified and loaded into the output within $\frac{50 \cdot 10^6}{192 \cdot 10^3}=260$ clock ticks.
 

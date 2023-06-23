@@ -1,6 +1,12 @@
 The lower level design of the system are explained in the architecture design of the system. 
 
 \subsection{Front-end}
+\begin{figure}[ht]
+    \includegraphics[width=\linewidth]{Front-end detailed.png}\\    
+    \caption{Front-end architecture of audio-DSP}
+    \label{fig:arch-front-end}
+\end{figure}
+
 The architecture design of the front-end of the Audio-DSP is shown in figure \ref{fig:arch-front-end}. The heart of the front-end consists of two stereo ADCs, although they are not necessarily used in stereo, and it is up to the user to choose how to utilize them. In essence, the audio DSP's front-end can be seen as four separate mono ADCs, as they provide the user with complete flexibility in their application. If time permits, the audio DSP will also feature a USB input, allowing direct digital audio input from a computer. This eliminates the need for digital-to-analog conversion by the computer's DAC and analog-to-digital conversion by the audio DSP. In theory, this USB input should offer the highest audio quality.
 
 CH1 and CH2 each have a DPDT relay that enables the user to select between RCA or jack inputs. CH1 and CH2 are not required to use the same connector type, providing maximum flexibility to the user.
@@ -18,12 +24,6 @@ Just before the actual ADCs, there is a differential active low-pass filter that
 The optional USB connection, CH5, is also protected by ESD diodes and then directly connected to the FPGA, which will convert the USB signal into the desired data format.
 
 Finally, the digitized data is sent to the FPGA through the $I^2S$ protocol, where it can be processed. Due to the relatively high data rate of the I2S data, these connections are equipped with EMI reduction resistors, which essentially form an RC filter with the capacitance of the PCB trace and the ground plane, while also acting as series terminations.
-
-\begin{figure}[ht]
-    \includegraphics[width=\linewidth]{Front-end detailed.png}\\    
-    \caption{Front-end architecture of audio-DSP}
-    \label{fig:arch-front-end}
-\end{figure}
 
 \subsection{Audio-DSP}
 During the development process, we came to the conclusion that the desired system could not be realized with the chosen hardware and system requirements. This is because the first design did the processing of the effects with the Fast Fourier Transform. Because the Fast Fourier Transform (FFT) requires all the samples from a certain time window at once, it takes the time window amount of time to process. This caused the latency of the system to get so large that it would not meet the requirement of 100ms propagation delay. Other than that it would not meet the requirement, it is also very complex to design the processing of the system with the FFT.
@@ -144,6 +144,31 @@ So with with a distance of two octaves between each band it is possible to have 
     \end{tabular}
     \caption{Band-pass filter resonance frequencies}
     \label{table:bpf-filters-frequencies}
+\end{table}
+
+The user is able to adjust the magnitude of each band-pass filter. This is done by adjusting the gain. So the parameter that is needed for the equalizer effect is gain for each band-pass filter. As the parameters size is 32 bits and there are 5 band-pass filters there can be $\lfloor\frac{32}{5}\rfloor=6\ bits$ available for each band-pass filter its gain parameter. This causes the parameter register to have two unused bits, which will be set to reserved.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        MSB & LSB & Parameter & Description\\
+        \hline
+        5 & 0 & Gain\_f0 & Specify magnitude of 40Hz frequency ranging from -32dB to 31dB with steps of 1dB\\
+        \hline
+        11 & 6 & Gain\_f1 & Specify magnitude of 160Hz frequency ranging from -32dB to 31dB with steps of 1dB\\
+        \hline
+        17 & 12 & Gain\_f2 & Specify magnitude of 640Hz frequency ranging from -32dB to 31dB with steps of 1dB\\
+        \hline
+        23 & 18 & Gain\_f3 & Specify magnitude of 2560Hz frequency ranging from -32dB to 31dB with steps of 1dB\\
+        \hline
+        29 & 24 & Gain\_f4 & Specify magnitude of 10240Hz frequency ranging from -32dB to 31dB with steps of 1dB\\
+        \hline
+        31 & 30 & Res & Reserved\\
+        \hline
+    \end{tabular}
+    \caption{Equalizer effect parameter register}
+    \label{table:eq-effect-parameters}
 \end{table}
 
 % The signal processor has to load a new sample into the effect loop and the previous modified sample to the output on the sample frequency. The sample frequency of the Audio-DSP is 192kHz. This means that the signal processor has $\frac{1}{192 \cdot 10^3} \approx 5 \mu s$ to process the sample. With a clock of 50MHz the sample must be modified and loaded into the output within $\frac{50 \cdot 10^6}{192 \cdot 10^3}=260$ clock ticks.

@@ -14,6 +14,7 @@
 \usepackage{tabularx}
 \usepackage{longtable}
 \usepackage{blindtext}
+\usepackage{pdfpages}
 \hypersetup{
     colorlinks=true, %set true if you want colored links
     linktoc=all,     %set to all if you want both sections and subsections linked
@@ -117,7 +118,9 @@ CH 						& Channel					\\ \hline
     \addcontentsline{toc}{chapter}{References}  
 
     \chapter*{Appendices}
-    \addcontentsline{toc}{chapter}{Appendices}  
-    
+    \addcontentsline{toc}{chapter}{Appendices}
+    Hello World!
+    \includepdf[pages=-]{Main_board_schematic.pdf}
+
     \end{justify}
 \end{document}

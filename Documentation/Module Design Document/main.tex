@@ -15,6 +15,9 @@
 \usepackage{blindtext}
 \usepackage{pdfpages}
 \usepackage[backend=biber]{biblatex}
+
+\bibliography{./bibfolder/ref.bib}
+
 \hypersetup{
     colorlinks=true, %set true if you want colored links
     linktoc=all,     %set to all if you want both sections and subsections linked
@@ -116,8 +119,9 @@ BPF 					& Band-Pass Filter			\\ \hline
     \chapter{Recommendations}
     \input{Recommendations.tex}
 
-    \chapter*{References}
-    \addcontentsline{toc}{chapter}{References}  
+    \nocite{*}
+    \printbibliography
+    \addcontentsline{toc}{chapter}{bibliography} 
 
     % \chapter*{Appendices}
     % \addcontentsline{toc}{chapter}{Appendices}  

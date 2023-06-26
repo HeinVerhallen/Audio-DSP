@@ -21,24 +21,6 @@ entity BPF_filter is
 end BPF_filter;
 
 architecture Behavioral of BPF_filter is
-    constant twoPI : real := 6.283185;
-
-    constant order : integer := 2;
-    type matrix_A is array (0 to 2*order-1) of real;
-    type matrix_B is array (0 to order-1) of real;
-
-    type matrix_Ad is array (0 to 2*order-1) of signed(31 downto 0);
-    type matrix_Bd is array (0 to order-1) of signed(31 downto 0);
-
-    type m_temp_state is array (0 to order-1) of signed(63 downto 0);
-
-    signal state : matrix_Bd := (to_signed(0, 32), to_signed(0, 32));
-    signal output : unsigned(63 downto 0);
-
-    --signal test_output  : unsigned(31 downto 0);
-    signal test_output  : integer;
-    signal test_real    : real := -20480.5364;
-
     function compress (
         a       : in unsigned;  --Value to be compressed
         d_width : in integer    --The size where the input value needs to be compressed to
@@ -129,6 +111,27 @@ architecture Behavioral of BPF_filter is
         return result;
     end compress;
 
+    constant twoPI : real := 6.283185;
+
+    constant order : integer := 2;
+    type matrix_A is array (0 to 2*order-1) of real;
+    type matrix_B is array (0 to order-1) of real;
+
+    type matrix_Ad is array (0 to 2*order-1) of signed(31 downto 0);
+    type matrix_Bd is array (0 to order-1) of signed(31 downto 0);
+
+    type m_temp_state is array (0 to order-1) of signed(63 downto 0);
+
+    signal state : matrix_Bd := (to_signed(0, 32), to_signed(0, 32));
+    signal output : unsigned(63 downto 0);
+
+    --signal test_output  : unsigned(31 downto 0);
+    signal test_output  : integer;
+    signal test_real    : real := -20480.5364;
+
+    signal test_Ad : matrix_Ad;
+    signal test_Bd : matrix_Bd;
+
 begin
     process(ready, nrst)                       
         variable coef_A : matrix_A := (-twoPI*real(freq_res), 0.0, -real(gain)*twoPI*real(freq_res), -twoPI*real(freq_res));
@@ -150,83 +153,129 @@ begin
         variable coef_Bd    : matrix_Bd;
 
         variable temp_state : m_temp_state;
+        variable temp_test  : signed(63 downto 0);
         variable temp_input : unsigned(7 downto 0) := "00011101";
+
+        variable shift17    : unsigned(31 downto 0) := (17 => '1', others => '0');
+        variable shift15    : unsigned(31 downto 0) := (15 => '1', others => '0');
         
     begin
-        --Initialize discrete coefficient matrices
-        coef_A_pow  := coef_A;
-        fl_coef_Ad     := identity_matrix;
-        fl_coef_Bd     := (coef_B(0)*sample_time, coef_B(0)*sample_time);
+        if (nrst = '0') then    --reset is active
+            --Initialize discrete coefficient matrices
+            coef_A_pow      := coef_A;
+            fl_coef_Ad      := identity_matrix;
+            fl_coef_Bd      := (coef_B(0)*sample_time, coef_B(0)*sample_time);
 
-        factorial       := 1.0;
-        sample_time_pow := sample_time;
+            factorial       := 1.0;
+            sample_time_pow := sample_time;
 
-        --Compute AT + A^2*T^2/2 + ...
-        compute_Ad_and_Bd : for i in 0 to 10 loop
+            --Compute AT + A^2*T^2/2 + ...
+            compute_Ad_and_Bd : for i in 0 to 10 loop
 
-            --Compute Resulting Ad and Bd
+                --Compute Resulting Ad and Bd
+                for j in 0 to 1 loop
+                    --Compute Bd
+                    fl_coef_Bd(j) := fl_coef_Bd(j) + (((coef_A_pow(j*2)*coef_B(0) + coef_A_pow(j*2+1)*coef_B(1))*sample_time_pow*sample_time)/(factorial * real(i+2)));
+
+                    for k in 0 to 1 loop
+                        --Compute Ad
+                        fl_coef_Ad(j*2+k) := fl_coef_Ad(j*2+k) + ((coef_A_pow(j*2+k)*sample_time_pow)/factorial);
+                    end loop;
+                end loop;
+
+                --Compute A to the power of n in temporary matrix 
+                for j in 0 to 1 loop
+                    for k in 0 to 1 loop
+                        coef_temp_A_pow(j*2+k) := coef_A_pow(j*2)*coef_A(k) + coef_A_pow(j*2+1)*coef_A(2+k);
+                    end loop;
+                end loop;
+
+                --Copy temp to power of A matrix
+                coef_A_pow := coef_temp_A_pow;
+
+                --Compute T^n and n!
+                sample_time_pow := sample_time_pow*sample_time;
+                factorial       := factorial * real(i+2);
+
+            end loop compute_Ad_and_Bd;
+
+            --Convert float coefficients to fixed point
             for j in 0 to 1 loop
-                --Compute Bd
-                fl_coef_Bd(j) := fl_coef_Bd(j) + (((coef_A_pow(j*2)*coef_B(0) + coef_A_pow(j*2+1)*coef_B(1))*sample_time_pow*sample_time)/(factorial * real(i+2)));
+                fl_coef_Bd(j)   := fl_coef_Bd(j)*real(to_integer(shift17));
+                fl_coef_Bd(j)   := fl_coef_Bd(j) / 2.0 + (fl_coef_Bd(j) - ((fl_coef_Bd(j)/2.0) * 2.0));
+                coef_Bd(j)      := to_signed(integer(fl_coef_Bd(j)), 32);
+                --coef_Bd(j) := to_signed(integer(fl_coef_Bd(j)*131072.0), 32);
+                --coef_Bd(j) := coef_Bd(j)/"10" + coef_Bd(j)(0);
+                report "coef_Bd: " & real'image(fl_coef_Bd(j));
 
-                for k in 0 to 1 loop
-                    --Compute Ad
-                    fl_coef_Ad(j*2+k) := fl_coef_Ad(j*2+k) + ((coef_A_pow(j*2+k)*sample_time_pow)/factorial);
+                for k in 0 to 1 loop 
+                    fl_coef_Ad(j*2+k)   := fl_coef_Ad(j*2+k)*real(to_integer(shift17));
+                    fl_coef_Ad(j*2+k)   := fl_coef_Ad(j*2+k) / 2.0 + (fl_coef_Ad(j*2+k) - ((fl_coef_Ad(j*2+k)/2.0) * 2.0));
+                    coef_Ad(j*2+k)      := to_signed(integer(fl_coef_Ad(j*2+k)), 32);
+                    --coef_Ad(j*2+k) := to_signed(integer(fl_coef_Ad(j*2+k)*131072.0), 32);
+                    --coef_Ad(j*2+k) := coef_Ad(j*2+k)/"10" + coef_Ad(j*2+k)(0);
+
+                    report "coef_Ad: " & real'image(fl_coef_Ad(j*2+k));
                 end loop;
             end loop;
+        elsif (rising_edge(ready)) then     --reset is inactive and sample is ready
+            --temp_state(0) := coef_Ad(0)*state(0) + coef_Ad(1)*state(1) + coef_Bd(0)*d_in;
+            --temp_state(1) := coef_Ad(2)*state(0) + coef_Ad(3)*state(1) + coef_Bd(1)*d_in;
 
-            --Compute A to the power of n in temporary matrix 
-            for j in 0 to 1 loop
-                for k in 0 to 1 loop
-                    coef_temp_A_pow(j*2+k) := coef_A_pow(j*2)*coef_A(k) + coef_A_pow(j*2+1)*coef_A(2+k);
-                end loop;
+            test_Ad <= coef_Ad;
+            test_Bd <= coef_Bd;
+
+            for i in 0 to 1 loop
+                --Hier gebleven. Op een of andere manier wordt het positieve getal negatief.
+                --Als je die berekende waarde hard codeerd werkt het wel ineens... Is denk ik een bug ofzo...
+
+                temp_state(i) := compress(coef_Ad(i*2)*state(0) + coef_Ad(i*2+1)*state(1) + coef_Bd(i)*resize(signed(d_in), 32), 64);
+                temp_test := signed(temp_state(i));
+                --temp_state(i) := to_signed(-780051308, 64);
+                --report "temp_state 1: " & integer'image(to_integer(temp_state(i) / to_signed(32768, 64)));
+                report "temp_state 1: " & integer'image(to_integer(temp_state(i)));
+                report "temp_test 1: " & integer'image(to_integer(temp_test));
+
+                --if (temp_state(i) >= 0) then
+                if (temp_test(temp_test'left) = '0') then
+                    report "is positive";
+                    temp_state(i) := temp_state(i) / 32768;
+                    temp_test := temp_test / 32768;
+                    report "temp_state positive: " & integer'image(to_integer(temp_state(i)));
+                    report "temp_test positive: " & integer'image(to_integer(temp_test));
+
+                    --temp_state(i) := (not temp_state(i)) + 1;
+                    --temp_state(i) := (not temp_state(i)) + 1;
+                else
+                    report "is negative";
+                    temp_state(i) := temp_state(i) / 32768;
+                    temp_test := temp_test / 32768;
+                    report "temp_state negative: " & integer'image(to_integer(temp_state(i)));
+                    report "temp_test negative: " & integer'image(to_integer(temp_test));
+                end if;
+
+                --temp_state(i) := temp_state(i) / 32768;
+                report "temp_state 2: " & integer'image(to_integer(temp_state(i)));
+                temp_state(i) := compress(temp_state(i)/2 + (temp_state(i) - ((temp_state(i)/2) * 2)), temp_state(i)'length);-- temp_state(i)(0);
+                report "temp_state 3: " & integer'image(to_integer(temp_state(i)));
+                --report "temp_state" & integer'image(to_integer(temp_state(i)));
+                state(i) <= compress(temp_state(i), 32);
             end loop;
 
-            --Copy temp to power of A matrix
-            coef_A_pow := coef_temp_A_pow;
+            --output <= std_logic_vector(compress(unsigned(temp_state(1)), d_width));
+            --output <= to_unsigned(natural(temp_state(1)), 64);
+            --output <= to_unsigned(natural(test_real), 64);
 
-            --Compute T^n and n!
-            sample_time_pow := sample_time_pow*sample_time;
-            factorial       := factorial * real(i+2);
+            d_out <= std_logic_vector(compress(temp_state(1), d_width));
+        end if;
 
-        end loop compute_Ad_and_Bd;
+        
 
-        --Convert float coefficients to fixed point
-        for j in 0 to 1 loop
-            fl_coef_Bd(j)   := fl_coef_Bd(j)*131072.0;
-            fl_coef_Bd(j)   := fl_coef_Bd(j) / 2.0 + (fl_coef_Bd(j) - ((fl_coef_Bd(j)/2.0) * 2.0));
-            coef_Bd(j)      := to_signed(integer(fl_coef_Bd(j)), 32);
-            --coef_Bd(j) := to_signed(integer(fl_coef_Bd(j)*131072.0), 32);
-            --coef_Bd(j) := coef_Bd(j)/"10" + coef_Bd(j)(0);
-            for k in 0 to 1 loop 
-                fl_coef_Ad(j)   := fl_coef_Ad(j)*131072.0;
-                fl_coef_Ad(j)   := fl_coef_Ad(j) / 2.0 + (fl_coef_Ad(j) - ((fl_coef_Ad(j)/2.0) * 2.0));
-                coef_Ad(j)      := to_signed(integer(fl_coef_Ad(j)), 32);
-                --coef_Ad(j*2+k) := to_signed(integer(fl_coef_Ad(j*2+k)*131072.0), 32);
-                --coef_Ad(j*2+k) := coef_Ad(j*2+k)/"10" + coef_Ad(j*2+k)(0);
-            end loop;
-        end loop;
 
-        --temp_state(0) := coef_Ad(0)*state(0) + coef_Ad(1)*state(1) + coef_Bd(0)*d_in;
-        --temp_state(1) := coef_Ad(2)*state(0) + coef_Ad(3)*state(1) + coef_Bd(1)*d_in;
-
-        for i in 0 to 1 loop
-            temp_state(i) := coef_Ad(i*2)*state(0) + coef_Ad(i*2+1)*state(1) ;--+ coef_Bd(i)*signed(d_in);
-            temp_state(i) := temp_state(i) / 32768;
-            --temp_state(i) := temp_state(i)/2 + (temp_state(i) - ((temp_state(i)/2) * 2));-- temp_state(i)(0);
-            --state(i) <= signed(compress(unsigned(temp_state(i)), 32));
-        end loop;
-
-        --output <= std_logic_vector(compress(unsigned(temp_state(1)), d_width));
-        --output <= to_unsigned(natural(temp_state(1)), 64);
-        --output <= to_unsigned(natural(test_real), 64);
 
         --test_output <= signed(to_sfixed(test_real,15,-16)) after 5 ns;
         --test_output <= to_unsigned(integer(test_real*65536.0), 32) after 5 ns;          --Hier gebleven!
         --test_output <= integer(test_real*65536.0) after 5 ns;
-
-        report "input: " & integer'image(to_integer(unsigned(d_in)));
-        report "Compressed input: " & integer'image(to_integer(compress(unsigned(d_in), 4)));
 
         --float a = -16.1746;
     

@@ -11,7 +11,9 @@ entity i2s_encoder is
         ws          : in std_logic;                             --left right audio word select
         data_left   : in  std_logic_vector(d_width-1 downto 0); --left audio data
         data_right  : in  std_logic_vector(d_width-1 downto 0); --right audio data
-        sd          : out std_logic                             --serial data
+        sd          : out std_logic;                            --serial data
+        i_avail_left  : in std_logic;                           --left audio available
+        i_avail_right : in std_logic                            --right audio available
         );                    
 end i2s_encoder;
 
@@ -41,7 +43,12 @@ begin
                         l_data_int  <= l_data_int(r_data_int'high - 1 downto 0) & '0';  --shift internal left audio data to the left
                         sd          <= l_data_int(l_data_int'high);                     --output MSB of internal left audio data to serial data output
                     end if;
-                    r_data_int  <= data_right;
+
+                    --If right data is available
+                    if (i_avail_right = '1') then
+                        r_data_int  <= data_right;
+                    end if;
+
                 --Write right audio
                 when wr_r =>
                     --Have all bits been written
@@ -50,7 +57,12 @@ begin
                         r_data_int  <= r_data_int(r_data_int'high - 1 downto 0) & '0';  --shift internal right audio data to the left
                         sd          <= r_data_int(r_data_int'high);                     --output MSB of internal right audio data to serial data output
                     end if;
-                    l_data_int  <= data_left;
+
+                    --If left data is available
+                    if (i_avail_left = '1') then
+                        l_data_int  <= data_left;
+                    end if;
+
                 when others =>
                     null;
             end case;

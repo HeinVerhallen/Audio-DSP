@@ -66,6 +66,20 @@ agreement for further details.
 		(text "data_right[d_width-1..0]" (rect 98 43 187 55)(font "Arial" ))
 		(line (pt 208 48)(pt 192 48)(line_width 3))
 	)
+	(port
+		(pt 208 64)
+		(output)
+		(text "o_avail_left" (rect 0 0 46 12)(font "Arial" ))
+		(text "o_avail_left" (rect 141 59 187 71)(font "Arial" ))
+		(line (pt 208 64)(pt 192 64)(line_width 1))
+	)
+	(port
+		(pt 208 80)
+		(output)
+		(text "o_avail_right" (rect 0 0 50 12)(font "Arial" ))
+		(text "o_avail_right" (rect 137 75 187 87)(font "Arial" ))
+		(line (pt 208 80)(pt 192 80)(line_width 1))
+	)
 	(parameter
 		"d_width"
 		"24"

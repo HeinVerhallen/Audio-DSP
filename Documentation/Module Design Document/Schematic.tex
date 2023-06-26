@@ -3,9 +3,11 @@ The electrical diagram of the audio DSP is divided into multiple separate diagra
 \subsubsection{Buck converter}
 The following text relates to the schematic displayed in appendix \ref{Appendix_buck_schematic}.
 
+The buck converters are based around the MAX17634C IC from Maxim Integrated. This IC was chosen due to its attractive price, excellent performance as indicated by the datasheet, availability, and small footprint.
 
+The schematic is designed in such a way that the different buck converters for the required voltages can utilize the same circuitry. In this approach, all components are chosen based on the worst-case scenario. For example, one buck converter may require a larger inductor, while another may need more output capacitance. By selecting larger footprints based on the worst-case scenario for all components, all buck converters on the PCB utilize the exact same design.
 
-appendix \ref{Appendix_buck_calculations}.
+The calculations made for the buck converters can be found in appendix \ref{Appendix_buck_calculations}.
 
 \subsubsection{Single-ended primary-inductor converter}
 The following text relates to the schematic displayed in appendix \ref{Appendix_SEPIC_schematic}.

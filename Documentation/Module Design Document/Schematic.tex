@@ -52,3 +52,11 @@ The ADC is equipped with EMI reduction resistors to limit the noise caused by th
 
 Furthermore, the entire analog section of the main board schematic is implemented differentially. This has been achieved, where necessary, by placing 0-ohm resistors to strategically connect the signals to ground, allowing the differential amplifiers to ensure that the voltages at desired locations are precisely as intended. 
 This reduces the sensitivity of the circuits to noise and ground loops significantly.
+
+The front-end of channels 3 and 4 resembles that of channels 1 and 2 but does not include the selection relay and volume controller. Additionally, this entire page is balanced, allowing these two inputs to achieve the best specifications.
+
+
+
+The FPGA page consists solely of the two GPIO connectors of the DE1-SOC board and all the connections to and from them.
+
+The power supplies page consists of all the power supply modules previously described in this section. The supply rails are equipped with test points to facilitate the qualification of the board.

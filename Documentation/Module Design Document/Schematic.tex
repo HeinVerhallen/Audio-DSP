@@ -36,4 +36,19 @@ The cutoff frequency of the capacitance multiplier can be calculated as shown in
 
 \subsubsection{Main board}
 The following text relates to the schematic displayed in appendix \ref{Appendix_main_schematic}.
-The schematic of the main board is subdevided in multiple pages
+
+The main board is based on the block diagram shown in Figure \ref{fig:arch-front-end} and is subdivided into multiple pages to keep the schematic organized and readable. The ADCs have their own page for every two channels, the DACs have their own page for every two channels, there is a page dedicated to the power supplies, and last but not least, there is a page for the connections to the FPGA board.
+
+The front-end of channels 1 and 2 consists of an input selection relay followed by a LPF (low-pass filter) to suppress RF (radio frequency) interference. The inputs are equipped with TVS diodes for ESD protection. Next in line is the PGA2311P volume controller, which independently adjusts the volume of both inputs based on volume settings obtained via I2C from the FPGA. Since the PGA2311P operates on 5V logic while the FPGA operates around 3.3V logic, a TXS0102 level translator is placed in between. This is a bidirectional level translator as the I2C protocol transmits data bidirectionally. Some additional logic is implemented around this chip to ensure proper startup.
+
+The outputs of the volume controller are fed into an LM4562 buffer OpAmp to ensure that the subsequent differential LPF is not affected by the undefined output impedance of the PGA2311P volume controller. This impedance can be approximated based on the maximum output current of the IC, but it does not guarantee that the signal still meets the low-noise specification of the IC.
+
+The balanced LPF is built around the OPA1632 FDA (fully differential amplifier). It is a second-order LPF that simultaneously provides an offset voltage to the output voltage, which is supplied by the PCM1804 ADC. The signal is then filtered by an RC filter and buffered by an LM4562 OpAmp.
+
+The outputs of the PGA2311P are also simultaneously tapped for the VU metering, which each consist of a precision rectifier and four comparators.
+
+The ADC is equipped with EMI reduction resistors to limit the noise caused by the relatively high dv/dt of the I2S bus.
+
+
+Furthermore, the entire analog section of the main board schematic is implemented differentially. This has been achieved, where necessary, by placing 0-ohm resistors to strategically connect the signals to ground, allowing the differential amplifiers to ensure that the voltages at desired locations are precisely as intended. 
+This reduces the sensitivity of the circuits to noise and ground loops significantly.

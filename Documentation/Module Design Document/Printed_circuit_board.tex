@@ -1,0 +1,24 @@
+For the project some printed circuit boards needed to be designed, A main board to connect the FPGA board to the rest of the electronics. The project uses piggyback boards for the power supplies. This makes designing the boards more modular and make the design process less long. The total PCB’s that have been designed for this project is four. There are five buck converter extension boards four linear converter boards, one Sepic converter board and the main PCB. 
+\par
+\noindent During the design process some key choices have been made to try to make the boards work better. Some of the key choices are:
+\begin{itemize}
+    \setlength\itemsep{-0.3em} %MAKES THE GAP SMALLER BETWEEN 2 ITEMS
+    \item Placement of the decoupling capacitors
+    \item Routing of sensitive audio signals using differential pairs
+    \item Making analogue signals as short as possible
+    \item Making sure the current loop is as short as possible
+    \item Adequate cooling of switching IC’s and transistors
+\end{itemize}
+\par
+\noindent By making sure the decoupling capacitors are as close to the supply inputs of an IC the noise on the supply rail will be less. This will make the behaviour of all the electronics more stable, by placing a decoupling capacitor close to an IC the current spikes that the IC might generate will be drawn from the power that is stored in the capacitor. This will prevent a drop in the voltage on the supply rail and thus the rail will be more stable.
+\par
+\noindent By routing sensitive audio signals in differential pairs the noise that may accrue will cancel out because of the subtraction of the two signals.This will make sure that the audio signal will sound as good as possible by eliminating as much noise as possible.
+\par
+\noindent It is very important to make sure that the analogue signals have been routed as short as possible. This will make sure that the signal will stay as close to the original intended value. A shorter signal means that less noise will couple in.
+\par
+\noindent By making sure that your current loop is as close as possible you eliminate the noise a source can make. If you don’t take this in to account it can be that the noise will have an impact on the rest of the system. For the project the loops have been made as close as possible by placing components close to each other and placing traces tactically.
+\par
+\noindent Some components can get hot due to the fast switching of power signals. The loss the switching generates will be converted to heat. This heat needs to be dissipated. For the designing of the PCB’s some measurements have been made to make sure the components don’t get to hot. More copper is added to the pins that will get hot and vias have been placed to dissipate the heat to a different layer. 
+
+\par
+\noindent 

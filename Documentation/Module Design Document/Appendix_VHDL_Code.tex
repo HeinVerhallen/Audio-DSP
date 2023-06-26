@@ -570,7 +570,7 @@ begin
                 --Compute Resulting Ad and Bd
                 for j in 0 to 1 loop
                     --Compute Bd
-                    fl_coef_Bd(j) := fl_coef_Bd(j) + (((coef_A_pow(j*2)*coef_B(0) + coef_A_pow(j*2+1)*coef_B(1))*sample_time_pow*sample_time)/(factorial * real(i+2)));
+                    fl_coef_Bd(j) := fl_coef_Bd(j) + (((coef_A_pow(j*2)*coef_B(0) + coef_A_pow(j*2+1) * coef_B(1))*sample_time_pow*sample_time) / (factorial * real(i+2)));
 
                     for k in 0 to 1 loop
                         --Compute Ad
@@ -685,7 +685,7 @@ begin
 
                 z := index * index;
 
-                temp_sine := -index*(1.0+z*(-factorials(0)+z*(factorials(1)+z*(-factorials(2)+z*(factorials(3)+z*(-factorials(4)+z*(factorials(5)+z*(-factorials(6)+z*(factorials(7)+z*(-factorials(8)+z*(factorials(9))))))))))));
+                temp_sine := -index * (1.0+z*(-factorials(0)+z*(factorials(1) + z*(-factorials(2)+z*(factorials(3) + z*(-factorials(4) + z*(factorials(5) + z*(-factorials(6) + z*(factorials(7) + z*(-factorials(8) + z*(factorials(9))))))))))));
 
                 resized_sine    := temp_sine * real(to_integer(shifter));
                 unsigned_sine   := to_signed(integer(temp_sine * real(to_integer(shifter))), d_width);

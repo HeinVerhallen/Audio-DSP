@@ -45,19 +45,7 @@ The RX block is capable of receiving a single byte at a time. When a full byte h
 \paragraph{Memory}
 The memory block is a simple register which stores frames of 32 bits at an address. It has 7 bit addresses meaning 128 frames can be stored, which is enough to hold the 120 frames which are necessary to store the 120 effect parameters.
 
-\subsection{Nextion screen}
-The nextion screen used in this project is an 3,5" discovery version screen with 320x480 pixels. The screen has its own controller which is responsible for handling incoming commands, send commands when the screen is touched and most importantly load the menu's to the screen. Figure \ref{fig:Main-menu} shows the home screen of the UI. These screens are designed in Adobe and imported to the Nextion environment with invisible buttons on top of the image.
+\paragraph{Nextion screen}
+The nextion screen used in this project is an 3,5" discovery version screen with 320x480 pixels. The screen has its own controller which is responsible for handling incoming commands, send commands when the screen is touched and most importantly load the menu's to the screen. Figure \ref{fig:mainmenu} shows the home screen of the UI. These screens are designed in Adobe and imported to the Nextion environment with invisible buttons on top of the image.
 
-\begin{figure}[ht]
-    \includegraphics[width=\textwidth]{MainMenu1.jpg}
-    \caption{Main menu screen on the Nextion screen}
-    \label{fig:Main-menu}
-\end{figure}
-
-Figure \ref{fig:adjust-preset} shows what the majority of the menu's look like. The three banner style with the action described in short text.
-
-\begin{figure}[ht]
-    \includegraphics[width=\textwidth]{adjustpreset1-2.jpg}
-    \caption{Adjust preset screen on the Nextion screen}
-    \label{fig:adjust-preset}
-\end{figure}
+Figure \ref{fig:adjustpresetmenu} shows what the majority of the menu's look like. The three banner style with the action described in short text.

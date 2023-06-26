@@ -10,6 +10,12 @@ Text shown in menus should not be cut off, as this can be frustrating for users 
 \subsubsection*{Feedback}
 Finally, it is important to provide feedback to the user when the system needs time to load in certain elements or execute specific settings. Without feedback, users may become frustrated and begin clicking buttons multiple times, which can lead to software errors. By providing clear feedback during loading processes, users are more likely to remain patient and avoid potential issues.
 
+\section{Nextion screen}
+
+For this project a Nextion screen is used. This screen can easily be programmed. It comes with software which is image based instead of code based. Images can be inserted and "invisible" buttons can be used to make menus out of the inserted images.
+
+This is a neat way to work because now it is possible to create images in Photoshop or a similar application to use for the whole menu design
+
 \subsection{Designing the UI}
 The design was started with a diagram with all the necessary screens and information so that is was clear what menus should be in the DSP. 
 
@@ -21,10 +27,18 @@ The design was started with a diagram with all the necessary screens and informa
 
 This UI is easy to understand when first using the DSP. Options and settings are easy to find from the first menu screen. While a channel based UI is unclear because every option is branched off from the channel select.
 \par
-\noindent 
+\noindent The UI is designed using Adobe Photoshop. Bright but matching colors are used to indicate certain buttons. Using the Nextion screen software, invisible buttons are placed over the Photoshop pictures to make it a usable menu. The menu follows the liquidCrystal function based UI schematic. (see \ref{fig:functionbasedUI})
 
-\section{Nextion screen}
+\begin{figure}[ht]
+    \includegraphics[width=0.8\textwidth]{MainMenu1}
+    \caption{Main menu design}
+    \label{fig:mainmenu}
+\end{figure}
 
-For this project a Nextion screen is used. This screen can easily be programmed. It comes with software which is image based instead of code based. Images can be inserted and "invisible" buttons can be used to make menus out of the inserted images.
+\begin{figure}[ht]
+    \includegraphics[width=0.8\textwidth]{adjustpreset1-2}
+    \caption{Other menu screen, other ones are similar to this one}
+    \label{fig:adjustpresetmenu}
+\end{figure}
 
-This is a neat way to work because now it is possible to create images in Photoshop or a similar application to use for the whole menu design
+

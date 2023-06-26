@@ -2,7 +2,7 @@
 The ADC and DAC use I2S to transfer the sampled audio data to the FPGA. This protocol needs to be decoded to obtain the actual data, processed and be encoded again to I2S to send to the DAC. The VHDL code that has been written for this can be found in \nameref{chap:appendix-B-vhdl}. 
 
 \subsection{I2C controller}
-
+The DAC must be configured with I2C. To be able to do this an I2C master must be programmed in the FPGA. This I2C master initializes the DAC with default configurations. The VHDL code of the I2C master can be found in \nameref{chap:appendix-B-vhdl}. 
 
 \subsection{Band-pass filter}
 

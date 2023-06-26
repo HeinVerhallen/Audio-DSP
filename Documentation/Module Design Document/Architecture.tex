@@ -85,9 +85,54 @@ The implemented effects are the following:
 
 The distortion effect works by amplifying the input signal with a gain and clipping the amplified signal at a certain level to obtain saturation. This saturation level is hardcoded in the effect. The gain can be adjusted by the user. Therefore the distortion effect only has one parameter, namely gain.
 
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|p{3.5in}|}
+        \hline
+        MSB & LSB & Parameter & Description\\
+        \hline
+        31 & 0 & Gain & Specify amount of gain for distortion. Ranging from ... to ... with a resolution of\\
+        \hline
+    \end{tabular}
+    \caption{Distortion parameter register}
+    \label{table:distortion-effect-parameters}
+\end{table}
+
 The delay effect works by adding a previous sample to the current sample creating the effect of delaying a signal. For this the delay time is a necessary parameter. The amount of time the delay lasts is configured by the feedback parameter. This simply feedbacks the output signal back to the input with a factor that causes the delayed signal to die out eventually. Another parameter used in delay effects is the mix parameter. This parameter configures the level of the delayed signal in relation to the original signal. Therefore the parameters this effects needs are: delay time, feedback and mix. 
 
-The reverb effect works nearly identical to the delay effect but it has a feedback loop that causes the signal to decay over time. This results in the effect of reverberation. The effect can be heard in large empty rooms when you for instance clap with your hands and hear the clap reflect back from the walls. To emulate this effect the necessary parameters are the length of the reverb, which represents how long it takes for the signal to decay. Another parameter is the size of the room that it needs to emulate. This represents the time it takes for the delayed signal to reverb back from the walls. Thus the reverb effect has two parameters: length and size.
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|p{3.5in}|}
+        \hline
+        MSB & LSB & Parameter & Description\\
+        \hline
+        11 & 0 & Delay time & Specify amount of delay time. Ranging from 1ms to 4096ms with a resolution of 1ms\\
+        \hline
+        21 & 12 & Feedback & The amount of time the delay lasts. Ranging from 0ms to 10s with a resolution of 10ms\\
+        \hline
+        31 & 22 & Mix & Specify amplitude of delayed signal relative to original signal. Ranging from 0.01 to 2 with a resolution of 0.002\\
+        \hline
+    \end{tabular}
+    \caption{Delay parameter register}
+    \label{table:delay-effect-parameters}
+\end{table}
+
+The reverb effect works nearly identical to the delay effect but it has a feedback loop that causes the signal to decay over time. This results in the effect of reverberation. The effect can be heard in large empty rooms when you for instance clap with your hands and hear the clap reflect back from the walls. To emulate this effect the necessary parameters are the length of the reverb, which represents how long it takes for the signal to decay. Another parameter is the size of the room that it needs to emulate. This represents the time it takes for the delayed signal to reflect back from the walls. Thus the reverb effect has two parameters: length and size.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|p{3.5in}|}
+        \hline
+        MSB & LSB & Parameter & Description\\
+        \hline
+        15 & 0 & Length & Specify how long the reverberation lasts. Ranging from 1ms to 4096ms with a resolution of 1ms\\
+        \hline
+        31 & 16 & Size & Time it takes for the signal to reflect back. Ranging from 0ms to 10s with a resolution of 10ms\\
+        \hline
+    \end{tabular}
+    \caption{Reverb parameter register}
+    \label{table:reverb-effect-parameters}
+\end{table}
 
 To implement the equalizer effect there are different approaches. As explained in the beginning of this chapter the first approach was to implement the effects with FFT, which would make the implementation of an equalizer much easier as you could simply modify the magnitudes of every frequency in the transformed spectrum to your liking. But because this approach has been canceled another very powerful and extremely fast mathematical method is chosen to implement the equalizer effect. The chosen method is state-space. With state-space a multiple order system can by simplified into multiple first order equations. With state-space a physical system can be represented by a set of inputs and outputs with a set of state variables related by first-order differential equations. 
 
@@ -150,19 +195,19 @@ The user is able to adjust the magnitude of each band-pass filter. This is done 
 
 \begin{table}[h!]
     \centering
-    \begin{tabular}{|c|c|c|c|}
+    \begin{tabular}{|c|c|c|p{3.5in}|}
         \hline
         MSB & LSB & Parameter & Description\\
         \hline
-        5 & 0 & Gain\_f0 & Specify magnitude of 40Hz frequency ranging from -32dB to 31dB with steps of 1dB\\
+        5 & 0 & Gain f0 & Specify magnitude of 40Hz frequency ranging from -32dB to 31dB with steps of 1dB\\
         \hline
-        11 & 6 & Gain\_f1 & Specify magnitude of 160Hz frequency ranging from -32dB to 31dB with steps of 1dB\\
+        11 & 6 & Gain f1 & Specify magnitude of 160Hz frequency ranging from -32dB to 31dB with steps of 1dB\\
         \hline
-        17 & 12 & Gain\_f2 & Specify magnitude of 640Hz frequency ranging from -32dB to 31dB with steps of 1dB\\
+        17 & 12 & Gain f2 & Specify magnitude of 640Hz frequency ranging from -32dB to 31dB with steps of 1dB\\
         \hline
-        23 & 18 & Gain\_f3 & Specify magnitude of 2560Hz frequency ranging from -32dB to 31dB with steps of 1dB\\
+        23 & 18 & Gain f3 & Specify magnitude of 2560Hz frequency ranging from -32dB to 31dB with steps of 1dB\\
         \hline
-        29 & 24 & Gain\_f4 & Specify magnitude of 10240Hz frequency ranging from -32dB to 31dB with steps of 1dB\\
+        29 & 24 & Gain f4 & Specify magnitude of 10240Hz frequency ranging from -32dB to 31dB with steps of 1dB\\
         \hline
         31 & 30 & Res & Reserved\\
         \hline

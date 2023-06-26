@@ -1,0 +1,706 @@
+\addcontentsline{toc}{chapter}{Appendix B: VHDL code}  
+\chapter*{Appendix B: VHDL code}
+\label{chap:appendix-B-vhdl}
+
+\section*{I2S Decoder}
+\addcontentsline{toc}{section}{I2S Decoder}
+\begin{lstlisting}
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.NUMERIC_STD.ALL;
+
+ENTITY i2s_decoder IS
+	GENERIC (
+	d_width : INTEGER := 24); --data width
+	PORT (
+		nrst : IN std_logic; --active-low reset
+		sck : IN std_logic; --serial clock
+		ws : IN std_logic; --left right audio word select
+		sd : IN std_logic; --serial data
+		data_left : OUT std_logic_vector(d_width - 1 DOWNTO 0); --left audio data
+		data_right : OUT std_logic_vector(d_width - 1 DOWNTO 0); --right audio data
+		o_avail_left : OUT std_logic; --left audio available
+		o_avail_right : OUT std_logic --right audio available
+	); 
+END i2s_decoder;
+
+ARCHITECTURE Behavioral OF i2s_decoder IS
+	SIGNAL l_data_int : std_logic_vector(d_width - 1 DOWNTO 0); --internal left audio data
+	SIGNAL r_data_int : std_logic_vector(d_width - 1 DOWNTO 0); --internal right audio data
+
+	TYPE t_machine IS (ready, rd_l, rd_r);
+	SIGNAL machine : t_machine := ready; --state machine
+
+	SIGNAL bit_cnt : INTEGER := 0; --bit counter
+
+BEGIN
+	PROCESS (sck, nrst)
+	BEGIN
+		IF nrst = '0' THEN
+			--Reset state machine and bit counter
+			machine <= ready;
+			bit_cnt <= 0;
+		ELSIF rising_edge(sck) THEN
+			CASE machine IS
+				--Read left audio
+				WHEN rd_l => 
+					--Have all bits been read
+					IF bit_cnt < d_width THEN
+						bit_cnt <= bit_cnt + 1; --increment bit counter
+						l_data_int <= l_data_int(l_data_int'HIGH - 1 DOWNTO 0) & sd; --shift serial data in internal left audio data
+						data_right <= r_data_int; --output right audio data
+					END IF;
+
+					--Write available bits
+					o_avail_left <= '0';
+					o_avail_right <= '1';
+					--Read right audio
+				WHEN rd_r => 
+					--Have all bits been read
+					IF bit_cnt < d_width THEN
+						bit_cnt <= bit_cnt + 1; --increment bit counter
+						r_data_int <= r_data_int(r_data_int'HIGH - 1 DOWNTO 0) & sd; --shift serial data in internal right audio data
+						data_left <= l_data_int; --output left audio data
+					END IF;
+
+					--Write available bits
+					o_avail_left <= '1';
+					o_avail_right <= '0';
+				WHEN OTHERS => 
+					NULL;
+			END CASE;
+
+			--Left audio data is selected and not already reading left audio data
+			IF ws = '0' AND machine /= rd_l THEN
+				bit_cnt <= 0; --reset bit counter 
+				machine <= rd_l; --set state to read left channel
+				--Right audio data is selected and not already reading right audio data
+			ELSIF ws = '1' AND machine /= rd_r THEN
+				bit_cnt <= 0; --reset bit counter
+				machine <= rd_r; --set state to read right channel
+			END IF;
+		END IF;
+	END PROCESS;
+
+END Behavioral;
+\end{lstlisting}
+
+\section*{I2S Encoder}
+\addcontentsline{toc}{section}{I2S Encoder}
+\begin{lstlisting}
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.NUMERIC_STD.ALL;
+
+ENTITY i2s_encoder IS
+	GENERIC (
+	d_width : INTEGER := 24); --data width
+	PORT (
+		nrst : IN std_logic; --active-low reset
+		sck : IN std_logic; --serial clock
+		ws : IN std_logic; --left right audio word select
+		data_left : IN std_logic_vector(d_width - 1 DOWNTO 0); --left audio data
+		data_right : IN std_logic_vector(d_width - 1 DOWNTO 0); --right audio data
+		sd : OUT std_logic; --serial data
+		i_avail_left : IN std_logic; --left audio available
+		i_avail_right : IN std_logic --right audio available
+	); 
+END i2s_encoder;
+
+ARCHITECTURE Behavioral OF i2s_encoder IS
+	SIGNAL l_data_int : std_logic_vector(d_width - 1 DOWNTO 0); --internal left audio data
+	SIGNAL r_data_int : std_logic_vector(d_width - 1 DOWNTO 0); --internal right audio data
+
+	TYPE t_machine IS (ready, wr_l, wr_r);
+	SIGNAL machine : t_machine := ready; --state machine
+
+	SIGNAL bit_cnt : INTEGER := 0; --bit counter
+
+BEGIN
+	PROCESS (sck, nrst)
+	BEGIN
+		IF nrst = '0' THEN
+			--Reset state machine and bit counter
+			machine <= ready;
+			bit_cnt <= 0;
+		ELSIF falling_edge(sck) THEN
+			CASE machine IS
+				--Write left audio
+				WHEN wr_l => 
+					--Have all bits been written
+					IF bit_cnt < d_width THEN
+						bit_cnt <= bit_cnt + 1; --increment bit counter
+						l_data_int <= l_data_int(r_data_int'HIGH - 1 DOWNTO 0) & '0'; --shift internal left audio data to the left
+						sd <= l_data_int(l_data_int'high); --output MSB of internal left audio data to serial data output
+					END IF;
+
+					--If right data is available
+					IF (i_avail_right = '1') THEN
+						r_data_int <= data_right;
+					END IF;
+
+					--Write right audio
+				WHEN wr_r => 
+					--Have all bits been written
+					IF bit_cnt < d_width THEN
+						bit_cnt <= bit_cnt + 1; --increment bit counter
+						r_data_int <= r_data_int(r_data_int'HIGH - 1 DOWNTO 0) & '0'; --shift internal right audio data to the left
+						sd <= r_data_int(r_data_int'high); --output MSB of internal right audio data to serial data output
+					END IF;
+
+					--If left data is available
+					IF (i_avail_left = '1') THEN
+						l_data_int <= data_left;
+					END IF;
+
+				WHEN OTHERS => 
+					NULL;
+			END CASE;
+ 
+			--Left audio data is selected and not already writing left audio data
+			IF ws = '0' AND machine /= wr_l THEN
+				bit_cnt <= 0; --reset bit counter
+				machine <= wr_l; --set state to write left channel
+				--Right audio data is selected and not already writing right audio data
+			ELSIF ws = '1' AND machine /= wr_r THEN
+				bit_cnt <= 0; --reset bit counter
+				machine <= wr_r; --set state to write right channel
+			END IF;
+		END IF;
+	END PROCESS;
+END Behavioral;
+\end{lstlisting}
+
+\section*{I2C master code}
+\addcontentsline{toc}{section}{I2C master code}
+\begin{lstlisting}
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.std_logic_unsigned.ALL;
+
+ENTITY i2c_master IS
+    GENERIC (
+        input_clk : INTEGER := 50_000_000; --input clock speed from user logic in Hz
+    bus_clk : INTEGER := 400_000); --speed the i2c bus (scl) will run at in Hz
+    PORT (
+        clk : IN STD_LOGIC; --system clock
+        reset_n : IN STD_LOGIC; --active low reset
+        ena : IN STD_LOGIC; --latch in command
+        addr : IN STD_LOGIC_VECTOR(6 DOWNTO 0); --address of target slave
+        rw : IN STD_LOGIC; --'0' is write, '1' is read
+        data_wr : IN STD_LOGIC_VECTOR(7 DOWNTO 0); --data to write to slave
+        busy : OUT STD_LOGIC; --indicates transaction in progress
+        data_rd : OUT STD_LOGIC_VECTOR(7 DOWNTO 0); --data read from slave
+        ack_error : BUFFER STD_LOGIC; --flag if improper acknowledge from slave
+        sda : INOUT STD_LOGIC; --serial data output of i2c bus
+    scl : INOUT STD_LOGIC); --serial clock output of i2c bus
+END i2c_master;
+
+ARCHITECTURE logic OF i2c_master IS
+    CONSTANT divider : INTEGER := (input_clk/bus_clk)/4; --number of clocks in 1/4 cycle of scl
+    TYPE machine IS(ready, start, command, slv_ack1, wr, rd, slv_ack2, mstr_ack, stop); --needed states
+    SIGNAL state : machine; --state machine
+    SIGNAL data_clk : STD_LOGIC; --data clock for sda
+    SIGNAL data_clk_prev : STD_LOGIC; --data clock during previous system clock
+    SIGNAL scl_clk : STD_LOGIC; --constantly running internal scl
+    SIGNAL scl_ena : STD_LOGIC := '0'; --enables internal scl to output
+    SIGNAL sda_int : STD_LOGIC := '1'; --internal sda
+    SIGNAL sda_ena_n : STD_LOGIC; --enables internal sda to output
+    SIGNAL addr_rw : STD_LOGIC_VECTOR(7 DOWNTO 0); --latched in address and read/write
+    SIGNAL data_tx : STD_LOGIC_VECTOR(7 DOWNTO 0); --latched in data to write to slave
+    SIGNAL data_rx : STD_LOGIC_VECTOR(7 DOWNTO 0); --data received from slave
+    SIGNAL bit_cnt : INTEGER RANGE 0 TO 7 := 7; --tracks bit number in transaction
+    SIGNAL stretch : STD_LOGIC := '0'; --identifies if slave is stretching scl
+BEGIN
+    --generate the timing for the bus clock (scl_clk) and the data clock (data_clk)
+    PROCESS (clk, reset_n)
+    VARIABLE count : INTEGER RANGE 0 TO divider * 4; --timing for clock generation
+    BEGIN
+        IF (reset_n = '0') THEN --reset asserted
+            stretch <= '0';
+            count := 0;
+        ELSIF (clk'EVENT AND clk = '1') THEN
+            data_clk_prev <= data_clk; --store previous value of data clock
+            IF (count = divider * 4 - 1) THEN --end of timing cycle
+                count := 0; --reset timer
+            ELSIF (stretch = '0') THEN --clock stretching from slave not detected
+                count := count + 1; --continue clock generation timing
+            END IF;
+            CASE count IS
+                WHEN 0 TO divider - 1 => --first 1/4 cycle of clocking
+                    scl_clk <= '0';
+                    data_clk <= '0';
+                WHEN divider TO divider * 2 - 1 => --second 1/4 cycle of clocking
+                    scl_clk <= '0';
+                    data_clk <= '1';
+                WHEN divider * 2 TO divider * 3 - 1 => --third 1/4 cycle of clocking
+                    scl_clk <= '1'; --release scl
+                    IF (scl = '0') THEN --detect if slave is stretching clock
+                        stretch <= '1';
+                    ELSE
+                        stretch <= '0';
+                    END IF;
+                    data_clk <= '1';
+                WHEN OTHERS => --last 1/4 cycle of clocking
+                    scl_clk <= '1';
+                    data_clk <= '0';
+            END CASE;
+        END IF;
+    END PROCESS;
+
+    --state machine and writing to sda during scl low (data_clk rising edge)
+    PROCESS (clk, reset_n)
+        BEGIN
+            IF (reset_n = '0') THEN --reset asserted
+                state <= ready; --return to initial state
+                busy <= '1'; --indicate not available
+                scl_ena <= '0'; --sets scl high impedance
+                sda_int <= '1'; --sets sda high impedance
+                ack_error <= '0'; --clear acknowledge error flag
+                bit_cnt <= 7; --restarts data bit counter
+                data_rd <= "00000000"; --clear data read port
+            ELSIF (clk'EVENT AND clk = '1') THEN
+                IF (data_clk = '1' AND data_clk_prev = '0') THEN --data clock rising edge
+                    CASE state IS
+                        WHEN ready => --idle state
+                            IF (ena = '1') THEN --transaction requested
+                                busy <= '1'; --flag busy
+                                addr_rw <= addr & rw; --collect requested slave address and command
+                                data_tx <= data_wr; --collect requested data to write
+                                state <= start; --go to start bit
+                            ELSE --remain idle
+                                busy <= '0'; --unflag busy
+                                state <= ready; --remain idle
+                            END IF;
+                        WHEN start => --start bit of transaction
+                            busy <= '1'; --resume busy if continuous mode
+                            sda_int <= addr_rw(bit_cnt); --set first address bit to bus
+                            state <= command; --go to command
+                        WHEN command => --address and command byte of transaction
+                            IF (bit_cnt = 0) THEN --command transmit finished
+                                sda_int <= '1'; --release sda for slave acknowledge
+                                bit_cnt <= 7; --reset bit counter for "byte" states
+                                state <= slv_ack1; --go to slave acknowledge (command)
+                            ELSE --next clock cycle of command state
+                                bit_cnt <= bit_cnt - 1; --keep track of transaction bits
+                                sda_int <= addr_rw(bit_cnt - 1); --write address/command bit to bus
+                                state <= command; --continue with command
+                            END IF;
+                        WHEN slv_ack1 => --slave acknowledge bit (command)
+                            IF (addr_rw(0) = '0') THEN --write command
+                                sda_int <= data_tx(bit_cnt); --write first bit of data
+                                state <= wr; --go to write byte
+                            ELSE --read command
+                                sda_int <= '1'; --release sda from incoming data
+                                state <= rd; --go to read byte
+                            END IF;
+                        WHEN wr => --write byte of transaction
+                            busy <= '1'; --resume busy if continuous mode
+                            IF (bit_cnt = 0) THEN --write byte transmit finished
+                                sda_int <= '1'; --release sda for slave acknowledge
+                                bit_cnt <= 7; --reset bit counter for "byte" states
+                                state <= slv_ack2; --go to slave acknowledge (write)
+                            ELSE --next clock cycle of write state
+                                bit_cnt <= bit_cnt - 1; --keep track of transaction bits
+                                sda_int <= data_tx(bit_cnt - 1); --write next bit to bus
+                                state <= wr; --continue writing
+                            END IF;
+                        WHEN rd => --read byte of transaction
+                            busy <= '1'; --resume busy if continuous mode
+                            IF (bit_cnt = 0) THEN --read byte receive finished
+                                IF (ena = '1' AND addr_rw = addr & rw) THEN --continuing with another read at same address
+                                    sda_int <= '0'; --acknowledge the byte has been received
+                                ELSE --stopping or continuing with a write
+                                    sda_int <= '1'; --send a no-acknowledge (before stop or repeated start)
+                                END IF;
+                                bit_cnt <= 7; --reset bit counter for "byte" states
+                                data_rd <= data_rx; --output received data
+                                state <= mstr_ack; --go to master acknowledge
+                            ELSE --next clock cycle of read state
+                                bit_cnt <= bit_cnt - 1; --keep track of transaction bits
+                                state <= rd; --continue reading
+                            END IF;
+                        WHEN slv_ack2 => --slave acknowledge bit (write)
+                            IF (ena = '1') THEN --continue transaction
+                                busy <= '0'; --continue is accepted
+                                addr_rw <= addr & rw; --collect requested slave address and command
+                                data_tx <= data_wr; --collect requested data to write
+                                IF (addr_rw = addr & rw) THEN --continue transaction with another write
+                                    sda_int <= data_wr(bit_cnt); --write first bit of data
+                                    state <= wr; --go to write byte
+                                ELSE --continue transaction with a read or new slave
+                                    state <= start; --go to repeated start
+                                END IF;
+                            ELSE --complete transaction
+                                state <= stop; --go to stop bit
+                            END IF;
+                        WHEN mstr_ack => --master acknowledge bit after a read
+                            IF (ena = '1') THEN --continue transaction
+                                busy <= '0'; --continue is accepted and data received is available on bus
+                                addr_rw <= addr & rw; --collect requested slave address and command
+                                data_tx <= data_wr; --collect requested data to write
+                                IF (addr_rw = addr & rw) THEN --continue transaction with another read
+                                    sda_int <= '1'; --release sda from incoming data
+                                    state <= rd; --go to read byte
+                                ELSE --continue transaction with a write or new slave
+                                    state <= start; --repeated start
+                                END IF; 
+                            ELSE --complete transaction
+                                state <= stop; --go to stop bit
+                            END IF;
+                        WHEN stop => --stop bit of transaction
+                            busy <= '0'; --unflag busy
+                            state <= ready; --go to idle state
+                    END CASE; 
+                ELSIF (data_clk = '0' AND data_clk_prev = '1') THEN --data clock falling edge
+                    CASE state IS
+                        WHEN start => 
+                            IF (scl_ena = '0') THEN --starting new transaction
+                                scl_ena <= '1'; --enable scl output
+                                ack_error <= '0'; --reset acknowledge error output
+                            END IF;
+                        WHEN slv_ack1 => --receiving slave acknowledge (command)
+                            IF (sda /= '0' OR ack_error = '1') THEN --no-acknowledge or previous no-acknowledge
+                                ack_error <= '1'; --set error output if no-acknowledge
+                            END IF;
+                        WHEN rd => --receiving slave data
+                            data_rx(bit_cnt) <= sda; --receive current slave data bit
+                        WHEN slv_ack2 => --receiving slave acknowledge (write)
+                            IF (sda /= '0' OR ack_error = '1') THEN --no-acknowledge or previous no-acknowledge
+                                ack_error <= '1'; --set error output if no-acknowledge
+                            END IF;
+                        WHEN stop => 
+                            scl_ena <= '0'; --disable scl
+                        WHEN OTHERS => 
+                            NULL;
+                    END CASE;
+                END IF;
+            END IF;
+        END PROCESS; 
+
+        --set sda output
+        WITH state SELECT
+        sda_ena_n <= data_clk_prev WHEN start, --generate start condition
+                        NOT data_clk_prev WHEN stop, --generate stop condition
+                        sda_int WHEN OTHERS; --set to internal sda signal 
+    
+        --set scl and sda outputs
+        scl <= '0' WHEN (scl_ena = '1' AND scl_clk = '0') ELSE 'Z';
+        sda <= '0' WHEN sda_ena_n = '0' ELSE 'Z';
+    
+END logic;
+\end{lstlisting}
+
+\section*{State-space BPF code}
+\addcontentsline{toc}{section}{State-space BPF code}
+\begin{lstlisting}
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+use ieee.fixed_pkg.all;
+use IEEE.math_real.all;
+
+entity BPF_filter is
+    GENERIC(
+        d_width     : integer := 8;
+        freq_sample : integer := 192000;
+        freq_res    : integer := 400;                         --resonance frequency
+        gain        : integer := 1);
+    Port ( 
+        d_in    : in  std_logic_vector(d_width-1 downto 0); --input data
+        nrst    : in  std_logic;                            --active-low reset
+        i_avail : in  std_logic;                            --input data available
+        d_out   : out std_logic_vector(d_width-1 downto 0) --output data
+        o_avail : out std_logic                             --output data available
+        ); 
+end BPF_filter;
+
+architecture Behavioral of BPF_filter is
+    function compress (
+        a       : in unsigned;  --Value to be compressed
+        d_width : in integer    --The size where the input value needs to be compressed to
+    ) return unsigned is
+        constant max            : unsigned(d_width-1 downto 0) := (others => '1');  --minimal value for input value to be shifted
+
+        variable temp_mirror    : unsigned(0 to a'length-1);        --mirrored temp value
+        variable shiftVal       : unsigned(a'length-1 downto 0);    --value that the input needs to be shifted
+
+        variable temp_result    : unsigned(a'length*2-1 downto 0);  --temporary result
+        variable result         : unsigned(d_width-1 downto 0);     --final result
+    begin
+        --Input is larger than maximum 
+        if (a > max) then
+            --Mirror input
+            for i in 0 to a'length-1 loop
+                temp_mirror(i) := a(i);
+            end loop;
+
+            --Compute amount of shifts for the value to line up correctly
+            shiftVal := temp_mirror and not (temp_mirror - "1");
+
+            --Shift input value by computed shift value
+            temp_result := a * shiftVal;
+
+            --Resize and set d_width amount of MSB to result
+            result := resize(temp_result(a'length-1 downto a'length-d_width), d_width);
+        else
+            --Set d_width amount of input bits to result
+            result := a(d_width-1 downto 0);
+        end if;
+
+        return result;
+    end compress;
+
+    function compress (
+        a       : in signed;    --Value to be compressed
+        d_width : in integer    --The size where the input value needs to be compressed to
+    ) return signed is
+        constant max_signed     : unsigned(d_width-2 downto 0) := (others => '1');  --minimal value for a negative valued input to be shifted
+        constant max_unsigned   : unsigned(d_width-1 downto 0) := (others => '1');  --minimal value for a positive valued input to be shifted
+
+        variable temp_a         : unsigned(a'length-1 downto 0);    --temporary input value
+        variable temp_mirror    : unsigned(0 to a'length-1);        --mirrored temp value
+        variable shiftVal       : unsigned(a'length-1 downto 0);    --value that the input needs to be shifted
+
+        variable temp_result    : signed(a'length*2-1 downto 0);    --temporary result
+        variable result         : signed(d_width-1 downto 0);       --final result
+    begin
+        --Convert signed input to unsigned value
+        temp_a := unsigned(a);
+
+        --If signed make unsigned
+        if (temp_a(a'left) = '1') then 
+            temp_a := (not temp_a) + 1; 
+        end if;
+
+        if ((a(a'left) = '0' and temp_a > max_unsigned) or (a(a'left) = '1' and temp_a > max_signed)) then
+            --Mirror temp
+            for i in 0 to a'length-1 loop
+                temp_mirror(i) := temp_a(i);
+            end loop;
+
+            --Compute amount of shifts for the value to line up correctly
+            shiftVal := ((temp_mirror and not (temp_mirror - 1)) / 2);
+
+            --Correct for zero value
+            if (shiftVal < 1) then
+                shiftVal := shiftVal + 1;
+            end if;
+
+            --Shift input value by computed shift value
+            temp_result := a * signed(shiftVal);
+
+            --Resize and set d_width amount of MSB to result
+            result := resize(temp_result(a'length-1 downto a'length-d_width), d_width);
+        --Input is signed
+        elsif a(a'left) = '1' then
+            --Set d_width amount of input bits to result
+            result := a(d_width-1 downto 0);
+
+        --Input is unsigned
+        else
+            --Set d_width amount of input bits minus sign position bit to result
+            result := '0' & a(d_width-2 downto 0);
+        end if;
+
+        return result;
+    end compress;
+
+    constant twoPI : real := 6.283185;
+
+    constant order : integer := 2;
+    type matrix_A is array (0 to 2*order-1) of real;
+    type matrix_B is array (0 to order-1) of real;
+
+    type matrix_Ad is array (0 to 2*order-1) of signed(31 downto 0);
+    type matrix_Bd is array (0 to order-1) of signed(31 downto 0);
+
+    type m_temp_state is array (0 to order-1) of signed(63 downto 0);
+
+    signal state : matrix_Bd := (to_signed(0, 32), to_signed(0, 32));
+    signal output : unsigned(63 downto 0);
+
+    --signal test_output  : unsigned(31 downto 0);
+    signal test_output  : integer;
+    signal test_real    : real := -20480.5364;
+
+    signal test_Ad : matrix_Ad;
+    signal test_Bd : matrix_Bd;
+
+begin
+    process(ready, nrst)                       
+        variable coef_A : matrix_A := (-twoPI*real(freq_res), 0.0, -real(gain)*twoPI*real(freq_res), -twoPI*real(freq_res));
+        variable coef_B : matrix_B := (twoPI*real(freq_res), real(gain)*twoPI*real(freq_res));
+        variable coef_C : matrix_B := (0.0, 1.0); --can use the same array size as B
+        
+        variable coef_A_pow      : matrix_A;
+        variable coef_temp_A_pow : matrix_A;
+        variable identity_matrix : matrix_A := (1.0, 0.0, 0.0, 1.0);
+
+        variable factorial          : real := 1.0;
+        variable sample_time        : real := 1.0/real(freq_sample);
+        variable sample_time_pow    : real := sample_time;
+
+        variable fl_coef_Ad : matrix_A := identity_matrix;
+        variable fl_coef_Bd : matrix_B := (coef_B(0)*sample_time, coef_B(0)*sample_time);
+
+        variable coef_Ad    : matrix_Ad;
+        variable coef_Bd    : matrix_Bd;
+
+        variable temp_state : m_temp_state;
+        variable temp_test  : signed(63 downto 0);
+        variable temp_input : unsigned(7 downto 0) := "00011101";
+
+        variable shift17    : unsigned(31 downto 0) := (17 => '1', others => '0');
+        variable shift15    : unsigned(31 downto 0) := (15 => '1', others => '0');
+        
+    begin
+        if (nrst = '0') then    --reset is active
+            --Initialize discrete coefficient matrices
+            coef_A_pow      := coef_A;
+            fl_coef_Ad      := identity_matrix;
+            fl_coef_Bd      := (coef_B(0)*sample_time, coef_B(0)*sample_time);
+
+            factorial       := 1.0;
+            sample_time_pow := sample_time;
+
+            --Compute AT + A^2*T^2/2 + ...
+            compute_Ad_and_Bd : for i in 0 to 10 loop
+
+                --Compute Resulting Ad and Bd
+                for j in 0 to 1 loop
+                    --Compute Bd
+                    fl_coef_Bd(j) := fl_coef_Bd(j) + (((coef_A_pow(j*2)*coef_B(0) + coef_A_pow(j*2+1) * coef_B(1))*sample_time_pow*sample_time) / (factorial * real(i+2)));
+
+                    for k in 0 to 1 loop
+                        --Compute Ad
+                        fl_coef_Ad(j*2+k) := fl_coef_Ad(j*2+k) + ((coef_A_pow(j*2+k)*sample_time_pow)/factorial);
+                    end loop;
+                end loop;
+
+                --Compute A to the power of n in temporary matrix 
+                for j in 0 to 1 loop
+                    for k in 0 to 1 loop
+                        coef_temp_A_pow(j*2+k) := coef_A_pow(j*2)*coef_A(k) + coef_A_pow(j*2+1)*coef_A(2+k);
+                    end loop;
+                end loop;
+
+                --Copy temp to power of A matrix
+                coef_A_pow := coef_temp_A_pow;
+
+                --Compute T^n and n!
+                sample_time_pow := sample_time_pow*sample_time;
+                factorial       := factorial * real(i+2);
+
+            end loop compute_Ad_and_Bd;
+
+            --Convert float coefficients to fixed point
+            for j in 0 to 1 loop
+                fl_coef_Bd(j)   := fl_coef_Bd(j)*real(to_integer(shift17));
+                fl_coef_Bd(j)   := fl_coef_Bd(j) / 2.0 + (fl_coef_Bd(j) - ((fl_coef_Bd(j)/2.0) * 2.0));
+                coef_Bd(j)      := to_signed(integer(fl_coef_Bd(j)), 32);
+
+                for k in 0 to 1 loop 
+                    fl_coef_Ad(j*2+k)   := fl_coef_Ad(j*2+k)*real(to_integer(shift17));
+                    fl_coef_Ad(j*2+k)   := fl_coef_Ad(j*2+k) / 2.0 + (fl_coef_Ad(j*2+k) - ((fl_coef_Ad(j*2+k)/2.0) * 2.0));
+                    coef_Ad(j*2+k)      := to_signed(integer(fl_coef_Ad(j*2+k)), 32);
+                end loop;
+            end loop;
+        elsif (rising_edge(ready)) then     --reset is inactive and sample is ready
+
+            test_Ad <= coef_Ad;
+            test_Bd <= coef_Bd;
+
+            for i in 0 to 1 loop
+                temp_state(i) := compress(coef_Ad(i*2)*state(0) + coef_Ad(i*2+1)*state(1) + coef_Bd(i)*resize(signed(d_in), 32), 64);
+                temp_test := signed(temp_state(i));
+
+                --if (temp_state(i) >= 0) then
+                if (temp_test(temp_test'left) = '0') then
+                    temp_state(i) := temp_state(i) / 32768;
+                    temp_test := temp_test / 32768;
+
+                else
+                    temp_state(i) := temp_state(i) / 32768;
+                    temp_test := temp_test / 32768;
+                end if;
+
+                temp_state(i) := temp_state(i) / 32768;
+                temp_state(i) := compress(temp_state(i)/2 + (temp_state(i) - ((temp_state(i)/2) * 2)), temp_state(i)'length);
+                state(i) <= compress(temp_state(i), 32);
+            end loop;
+
+            d_out <= std_logic_vector(compress(temp_state(1), d_width));
+        end if;
+    end process;
+end Behavioral;
+\end{lstlisting}
+
+\section*{Sinewave generator code}
+\addcontentsline{toc}{section}{Sinewave generator code}
+\begin{lstlisting}
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity sinewave_generator is
+    GENERIC(
+        d_width         : integer := 24;
+        mclk_freq       : integer := 50000000;
+        sample_freq     : integer := 192000;
+        desired_freq    : integer := 1000);
+    Port (
+        mclk        : in  std_logic;
+        sinewave    : out std_logic_vector(d_width-1 downto 0);
+        valid       : out std_logic
+        ); 
+end sinewave_generator;
+
+architecture Behavioral of sinewave_generator is
+begin
+    process(mclk)
+        constant PI     : real := 3.14159265;
+        constant limit  : real := PI - (2.0*PI/real(sample_freq));
+        constant step   : real := 2.0*PI/real(sample_freq);
+        variable index  : real := -PI;
+        variable z      : real;
+
+        type t_factorials is array (0 to 10) of real;
+        constant factorials : t_factorials := (1.0/6.0, 1.0/120.0, 1.0/5040.0, 1.0/362880.0, 1.0/39916800.0, 1.0/6227020800.0, 1.0/1307674368000.0, 1.0/355687428100000.0, 1.0/121645100400000000.0, 1.0/51090942170000000000.0, 1.0/25852016740000000000000.0);
+
+        variable temp_sine      : real := 0.0;
+        variable resized_sine   : real := 0.0;
+        variable unsigned_sine  : signed(d_width-1 downto 0) := (others => '0');
+        variable shifter        : unsigned(d_width-1 downto 0) := (d_width-1 => '0', others => '1');
+
+        constant divider        : integer := mclk_freq/sample_freq;
+        variable tick_counter   : integer := 0;
+
+    begin
+        if rising_edge(mclk) then
+            tick_counter := tick_counter + 1;
+
+            if (tick_counter >= divider) then
+                tick_counter := 0;
+
+                z := index * index;
+
+                temp_sine := -index * (1.0+z*(-factorials(0)+z*(factorials(1) + z*(-factorials(2)+z*(factorials(3) + z*(-factorials(4) + z*(factorials(5) + z*(-factorials(6) + z*(factorials(7) + z*(-factorials(8) + z*(factorials(9))))))))))));
+
+                resized_sine    := temp_sine * real(to_integer(shifter));
+                unsigned_sine   := to_signed(integer(temp_sine * real(to_integer(shifter))), d_width);
+
+                sinewave    <= std_logic_vector(unsigned_sine);
+                valid       <= '1';
+
+                index := index + (step * real(desired_freq));
+                if (index >= limit) then
+                    index := -PI;
+                end if;
+            else
+                valid <= '0';
+            end if;
+        end if;
+    end process;
+end Behavioral;
+\end{lstlisting}

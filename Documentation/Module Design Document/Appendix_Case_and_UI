@@ -1,0 +1,52 @@
+\chapter*{Appendix D: UI design}
+\addcontentsline{toc}{chapter}{Appendix D: UI design}  
+\label{chap:appendix-D-UIdesign}
+
+\section*{Main menu} \label{Appendix-main-menu}
+\phantomsection
+\addcontentsline{toc}{section}{Main menu}  
+\begin{figure}[ht]
+    \includegraphics[height=.25\textheight]{MainMenu1}
+    \caption{Main menu design}
+    \label{fig:mainmenu}
+\end{figure}
+
+\section*{Adjust preset menu} \label{Appendix-Adjust-preset-menu}
+\phantomsection
+\addcontentsline{toc}{section}{Adjust preset menu} 
+\begin{figure}[ht]
+    \includegraphics[height=.25\textheight]{adjustpreset1-2}
+    \caption{Other menu screen, other ones are similar to this one}
+    \label{fig:adjustpresetmenu}
+\end{figure}
+
+\chapter*{Appendix E: Case}
+\addcontentsline{toc}{chapter}{Appendix E: Case}  
+\label{chap:appendix-E-Case}
+
+\section*{Top view} \label{Appendix-topview}
+\phantomsection
+\addcontentsline{toc}{section}{Top view} 
+\begin{figure}[!htb]
+    \includegraphics[height=.25\textheight]{topviewcase}
+    \caption{Top-down view of the case}
+    \label{fig:topview}
+\end{figure}
+
+\section*{Front view} \label{Appendix-front-view}
+\phantomsection
+\addcontentsline{toc}{section}{Front view}
+\begin{figure}[!htb]
+    \includegraphics[height=.3\textheight]{frontviewcase}
+    \caption{Front view of the case}
+    \label{fig:frontview}
+\end{figure}
+
+\section*{Rear view} \label{Appendix-rear-view}
+\phantomsection
+\addcontentsline{toc}{section}{Rear view}
+\begin{figure}[!htb]
+    \includegraphics[height=.45\textheight]{rearviewcase}
+    \caption{Rear view of the case}
+    \label{fig:rearview}
+\end{figure}

@@ -144,7 +144,7 @@ architecture Behavioral of multiplier_rounder is
         return result(a'length*2-1 downto a'length);
     end multiply;
 
-    --signal c : unsigned(d_width-1 downto 0);-- := multiply("1010","0101"); -- dit werkt!
+    signal c : unsigned(d_width-1 downto 0);-- := multiply("1010","0101"); -- dit werkt!
     --signal p : signed(d_width-1 downto 0) := to_signed(-1, d_width);
     --signal q : signed(d_width-1 downto 0) := to_signed(13, d_width);
     --signal s : signed(d_width-1 downto 0);
@@ -152,7 +152,7 @@ architecture Behavioral of multiplier_rounder is
 begin
     process(a, b)
     begin
-        --c       <= multiply(unsigned(a),unsigned(b));
+        c       <= multiply(unsigned(a),unsigned(b));
         unsigned_output  <= multiply(a,b);
         --s <= multiply(p,q);
         signed_output <= std_logic_vector(multiply(signed(a), signed(b)));

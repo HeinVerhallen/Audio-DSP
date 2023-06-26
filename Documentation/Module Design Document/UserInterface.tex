@@ -31,13 +31,33 @@ The main component of the UI is the UI controller, it translates commands from t
 \end{figure}
 
 \paragraph{Menu controller}
-The menu controller is the block that contains all the logic for the menu navigation and DSP control. It reads user inputs coming from the touchscreen or from the rotary encoder, and processes that into menu navigation and updating the correct parameters.
+The menu controller is the block that contains all the logic for the menu navigation and DSP control. It reads user inputs coming from the touchscreen or from the rotary encoder, and processes that into menu navigation and updating the correct parameters. The controller checks in the RX buffer for the stop bytes and if they are there then it starts processing the incoming data, and perform the appropriate actions.
 
 \paragraph{Buffer}
-The buffer block is a circular FIFO buffer, meaning that the data comes in and the buffer keeps track of the position of the first unread byte, called the tail, and the next free space in the buffer, called the head. When a new byte comes in the byte is placed at head. When a byte is read the buffer takes it from the tail. When the head or tail reaches
+The buffer block is a circular FIFO buffer, meaning that the data comes in and the buffer keeps track of the position of the first unread byte, called the tail, and the next free space in the buffer, called the head. When a new byte comes in the byte is placed at head. When a byte is read the buffer takes it from the tail. When the head or tail reaches the end of the buffer it cycles back to the beginning of the buffer. In the case that the head and the tail are at the same position the buffer is either completely full or empty.
+
+\paragraph{Tx}
+The TX block is capable of sending a single byte at a time. When the ready line is high the block loads the data on the Byte line and sends the bits one by one at the set baud rate.
+
+\paragraph{RX}
+The RX block is capable of receiving a single byte at a time. When a full byte has been received the data gets put on the Byte line and the ready line will be high for a single clock cycle.
+
+\paragraph{Memory}
+The memory block is a simple register which stores frames of 32 bits at an address. It has 7 bit addresses meaning 128 frames can be stored, which is enough to hold the 120 frames which are necessary to store the 120 effect parameters.
 
 \subsection{Nextion screen}
+The nextion screen used in this project is an 3,5" discovery version screen with 320x480 pixels. The screen has its own controller which is responsible for handling incoming commands, send commands when the screen is touched and most importantly load the menu's to the screen. Figure \ref{fig:Main-menu} shows the home screen of the UI. These screens are designed in Adobe and imported to the Nextion environment with invisible buttons on top of the image.
 
+\begin{figure}[ht]
+    \includegraphics[width=\textwidth]{MainMenu1.jpg}
+    \caption{Main menu screen on the Nextion screen}
+    \label{fig:Main-menu}
+\end{figure}
 
+Figure \ref{fig:adjust-preset} shows what the majority of the menu's look like. The three banner style with the action described in short text.
 
-
+\begin{figure}[ht]
+    \includegraphics[width=\textwidth]{adjustpreset1-2.jpg}
+    \caption{Adjust preset screen on the Nextion screen}
+    \label{fig:adjust-preset}
+\end{figure}

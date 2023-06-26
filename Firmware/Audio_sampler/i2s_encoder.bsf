@@ -21,9 +21,9 @@ agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 216 160)
+	(rect 16 16 216 192)
 	(text "i2s_encoder" (rect 5 0 53 12)(font "Arial" ))
-	(text "inst" (rect 8 128 20 140)(font "Arial" ))
+	(text "inst" (rect 8 160 20 172)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -60,6 +60,20 @@ agreement for further details.
 		(line (pt 0 96)(pt 16 96)(line_width 3))
 	)
 	(port
+		(pt 0 112)
+		(input)
+		(text "i_avail_left" (rect 0 0 42 12)(font "Arial" ))
+		(text "i_avail_left" (rect 21 107 63 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 1))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "i_avail_right" (rect 0 0 47 12)(font "Arial" ))
+		(text "i_avail_right" (rect 21 123 68 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 1))
+	)
+	(port
 		(pt 200 32)
 		(output)
 		(text "sd" (rect 0 0 9 12)(font "Arial" ))
@@ -72,7 +86,7 @@ agreement for further details.
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 184 128)(line_width 1))
+		(rectangle (rect 16 16 184 160)(line_width 1))
 	)
 	(annotation_block (parameter)(rect 216 -64 316 16))
 )

@@ -43,26 +43,6 @@ In the signal processor block there are effects that modify the chosen input sig
 
 To make sure that the signal processor modifies the input sample correctly it is necessary to have an input and output available bit that notifies the next effect block that the data is ready to be modified. 
 
-% In order for the signal processor to modify the signal with various digital effects, memory is needed. This memory is stored inside the signal processor block itself. To access and modify the memory some kind of communication protocol had to be chosen in order for the controller to configure the effect parameters. For this a register based memory has been chosen.
-
-% Looking at the system requirements it is known that the user is able to adjust the position of each effect in the effects loop. Therefore the signal processor needs registers to store the position of each effect. The system must support at least five effects and should support at least twenty effects. Thus in order to fulfill all the requirements the signal processor should be able to position twenty effects. For this we would need at least 5 bits at each position. The various effects available to the user have configurable parameters. Therefore each effect also needs a register in the signal processor block. Also the equalizer settings are adjustable by the user. This means the equalizer also has a register with data.
-
-% The size of the registers can be very large. But to make the communication to the signal processor intuitive the registers will be limited to a maximum amount of bits. In order to choose the most efficient register size the registers should use most of its bits. The size of the register is of no importance for the effect and equalizer parameters as the size only affects the resolution of the parameters. But for the position register 5-bits per position are needed. Thus the register should be dividable by 5 in order to use the most of the registers bits. As there are 20 positions it is chosen to have four position registers with 5 positions (see figure \ref{fig:reg-position}).
-% This means the register size will be 25 bits.
-
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[width=0.4\textwidth]{Position register design}
-%     \caption{Effect loop position 0 to 4 register}
-%     \label{fig:reg-position}
-% \end{figure}
-
-% Now that the register size has been defined we need to define the amount of registers needed. The system has 20 effects, therefore 20 effect parameter registers. Each effect needs to be positioned in the position registers which there are four of. Then the equalizer and volume registers are left. when using 5 bits for selecting the registers we would be able to access up to 32 registers. This means that there are $32 - (20 + 4) = 8$ registers left for the equalizer and volume parameters. That is more than enough for these registers.
-
-% Thus the data bus will be 25 bits and the register selector line will be 5 bits. With these two lines every register can be accessed by the controller. Now the memory needs to know if the data needs to be read or written. This is indicated by the R/W signal. When this signal is low the memory will be written and when the signal is high the memory will be read.
-
-% It is undesired that every signal processor memory will be read or written constantly. Therefore each signal processor block has an enable. When this enable signal is high the memory can be read or written. This gives the controller the ability to read or write to only one signal processor memory at a time. And the ability to write multiple signal processor memories at once.
-
 \subsubsection{Signal processor}
 \begin{figure}[ht]
     \includegraphics[width=\linewidth]{20230622_Audio-DSP design_redesign-Signal processor.png}
@@ -136,7 +116,7 @@ The reverb effect works nearly identical to the delay effect but it has a feedba
 
 To implement the equalizer effect there are different approaches. As explained in the beginning of this chapter the first approach was to implement the effects with FFT, which would make the implementation of an equalizer much easier as you could simply modify the magnitudes of every frequency in the transformed spectrum to your liking. But because this approach has been canceled another very powerful and extremely fast mathematical method is chosen to implement the equalizer effect. The chosen method is state-space. With state-space a multiple order system can by simplified into multiple first order equations. With state-space a physical system can be represented by a set of inputs and outputs with a set of state variables related by first-order differential equations. 
 
-Making an equalizer effect can be seen as adding up different band-pass filters. Thus to make the equalizer filter it is much simpler to represent a band-pass filter with state-space and change the state variables according to the desired frequency of the band-pass filter. To do this a physical system should be converted to state-space. The simplest system for making a band-pass filter in electronics is by having a low-pass filter in series with a buffer and a high-pass filter (see figure \ref{fig:bpf-circuit}). The calculations needed to achieve the state-space notation of this circuit can be seen in appendix ???.
+Making an equalizer effect can be seen as adding up different band-pass filters. Thus to make the equalizer filter it is much simpler to represent a band-pass filter with state-space and change the state variables according to the desired frequency of the band-pass filter. To do this a physical system should be converted to state-space. The simplest system for making a band-pass filter in electronics is by having a low-pass filter in series with a buffer and a high-pass filter (see figure \ref{fig:bpf-circuit}). The calculations needed to achieve the state-space notation of this circuit can be found in \nameref{chap:appendix-A-statespace}.
 
 \begin{figure}[ht]
     \includegraphics[width=\linewidth]{BandPassFilter_circuit.jpg}

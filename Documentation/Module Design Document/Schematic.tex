@@ -55,7 +55,9 @@ This reduces the sensitivity of the circuits to noise and ground loops significa
 
 The front-end of channels 3 and 4 resembles that of channels 1 and 2 but does not include the selection relay and volume controller. Additionally, this entire page is balanced, allowing these two inputs to achieve the best specifications.
 
+The back-end is divided into three pages, with output channels 1 and 2 being the most comprehensive. These channels include XLR, RCA, and jack connections. Output channels 3 to 6 are identical, except for the absence of RCA and jack outputs. All channels feature the PCM1789 DAC and external reconstruction filters (LPF). The voltage is slightly attenuated for the RCA and jack outputs, while it is slightly amplified to meet the standard amplitudes for XLR connections.
 
+The sensitive analog ICs are each equipped with standard 100nF decoupling capacitors, 22uF buffer capacitors, and low-ohm series resistors to suppress CLC oscillations in the PCB design.
 
 The FPGA page consists solely of the two GPIO connectors of the DE1-SOC board and all the connections to and from them.
 

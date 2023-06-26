@@ -36,4 +36,7 @@ The cutoff frequency of the capacitance multiplier can be calculated as shown in
 
 \subsubsection{Main board}
 The following text relates to the schematic displayed in appendix \ref{Appendix_main_schematic}.
-The schematic of the main board is subdevided in multiple pages
+
+The main board is based on the block diagram shown in Figure \ref{fig:arch-front-end} and is subdivided into multiple pages to keep the schematic organized and readable. The ADCs have their own page for every two channels, the DACs have their own page for every two channels, there is a page dedicated to the power supplies, and last but not least, there is a page for the connections to the FPGA board.
+
+The front-end of channels 1 and 2 consists of an input selection relay followed by a LPF (low-pass filter) to suppress RF (radio frequency) interference. The inputs are equipped with TVS diodes for ESD protection. Next in line is the PGA2311P volume controller, which independently adjusts the volume of both inputs based on volume settings obtained via I2C from the FPGA. Since the PGA2311P operates on 5V logic while the FPGA operates around 3.3V logic, a TXS0102 level translator is placed in between. This is a bidirectional level translator as the I2C protocol transmits data bidirectionally. Some additional logic is implemented around this chip to ensure proper startup.

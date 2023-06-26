@@ -71,7 +71,7 @@ The distortion effect works by amplifying the input signal with a gain and clipp
         \hline
         MSB & LSB & Parameter & Description\\
         \hline
-        31 & 0 & Gain & Specify amount of gain for distortion. Ranging from ... to ... with a resolution of\\
+        31 & 0 & Gain & Specify amount of gain for distortion. Ranging from 1 to 429,496,730 with a resolution of 0.1\\
         \hline
     \end{tabular}
     \caption{Distortion parameter register}
@@ -195,12 +195,6 @@ The user is able to adjust the magnitude of each band-pass filter. This is done 
     \caption{Equalizer effect parameter register}
     \label{table:eq-effect-parameters}
 \end{table}
-
-% The signal processor has to load a new sample into the effect loop and the previous modified sample to the output on the sample frequency. The sample frequency of the Audio-DSP is 192kHz. This means that the signal processor has $\frac{1}{192 \cdot 10^3} \approx 5 \mu s$ to process the sample. With a clock of 50MHz the sample must be modified and loaded into the output within $\frac{50 \cdot 10^6}{192 \cdot 10^3}=260$ clock ticks.
-
-% When a sample has been loaded into the signal processor, it is fed into the effect processor manager (see figure \ref{fig:arch-signal-processor}). The effect processor manager houses multiple effects processor in series. The sample will go through these effect processors. Each effect processor can be configured to be a certain effect (see figure \ref{fig:arch-effect-processor}). Because the system has at least twenty effects, the amount of bits the selector needs is 5 bits.
-
-% Each effect modifies the signal by applying a transfer function to the sample. The variables in that transfer function are configured by the user via the user interface. Therefore the effect processors needs to get the variables from the controller block, which gets the variables from the register bank. After the sample has gone through all the effect processors the modified sample waits before it is shifted out of the signal processor. 
 
 \subsection{Back-end}
 The architecture design of the back-end of the Audio-DSP is shown in figure \ref{fig:arch-back-end}. The processed data is sent from the FPGA to the DACs via the I2S protocol. The back-end consists of three stereo DACs, which, like the front-end, can be used as six separate mono channels depending on the user's preferences. Similar to the front-end, the I2S connections in the back-end are equipped with EMI reduction resistors due to the relatively high data rate.

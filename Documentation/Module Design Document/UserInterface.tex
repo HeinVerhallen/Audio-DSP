@@ -1,23 +1,17 @@
-\subsection*{UI Design} \label{UI_Design}
-A well-designed user interface is a critical component of any audio DSP project, particularly when utilizing a Nextion or similar screen. The user interface should be designed with simplicity in mind to ensure it is accessible to everyone who uses it. One of the primary goals of a good UI is to ensure that it is intuitive and easy to remember, so that users can begin using the product without feeling frustrated or overwhelmed.
+\subsection{User interface}\label{UI_Design}
+The user interface(UI) is a critical part of the audio DSP project. The UI makes it that the user can interact with the system and set his desired settings.
+What makes a good UI design is consistency, Readability and feedback. If every menu has the same style and general button layout to make sure menus are easy to navigate. Text in the UI should be kept to a minimum. This follows the saying that an image is worth a thousand words.If text is necessary it should be easy to read. The U should provide proper feedback, this means that if for example a page would take a second to load the UI should show that it is loading a page to prevent frustrations and possible errors.
 
-\subsubsection*{Consistent}
-The UI should maintain a consistent style throughout, so that each new menu or dial looks and feels the same as every other menu. This ensures that using the menus is easy and recognizable, even for new users.
+\subsubsection{UI Components}
+The UI will consist of the following three main components: A touchscreen, a rotary knob (with pushbutton) and a controller. The screen is a Nextion screen, meaning the menu design can be done in the Nextion editor.
+The benefit of this is that we can design a menu in photoshop and lay transparent buttons on top of the parts that the user should be able to press.
 
-\subsubsection*{Readability}
-Text shown in menus should not be cut off, as this can be frustrating for users trying to read it. Short sentences are preferred to keep the menus clean and easy to read. When a sentence is cut off by the edge of the screen, users may struggle to figure out what it says, leading to confusion and frustration.
+The controller can control the screen visuals by sending commands via UART protocol. When an on screen button is pressed the Nextion screen sends can send the id of the button which is pressed. The menu navigation can be entirely done by using the rotary knob with pushbutton, but the screen also is a touchscreen so for simplicity's sake every on screen button can be used with touchscreen as well.
 
-\subsubsection*{Feedback}
-Finally, it is important to provide feedback to the user when the system needs time to load in certain elements or execute specific settings. Without feedback, users may become frustrated and begin clicking buttons multiple times, which can lead to software errors. By providing clear feedback during loading processes, users are more likely to remain patient and avoid potential issues.
+\subsubsection{UI Design}
+The design was started with a diagram with all the necessary screens and information so that is was clear what menus should be in the DSP. There are 2 main menu layouts which are considered, namely function based and channel based. The function based layout is a layout where the functions are grouped and at the lowest level possible the channel has to be selected, for example in the function based layout the user would first navigate to the equalizer section and then select for which channel the equalizer has to be set.
 
-\section{Nextion screen}
-
-For this project a Nextion screen is used. This screen can easily be programmed. It comes with software which is image based instead of code based. Images can be inserted and "invisible" buttons can be used to make menus out of the inserted images.
-
-This is a neat way to work because now it is possible to create images in Photoshop or a similar application to use for the whole menu design
-
-\subsection{Designing the UI}
-The design was started with a diagram with all the necessary screens and information so that is was clear what menus should be in the DSP. 
+The channel based layout is a layout where the user first selects the main functionality (signal routing, effects or presets) and after that selects the channel giving the user specific controls for the selected channel all in one place. Lets take a look at the previous example in the function based layout. In this case the user would navigate to the effect section, than select the channel to modify and lastly selecting the effect, in this case the equalizer.
 
 \begin{figure}[ht]
     \includegraphics[width=\linewidth]{functionbasedUI}
@@ -25,9 +19,9 @@ The design was started with a diagram with all the necessary screens and informa
     \label{fig:functionbasedUI}
 \end{figure}
 
-This UI is easy to understand when first using the DSP. Options and settings are easy to find from the first menu screen. While a channel based UI is unclear because every option is branched off from the channel select.
-\par
-\noindent The UI is designed using Adobe Photoshop. Bright but matching colors are used to indicate certain buttons. Using the Nextion screen software, invisible buttons are placed over the Photoshop pictures to make it a usable menu. The menu follows the liquidCrystal function based UI schematic. (see \ref{fig:functionbasedUI})
+The channel based layout is chosen for the audio DSP UI, because it gives the user better overview of settings of the DSP, because all functions are sorted per channel.
+
+\subsubsection{UI controller}
 
 
 

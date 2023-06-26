@@ -414,9 +414,9 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect 744 64 944 208)
+	(rect 744 64 944 240)
 	(text "i2s_encoder" (rect 5 0 64 12)(font "Arial" ))
-	(text "inst15" (rect 8 128 37 140)(font "Arial" ))
+	(text "inst15" (rect 8 160 37 172)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -453,10 +453,24 @@ agreement for further details.
 		(line (pt 0 96)(pt 16 96)(line_width 3))
 	)
 	(port
+		(pt 0 112)
+		(input)
+		(text "i_avail_left" (rect 0 0 54 12)(font "Arial" ))
+		(text "i_avail_left" (rect 21 107 75 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "i_avail_right" (rect 0 0 59 12)(font "Arial" ))
+		(text "i_avail_right" (rect 21 123 80 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128))
+	)
+	(port
 		(pt 200 32)
 		(output)
 		(text "sd" (rect 0 0 11 12)(font "Arial" ))
-		(text "sd" (rect 170 27 181 39)(font "Arial" ))
+		(text "sd" (rect 170 27 179 39)(font "Arial" ))
 		(line (pt 200 32)(pt 184 32))
 	)
 	(parameter
@@ -465,7 +479,7 @@ agreement for further details.
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 184 128))
+		(rectangle (rect 16 16 184 160))
 	)
 	(annotation_block (parameter)(rect 744 16 913 54))
 )
@@ -505,15 +519,29 @@ agreement for further details.
 		(pt 208 32)
 		(output)
 		(text "data_left[d_width-1..0]" (rect 0 0 109 12)(font "Arial" ))
-		(text "data_left[d_width-1..0]" (rect 95 27 204 39)(font "Arial" ))
+		(text "data_left[d_width-1..0]" (rect 95 27 187 39)(font "Arial" ))
 		(line (pt 208 32)(pt 192 32)(line_width 3))
 	)
 	(port
 		(pt 208 48)
 		(output)
 		(text "data_right[d_width-1..0]" (rect 0 0 114 12)(font "Arial" ))
-		(text "data_right[d_width-1..0]" (rect 91 43 205 55)(font "Arial" ))
+		(text "data_right[d_width-1..0]" (rect 91 43 187 55)(font "Arial" ))
 		(line (pt 208 48)(pt 192 48)(line_width 3))
+	)
+	(port
+		(pt 208 64)
+		(output)
+		(text "o_avail_left" (rect 0 0 57 12)(font "Arial" ))
+		(text "o_avail_left" (rect 139 59 187 71)(font "Arial" ))
+		(line (pt 208 64)(pt 192 64))
+	)
+	(port
+		(pt 208 80)
+		(output)
+		(text "o_avail_right" (rect 0 0 62 12)(font "Arial" ))
+		(text "o_avail_right" (rect 135 75 187 87)(font "Arial" ))
+		(line (pt 208 80)(pt 192 80))
 	)
 	(parameter
 		"d_width"
@@ -730,6 +758,30 @@ agreement for further details.
 (connector
 	(pt 280 432)
 	(pt 408 432)
+)
+(connector
+	(pt 640 208)
+	(pt 712 208)
+)
+(connector
+	(pt 712 208)
+	(pt 712 176)
+)
+(connector
+	(pt 712 176)
+	(pt 744 176)
+)
+(connector
+	(pt 640 224)
+	(pt 728 224)
+)
+(connector
+	(pt 728 224)
+	(pt 728 192)
+)
+(connector
+	(pt 728 192)
+	(pt 744 192)
 )
 (junction (pt 408 432))
 (junction (pt 384 448))

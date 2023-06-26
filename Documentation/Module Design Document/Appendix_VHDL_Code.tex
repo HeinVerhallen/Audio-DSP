@@ -2,3 +2,485 @@
 \chapter*{Appendix B: VHDL code}
 \label{chap:appendix-B-vhdl}
 
+\section*{I2S Decoder}
+\addcontentsline{toc}{section}{I2S Decoder}
+\begin{lstlisting}
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.NUMERIC_STD.ALL;
+
+ENTITY i2s_decoder IS
+	GENERIC (
+	d_width : INTEGER := 24); --data width
+	PORT (
+		nrst : IN std_logic; --active-low reset
+		sck : IN std_logic; --serial clock
+		ws : IN std_logic; --left right audio word select
+		sd : IN std_logic; --serial data
+		data_left : OUT std_logic_vector(d_width - 1 DOWNTO 0); --left audio data
+		data_right : OUT std_logic_vector(d_width - 1 DOWNTO 0); --right audio data
+		o_avail_left : OUT std_logic; --left audio available
+		o_avail_right : OUT std_logic --right audio available
+	); 
+END i2s_decoder;
+
+ARCHITECTURE Behavioral OF i2s_decoder IS
+	SIGNAL l_data_int : std_logic_vector(d_width - 1 DOWNTO 0); --internal left audio data
+	SIGNAL r_data_int : std_logic_vector(d_width - 1 DOWNTO 0); --internal right audio data
+
+	TYPE t_machine IS (ready, rd_l, rd_r);
+	SIGNAL machine : t_machine := ready; --state machine
+
+	SIGNAL bit_cnt : INTEGER := 0; --bit counter
+
+BEGIN
+	PROCESS (sck, nrst)
+	BEGIN
+		IF nrst = '0' THEN
+			--Reset state machine and bit counter
+			machine <= ready;
+			bit_cnt <= 0;
+		ELSIF rising_edge(sck) THEN
+			CASE machine IS
+				--Read left audio
+				WHEN rd_l => 
+					--Have all bits been read
+					IF bit_cnt < d_width THEN
+						bit_cnt <= bit_cnt + 1; --increment bit counter
+						l_data_int <= l_data_int(l_data_int'HIGH - 1 DOWNTO 0) & sd; --shift serial data in internal left audio data
+						data_right <= r_data_int; --output right audio data
+					END IF;
+
+					--Write available bits
+					o_avail_left <= '0';
+					o_avail_right <= '1';
+					--Read right audio
+				WHEN rd_r => 
+					--Have all bits been read
+					IF bit_cnt < d_width THEN
+						bit_cnt <= bit_cnt + 1; --increment bit counter
+						r_data_int <= r_data_int(r_data_int'HIGH - 1 DOWNTO 0) & sd; --shift serial data in internal right audio data
+						data_left <= l_data_int; --output left audio data
+					END IF;
+
+					--Write available bits
+					o_avail_left <= '1';
+					o_avail_right <= '0';
+				WHEN OTHERS => 
+					NULL;
+			END CASE;
+
+			--Left audio data is selected and not already reading left audio data
+			IF ws = '0' AND machine /= rd_l THEN
+				bit_cnt <= 0; --reset bit counter 
+				machine <= rd_l; --set state to read left channel
+				--Right audio data is selected and not already reading right audio data
+			ELSIF ws = '1' AND machine /= rd_r THEN
+				bit_cnt <= 0; --reset bit counter
+				machine <= rd_r; --set state to read right channel
+			END IF;
+		END IF;
+	END PROCESS;
+
+END Behavioral;
+\end{lstlisting}
+
+\section*{I2S Encoder}
+\addcontentsline{toc}{section}{I2S Encoder}
+\begin{lstlisting}
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.NUMERIC_STD.ALL;
+
+ENTITY i2s_encoder IS
+	GENERIC (
+	d_width : INTEGER := 24); --data width
+	PORT (
+		nrst : IN std_logic; --active-low reset
+		sck : IN std_logic; --serial clock
+		ws : IN std_logic; --left right audio word select
+		data_left : IN std_logic_vector(d_width - 1 DOWNTO 0); --left audio data
+		data_right : IN std_logic_vector(d_width - 1 DOWNTO 0); --right audio data
+		sd : OUT std_logic; --serial data
+		i_avail_left : IN std_logic; --left audio available
+		i_avail_right : IN std_logic --right audio available
+	); 
+END i2s_encoder;
+
+ARCHITECTURE Behavioral OF i2s_encoder IS
+	SIGNAL l_data_int : std_logic_vector(d_width - 1 DOWNTO 0); --internal left audio data
+	SIGNAL r_data_int : std_logic_vector(d_width - 1 DOWNTO 0); --internal right audio data
+
+	TYPE t_machine IS (ready, wr_l, wr_r);
+	SIGNAL machine : t_machine := ready; --state machine
+
+	SIGNAL bit_cnt : INTEGER := 0; --bit counter
+
+BEGIN
+	PROCESS (sck, nrst)
+	BEGIN
+		IF nrst = '0' THEN
+			--Reset state machine and bit counter
+			machine <= ready;
+			bit_cnt <= 0;
+		ELSIF falling_edge(sck) THEN
+			CASE machine IS
+				--Write left audio
+				WHEN wr_l => 
+					--Have all bits been written
+					IF bit_cnt < d_width THEN
+						bit_cnt <= bit_cnt + 1; --increment bit counter
+						l_data_int <= l_data_int(r_data_int'HIGH - 1 DOWNTO 0) & '0'; --shift internal left audio data to the left
+						sd <= l_data_int(l_data_int'high); --output MSB of internal left audio data to serial data output
+					END IF;
+
+					--If right data is available
+					IF (i_avail_right = '1') THEN
+						r_data_int <= data_right;
+					END IF;
+
+					--Write right audio
+				WHEN wr_r => 
+					--Have all bits been written
+					IF bit_cnt < d_width THEN
+						bit_cnt <= bit_cnt + 1; --increment bit counter
+						r_data_int <= r_data_int(r_data_int'HIGH - 1 DOWNTO 0) & '0'; --shift internal right audio data to the left
+						sd <= r_data_int(r_data_int'high); --output MSB of internal right audio data to serial data output
+					END IF;
+
+					--If left data is available
+					IF (i_avail_left = '1') THEN
+						l_data_int <= data_left;
+					END IF;
+
+				WHEN OTHERS => 
+					NULL;
+			END CASE;
+ 
+			--Left audio data is selected and not already writing left audio data
+			IF ws = '0' AND machine /= wr_l THEN
+				bit_cnt <= 0; --reset bit counter
+				machine <= wr_l; --set state to write left channel
+				--Right audio data is selected and not already writing right audio data
+			ELSIF ws = '1' AND machine /= wr_r THEN
+				bit_cnt <= 0; --reset bit counter
+				machine <= wr_r; --set state to write right channel
+			END IF;
+		END IF;
+	END PROCESS;
+END Behavioral;
+\end{lstlisting}
+
+\section*{State-space BPF code}
+\addcontentsline{toc}{section}{State-space BPF code}
+\begin{lstlisting}
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+use ieee.fixed_pkg.all;
+use IEEE.math_real.all;
+
+entity BPF_filter is
+    GENERIC(
+        d_width     : integer := 8;
+        freq_sample : integer := 192000;
+        freq_res    : integer := 400;                         --resonance frequency
+        gain        : integer := 1);
+    Port ( 
+        d_in    : in  std_logic_vector(d_width-1 downto 0); --input data
+        nrst    : in  std_logic;                            --active-low reset
+        i_avail : in  std_logic;                            --input data available
+        d_out   : out std_logic_vector(d_width-1 downto 0) --output data
+        o_avail : out std_logic                             --output data available
+        ); 
+end BPF_filter;
+
+architecture Behavioral of BPF_filter is
+    function compress (
+        a       : in unsigned;  --Value to be compressed
+        d_width : in integer    --The size where the input value needs to be compressed to
+    ) return unsigned is
+        constant max            : unsigned(d_width-1 downto 0) := (others => '1');  --minimal value for input value to be shifted
+
+        variable temp_mirror    : unsigned(0 to a'length-1);        --mirrored temp value
+        variable shiftVal       : unsigned(a'length-1 downto 0);    --value that the input needs to be shifted
+
+        variable temp_result    : unsigned(a'length*2-1 downto 0);  --temporary result
+        variable result         : unsigned(d_width-1 downto 0);     --final result
+    begin
+        --Input is larger than maximum 
+        if (a > max) then
+            --Mirror input
+            for i in 0 to a'length-1 loop
+                temp_mirror(i) := a(i);
+            end loop;
+
+            --Compute amount of shifts for the value to line up correctly
+            shiftVal := temp_mirror and not (temp_mirror - "1");
+
+            --Shift input value by computed shift value
+            temp_result := a * shiftVal;
+
+            --Resize and set d_width amount of MSB to result
+            result := resize(temp_result(a'length-1 downto a'length-d_width), d_width);
+        else
+            --Set d_width amount of input bits to result
+            result := a(d_width-1 downto 0);
+        end if;
+
+        return result;
+    end compress;
+
+    function compress (
+        a       : in signed;    --Value to be compressed
+        d_width : in integer    --The size where the input value needs to be compressed to
+    ) return signed is
+        constant max_signed     : unsigned(d_width-2 downto 0) := (others => '1');  --minimal value for a negative valued input to be shifted
+        constant max_unsigned   : unsigned(d_width-1 downto 0) := (others => '1');  --minimal value for a positive valued input to be shifted
+
+        variable temp_a         : unsigned(a'length-1 downto 0);    --temporary input value
+        variable temp_mirror    : unsigned(0 to a'length-1);        --mirrored temp value
+        variable shiftVal       : unsigned(a'length-1 downto 0);    --value that the input needs to be shifted
+
+        variable temp_result    : signed(a'length*2-1 downto 0);    --temporary result
+        variable result         : signed(d_width-1 downto 0);       --final result
+    begin
+        --Convert signed input to unsigned value
+        temp_a := unsigned(a);
+
+        --If signed make unsigned
+        if (temp_a(a'left) = '1') then 
+            temp_a := (not temp_a) + 1; 
+        end if;
+
+        if ((a(a'left) = '0' and temp_a > max_unsigned) or (a(a'left) = '1' and temp_a > max_signed)) then
+            --Mirror temp
+            for i in 0 to a'length-1 loop
+                temp_mirror(i) := temp_a(i);
+            end loop;
+
+            --Compute amount of shifts for the value to line up correctly
+            shiftVal := ((temp_mirror and not (temp_mirror - 1)) / 2);
+
+            --Correct for zero value
+            if (shiftVal < 1) then
+                shiftVal := shiftVal + 1;
+            end if;
+
+            --Shift input value by computed shift value
+            temp_result := a * signed(shiftVal);
+
+            --Resize and set d_width amount of MSB to result
+            result := resize(temp_result(a'length-1 downto a'length-d_width), d_width);
+        --Input is signed
+        elsif a(a'left) = '1' then
+            --Set d_width amount of input bits to result
+            result := a(d_width-1 downto 0);
+
+        --Input is unsigned
+        else
+            --Set d_width amount of input bits minus sign position bit to result
+            result := '0' & a(d_width-2 downto 0);
+        end if;
+
+        return result;
+    end compress;
+
+    constant twoPI : real := 6.283185;
+
+    constant order : integer := 2;
+    type matrix_A is array (0 to 2*order-1) of real;
+    type matrix_B is array (0 to order-1) of real;
+
+    type matrix_Ad is array (0 to 2*order-1) of signed(31 downto 0);
+    type matrix_Bd is array (0 to order-1) of signed(31 downto 0);
+
+    type m_temp_state is array (0 to order-1) of signed(63 downto 0);
+
+    signal state : matrix_Bd := (to_signed(0, 32), to_signed(0, 32));
+    signal output : unsigned(63 downto 0);
+
+    --signal test_output  : unsigned(31 downto 0);
+    signal test_output  : integer;
+    signal test_real    : real := -20480.5364;
+
+    signal test_Ad : matrix_Ad;
+    signal test_Bd : matrix_Bd;
+
+begin
+    process(ready, nrst)                       
+        variable coef_A : matrix_A := (-twoPI*real(freq_res), 0.0, -real(gain)*twoPI*real(freq_res), -twoPI*real(freq_res));
+        variable coef_B : matrix_B := (twoPI*real(freq_res), real(gain)*twoPI*real(freq_res));
+        variable coef_C : matrix_B := (0.0, 1.0); --can use the same array size as B
+        
+        variable coef_A_pow      : matrix_A;
+        variable coef_temp_A_pow : matrix_A;
+        variable identity_matrix : matrix_A := (1.0, 0.0, 0.0, 1.0);
+
+        variable factorial          : real := 1.0;
+        variable sample_time        : real := 1.0/real(freq_sample);
+        variable sample_time_pow    : real := sample_time;
+
+        variable fl_coef_Ad : matrix_A := identity_matrix;
+        variable fl_coef_Bd : matrix_B := (coef_B(0)*sample_time, coef_B(0)*sample_time);
+
+        variable coef_Ad    : matrix_Ad;
+        variable coef_Bd    : matrix_Bd;
+
+        variable temp_state : m_temp_state;
+        variable temp_test  : signed(63 downto 0);
+        variable temp_input : unsigned(7 downto 0) := "00011101";
+
+        variable shift17    : unsigned(31 downto 0) := (17 => '1', others => '0');
+        variable shift15    : unsigned(31 downto 0) := (15 => '1', others => '0');
+        
+    begin
+        if (nrst = '0') then    --reset is active
+            --Initialize discrete coefficient matrices
+            coef_A_pow      := coef_A;
+            fl_coef_Ad      := identity_matrix;
+            fl_coef_Bd      := (coef_B(0)*sample_time, coef_B(0)*sample_time);
+
+            factorial       := 1.0;
+            sample_time_pow := sample_time;
+
+            --Compute AT + A^2*T^2/2 + ...
+            compute_Ad_and_Bd : for i in 0 to 10 loop
+
+                --Compute Resulting Ad and Bd
+                for j in 0 to 1 loop
+                    --Compute Bd
+                    fl_coef_Bd(j) := fl_coef_Bd(j) + (((coef_A_pow(j*2)*coef_B(0) + coef_A_pow(j*2+1)*coef_B(1))*sample_time_pow*sample_time)/(factorial * real(i+2)));
+
+                    for k in 0 to 1 loop
+                        --Compute Ad
+                        fl_coef_Ad(j*2+k) := fl_coef_Ad(j*2+k) + ((coef_A_pow(j*2+k)*sample_time_pow)/factorial);
+                    end loop;
+                end loop;
+
+                --Compute A to the power of n in temporary matrix 
+                for j in 0 to 1 loop
+                    for k in 0 to 1 loop
+                        coef_temp_A_pow(j*2+k) := coef_A_pow(j*2)*coef_A(k) + coef_A_pow(j*2+1)*coef_A(2+k);
+                    end loop;
+                end loop;
+
+                --Copy temp to power of A matrix
+                coef_A_pow := coef_temp_A_pow;
+
+                --Compute T^n and n!
+                sample_time_pow := sample_time_pow*sample_time;
+                factorial       := factorial * real(i+2);
+
+            end loop compute_Ad_and_Bd;
+
+            --Convert float coefficients to fixed point
+            for j in 0 to 1 loop
+                fl_coef_Bd(j)   := fl_coef_Bd(j)*real(to_integer(shift17));
+                fl_coef_Bd(j)   := fl_coef_Bd(j) / 2.0 + (fl_coef_Bd(j) - ((fl_coef_Bd(j)/2.0) * 2.0));
+                coef_Bd(j)      := to_signed(integer(fl_coef_Bd(j)), 32);
+
+                for k in 0 to 1 loop 
+                    fl_coef_Ad(j*2+k)   := fl_coef_Ad(j*2+k)*real(to_integer(shift17));
+                    fl_coef_Ad(j*2+k)   := fl_coef_Ad(j*2+k) / 2.0 + (fl_coef_Ad(j*2+k) - ((fl_coef_Ad(j*2+k)/2.0) * 2.0));
+                    coef_Ad(j*2+k)      := to_signed(integer(fl_coef_Ad(j*2+k)), 32);
+                end loop;
+            end loop;
+        elsif (rising_edge(ready)) then     --reset is inactive and sample is ready
+
+            test_Ad <= coef_Ad;
+            test_Bd <= coef_Bd;
+
+            for i in 0 to 1 loop
+                temp_state(i) := compress(coef_Ad(i*2)*state(0) + coef_Ad(i*2+1)*state(1) + coef_Bd(i)*resize(signed(d_in), 32), 64);
+                temp_test := signed(temp_state(i));
+
+                --if (temp_state(i) >= 0) then
+                if (temp_test(temp_test'left) = '0') then
+                    temp_state(i) := temp_state(i) / 32768;
+                    temp_test := temp_test / 32768;
+
+                else
+                    temp_state(i) := temp_state(i) / 32768;
+                    temp_test := temp_test / 32768;
+                end if;
+
+                temp_state(i) := temp_state(i) / 32768;
+                temp_state(i) := compress(temp_state(i)/2 + (temp_state(i) - ((temp_state(i)/2) * 2)), temp_state(i)'length);
+                state(i) <= compress(temp_state(i), 32);
+            end loop;
+
+            d_out <= std_logic_vector(compress(temp_state(1), d_width));
+        end if;
+    end process;
+end Behavioral;
+\end{lstlisting}
+
+\section*{Sinewave generator code}
+\addcontentsline{toc}{section}{Sinewave generator code}
+\begin{lstlisting}
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity sinewave_generator is
+    GENERIC(
+        d_width         : integer := 24;
+        mclk_freq       : integer := 50000000;
+        sample_freq     : integer := 192000;
+        desired_freq    : integer := 1000);
+    Port (
+        mclk        : in  std_logic;
+        sinewave    : out std_logic_vector(d_width-1 downto 0);
+        valid       : out std_logic
+        ); 
+end sinewave_generator;
+
+architecture Behavioral of sinewave_generator is
+begin
+    process(mclk)
+        constant PI     : real := 3.14159265;
+        constant limit  : real := PI - (2.0*PI/real(sample_freq));
+        constant step   : real := 2.0*PI/real(sample_freq);
+        variable index  : real := -PI;
+        variable z      : real;
+
+        type t_factorials is array (0 to 10) of real;
+        constant factorials : t_factorials := (1.0/6.0, 1.0/120.0, 1.0/5040.0, 1.0/362880.0, 1.0/39916800.0, 1.0/6227020800.0, 1.0/1307674368000.0, 1.0/355687428100000.0, 1.0/121645100400000000.0, 1.0/51090942170000000000.0, 1.0/25852016740000000000000.0);
+
+        variable temp_sine      : real := 0.0;
+        variable resized_sine   : real := 0.0;
+        variable unsigned_sine  : signed(d_width-1 downto 0) := (others => '0');
+        variable shifter        : unsigned(d_width-1 downto 0) := (d_width-1 => '0', others => '1');
+
+        constant divider        : integer := mclk_freq/sample_freq;
+        variable tick_counter   : integer := 0;
+
+    begin
+        if rising_edge(mclk) then
+            tick_counter := tick_counter + 1;
+
+            if (tick_counter >= divider) then
+                tick_counter := 0;
+
+                z := index * index;
+
+                temp_sine := -index*(1.0+z*(-factorials(0)+z*(factorials(1)+z*(-factorials(2)+z*(factorials(3)+z*(-factorials(4)+z*(factorials(5)+z*(-factorials(6)+z*(factorials(7)+z*(-factorials(8)+z*(factorials(9))))))))))));
+
+                resized_sine    := temp_sine * real(to_integer(shifter));
+                unsigned_sine   := to_signed(integer(temp_sine * real(to_integer(shifter))), d_width);
+
+                sinewave    <= std_logic_vector(unsigned_sine);
+                valid       <= '1';
+
+                index := index + (step * real(desired_freq));
+                if (index >= limit) then
+                    index := -PI;
+                end if;
+            else
+                valid <= '0';
+            end if;
+        end if;
+    end process;
+end Behavioral;
+\end{lstlisting}

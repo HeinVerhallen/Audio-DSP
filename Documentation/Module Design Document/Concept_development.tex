@@ -1,13 +1,30 @@
 \section{Concept overview}
 \input{System_context.tex}
 
-\section{Architecture}
+\section{Architecture} \label{Architecture}
 \input{Architecture.tex}
 
 \section{Block diagrams}
 
+The system design block diagrams are discussed in \ref{Architecture} Architecture. 
+
 \section{Modules}
 
-\section{Design decisions}
+This project has been split into three main modules. This is done to keep the project clear and organized. Every module consist of multiple subjects. But to keep everything clear, it is divided over three modules.
 
+\subsection{UI}
+To control everything in the DSP a UI is needed. Appearance is important, but how to control it and how the menus flow over in each other is also important. A Nextion screen is used to control the FPGA. More information about the UI can be found further on in the report in \ref{UI_Design} UI design.
+
+\subsection{Hardware programming}
+To make every component work together, programming the hardware is important. This module is divided into multiple tasks to make everything work together.
+
+\subsection{Hardware design}
+The project has to be physical. And that is where the hardware design module comes into play. The hardware design module covers the case and PCB/FPGA mounting, but also the layout of the PCB and where all the wires from components are routed to.
+
+\section{Design decisions}
+To keep everything more clear. A couple of design decisions are made. Such as where the inputs on the back of the case are located to keep the cables as short as possible. The same applies to the PCB and FPGA mounting. The PCB communicates with the FPGA with a thick cable. To keep signal noise low, the cable has to be as short as possible. 
+\par
+\noindent The power is connected to the custom PCB via a cable from the DC-connector on the back of the case, and the PCB reroutes it to the FPGA.
+\par
+\noindent The Nextion screen is to the left of the case. This is chosen so that the screen is the closest it can be to the connector on the FGPA-board. 
 

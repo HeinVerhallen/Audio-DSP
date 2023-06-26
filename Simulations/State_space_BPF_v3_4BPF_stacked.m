@@ -1,5 +1,5 @@
-factor = 6;
-f0 = 80;        %resonance frequency of BPF 0
+factor = 4;
+f0 = 100;        %resonance frequency of BPF 0
 f1 = f0*factor; %resonance frequency of BPF 1
 f2 = f1*factor; %resonance frequency of BPF 2
 f3 = f2*factor; %resonance frequency of BPF 3
@@ -9,7 +9,8 @@ k0 = 1;     %gain of BPF 0
 k1 = 1;     %gain of BPF 1
 k2 = 1;     %gain of BPF 2
 k3 = 1;     %gain of BPF 3
-dt = 1e-6;  %sample time
+% dt = 1e-6;  %sample time
+dt = 1/192000;
 
 t_end = 10;
 t = 0:dt:t_end;
@@ -53,8 +54,8 @@ Ad3=expm(A3*dt);
 Bd3=((Ad3-Ad3^0)/A3)*B3;
 
 %Analyze frequency response with fvtool
-[num,den] = ss2tf(Ad1,Bd1,C1,D1);
-fvtool(num(1,:),den, 'Fs',1/dt);
+% [num,den] = ss2tf(Ad1,Bd1,C1,D1);
+% fvtool(num(1,:),den, 'Fs',1/dt);
 
 %Compute filter output
 filtOut0 = zeros(2, length(filtIn));
@@ -81,14 +82,21 @@ for n = 1:length(t)-1
 end
 
 %Display filter response
-fig1 = figure(1);
-tiledlayout(fig1,2,1);
-nexttile;
-plot(t, filtIn);
-nexttile;
+fig2 = figure(1);
+tiledlayout(fig2,2,1);
+ax1 = nexttile;
+ax2 = nexttile;
+
+plot(ax1, t, filtIn);
+title(ax1, 'Input chirp');
+ylabel(ax1, 'Amplitude');
+xlabel(ax1, 'Time [s]');
 % x_log = logspace(0,5,length(t));
 % x_log = linspace(1,1e5,length(t));
-plot(t, filtOut(2, 1:end));
+plot(ax2, t, filtOut(2, 1:end));
+title(ax2, 'Filtered chirp');
+ylabel(ax2, 'Amplitude');
+xlabel(ax2, 'Time [s]');
 
 % f2 = figure(2);
 % plot(tfestimate(filtIn, filtOut(2, 1:end)));

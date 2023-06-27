@@ -8,12 +8,13 @@ entity BPF_filter_v2 is
     GENERIC(
         d_width     : integer := 8;
         freq_sample : integer := 192000;
-        freq_res    : integer := 400;                         --resonance frequency
-        gain        : real := 1.0);
+        freq_res    : integer := 400);                         --resonance frequency
+        --gain        : real := 1.0);
     Port ( 
         d_in    : in  std_logic_vector(d_width-1 downto 0); --input data
         nrst    : in  std_logic;                            --active-low reset
         i_avail : in  std_logic;                            --input data available
+        param   : in  std_logic_vector(5 downto 0);         --gain parameter
         d_out   : out std_logic_vector(d_width-1 downto 0); --output data
         o_avail : out std_logic                             --output data available
         ); 
@@ -119,9 +120,16 @@ architecture Behavioral of BPF_filter_v2 is
     signal state : matrix_B := (0.0, 0.0);
 
 begin
-    process(i_avail, nrst)                       
-        variable coef_A : matrix_A := (-twoPI*real(freq_res), 0.0, -real(gain)*twoPI*real(freq_res), -twoPI*real(freq_res));
-        variable coef_B : matrix_B := (twoPI*real(freq_res), real(gain)*twoPI*real(freq_res));
+    process(i_avail, nrst, param)
+        variable gain : real := 0.0;
+        variable unsigned_gain : unsigned(param'length-1 downto 0) := (others => '0');
+        constant saturation_limit : signed(d_width-1 downto 0) := (d_width-1 => '0', others => '1');
+        constant fl_saturation_limit : real := real(to_integer(unsigned(saturation_limit)));
+
+        --variable coef_A : matrix_A := (-twoPI*real(freq_res), 0.0, -real(gain)*twoPI*real(freq_res), -twoPI*real(freq_res));
+        --variable coef_B : matrix_B := (twoPI*real(freq_res), real(gain)*twoPI*real(freq_res));
+        variable coef_A : matrix_A;
+        variable coef_B : matrix_B;
         variable coef_C : matrix_B := (0.0, 1.0); --can use the same array size as B
         
         variable coef_A_pow      : matrix_A;
@@ -133,16 +141,37 @@ begin
         variable sample_time_pow    : real := sample_time;
 
         variable fl_coef_Ad : matrix_A := identity_matrix;
-        variable fl_coef_Bd : matrix_B := (coef_B(0)*sample_time, coef_B(0)*sample_time);
+        variable fl_coef_Bd : matrix_B := (coef_B(0)*sample_time, coef_B(1)*sample_time);
 
         variable temp_state : matrix_B;
         
+        --variable test_var : signed(12 downto 0) := "0000000001010";
+
     begin
-        if (nrst = '0') then    --reset is active
+        --if (nrst = '0') then    --reset is active
+        if (unsigned_gain /= unsigned(param)) then
+            unsigned_gain := unsigned(param);
+            gain := 10.0 ** ((real(to_integer(unsigned(param))) - 32.0) / 20.0);
+            --gain := 2.0;
+            --gain := (real(to_integer(unsigned(param)))) / 5.0;
+            report "unsigned gain: " & real'image(real(to_integer(unsigned(param))));
+            report "Gain: " & real'image(gain);
+
+            --report "saturation_limit: " & integer'image(to_integer(saturation_limit));
+            --report "fl_saturation_limit: " & real'image(fl_saturation_limit);
+            --report "fl_saturation_limit: " & real'image(-fl_saturation_limit);
+
+            --Compute new coefficients
+            coef_A := (-twoPI*real(freq_res), 0.0, -gain*twoPI*real(freq_res), -twoPI*real(freq_res));
+            coef_B := (twoPI*real(freq_res), gain*twoPI*real(freq_res));
+
+            --report "coef_A(2): " & real'image(coef_A(2));
+            --report "coef_B(1): " & real'image(coef_B(1));
+
             --Initialize discrete coefficient matrices
             coef_A_pow      := coef_A;
             fl_coef_Ad      := identity_matrix;
-            fl_coef_Bd      := (coef_B(0)*sample_time, coef_B(0)*sample_time);
+            fl_coef_Bd      := (coef_B(0)*sample_time, coef_B(1)*sample_time);
 
             factorial       := 1.0;
             sample_time_pow := sample_time;
@@ -194,7 +223,18 @@ begin
 
                 state(i) <= temp_state(i);
             end loop;
-            d_out <= std_logic_vector(compress(to_signed(integer(temp_state(1)), 32), d_width));
+
+            if (temp_state(1) > fl_saturation_limit) then
+                report "bigger: " & "saturation_limit: " & integer'image(to_integer(saturation_limit));
+                d_out <= std_logic_vector(saturation_limit);
+            elsif (temp_state(1) < -fl_saturation_limit) then
+                report "smaller: " & "-saturation_limit: " & integer'image(to_integer((not saturation_limit) - "1"));
+                d_out <= std_logic_vector((not saturation_limit) - "1");
+            else 
+                d_out <= std_logic_vector(compress(to_signed(integer(temp_state(1)), 32), d_width));
+            end if;
         end if;
+
+        --report "test: " & integer'image(to_integer(compress(test_var, 6)));
     end process;
 end Behavioral;

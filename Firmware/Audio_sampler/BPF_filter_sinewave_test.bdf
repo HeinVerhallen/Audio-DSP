@@ -53,6 +53,22 @@ agreement for further details.
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
 )
 (pin
+	(input)
+	(rect 8 328 176 344)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "param[5..0]" (rect 5 0 60 17)(font "Intel Clear" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(pin
 	(output)
 	(rect 832 264 1008 280)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
@@ -67,70 +83,6 @@ agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-)
-(symbol
-	(rect 568 240 808 352)
-	(text "BPF_filter_v2" (rect 5 0 73 12)(font "Arial" ))
-	(text "inst1" (rect 8 96 31 108)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "d_in[d_width-1..0]" (rect 0 0 86 12)(font "Arial" ))
-		(text "d_in[d_width-1..0]" (rect 21 27 107 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32)(line_width 3))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "nrst" (rect 0 0 18 12)(font "Arial" ))
-		(text "nrst" (rect 21 43 39 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "i_avail" (rect 0 0 31 12)(font "Arial" ))
-		(text "i_avail" (rect 21 59 52 71)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64))
-	)
-	(port
-		(pt 240 32)
-		(output)
-		(text "d_out[d_width-1..0]" (rect 0 0 93 12)(font "Arial" ))
-		(text "d_out[d_width-1..0]" (rect 141 27 234 39)(font "Arial" ))
-		(line (pt 240 32)(pt 224 32)(line_width 3))
-	)
-	(port
-		(pt 240 48)
-		(output)
-		(text "o_avail" (rect 0 0 35 12)(font "Arial" ))
-		(text "o_avail" (rect 190 43 225 55)(font "Arial" ))
-		(line (pt 240 48)(pt 224 48))
-	)
-	(parameter
-		"d_width"
-		"24"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"freq_sample"
-		"192000"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"freq_res"
-		"400"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"gain"
-		"2"
-		""
-		(type "PARAMETER_SIGNED_FLOAT")	)
-	(drawing
-		(rectangle (rect 16 16 224 96))
-	)
-	(annotation_block (parameter)(rect 568 128 761 223))
 )
 (symbol
 	(rect 208 240 416 320)
@@ -182,6 +134,72 @@ agreement for further details.
 	)
 	(annotation_block (parameter)(rect 208 120 416 215))
 )
+(symbol
+	(rect 568 240 808 352)
+	(text "BPF_filter_v2" (rect 5 0 73 12)(font "Arial" ))
+	(text "inst" (rect 8 96 25 108)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "d_in[d_width-1..0]" (rect 0 0 86 12)(font "Arial" ))
+		(text "d_in[d_width-1..0]" (rect 21 27 107 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "nrst" (rect 0 0 18 12)(font "Arial" ))
+		(text "nrst" (rect 21 43 39 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "i_avail" (rect 0 0 31 12)(font "Arial" ))
+		(text "i_avail" (rect 21 59 52 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "param[5..0]" (rect 0 0 56 12)(font "Arial" ))
+		(text "param[5..0]" (rect 21 75 77 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 240 32)
+		(output)
+		(text "d_out[d_width-1..0]" (rect 0 0 93 12)(font "Arial" ))
+		(text "d_out[d_width-1..0]" (rect 141 27 234 39)(font "Arial" ))
+		(line (pt 240 32)(pt 224 32)(line_width 3))
+	)
+	(port
+		(pt 240 48)
+		(output)
+		(text "o_avail" (rect 0 0 35 12)(font "Arial" ))
+		(text "o_avail" (rect 190 43 225 55)(font "Arial" ))
+		(line (pt 240 48)(pt 224 48))
+	)
+	(parameter
+		"d_width"
+		"24"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"freq_sample"
+		"192000"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"freq_res"
+		"400"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 224 96))
+	)
+	(annotation_block (parameter)(rect 568 144 761 220))
+)
 (connector
 	(pt 416 272)
 	(pt 568 272)
@@ -218,5 +236,20 @@ agreement for further details.
 (connector
 	(pt 808 272)
 	(pt 832 272)
+	(bus)
+)
+(connector
+	(pt 176 336)
+	(pt 512 336)
+	(bus)
+)
+(connector
+	(pt 512 336)
+	(pt 512 320)
+	(bus)
+)
+(connector
+	(pt 512 320)
+	(pt 568 320)
 	(bus)
 )

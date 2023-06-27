@@ -6,7 +6,7 @@ f3 = f2*factor; %resonance frequency of BPF 3
 % f1 = 1e3;
 % f2 = 1e3;
 k0 = 1;     %gain of BPF 0
-k1 = 1;     %gain of BPF 1
+k1 = 2;     %gain of BPF 1
 k2 = 1;     %gain of BPF 2
 k3 = 1;     %gain of BPF 3
 % dt = 1e-6;  %sample time
@@ -17,7 +17,8 @@ t = 0:dt:t_end;
 f_start = 1;    %chirp start frequency
 f_end = 1e5;    %chirp end frequency
 % -90 degree phase for it to be a sine
-filtIn = chirp(t,f_start,t_end,f_end,'logarithmic',-90);
+% filtIn = chirp(t,f_start,t_end,f_end,'logarithmic',-90);
+filtIn = sin(2*pi*f1*t);
 
 %Setup State-space coefficients
 A0 = [-2*pi*f0 0; -k0*2*pi*f0 -2*pi*f0];

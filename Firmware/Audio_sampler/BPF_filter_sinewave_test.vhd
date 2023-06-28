@@ -15,7 +15,7 @@
 
 -- PROGRAM		"Quartus Prime"
 -- VERSION		"Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition"
--- CREATED		"Tue Jun 27 14:29:07 2023"
+-- CREATED		"Tue Jun 27 15:09:24 2023"
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all; 
@@ -27,6 +27,7 @@ ENTITY BPF_filter_sinewave_test IS
 	(
 		mclk :  IN  STD_LOGIC;
 		nrst :  IN  STD_LOGIC;
+		param :  IN  STD_LOGIC_VECTOR(5 DOWNTO 0);
 		d_out :  OUT  STD_LOGIC_VECTOR(23 DOWNTO 0)
 	);
 END BPF_filter_sinewave_test;
@@ -36,12 +37,12 @@ ARCHITECTURE bdf_type OF BPF_filter_sinewave_test IS
 COMPONENT bpf_filter_v2
 GENERIC (d_width : INTEGER;
 			freq_res : INTEGER;
-			freq_sample : INTEGER;
-			gain : REAL
+			freq_sample : INTEGER
 			);
 	PORT(nrst : IN STD_LOGIC;
 		 i_avail : IN STD_LOGIC;
 		 d_in : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+		 param : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
 		 o_avail : OUT STD_LOGIC;
 		 d_out : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
 	);
@@ -67,15 +68,15 @@ BEGIN
 
 
 
-b2v_inst1 : bpf_filter_v2
+b2v_inst : bpf_filter_v2
 GENERIC MAP(d_width => 24,
 			freq_res => 400,
-			freq_sample => 192000,
-			gain => 2.0
+			freq_sample => 192000
 			)
 PORT MAP(nrst => nrst,
 		 i_avail => SYNTHESIZED_WIRE_0,
 		 d_in => SYNTHESIZED_WIRE_1,
+		 param => param,
 		 d_out => d_out);
 
 

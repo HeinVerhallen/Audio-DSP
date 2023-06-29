@@ -66,6 +66,7 @@ set_location_assignment PIN_G7 -to MCLK
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name VHDL_FILE BPF_filter_v2.vhd
 set_global_assignment -name VHDL_FILE sinewave_generator.vhd
 set_global_assignment -name VHDL_FILE ../multiplier_rounder.vhd
 set_global_assignment -name VHDL_FILE float_pkg_c.vhdl

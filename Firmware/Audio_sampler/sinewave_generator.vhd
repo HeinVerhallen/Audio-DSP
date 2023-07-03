@@ -6,10 +6,11 @@ entity sinewave_generator is
     GENERIC(
         d_width         : integer := 24;
         mclk_freq       : integer := 50000000;
-        sample_freq     : integer := 192000;
-        desired_freq    : integer := 1000);
+        sample_freq     : integer := 192000);
+--        desired_freq    : integer := 1000);
     Port (
         mclk        : in  std_logic;
+        desired_freq : in std_logic_vector(31 downto 0);
         sinewave    : out std_logic_vector(d_width-1 downto 0);
         valid       : out std_logic
         ); 
@@ -53,7 +54,7 @@ begin
                 sinewave    <= std_logic_vector(unsigned_sine);
                 valid       <= '1';
 
-                index := index + (step * real(desired_freq));
+                index := index + (step * real(to_integer(unsigned(desired_freq))));
                 if (index >= limit) then
                     index := -PI;
                 end if;

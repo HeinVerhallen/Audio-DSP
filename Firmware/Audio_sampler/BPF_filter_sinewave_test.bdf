@@ -22,7 +22,7 @@ agreement for further details.
 (header "graphic" (version "1.4"))
 (pin
 	(input)
-	(rect 8 264 176 280)
+	(rect -32 264 136 280)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
 	(text "mclk" (rect 5 0 28 12)(font "Arial" ))
 	(pt 168 8)
@@ -56,7 +56,23 @@ agreement for further details.
 	(input)
 	(rect 8 328 176 344)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "param[5..0]" (rect 5 0 60 17)(font "Intel Clear" ))
+	(text "param[5..0]" (rect 5 0 59 17)(font "Intel Clear" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(pin
+	(input)
+	(rect -32 280 136 296)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "freq[31..0]" (rect 5 0 54 17)(font "Intel Clear" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -83,56 +99,6 @@ agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-)
-(symbol
-	(rect 208 240 416 320)
-	(text "sinewave_generator" (rect 5 0 102 12)(font "Arial" ))
-	(text "inst2" (rect 8 64 31 76)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "mclk" (rect 0 0 23 12)(font "Arial" ))
-		(text "mclk" (rect 21 27 44 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 208 32)
-		(output)
-		(text "sinewave[d_width-1..0]" (rect 0 0 112 12)(font "Arial" ))
-		(text "sinewave[d_width-1..0]" (rect 93 27 205 39)(font "Arial" ))
-		(line (pt 208 32)(pt 192 32)(line_width 3))
-	)
-	(port
-		(pt 208 48)
-		(output)
-		(text "valid" (rect 0 0 23 12)(font "Arial" ))
-		(text "valid" (rect 168 43 191 55)(font "Arial" ))
-		(line (pt 208 48)(pt 192 48))
-	)
-	(parameter
-		"d_width"
-		"24"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"mclk_freq"
-		"50000000"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"sample_freq"
-		"192000"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"desired_freq"
-		"400"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 192 64))
-	)
-	(annotation_block (parameter)(rect 208 120 416 215))
 )
 (symbol
 	(rect 568 240 808 352)
@@ -200,26 +166,61 @@ agreement for further details.
 	)
 	(annotation_block (parameter)(rect 568 144 761 220))
 )
-(connector
-	(pt 416 272)
-	(pt 568 272)
-	(bus)
-)
-(connector
-	(pt 416 288)
-	(pt 504 288)
-)
-(connector
-	(pt 504 288)
-	(pt 504 304)
+(symbol
+	(rect 160 240 424 320)
+	(text "sinewave_generator" (rect 5 0 102 12)(font "Arial" ))
+	(text "inst2" (rect 8 64 31 76)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "mclk" (rect 0 0 23 12)(font "Arial" ))
+		(text "mclk" (rect 21 27 44 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "desired_freq[31..0]" (rect 0 0 93 12)(font "Arial" ))
+		(text "desired_freq[31..0]" (rect 21 43 114 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
+	)
+	(port
+		(pt 264 32)
+		(output)
+		(text "sinewave[d_width-1..0]" (rect 0 0 112 12)(font "Arial" ))
+		(text "sinewave[d_width-1..0]" (rect 149 27 243 39)(font "Arial" ))
+		(line (pt 264 32)(pt 248 32)(line_width 3))
+	)
+	(port
+		(pt 264 48)
+		(output)
+		(text "valid" (rect 0 0 23 12)(font "Arial" ))
+		(text "valid" (rect 224 43 243 55)(font "Arial" ))
+		(line (pt 264 48)(pt 248 48))
+	)
+	(parameter
+		"d_width"
+		"24"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"mclk_freq"
+		"50000000"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"sample_freq"
+		"192000"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 248 64))
+	)
+	(annotation_block (parameter)(rect 160 144 368 224))
 )
 (connector
 	(pt 504 304)
 	(pt 568 304)
-)
-(connector
-	(pt 176 272)
-	(pt 208 272)
 )
 (connector
 	(pt 176 360)
@@ -251,5 +252,29 @@ agreement for further details.
 (connector
 	(pt 512 320)
 	(pt 568 320)
+	(bus)
+)
+(connector
+	(pt 504 304)
+	(pt 504 288)
+)
+(connector
+	(text "valid" (rect 491 272 514 289)(font "Intel Clear" ))
+	(pt 504 288)
+	(pt 424 288)
+)
+(connector
+	(text "sinewave[23..0]" (rect 468 256 542 273)(font "Intel Clear" ))
+	(pt 568 272)
+	(pt 424 272)
+	(bus)
+)
+(connector
+	(pt 160 272)
+	(pt 136 272)
+)
+(connector
+	(pt 160 288)
+	(pt 136 288)
 	(bus)
 )

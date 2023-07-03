@@ -151,7 +151,9 @@ begin
         --if (nrst = '0') then    --reset is active
         if (unsigned_gain /= unsigned(param)) then
             unsigned_gain := unsigned(param);
-            gain := 10.0 ** ((real(to_integer(unsigned(param))) - 32.0) / 20.0);
+
+            --Compute gain from dB input. Compensate the -6dB point at res_freq by multiplying by 2
+            gain := 2.0 * (10.0 ** ((real(to_integer(unsigned(param))) - 32.0) / 20.0));
             --gain := 2.0;
             --gain := (real(to_integer(unsigned(param)))) / 5.0;
             report "unsigned gain: " & real'image(real(to_integer(unsigned(param))));

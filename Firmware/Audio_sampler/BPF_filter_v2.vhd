@@ -6,13 +6,12 @@ use IEEE.math_real.all;
 
 entity BPF_filter_v2 is
     GENERIC(
-        d_width     : integer := 8;
-        freq_sample : integer := 192000;
-        freq_res    : integer := 400);                         --resonance frequency
-        --gain        : real := 1.0);
+        d_width     : integer := 24;         --data width of input and output
+        freq_sample : integer := 192000;    --sample frequency
+        freq_res    : integer := 1000);      --resonance frequency
     Port ( 
+        mclk    : in std_logic;                             --master clock
         d_in    : in  std_logic_vector(d_width-1 downto 0); --input data
-        nrst    : in  std_logic;                            --active-low reset
         i_avail : in  std_logic;                            --input data available
         param   : in  std_logic_vector(5 downto 0);         --gain parameter
         d_out   : out std_logic_vector(d_width-1 downto 0); --output data
@@ -119,15 +118,15 @@ architecture Behavioral of BPF_filter_v2 is
 
     signal state : matrix_B := (0.0, 0.0);
 
-begin
-    process(i_avail, nrst, param)
-        variable gain : real := 0.0;
-        variable unsigned_gain : unsigned(param'length-1 downto 0) := (others => '0');
-        constant saturation_limit : signed(d_width-1 downto 0) := (d_width-1 => '0', others => '1');
-        constant fl_saturation_limit : real := real(to_integer(unsigned(saturation_limit)));
+    --signal finished : std_logic := '0';
 
-        --variable coef_A : matrix_A := (-twoPI*real(freq_res), 0.0, -real(gain)*twoPI*real(freq_res), -twoPI*real(freq_res));
-        --variable coef_B : matrix_B := (twoPI*real(freq_res), real(gain)*twoPI*real(freq_res));
+begin
+    stateSpace : process(i_avail, param)
+        variable gain                   : real := 0.0;
+        variable unsigned_gain          : unsigned(param'length-1 downto 0) := (others => '0');
+        constant saturation_limit       : signed(d_width-1 downto 0) := (d_width-1 => '0', others => '1');
+        constant fl_saturation_limit    : real := real(to_integer(unsigned(saturation_limit)));
+
         variable coef_A : matrix_A;
         variable coef_B : matrix_B;
         variable coef_C : matrix_B := (0.0, 1.0); --can use the same array size as B
@@ -144,31 +143,17 @@ begin
         variable fl_coef_Bd : matrix_B := (coef_B(0)*sample_time, coef_B(1)*sample_time);
 
         variable temp_state : matrix_B;
-        
-        --variable test_var : signed(12 downto 0) := "0000000001010";
 
     begin
-        --if (nrst = '0') then    --reset is active
         if (unsigned_gain /= unsigned(param)) then
             unsigned_gain := unsigned(param);
 
             --Compute gain from dB input. Compensate the -6dB point at res_freq by multiplying by 2
             gain := 2.0 * (10.0 ** ((real(to_integer(unsigned(param))) - 32.0) / 20.0));
-            --gain := 2.0;
-            --gain := (real(to_integer(unsigned(param)))) / 5.0;
-            report "unsigned gain: " & real'image(real(to_integer(unsigned(param))));
-            report "Gain: " & real'image(gain);
-
-            --report "saturation_limit: " & integer'image(to_integer(saturation_limit));
-            --report "fl_saturation_limit: " & real'image(fl_saturation_limit);
-            --report "fl_saturation_limit: " & real'image(-fl_saturation_limit);
 
             --Compute new coefficients
             coef_A := (-twoPI*real(freq_res), 0.0, -gain*twoPI*real(freq_res), -twoPI*real(freq_res));
             coef_B := (twoPI*real(freq_res), gain*twoPI*real(freq_res));
-
-            --report "coef_A(2): " & real'image(coef_A(2));
-            --report "coef_B(1): " & real'image(coef_B(1));
 
             --Initialize discrete coefficient matrices
             coef_A_pow      := coef_A;
@@ -208,35 +193,41 @@ begin
 
             end loop compute_Ad_and_Bd;
 
-            --Print coefficients
-            for j in 0 to 1 loop
-                report "coef_Bd(" & integer'image(j) & "): " & real'image(fl_coef_Bd(j));
-                report "coef_B(" & integer'image(j) & "): " & real'image(coef_B(j));
-
-                for k in 0 to 1 loop 
-                    report "coef_Ad(" & integer'image(j*2+k) & "): " & real'image(fl_coef_Ad(j*2+k));
-                    report "coef_A(" & integer'image(j*2+k) & "): " & real'image(coef_A(j*2+k));
-                end loop;
-            end loop;
-        elsif (rising_edge(i_avail)) then     --reset is inactive and sample is ready
+        --sample is available
+        elsif (rising_edge(i_avail)) then
             for i in 0 to 1 loop
                 temp_state(i) := fl_coef_Ad(i*2)*state(0) + fl_coef_Ad(i*2+1)*state(1) + fl_coef_Bd(i)*real(to_integer(signed(d_in)));
-                --report real'image(fl_coef_Ad(i*2)) & " * " & real'image(state(0)) & " + " & real'image(fl_coef_Ad(i*2+1)) & " * " & real'image(state(1)) & " + " & real'image(fl_coef_Bd(i)) & " * " & real'image(real(to_integer(signed(d_in)))) & " = " & real'image(temp_state(i));
-
+                
                 state(i) <= temp_state(i);
             end loop;
 
+            --Output is larger then integer maximum
             if (temp_state(1) > fl_saturation_limit) then
-                report "bigger: " & "saturation_limit: " & integer'image(to_integer(saturation_limit));
+                --Clip at integer maximum
                 d_out <= std_logic_vector(saturation_limit);
+            --Output is smaller then integer minimum
             elsif (temp_state(1) < -fl_saturation_limit) then
-                report "smaller: " & "-saturation_limit: " & integer'image(to_integer((not saturation_limit) - "1"));
+                --Clip at integer minimum
                 d_out <= std_logic_vector((not saturation_limit) - "1");
+            --Output within integer range
             else 
+                --Compress output correctly to fit d_out
                 d_out <= std_logic_vector(compress(to_signed(integer(temp_state(1)), 32), d_width));
             end if;
-        end if;
 
-        --report "test: " & integer'image(to_integer(compress(test_var, 6)));
+            --Computation is finished
+            --finished <= '1';
+        end if;
     end process;
+
+    --avail : process(mclk)
+    --begin
+    --    if finished = '0' then
+    --        o_avail     <= '0';
+    --    else
+    --        o_avail     <= '1';
+    --        finished    <= '0';
+    --        --report "not finished";
+    --    end if;
+    --end process;
 end Behavioral;

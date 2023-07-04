@@ -36,6 +36,8 @@ begin
         constant divider        : integer := mclk_freq/sample_freq;
         variable tick_counter   : integer := 0;
 
+        variable finished : std_logic := '0';
+
     begin
         if rising_edge(mclk) then
             tick_counter := tick_counter + 1;
@@ -51,12 +53,18 @@ begin
                 unsigned_sine   := to_signed(integer(temp_sine * real(to_integer(shifter))), d_width);
 
                 sinewave    <= std_logic_vector(unsigned_sine);
-                o_avail       <= '1';
+                finished    := '1';
 
                 index := index + (step * real(to_integer(unsigned(desired_freq))));
                 if (index >= limit) then
                     index := -PI;
                 end if;
+            else
+                finished := '0';
+            end if;
+        elsif falling_edge(mclk) then
+            if (finished = '1') then
+                o_avail <= '1';
             else
                 o_avail <= '0';
             end if;

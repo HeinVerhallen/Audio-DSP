@@ -118,10 +118,8 @@ architecture Behavioral of BPF_filter_v2 is
 
     signal state : matrix_B := (0.0, 0.0);
 
-    --signal finished : std_logic := '0';
-
 begin
-    stateSpace : process(i_avail, param)
+    process(mclk)
         variable gain                   : real := 0.0;
         variable unsigned_gain          : unsigned(param'length-1 downto 0) := (others => '0');
         constant saturation_limit       : signed(d_width-1 downto 0) := (d_width-1 => '0', others => '1');
@@ -144,90 +142,94 @@ begin
 
         variable temp_state : matrix_B;
 
+        variable finished : std_logic := '0';
+
     begin
-        if (unsigned_gain /= unsigned(param)) then
-            unsigned_gain := unsigned(param);
+        if rising_edge(mclk) then
+            --Set output available low
+            finished := '0';
 
-            --Compute gain from dB input. Compensate the -6dB point at res_freq by multiplying by 2
-            gain := 2.0 * (10.0 ** ((real(to_integer(unsigned(param))) - 32.0) / 20.0));
+            if (unsigned_gain /= unsigned(param)) then
+                unsigned_gain := unsigned(param);
 
-            --Compute new coefficients
-            coef_A := (-twoPI*real(freq_res), 0.0, -gain*twoPI*real(freq_res), -twoPI*real(freq_res));
-            coef_B := (twoPI*real(freq_res), gain*twoPI*real(freq_res));
+                --Compute gain from dB input. Compensate the -6dB point at res_freq by multiplying by 2
+                gain := 2.0 * (10.0 ** ((real(to_integer(unsigned(param))) - 32.0) / 20.0));
 
-            --Initialize discrete coefficient matrices
-            coef_A_pow      := coef_A;
-            fl_coef_Ad      := identity_matrix;
-            fl_coef_Bd      := (coef_B(0)*sample_time, coef_B(1)*sample_time);
+                --Compute new coefficients
+                coef_A := (-twoPI*real(freq_res), 0.0, -gain*twoPI*real(freq_res), -twoPI*real(freq_res));
+                coef_B := (twoPI*real(freq_res), gain*twoPI*real(freq_res));
 
-            factorial       := 1.0;
-            sample_time_pow := sample_time;
+                --Initialize discrete coefficient matrices
+                coef_A_pow      := coef_A;
+                fl_coef_Ad      := identity_matrix;
+                fl_coef_Bd      := (coef_B(0)*sample_time, coef_B(1)*sample_time);
 
-            --Compute AT + A^2*T^2/2 + ...
-            compute_Ad_and_Bd : for i in 0 to 10 loop
+                factorial       := 1.0;
+                sample_time_pow := sample_time;
 
-                --Compute Resulting Ad and Bd
-                for j in 0 to 1 loop
-                    --Compute Bd
-                    fl_coef_Bd(j) := fl_coef_Bd(j) + (((coef_A_pow(j*2)*coef_B(0) + coef_A_pow(j*2+1)*coef_B(1))*sample_time_pow*sample_time)/(factorial * real(i+2)));
+                --Compute AT + A^2*T^2/2 + ...
+                compute_Ad_and_Bd : for i in 0 to 10 loop
 
-                    for k in 0 to 1 loop
-                        --Compute Ad
-                        fl_coef_Ad(j*2+k) := fl_coef_Ad(j*2+k) + ((coef_A_pow(j*2+k)*sample_time_pow)/factorial);
+                    --Compute Resulting Ad and Bd
+                    for j in 0 to 1 loop
+                        --Compute Bd
+                        fl_coef_Bd(j) := fl_coef_Bd(j) + (((coef_A_pow(j*2)*coef_B(0) + coef_A_pow(j*2+1)*coef_B(1))*sample_time_pow*sample_time)/(factorial * real(i+2)));
+
+                        for k in 0 to 1 loop
+                            --Compute Ad
+                            fl_coef_Ad(j*2+k) := fl_coef_Ad(j*2+k) + ((coef_A_pow(j*2+k)*sample_time_pow)/factorial);
+                        end loop;
                     end loop;
+
+                    --Compute A to the power of n in temporary matrix 
+                    for j in 0 to 1 loop
+                        for k in 0 to 1 loop
+                            coef_temp_A_pow(j*2+k) := coef_A_pow(j*2)*coef_A(k) + coef_A_pow(j*2+1)*coef_A(2+k);
+                        end loop;
+                    end loop;
+
+                    --Copy temp to power of A matrix
+                    coef_A_pow := coef_temp_A_pow;
+
+                    --Compute T^n and n!
+                    sample_time_pow := sample_time_pow*sample_time;
+                    factorial       := factorial * real(i+2);
+
+                end loop compute_Ad_and_Bd;
+
+            --sample is available and process is not currently active
+            elsif (i_avail = '1') then
+                for i in 0 to 1 loop
+                    temp_state(i) := fl_coef_Ad(i*2)*state(0) + fl_coef_Ad(i*2+1)*state(1) + fl_coef_Bd(i)*real(to_integer(signed(d_in)));
+                    
+                    state(i) <= temp_state(i);
                 end loop;
 
-                --Compute A to the power of n in temporary matrix 
-                for j in 0 to 1 loop
-                    for k in 0 to 1 loop
-                        coef_temp_A_pow(j*2+k) := coef_A_pow(j*2)*coef_A(k) + coef_A_pow(j*2+1)*coef_A(2+k);
-                    end loop;
-                end loop;
+                --Output is larger then integer maximum
+                if (temp_state(1) > fl_saturation_limit) then
+                    --Clip at integer maximum
+                    d_out <= std_logic_vector(saturation_limit);
+                --Output is smaller then integer minimum
+                elsif (temp_state(1) < -fl_saturation_limit) then
+                    --Clip at integer minimum
+                    d_out <= std_logic_vector((not saturation_limit) - "1");
+                --Output within integer range
+                else 
+                    --Compress output correctly to fit d_out
+                    d_out <= std_logic_vector(compress(to_signed(integer(temp_state(1)), 32), d_width));
+                end if;
 
-                --Copy temp to power of A matrix
-                coef_A_pow := coef_temp_A_pow;
-
-                --Compute T^n and n!
-                sample_time_pow := sample_time_pow*sample_time;
-                factorial       := factorial * real(i+2);
-
-            end loop compute_Ad_and_Bd;
-
-        --sample is available
-        elsif (rising_edge(i_avail)) then
-            for i in 0 to 1 loop
-                temp_state(i) := fl_coef_Ad(i*2)*state(0) + fl_coef_Ad(i*2+1)*state(1) + fl_coef_Bd(i)*real(to_integer(signed(d_in)));
-                
-                state(i) <= temp_state(i);
-            end loop;
-
-            --Output is larger then integer maximum
-            if (temp_state(1) > fl_saturation_limit) then
-                --Clip at integer maximum
-                d_out <= std_logic_vector(saturation_limit);
-            --Output is smaller then integer minimum
-            elsif (temp_state(1) < -fl_saturation_limit) then
-                --Clip at integer minimum
-                d_out <= std_logic_vector((not saturation_limit) - "1");
-            --Output within integer range
-            else 
-                --Compress output correctly to fit d_out
-                d_out <= std_logic_vector(compress(to_signed(integer(temp_state(1)), 32), d_width));
+                --Computation is finished
+                finished := '1';
             end if;
-
-            --Computation is finished
-            --finished <= '1';
+        elsif falling_edge(mclk) then
+            if (finished = '1') then
+                --Set output available
+                o_avail <= '1';
+            else
+                --Disable output available
+                o_avail <= '0';
+            end if;
         end if;
     end process;
-
-    --avail : process(mclk)
-    --begin
-    --    if finished = '0' then
-    --        o_avail     <= '0';
-    --    else
-    --        o_avail     <= '1';
-    --        finished    <= '0';
-    --        --report "not finished";
-    --    end if;
-    --end process;
 end Behavioral;

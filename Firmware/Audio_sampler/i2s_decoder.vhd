@@ -6,6 +6,7 @@ entity i2s_decoder is
     GENERIC(
         d_width     : integer := 24);                           --data width
     Port ( 
+        mclk        : in  std_logic;
         nrst        : in  std_logic;                            --active-low reset
         sck         : in  std_logic;                            --serial clock
         ws          : in  std_logic;                            --left right audio word select
@@ -26,6 +27,9 @@ architecture Behavioral of i2s_decoder is
 
     signal bit_cnt : integer := 0;          --bit counter
 
+    signal left_avail   : std_logic := '0';
+    signal right_avail  : std_logic := '0';
+
 begin
     process(sck, nrst)
     begin
@@ -45,8 +49,8 @@ begin
                     end if;
 
                     --Write available bits
-                    o_avail_left  <= '0';
-                    o_avail_right <= '1';
+                    left_avail  <= '0';
+                    right_avail <= '1';
                 --Read right audio
                 when rd_r =>
                     --Have all bits been read
@@ -57,8 +61,8 @@ begin
                     end if;
 
                     --Write available bits
-                    o_avail_left  <= '1';
-                    o_avail_right <= '0';
+                    left_avail  <= '1';
+                    right_avail <= '0';
                 when others =>
                     null;
             end case;
@@ -71,6 +75,29 @@ begin
             elsif ws = '1' and machine /= rd_r then
                 bit_cnt     <= 0;       --reset bit counter
                 machine     <= rd_r;    --set state to read right channel
+            end if;
+        end if;
+    end process;
+
+    process (mclk)
+        variable trigger_left   : std_logic := '0';
+        variable trigger_right  : std_logic := '0';
+    begin
+        if (falling_edge(mclk)) then
+            if (trigger_left = '0' and left_avail = '1') then
+                o_avail_left    <= '1';
+                trigger_left    := '1';
+                trigger_right   := '0';
+            else
+                o_avail_left <= '0';
+            end if;
+
+            if (trigger_right = '0' and right_avail = '1') then
+                o_avail_right   <= '1';
+                trigger_right   := '1';
+                trigger_left    := '0';
+            else
+                o_avail_right <= '0';
             end if;
         end if;
     end process;

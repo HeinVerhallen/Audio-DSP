@@ -52,12 +52,7 @@ begin
                         l_data_int  <= l_data_int(l_data_int'high - 1 downto 0) & '0';  --shift internal left audio data to the left
                         sd          <= l_data_int(l_data_int'high);                     --output MSB of internal left audio data to serial data output
                     end if;
-
-                    --If right data is available
-                    --if (i_avail_right = '1') then
-                    --    r_data_int  <= data_right;
-                    --end if;
-
+                    
                 --Write right audio
                 when wr_r =>
                     --Have all bits been written
@@ -66,11 +61,6 @@ begin
                         r_data_int  <= r_data_int(r_data_int'high - 1 downto 0) & '0';  --shift internal right audio data to the left
                         sd          <= r_data_int(r_data_int'high);                     --output MSB of internal right audio data to serial data output
                     end if;
-
-                    --If left data is available
-                    --if (i_avail_left = '1') then
-                    --    l_data_int  <= data_left;
-                    --end if;
 
                 when others =>
                     null;
@@ -85,16 +75,6 @@ begin
                 bit_cnt     <= 0;       --reset bit counter
                 machine     <= wr_r;    --set state to write right channel
             end if;
-        --elsif (rising_edge(mclk)) then
-        --    --If left data is available and not currently writing left data
-        --    if (i_avail_left = '1' and machine /= wr_l) then
-        --        l_data_int  <= data_left;
-        --    end if;
-
-        --    --If right data is available and not currently writing right data
-        --    if (i_avail_right = '1' and machine /= wr_r) then
-        --        r_data_int  <= data_right;
-        --    end if;
         end if;
 
         if (load_l = '1') then
@@ -119,12 +99,6 @@ begin
         if (rising_edge(mclk)) then
             --If left data is available and not currently writing left data
             if (i_avail_left = '1' and machine /= wr_l and ack_l = '0') then
-                --l_data_int  <= data_left;
-                --if (ack_l = '1') then
-                --    load_l <= '0';
-                --else
-                --    load_l <= '1';
-                --end if;
                 load_l <= '1';
             else
                 load_l <= '0';
@@ -132,12 +106,6 @@ begin
 
             --If right data is available and not currently writing right data
             if (i_avail_right = '1' and machine /= wr_r and ack_r = '0') then
-                --r_data_int  <= data_right;
-                --if (ack_r = '1') then
-                --    load_r <= '0';
-                --else
-                --    load_r <= '1';
-                --end if;
                 load_r <= '1';
             else
                 load_r <= '0';

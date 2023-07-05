@@ -15,7 +15,7 @@
 
 -- PROGRAM		"Quartus Prime"
 -- VERSION		"Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition"
--- CREATED		"Tue Jun 27 15:09:24 2023"
+-- CREATED		"Tue Jul 04 14:29:39 2023"
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all; 
@@ -26,20 +26,33 @@ ENTITY BPF_filter_sinewave_test IS
 	PORT
 	(
 		mclk :  IN  STD_LOGIC;
-		nrst :  IN  STD_LOGIC;
+		freq :  IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		param :  IN  STD_LOGIC_VECTOR(5 DOWNTO 0);
+		o_avail :  OUT  STD_LOGIC;
 		d_out :  OUT  STD_LOGIC_VECTOR(23 DOWNTO 0)
 	);
 END BPF_filter_sinewave_test;
 
 ARCHITECTURE bdf_type OF BPF_filter_sinewave_test IS 
 
+COMPONENT sinewave_generator
+GENERIC (d_width : INTEGER;
+			mclk_freq : INTEGER;
+			sample_freq : INTEGER
+			);
+	PORT(mclk : IN STD_LOGIC;
+		 desired_freq : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+		 o_avail : OUT STD_LOGIC;
+		 sinewave : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
+	);
+END COMPONENT;
+
 COMPONENT bpf_filter_v2
 GENERIC (d_width : INTEGER;
 			freq_res : INTEGER;
 			freq_sample : INTEGER
 			);
-	PORT(nrst : IN STD_LOGIC;
+	PORT(mclk : IN STD_LOGIC;
 		 i_avail : IN STD_LOGIC;
 		 d_in : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
 		 param : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
@@ -48,47 +61,36 @@ GENERIC (d_width : INTEGER;
 	);
 END COMPONENT;
 
-COMPONENT sinewave_generator
-GENERIC (d_width : INTEGER;
-			desired_freq : INTEGER;
-			mclk_freq : INTEGER;
-			sample_freq : INTEGER
-			);
-	PORT(mclk : IN STD_LOGIC;
-		 valid : OUT STD_LOGIC;
-		 sinewave : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
-	);
-END COMPONENT;
-
-SIGNAL	SYNTHESIZED_WIRE_0 :  STD_LOGIC;
-SIGNAL	SYNTHESIZED_WIRE_1 :  STD_LOGIC_VECTOR(23 DOWNTO 0);
+SIGNAL	avail :  STD_LOGIC;
+SIGNAL	sinewave :  STD_LOGIC_VECTOR(23 DOWNTO 0);
 
 
 BEGIN 
 
 
 
-b2v_inst : bpf_filter_v2
+b2v_inst : sinewave_generator
 GENERIC MAP(d_width => 24,
-			freq_res => 400,
-			freq_sample => 192000
-			)
-PORT MAP(nrst => nrst,
-		 i_avail => SYNTHESIZED_WIRE_0,
-		 d_in => SYNTHESIZED_WIRE_1,
-		 param => param,
-		 d_out => d_out);
-
-
-b2v_inst2 : sinewave_generator
-GENERIC MAP(d_width => 24,
-			desired_freq => 400,
 			mclk_freq => 50000000,
 			sample_freq => 192000
 			)
 PORT MAP(mclk => mclk,
-		 valid => SYNTHESIZED_WIRE_0,
-		 sinewave => SYNTHESIZED_WIRE_1);
+		 desired_freq => freq,
+		 o_avail => avail,
+		 sinewave => sinewave);
+
+
+b2v_inst3 : bpf_filter_v2
+GENERIC MAP(d_width => 24,
+			freq_res => 400,
+			freq_sample => 192000
+			)
+PORT MAP(mclk => mclk,
+		 i_avail => avail,
+		 d_in => sinewave,
+		 param => param,
+		 o_avail => o_avail,
+		 d_out => d_out);
 
 
 END bdf_type;

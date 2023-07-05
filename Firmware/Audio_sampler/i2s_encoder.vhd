@@ -4,16 +4,17 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity i2s_encoder is
     GENERIC(
-        d_width     : integer := 24);                           --data width
+        d_width     : integer := 24); --data width
     Port ( 
-        nrst        : in  std_logic;                            --active-low reset
-        sck         : in std_logic;                             --serial clock
-        ws          : in std_logic;                             --left right audio word select
-        data_left   : in  std_logic_vector(d_width-1 downto 0); --left audio data
-        data_right  : in  std_logic_vector(d_width-1 downto 0); --right audio data
-        sd          : out std_logic;                            --serial data
-        i_avail_left  : in std_logic;                           --left audio available
-        i_avail_right : in std_logic                            --right audio available
+        mclk            : in std_logic;
+        nrst            : in std_logic;                             --active-low reset
+        sck             : in std_logic;                             --serial clock
+        ws              : in std_logic;                             --left right audio word select
+        data_left       : in std_logic_vector(d_width-1 downto 0);  --left audio data
+        data_right      : in std_logic_vector(d_width-1 downto 0);  --right audio data
+        i_avail_left    : in std_logic;                             --left audio available
+        i_avail_right   : in std_logic;                             --right audio available
+        sd              : out std_logic                             --serial data
         );                    
 end i2s_encoder;
 
@@ -27,7 +28,7 @@ architecture Behavioral of i2s_encoder is
     signal bit_cnt : integer := 0;          --bit counter
 
 begin
-    process(sck, nrst)
+    process(mclk, sck, nrst)
     begin
         if nrst = '0' then 
             --Reset state machine and bit counter
@@ -44,11 +45,6 @@ begin
                         sd          <= l_data_int(l_data_int'high);                     --output MSB of internal left audio data to serial data output
                     end if;
 
-                    --If right data is available
-                    if (i_avail_right = '1') then
-                        r_data_int  <= data_right;
-                    end if;
-
                 --Write right audio
                 when wr_r =>
                     --Have all bits been written
@@ -56,11 +52,6 @@ begin
                         bit_cnt     <= bit_cnt + 1;                                     --increment bit counter
                         r_data_int  <= r_data_int(r_data_int'high - 1 downto 0) & '0';  --shift internal right audio data to the left
                         sd          <= r_data_int(r_data_int'high);                     --output MSB of internal right audio data to serial data output
-                    end if;
-
-                    --If left data is available
-                    if (i_avail_left = '1') then
-                        l_data_int  <= data_left;
                     end if;
 
                 when others =>
@@ -75,6 +66,18 @@ begin
             elsif ws = '1' and machine /= wr_r then
                 bit_cnt     <= 0;       --reset bit counter
                 machine     <= wr_r;    --set state to write right channel
+            end if;
+        end if;
+
+        if (rising_edge(mclk)) then
+            --If left data is available and not currently writing left data
+            if (i_avail_left = '1' and machine /= wr_l) then
+                l_data_int  <= data_left;
+            end if;
+
+            --If right data is available and not currently writing right data
+            if (i_avail_right = '1' and machine /= wr_r) then
+                r_data_int  <= data_right;
             end if;
         end if;
     end process;

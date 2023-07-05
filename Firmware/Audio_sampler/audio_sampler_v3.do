@@ -1,6 +1,7 @@
 restart -f
 
 force nrst 0
+force clk_50 1 0, 0 10 -rep 20
 force bclk 1 0, 0 160 -rep 320
 run 480
 

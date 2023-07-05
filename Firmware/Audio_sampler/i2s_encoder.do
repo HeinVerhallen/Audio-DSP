@@ -1,6 +1,7 @@
 restart -f
 
 force sck 1 0, 0 10 -rep 20
+force mclk 1 0, 0 1 -rep 2
 force nrst 0
 run 20
 

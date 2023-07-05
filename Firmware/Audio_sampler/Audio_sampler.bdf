@@ -477,7 +477,7 @@ agreement for further details.
 		(pt 200 32)
 		(output)
 		(text "sd" (rect 0 0 11 12)(font "Arial" ))
-		(text "sd" (rect 170 27 179 39)(font "Arial" ))
+		(text "sd" (rect 170 27 181 39)(font "Arial" ))
 		(line (pt 200 32)(pt 184 32))
 	)
 	(parameter
@@ -533,28 +533,28 @@ agreement for further details.
 		(pt 208 32)
 		(output)
 		(text "data_left[d_width-1..0]" (rect 0 0 109 12)(font "Arial" ))
-		(text "data_left[d_width-1..0]" (rect 95 27 187 39)(font "Arial" ))
+		(text "data_left[d_width-1..0]" (rect 95 27 204 39)(font "Arial" ))
 		(line (pt 208 32)(pt 192 32)(line_width 3))
 	)
 	(port
 		(pt 208 48)
 		(output)
 		(text "data_right[d_width-1..0]" (rect 0 0 114 12)(font "Arial" ))
-		(text "data_right[d_width-1..0]" (rect 91 43 187 55)(font "Arial" ))
+		(text "data_right[d_width-1..0]" (rect 91 43 205 55)(font "Arial" ))
 		(line (pt 208 48)(pt 192 48)(line_width 3))
 	)
 	(port
 		(pt 208 64)
 		(output)
 		(text "o_avail_left" (rect 0 0 57 12)(font "Arial" ))
-		(text "o_avail_left" (rect 139 59 187 71)(font "Arial" ))
+		(text "o_avail_left" (rect 139 59 196 71)(font "Arial" ))
 		(line (pt 208 64)(pt 192 64))
 	)
 	(port
 		(pt 208 80)
 		(output)
 		(text "o_avail_right" (rect 0 0 62 12)(font "Arial" ))
-		(text "o_avail_right" (rect 135 75 187 87)(font "Arial" ))
+		(text "o_avail_right" (rect 135 75 197 87)(font "Arial" ))
 		(line (pt 208 80)(pt 192 80))
 	)
 	(parameter
@@ -601,73 +601,7 @@ agreement for further details.
 )
 (symbol
 	(rect 712 56 952 168)
-	(text "BPF_filter_v2" (rect 5 0 73 12)(font "Arial" ))
-	(text "inst5" (rect 8 96 31 108)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "mclk" (rect 0 0 23 12)(font "Arial" ))
-		(text "mclk" (rect 21 27 44 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "d_in[d_width-1..0]" (rect 0 0 86 12)(font "Arial" ))
-		(text "d_in[d_width-1..0]" (rect 21 43 107 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48)(line_width 3))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "i_avail" (rect 0 0 31 12)(font "Arial" ))
-		(text "i_avail" (rect 21 59 52 71)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64))
-	)
-	(port
-		(pt 0 80)
-		(input)
-		(text "param[5..0]" (rect 0 0 56 12)(font "Arial" ))
-		(text "param[5..0]" (rect 21 75 77 87)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80)(line_width 3))
-	)
-	(port
-		(pt 240 32)
-		(output)
-		(text "d_out[d_width-1..0]" (rect 0 0 93 12)(font "Arial" ))
-		(text "d_out[d_width-1..0]" (rect 141 27 219 39)(font "Arial" ))
-		(line (pt 240 32)(pt 224 32)(line_width 3))
-	)
-	(port
-		(pt 240 48)
-		(output)
-		(text "o_avail" (rect 0 0 35 12)(font "Arial" ))
-		(text "o_avail" (rect 190 43 219 55)(font "Arial" ))
-		(line (pt 240 48)(pt 224 48))
-	)
-	(parameter
-		"d_width"
-		"24"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"freq_sample"
-		"192000"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"freq_res"
-		"1000"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 224 96))
-	)
-	(annotation_block (parameter)(rect 712 -112 912 -32))
-)
-(symbol
-	(rect 712 176 952 288)
-	(text "BPF_filter_v2" (rect 5 0 73 12)(font "Arial" ))
+	(text "BPF_filter_v3" (rect 5 0 73 12)(font "Arial" ))
 	(text "inst6" (rect 8 96 31 108)(font "Arial" ))
 	(port
 		(pt 0 32)
@@ -729,7 +663,73 @@ agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 224 96))
 	)
-	(annotation_block (parameter)(rect 968 272 1168 352))
+	(annotation_block (parameter)(rect 728 -96 928 -16))
+)
+(symbol
+	(rect 712 176 952 288)
+	(text "BPF_filter_v3" (rect 5 0 73 12)(font "Arial" ))
+	(text "inst9" (rect 8 96 31 108)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "mclk" (rect 0 0 23 12)(font "Arial" ))
+		(text "mclk" (rect 21 27 44 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "d_in[d_width-1..0]" (rect 0 0 86 12)(font "Arial" ))
+		(text "d_in[d_width-1..0]" (rect 21 43 107 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "i_avail" (rect 0 0 31 12)(font "Arial" ))
+		(text "i_avail" (rect 21 59 52 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "param[5..0]" (rect 0 0 56 12)(font "Arial" ))
+		(text "param[5..0]" (rect 21 75 77 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 240 32)
+		(output)
+		(text "d_out[d_width-1..0]" (rect 0 0 93 12)(font "Arial" ))
+		(text "d_out[d_width-1..0]" (rect 141 27 219 39)(font "Arial" ))
+		(line (pt 240 32)(pt 224 32)(line_width 3))
+	)
+	(port
+		(pt 240 48)
+		(output)
+		(text "o_avail" (rect 0 0 35 12)(font "Arial" ))
+		(text "o_avail" (rect 190 43 219 55)(font "Arial" ))
+		(line (pt 240 48)(pt 224 48))
+	)
+	(parameter
+		"d_width"
+		"24"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"freq_sample"
+		"192000"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"freq_res"
+		"1000"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 224 96))
+	)
+	(annotation_block (parameter)(rect 872 296 1072 376))
 )
 (connector
 	(pt 664 432)

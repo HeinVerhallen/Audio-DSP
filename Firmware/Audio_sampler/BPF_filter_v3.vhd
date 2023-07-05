@@ -110,60 +110,65 @@ architecture Behavioral of BPF_filter_v3 is
         return result;
     end compress;
 
-    constant twoPI : real := 6.283185;
+    constant twoPI : sfixed(31 downto -32) := to_sfixed(6.283185, 31, -32);
 
     constant order : integer := 2;
-    type matrix_A is array (0 to 2*order-1) of real;
-    type matrix_B is array (0 to order-1) of real;
+    type matrix_A is array (0 to 2*order-1) of sfixed(31 downto -32);
+    type matrix_B is array (0 to order-1) of sfixed(31 downto -32);
 
 begin
     process(mclk)
-        variable gain                   : real := 0.0;
-        variable unsigned_gain          : unsigned(param'length-1 downto 0) := (others => '0');
+        variable gain                   : sfixed(31 downto -32) := to_sfixed(0.0, 31, -32);
+        variable unsigned_gain          : unsigned(param'length downto 0) := (param'length => '1', others => '0');  --make this 1 bit larger than param so it is never the same the first cycle!
         constant saturation_limit       : signed(d_width-1 downto 0) := (d_width-1 => '0', others => '1');
-        constant fl_saturation_limit    : real := real(to_integer(unsigned(saturation_limit)));
+        constant fl_saturation_limit    : sfixed(31 downto -32) := to_sfixed(to_integer(unsigned(saturation_limit)), 31, -32);
 
         variable coef_A : matrix_A;
         variable coef_B : matrix_B;
-        variable coef_C : matrix_B := (0.0, 1.0); --can use the same array size as B
+        variable coef_C : matrix_B := (to_sfixed(0.0, 31, -32), to_sfixed(1.0, 31, -32)); --can use the same array size as B
         
         variable coef_A_pow      : matrix_A;
         variable coef_temp_A_pow : matrix_A;
-        variable identity_matrix : matrix_A := (1.0, 0.0, 0.0, 1.0);
+        variable identity_matrix : matrix_A := (to_sfixed(1.0, 31, -32), to_sfixed(0.0, 31, -32), to_sfixed(0.0, 31, -32), to_sfixed(1.0, 31, -32));
 
-        variable factorial          : real := 1.0;
-        variable sample_time        : real := 1.0/real(freq_sample);
-        variable sample_time_pow    : real := sample_time;
+        variable factorial          : sfixed(31 downto -32) := to_sfixed(1.0, 31, -32);
+        variable sample_time        : sfixed(31 downto -32) := resize(to_sfixed(1.0, 31, -32)/to_sfixed(freq_sample, 31, -32), 31, -32);
+        variable sample_time_pow    : sfixed(31 downto -32) := sample_time;
 
         variable fl_coef_Ad : matrix_A := identity_matrix;
-        variable fl_coef_Bd : matrix_B := (coef_B(0)*sample_time, coef_B(1)*sample_time);
+        variable fl_coef_Bd : matrix_B := (resize(coef_B(0)*sample_time, 31, -32), resize(coef_B(1)*sample_time, 31, -32));
 
-        variable state : matrix_B := (0.0, 0.0);
+        variable state : matrix_B := (to_sfixed(0.0, 31, -32), to_sfixed(0.0, 31, -32));
         variable temp_state : matrix_B;
 
         variable finished : std_logic := '0';
+
+        type t_lookup_gain is array (0 to 63) of sfixed(31 downto -32);
+        variable lookup_gain : t_lookup_gain := (to_sfixed(0.050238, 31, -32), to_sfixed(0.056368, 31, -32), to_sfixed(0.063246, 31, -32), to_sfixed(0.070963, 31, -32), to_sfixed(0.079621, 31, -32), to_sfixed(0.089337, 31, -32), to_sfixed(0.100237, 31, -32), to_sfixed(0.112468, 31, -32), to_sfixed(0.126191, 31, -32), to_sfixed(0.141589, 31, -32), to_sfixed(0.158866, 31, -32), to_sfixed(0.178250, 31, -32), to_sfixed(0.200000, 31, -32), to_sfixed(0.224404, 31, -32), to_sfixed(0.251785, 31, -32), to_sfixed(0.282508, 31, -32), to_sfixed(0.316979, 31, -32), to_sfixed(0.355656, 31, -32), to_sfixed(0.399052, 31, -32), to_sfixed(0.447744, 31, -32), to_sfixed(0.502377, 31, -32), to_sfixed(0.563677, 31, -32), to_sfixed(0.632456, 31, -32), to_sfixed(0.709627, 31, -32), to_sfixed(0.796214, 31, -32), to_sfixed(0.893367, 31, -32), to_sfixed(1.002374, 31, -32), to_sfixed(1.124683, 31, -32), to_sfixed(1.261915, 31, -32), to_sfixed(1.415892, 31, -32), to_sfixed(1.588656, 31, -32), to_sfixed(1.782502, 31, -32), to_sfixed(2.000000, 31, -32), to_sfixed(2.244037, 31, -32), to_sfixed(2.517851, 31, -32), to_sfixed(2.825075, 31, -32), to_sfixed(3.169786, 31, -32), to_sfixed(3.556559, 31, -32), to_sfixed(3.990525, 31, -32), to_sfixed(4.477442, 31, -32), to_sfixed(5.023773, 31, -32), to_sfixed(5.636766, 31, -32), to_sfixed(6.324555, 31, -32), to_sfixed(7.096268, 31, -32), to_sfixed(7.962143, 31, -32), to_sfixed(8.933672, 31, -32), to_sfixed(10.023745, 31, -32), to_sfixed(11.246826, 31, -32), to_sfixed(12.619147, 31, -32), to_sfixed(14.158916, 31, -32), to_sfixed(15.886564, 31, -32), to_sfixed(17.825018, 31, -32), to_sfixed(20.000000, 31, -32), to_sfixed(22.440369, 31, -32), to_sfixed(25.178509, 31, -32), to_sfixed(28.250751, 31, -32), to_sfixed(31.697865, 31, -32), to_sfixed(35.565590, 31, -32), to_sfixed(39.905247, 31, -32), to_sfixed(44.774422, 31, -32), to_sfixed(50.237728, 31, -32), to_sfixed(56.367661, 31, -32), to_sfixed(63.245552, 31, -32), to_sfixed(70.962677, 31, -32));
 
     begin
         if rising_edge(mclk) then
             --Set output available low
             finished := '0';
 
-            if (unsigned_gain /= unsigned(param)) then
-                unsigned_gain := unsigned(param);
+            if (unsigned_gain /= unsigned('0' & param)) then
+                unsigned_gain := unsigned('0' & param);
 
                 --Compute gain from dB input. Compensate the -6dB point at res_freq by multiplying by 2
-                gain := 2.0 * (10.0 ** ((real(to_integer(unsigned(param))) - 32.0) / 20.0));
+                --gain := to_sfixed(2.0, 31, -32) * (to_sfixed(10.0, 31, -32) ** ((to_sfixed(to_integer(unsigned(param)), 31, -32) - to_sfixed(32.0, 31, -32)) / to_sfixed(20.0, 31, -32)));
+                --gain := to_sfixed(2.0 * 10.0 ** ((real(to_integer(unsigned(param))) - 32.0) / 20.0), 31, -31);
+                gain := lookup_gain(to_integer(unsigned(param)));
 
                 --Compute new coefficients
-                coef_A := (-twoPI*real(freq_res), 0.0, -gain*twoPI*real(freq_res), -twoPI*real(freq_res));
-                coef_B := (twoPI*real(freq_res), gain*twoPI*real(freq_res));
+                coef_A := (resize(-twoPI*to_sfixed(freq_res, 31, -32), 31, -32), to_sfixed(0.0, 31, -32), resize(-gain*twoPI*to_sfixed(freq_res, 31, -32), 31, -32), resize(-twoPI*to_sfixed(freq_res, 31, -32), 31, -32));
+                coef_B := (resize(twoPI*to_sfixed(freq_res, 31, -32), 31, -32), resize(gain*twoPI*to_sfixed(freq_res, 31, -32), 31, -32));
 
                 --Initialize discrete coefficient matrices
                 coef_A_pow      := coef_A;
                 fl_coef_Ad      := identity_matrix;
-                fl_coef_Bd      := (coef_B(0)*sample_time, coef_B(1)*sample_time);
+                fl_coef_Bd      := (resize(coef_B(0)*sample_time, 31, -32), resize(coef_B(1)*sample_time, 31, -32));
 
-                factorial       := 1.0;
+                factorial       := to_sfixed(1.0, 31, -32);
                 sample_time_pow := sample_time;
 
                 --Compute AT + A^2*T^2/2 + ...
@@ -172,18 +177,18 @@ begin
                     --Compute Resulting Ad and Bd
                     for j in 0 to 1 loop
                         --Compute Bd
-                        fl_coef_Bd(j) := fl_coef_Bd(j) + (((coef_A_pow(j*2)*coef_B(0) + coef_A_pow(j*2+1)*coef_B(1))*sample_time_pow*sample_time)/(factorial * real(i+2)));
+                        fl_coef_Bd(j) := resize(fl_coef_Bd(j) + (((coef_A_pow(j*2)*coef_B(0) + coef_A_pow(j*2+1)*coef_B(1))*sample_time_pow*sample_time)/(factorial * to_sfixed((i+2), 31, -32))), 31, -32);
 
                         for k in 0 to 1 loop
                             --Compute Ad
-                            fl_coef_Ad(j*2+k) := fl_coef_Ad(j*2+k) + ((coef_A_pow(j*2+k)*sample_time_pow)/factorial);
+                            fl_coef_Ad(j*2+k) := resize(fl_coef_Ad(j*2+k) + ((coef_A_pow(j*2+k)*sample_time_pow)/factorial), 31, -32);
                         end loop;
                     end loop;
 
                     --Compute A to the power of n in temporary matrix 
                     for j in 0 to 1 loop
                         for k in 0 to 1 loop
-                            coef_temp_A_pow(j*2+k) := coef_A_pow(j*2)*coef_A(k) + coef_A_pow(j*2+1)*coef_A(2+k);
+                            coef_temp_A_pow(j*2+k) := resize(coef_A_pow(j*2)*coef_A(k) + coef_A_pow(j*2+1)*coef_A(2+k), 31, -32);
                         end loop;
                     end loop;
 
@@ -191,22 +196,34 @@ begin
                     coef_A_pow := coef_temp_A_pow;
 
                     --Compute T^n and n!
-                    sample_time_pow := sample_time_pow*sample_time;
-                    factorial       := factorial * real(i+2);
+                    sample_time_pow := resize(sample_time_pow*sample_time, 31, -32);
+                    factorial       := resize(factorial * to_sfixed((i+2), 31, -32), 31, -32);
 
                 end loop compute_Ad_and_Bd;
 
             --sample is available and process is not currently active
             elsif (i_avail = '1') then
                 for i in 0 to 1 loop
-                    temp_state(i) := fl_coef_Ad(i*2)*state(0) + fl_coef_Ad(i*2+1)*state(1) + fl_coef_Bd(i)*real(to_integer(signed(d_in)));
-                    
-                    --state(i) := temp_state(i);                    
+                    temp_state(i) := resize(resize(fl_coef_Ad(i*2)*state(0), 31, -32) + resize(fl_coef_Ad(i*2+1)*state(1), 31, -32) + resize(fl_coef_Bd(i)*to_sfixed(to_integer(signed(d_in)), 31, -32), 31, -32), 31, -32);
                 end loop;
                 
                 for i in 0 to 1 loop
                     state(i) := temp_state(i);
                 end loop;
+
+                --Output is larger then integer maximum
+                --if (to_signed(temp_state(1), 32) > saturation_limit) then
+                --    --Clip at integer maximum
+                --    d_out <= std_logic_vector(saturation_limit);
+                ----Output is smaller then integer minimum
+                --elsif (to_signed(temp_state(1), 32) < ((not saturation_limit) - "1")) then
+                --    --Clip at integer minimum
+                --    d_out <= std_logic_vector((not saturation_limit) - "1");
+                ----Output within integer range
+                --else 
+                --    --Compress output correctly to fit d_out
+                --    d_out <= std_logic_vector(compress(to_signed(temp_state(1), 32), d_width));
+                --end if;
 
                 --Output is larger then integer maximum
                 if (temp_state(1) > fl_saturation_limit) then
@@ -219,7 +236,7 @@ begin
                 --Output within integer range
                 else 
                     --Compress output correctly to fit d_out
-                    d_out <= std_logic_vector(compress(to_signed(integer(temp_state(1)), 32), d_width));
+                    d_out <= std_logic_vector(compress(to_signed(temp_state(1), 32), d_width));
                 end if;
 
                 --Computation is finished

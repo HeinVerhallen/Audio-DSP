@@ -15,7 +15,7 @@
 
 -- PROGRAM		"Quartus Prime"
 -- VERSION		"Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition"
--- CREATED		"Wed Jul 05 20:39:55 2023"
+-- CREATED		"Thu Jul 06 17:16:56 2023"
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all; 
@@ -33,6 +33,7 @@ ENTITY Audio_sampler IS
 		ADC_LRCK :  IN  STD_LOGIC;
 		SDA :  INOUT  STD_LOGIC;
 		SCL :  INOUT  STD_LOGIC;
+		parameter :  IN  STD_LOGIC_VECTOR(5 DOWNTO 0);
 		ack_err :  OUT  STD_LOGIC;
 		DAC_DAT :  OUT  STD_LOGIC;
 		MCLK :  OUT  STD_LOGIC;
@@ -84,6 +85,13 @@ GENERIC (div : INTEGER
 	);
 END COMPONENT;
 
+COMPONENT controller_eff
+	PORT(mclk : IN STD_LOGIC;
+		 param_in : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
+		 param_out : OUT STD_LOGIC_VECTOR(5 DOWNTO 0)
+	);
+END COMPONENT;
+
 COMPONENT initializer
 	PORT(clk : IN STD_LOGIC;
 		 nrst : IN STD_LOGIC;
@@ -110,6 +118,20 @@ GENERIC (d_width : INTEGER
 	);
 END COMPONENT;
 
+COMPONENT bpf_filter_v3
+GENERIC (d_width : INTEGER;
+			freq_res : INTEGER;
+			freq_sample : INTEGER
+			);
+	PORT(mclk : IN STD_LOGIC;
+		 i_avail : IN STD_LOGIC;
+		 d_in : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+		 param : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
+		 o_avail : OUT STD_LOGIC;
+		 d_out : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
+	);
+END COMPONENT;
+
 SIGNAL	addr :  STD_LOGIC_VECTOR(6 DOWNTO 0);
 SIGNAL	busy :  STD_LOGIC;
 SIGNAL	data :  STD_LOGIC_VECTOR(7 DOWNTO 0);
@@ -119,6 +141,11 @@ SIGNAL	SYNTHESIZED_WIRE_0 :  STD_LOGIC;
 SIGNAL	SYNTHESIZED_WIRE_1 :  STD_LOGIC;
 SIGNAL	SYNTHESIZED_WIRE_2 :  STD_LOGIC_VECTOR(23 DOWNTO 0);
 SIGNAL	SYNTHESIZED_WIRE_3 :  STD_LOGIC_VECTOR(23 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_4 :  STD_LOGIC;
+SIGNAL	SYNTHESIZED_WIRE_5 :  STD_LOGIC_VECTOR(23 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_10 :  STD_LOGIC_VECTOR(5 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_7 :  STD_LOGIC;
+SIGNAL	SYNTHESIZED_WIRE_8 :  STD_LOGIC_VECTOR(23 DOWNTO 0);
 
 
 BEGIN 
@@ -150,10 +177,10 @@ PORT MAP(mclk => clk_50,
 		 sck => BCLK,
 		 ws => ADC_LRCK,
 		 sd => ADC_DAT,
-		 o_avail_left => SYNTHESIZED_WIRE_0,
-		 o_avail_right => SYNTHESIZED_WIRE_1,
-		 data_left => SYNTHESIZED_WIRE_2,
-		 data_right => SYNTHESIZED_WIRE_3);
+		 o_avail_left => SYNTHESIZED_WIRE_4,
+		 o_avail_right => SYNTHESIZED_WIRE_7,
+		 data_left => SYNTHESIZED_WIRE_5,
+		 data_right => SYNTHESIZED_WIRE_8);
 
 
 b2v_inst11 : clk_div
@@ -162,6 +189,12 @@ GENERIC MAP(div => 4
 PORT MAP(clk_in => clk_50,
 		 nrst => nrst,
 		 clk_out => MCLK);
+
+
+b2v_inst2 : controller_eff
+PORT MAP(mclk => clk_50,
+		 param_in => parameter,
+		 param_out => SYNTHESIZED_WIRE_10);
 
 
 b2v_inst3 : initializer
@@ -186,6 +219,32 @@ PORT MAP(mclk => clk_50,
 		 data_left => SYNTHESIZED_WIRE_2,
 		 data_right => SYNTHESIZED_WIRE_3,
 		 sd => DAC_DAT);
+
+
+b2v_inst5 : bpf_filter_v3
+GENERIC MAP(d_width => 24,
+			freq_res => 1000,
+			freq_sample => 96000
+			)
+PORT MAP(mclk => clk_50,
+		 i_avail => SYNTHESIZED_WIRE_4,
+		 d_in => SYNTHESIZED_WIRE_5,
+		 param => SYNTHESIZED_WIRE_10,
+		 o_avail => SYNTHESIZED_WIRE_0,
+		 d_out => SYNTHESIZED_WIRE_2);
+
+
+b2v_inst6 : bpf_filter_v3
+GENERIC MAP(d_width => 24,
+			freq_res => 1000,
+			freq_sample => 96000
+			)
+PORT MAP(mclk => clk_50,
+		 i_avail => SYNTHESIZED_WIRE_7,
+		 d_in => SYNTHESIZED_WIRE_8,
+		 param => SYNTHESIZED_WIRE_10,
+		 o_avail => SYNTHESIZED_WIRE_1,
+		 d_out => SYNTHESIZED_WIRE_3);
 
 
 END bdf_type;

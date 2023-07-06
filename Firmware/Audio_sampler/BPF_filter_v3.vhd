@@ -118,7 +118,7 @@ architecture Behavioral of BPF_filter_v3 is
 
 begin
     process(mclk)
-        variable gain                   : sfixed(31 downto -32) := to_sfixed(0.0, 31, -32);
+        variable gain                   : sfixed(31 downto -32) := to_sfixed(1.0, 31, -32);
         variable unsigned_gain          : unsigned(param'length downto 0) := (param'length => '1', others => '0');  --make this 1 bit larger than param so it is never the same the first cycle!
         constant saturation_limit       : signed(d_width-1 downto 0) := (d_width-1 => '0', others => '1');
         constant fl_saturation_limit    : sfixed(31 downto -32) := to_sfixed(to_integer(unsigned(saturation_limit)), 31, -32);
@@ -157,7 +157,8 @@ begin
                 --Compute gain from dB input. Compensate the -6dB point at res_freq by multiplying by 2
                 --gain := to_sfixed(2.0, 31, -32) * (to_sfixed(10.0, 31, -32) ** ((to_sfixed(to_integer(unsigned(param)), 31, -32) - to_sfixed(32.0, 31, -32)) / to_sfixed(20.0, 31, -32)));
                 --gain := to_sfixed(2.0 * 10.0 ** ((real(to_integer(unsigned(param))) - 32.0) / 20.0), 31, -31);
-                gain := lookup_gain(to_integer(unsigned(param)));
+                --gain := lookup_gain(to_integer(unsigned(param)));
+                gain := to_sfixed(2.0, 31, -32);
 
                 --Compute new coefficients
                 coef_A := (resize(-twoPI*to_sfixed(freq_res, 31, -32), 31, -32), to_sfixed(0.0, 31, -32), resize(-gain*twoPI*to_sfixed(freq_res, 31, -32), 31, -32), resize(-twoPI*to_sfixed(freq_res, 31, -32), 31, -32));
@@ -236,7 +237,8 @@ begin
                 --Output within integer range
                 else 
                     --Compress output correctly to fit d_out
-                    d_out <= std_logic_vector(compress(to_signed(temp_state(1), 32), d_width));
+                    --d_out <= std_logic_vector(compress(to_signed(temp_state(1), 32), d_width));
+                    d_out <= std_logic_vector(to_signed(temp_state(1), d_width));
                 end if;
 
                 --Computation is finished

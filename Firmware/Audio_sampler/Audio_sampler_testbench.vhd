@@ -15,14 +15,14 @@
 
 -- PROGRAM		"Quartus Prime"
 -- VERSION		"Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition"
--- CREATED		"Fri Jul 07 13:41:20 2023"
+-- CREATED		"Fri Jul 07 13:41:29 2023"
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all; 
 
 LIBRARY work;
 
-ENTITY Audio_sampler IS 
+ENTITY Audio_sampler_testbench IS 
 	PORT
 	(
 		clk_50 :  IN  STD_LOGIC;
@@ -33,15 +33,16 @@ ENTITY Audio_sampler IS
 		ADC_LRCK :  IN  STD_LOGIC;
 		SDA :  INOUT  STD_LOGIC;
 		SCL :  INOUT  STD_LOGIC;
+		freq :  IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		parameter :  IN  STD_LOGIC_VECTOR(5 DOWNTO 0);
 		ack_err :  OUT  STD_LOGIC;
 		DAC_DAT :  OUT  STD_LOGIC;
 		MCLK :  OUT  STD_LOGIC;
 		data_read :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0)
 	);
-END Audio_sampler;
+END Audio_sampler_testbench;
 
-ARCHITECTURE bdf_type OF Audio_sampler IS 
+ARCHITECTURE bdf_type OF Audio_sampler_testbench IS 
 
 COMPONENT i2c_master
 GENERIC (bus_clk : INTEGER;
@@ -132,6 +133,18 @@ GENERIC (d_width : INTEGER;
 	);
 END COMPONENT;
 
+COMPONENT sinewave_generator
+GENERIC (d_width : INTEGER;
+			mclk_freq : INTEGER;
+			sample_freq : INTEGER
+			);
+	PORT(mclk : IN STD_LOGIC;
+		 desired_freq : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+		 o_avail : OUT STD_LOGIC;
+		 sinewave : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
+	);
+END COMPONENT;
+
 SIGNAL	addr :  STD_LOGIC_VECTOR(6 DOWNTO 0);
 SIGNAL	busy :  STD_LOGIC;
 SIGNAL	d_in_l :  STD_LOGIC_VECTOR(23 DOWNTO 0);
@@ -140,12 +153,16 @@ SIGNAL	d_out_l :  STD_LOGIC_VECTOR(23 DOWNTO 0);
 SIGNAL	d_out_r :  STD_LOGIC_VECTOR(23 DOWNTO 0);
 SIGNAL	data :  STD_LOGIC_VECTOR(7 DOWNTO 0);
 SIGNAL	ena :  STD_LOGIC;
+SIGNAL	encoded_sine :  STD_LOGIC;
 SIGNAL	i_avail_l :  STD_LOGIC;
 SIGNAL	i_avail_r :  STD_LOGIC;
 SIGNAL	o_avail_l :  STD_LOGIC;
 SIGNAL	o_avail_r :  STD_LOGIC;
 SIGNAL	rw :  STD_LOGIC;
-SIGNAL	SYNTHESIZED_WIRE_2 :  STD_LOGIC_VECTOR(5 DOWNTO 0);
+SIGNAL	sinewave_l :  STD_LOGIC_VECTOR(23 DOWNTO 0);
+SIGNAL	sinewave_r :  STD_LOGIC_VECTOR(23 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_3 :  STD_LOGIC_VECTOR(5 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_2 :  STD_LOGIC;
 
 
 BEGIN 
@@ -176,7 +193,7 @@ PORT MAP(mclk => clk_50,
 		 nrst => nrst,
 		 sck => BCLK,
 		 ws => ADC_LRCK,
-		 sd => ADC_DAT,
+		 sd => encoded_sine,
 		 o_avail_left => i_avail_l,
 		 o_avail_right => i_avail_r,
 		 data_left => d_in_l,
@@ -191,10 +208,14 @@ PORT MAP(clk_in => clk_50,
 		 clk_out => MCLK);
 
 
+SYNTHESIZED_WIRE_2 <= NOT(ADC_LRCK);
+
+
+
 b2v_inst2 : controller_eff
 PORT MAP(mclk => clk_50,
 		 param_in => parameter,
-		 param_out => SYNTHESIZED_WIRE_2);
+		 param_out => SYNTHESIZED_WIRE_3);
 
 
 b2v_inst3 : initializer
@@ -229,7 +250,7 @@ GENERIC MAP(d_width => 24,
 PORT MAP(mclk => clk_50,
 		 i_avail => i_avail_l,
 		 d_in => d_in_l,
-		 param => SYNTHESIZED_WIRE_2,
+		 param => SYNTHESIZED_WIRE_3,
 		 o_avail => o_avail_l,
 		 d_out => d_out_l);
 
@@ -242,9 +263,43 @@ GENERIC MAP(d_width => 24,
 PORT MAP(mclk => clk_50,
 		 i_avail => i_avail_r,
 		 d_in => d_in_r,
-		 param => SYNTHESIZED_WIRE_2,
+		 param => SYNTHESIZED_WIRE_3,
 		 o_avail => o_avail_r,
 		 d_out => d_out_r);
+
+
+b2v_inst7 : sinewave_generator
+GENERIC MAP(d_width => 24,
+			mclk_freq => 50000000,
+			sample_freq => 192000
+			)
+PORT MAP(mclk => clk_50,
+		 desired_freq => freq,
+		 sinewave => sinewave_l);
+
+
+b2v_inst8 : i2s_encoder
+GENERIC MAP(d_width => 24
+			)
+PORT MAP(mclk => clk_50,
+		 nrst => nrst,
+		 sck => BCLK,
+		 ws => ADC_LRCK,
+		 i_avail_left => ADC_LRCK,
+		 i_avail_right => SYNTHESIZED_WIRE_2,
+		 data_left => sinewave_l,
+		 data_right => sinewave_r,
+		 sd => encoded_sine);
+
+
+b2v_inst9 : sinewave_generator
+GENERIC MAP(d_width => 24,
+			mclk_freq => 50000000,
+			sample_freq => 192000
+			)
+PORT MAP(mclk => clk_50,
+		 desired_freq => freq,
+		 sinewave => sinewave_r);
 
 
 END bdf_type;

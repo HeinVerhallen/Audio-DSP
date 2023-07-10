@@ -57,13 +57,14 @@ The implemented effects are the following:
 
 \begin{itemize}
     \setlength\itemsep{-0.3em} %MAKES THE GAP SMALLER BETWEEN 2 ITEMS
-    \item Distortion (gain)
+    \item Volume control
+    \item Distortion
     \item Delay
     \item Reverb
     \item Equalizer
 \end{itemize}
 
-The distortion effect works by amplifying the input signal with a gain and clipping the amplified signal at a certain level to obtain saturation. This saturation level is hardcoded in the effect. The gain can be adjusted by the user. Therefore the distortion effect only has one parameter, namely gain.
+The volume control effect is simply made by amplifying the input signal by a certain gain value. Because VHDL works with binary signals, overflowing the signal must be taken into account. Therefore it must be checked if the computed output signal does not overflow, and if it overflows it must be clipped to the nearest maximum or minimum. The parameter register of the volume control effect can be seen in table \ref{table:volume-effect-parameters}.
 
 \begin{table}[h!]
     \centering
@@ -71,14 +72,30 @@ The distortion effect works by amplifying the input signal with a gain and clipp
         \hline
         MSB & LSB & Parameter & Description\\
         \hline
-        31 & 0 & Gain & Specify amount of gain for distortion. Ranging from 1 to 429,496,730 with a resolution of 0.1\\
+        31 & 0 & Volume & Specify amount of volume. Ranging from -80dB to 80dB with a resolution of $37 \cdot 10^{-9}$dB\\
+        \hline
+    \end{tabular}
+    \caption{Volume control parameter register}
+    \label{table:volume-effect-parameters}
+\end{table}
+
+The distortion effect works by amplifying the input signal with a gain and clipping the amplified signal at a certain level to obtain saturation. This saturation level is hardcoded in the effect. The gain can be adjusted by the user. In order for the signal to become saturated a large gain is needed. This causes the output signal to be very loud. Therefore the user must be able to attenuate the distorted signal with a level parameter. The parameter register of the distortion effect is seen in table \ref{table:distortion-effect-parameters}.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|p{3.5in}|}
+        \hline
+        MSB & LSB & Parameter & Description\\
+        \hline
+        15 & 0 & Gain & Specify amount of gain for distortion. Ranging from 0dB to 80dB with a resolution of 0.0012dB\\
+        31 & 16 & Level & Specify output level of distorted signal. Ranging from -100dB to 20dB with a resolution of 0.0018dB\\
         \hline
     \end{tabular}
     \caption{Distortion parameter register}
     \label{table:distortion-effect-parameters}
 \end{table}
 
-The delay effect works by adding a previous sample to the current sample creating the effect of delaying a signal. For this the delay time is a necessary parameter. The amount of time the delay lasts is configured by the feedback parameter. This simply feedbacks the output signal back to the input with a factor that causes the delayed signal to die out eventually. Another parameter used in delay effects is the mix parameter. This parameter configures the level of the delayed signal in relation to the original signal. Therefore the parameters this effects needs are: delay time, feedback and mix. 
+The delay effect works by adding a previous sample to the current sample creating the effect of delaying a signal. For this the delay time is a necessary parameter. The amount of time the delay lasts is configured by the feedback parameter. This simply feedbacks the output signal back to the input with a factor that causes the delayed signal to die out eventually. Another parameter used in delay effects is the mix parameter. This parameter configures the level of the delayed signal in relation to the original signal. Therefore the parameters this effects needs are: delay time, feedback and mix. The parameter register for the delay effect can be seen in table \ref{table:delay-effect-parameters}.
 
 \begin{table}[h!]
     \centering

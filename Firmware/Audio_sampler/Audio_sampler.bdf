@@ -545,6 +545,35 @@ agreement for further details.
 	(annotation_block (parameter)(rect 432 96 608 136))
 )
 (symbol
+	(rect 424 -112 648 -32)
+	(text "controller_eff" (rect 5 0 71 12)(font "Arial" ))
+	(text "inst2" (rect 8 64 31 76)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "mclk" (rect 0 0 23 12)(font "Arial" ))
+		(text "mclk" (rect 21 27 44 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "param_in[5..0]" (rect 0 0 70 12)(font "Arial" ))
+		(text "param_in[5..0]" (rect 21 43 91 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
+	)
+	(port
+		(pt 224 32)
+		(output)
+		(text "param_out[5..0]" (rect 0 0 77 12)(font "Arial" ))
+		(text "param_out[5..0]" (rect 138 27 203 39)(font "Arial" ))
+		(line (pt 224 32)(pt 208 32)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 208 64))
+	)
+)
+(symbol
 	(rect 736 72 976 152)
 	(text "volume_eff_v2" (rect 5 0 81 12)(font "Arial" ))
 	(text "inst5" (rect 8 64 31 76)(font "Arial" ))
@@ -613,35 +642,6 @@ agreement for further details.
 		(rectangle (rect 16 16 224 64))
 	)
 	(annotation_block (parameter)(rect 736 160 912 200))
-)
-(symbol
-	(rect 424 -112 648 -32)
-	(text "controller_eff" (rect 5 0 71 12)(font "Arial" ))
-	(text "inst2" (rect 8 64 31 76)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "mclk" (rect 0 0 23 12)(font "Arial" ))
-		(text "mclk" (rect 21 27 44 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "param_in[5..0]" (rect 0 0 70 12)(font "Arial" ))
-		(text "param_in[5..0]" (rect 21 43 91 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48)(line_width 3))
-	)
-	(port
-		(pt 224 32)
-		(output)
-		(text "param_out[5..0]" (rect 0 0 77 12)(font "Arial" ))
-		(text "param_out[5..0]" (rect 138 27 203 39)(font "Arial" ))
-		(line (pt 224 32)(pt 208 32)(line_width 3))
-	)
-	(drawing
-		(rectangle (rect 16 16 208 64))
-	)
 )
 (connector
 	(pt 664 432)

@@ -35,6 +35,7 @@ architecture main of sdram_controller is
 TYPE STAGES IS (State_read , State_write, State_idle);
 SIGNAL Current_state: STAGES:=State_idle;
 SIGNAL Next_state: STAGES := State_idle;
+SIGNAL Getal : unsigned (15 downto 0) := (others => '0');
 
 BEGIN
 PROCESS (SW_read, SW_write)
@@ -54,9 +55,14 @@ case Current_state is
 --		sdramcontroller_chipselect 	<= '1';
 --		sdramcontroller_read_n 			<= '1';
 --		sdramcontroller_write_n 		<= '0';
-
+		
 		IF SW_write = '1' THEN
 			Next_state <= State_idle;
+			
+		Getal <= Getal + 1;
+		if Getal > 6000 then
+			Getal <= (others => '0');
+		end if;
 		END IF;
 		
 	when State_idle => ---------- idle state------------
@@ -88,17 +94,17 @@ BEGIN
 		
 		case Current_state is
 			when State_read => 
-				sdramcontroller_writedata 	<= "0111000000000000";
+				sdramcontroller_writedata 	<= "0000000000000000";
 				sdramcontroller_chipselect 	<= '1';
 				sdramcontroller_read_n 			<= '0';
 				sdramcontroller_write_n 		<= '1';
 			when State_write => 
-				sdramcontroller_writedata 	<= "0000000000000111";
+				sdramcontroller_writedata 	<= std_logic_vector(Getal);
 				sdramcontroller_chipselect 	<= '1';
 				sdramcontroller_read_n 			<= '1';
 				sdramcontroller_write_n 		<= '0';
 			when State_idle => 
-				sdramcontroller_writedata 	<= "0000011100000000";
+				sdramcontroller_writedata 	<= "0000000000000000";
 				sdramcontroller_chipselect 	<= '0';
 				sdramcontroller_read_n 			<= '1';
 				sdramcontroller_write_n 		<= '1';

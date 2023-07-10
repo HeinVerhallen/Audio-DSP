@@ -15,7 +15,7 @@
 
 -- PROGRAM		"Quartus Prime"
 -- VERSION		"Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition"
--- CREATED		"Tue Apr 25 16:32:28 2023"
+-- CREATED		"Mon Jul 10 12:03:33 2023"
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all; 
@@ -33,6 +33,7 @@ ENTITY Audio_sampler IS
 		ADC_LRCK :  IN  STD_LOGIC;
 		SDA :  INOUT  STD_LOGIC;
 		SCL :  INOUT  STD_LOGIC;
+		parameter :  IN  STD_LOGIC_VECTOR(5 DOWNTO 0);
 		ack_err :  OUT  STD_LOGIC;
 		DAC_DAT :  OUT  STD_LOGIC;
 		MCLK :  OUT  STD_LOGIC;
@@ -60,6 +61,18 @@ GENERIC (bus_clk : INTEGER;
 	);
 END COMPONENT;
 
+COMPONENT i2s_encoder_v2
+GENERIC (d_width : INTEGER
+			);
+	PORT(nrst : IN STD_LOGIC;
+		 sck : IN STD_LOGIC;
+		 ws : IN STD_LOGIC;
+		 data_left : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+		 data_right : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+		 sd : OUT STD_LOGIC
+	);
+END COMPONENT;
+
 COMPONENT clk_div
 GENERIC (div : INTEGER
 			);
@@ -69,15 +82,10 @@ GENERIC (div : INTEGER
 	);
 END COMPONENT;
 
-COMPONENT i2s_encoder
-GENERIC (d_width : INTEGER
-			);
-	PORT(nrst : IN STD_LOGIC;
-		 sck : IN STD_LOGIC;
-		 ws : IN STD_LOGIC;
-		 data_left : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
-		 data_right : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
-		 sd : OUT STD_LOGIC
+COMPONENT controller_eff
+	PORT(mclk : IN STD_LOGIC;
+		 param_in : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
+		 param_out : OUT STD_LOGIC_VECTOR(5 DOWNTO 0)
 	);
 END COMPONENT;
 
@@ -92,15 +100,26 @@ COMPONENT initializer
 	);
 END COMPONENT;
 
-COMPONENT i2s_decoder
+COMPONENT i2s_decoder_v2
 GENERIC (d_width : INTEGER
 			);
 	PORT(nrst : IN STD_LOGIC;
 		 sck : IN STD_LOGIC;
 		 ws : IN STD_LOGIC;
 		 sd : IN STD_LOGIC;
+		 o_avail_left : OUT STD_LOGIC;
+		 o_avail_right : OUT STD_LOGIC;
 		 data_left : OUT STD_LOGIC_VECTOR(23 DOWNTO 0);
 		 data_right : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
+	);
+END COMPONENT;
+
+COMPONENT volume_eff_v2
+GENERIC (d_width : INTEGER
+			);
+	PORT(d_in : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+		 param : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
+		 d_out : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
 	);
 END COMPONENT;
 
@@ -111,6 +130,9 @@ SIGNAL	ena :  STD_LOGIC;
 SIGNAL	rw :  STD_LOGIC;
 SIGNAL	SYNTHESIZED_WIRE_0 :  STD_LOGIC_VECTOR(23 DOWNTO 0);
 SIGNAL	SYNTHESIZED_WIRE_1 :  STD_LOGIC_VECTOR(23 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_2 :  STD_LOGIC_VECTOR(23 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_6 :  STD_LOGIC_VECTOR(5 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_4 :  STD_LOGIC_VECTOR(23 DOWNTO 0);
 
 
 BEGIN 
@@ -134,15 +156,7 @@ PORT MAP(clk => clk_50,
 		 data_rd => data_read);
 
 
-b2v_inst11 : clk_div
-GENERIC MAP(div => 4
-			)
-PORT MAP(clk_in => clk_50,
-		 nrst => nrst,
-		 clk_out => MCLK);
-
-
-b2v_inst15 : i2s_encoder
+b2v_inst1 : i2s_encoder_v2
 GENERIC MAP(d_width => 24
 			)
 PORT MAP(nrst => nrst,
@@ -151,6 +165,20 @@ PORT MAP(nrst => nrst,
 		 data_left => SYNTHESIZED_WIRE_0,
 		 data_right => SYNTHESIZED_WIRE_1,
 		 sd => DAC_DAT);
+
+
+b2v_inst11 : clk_div
+GENERIC MAP(div => 4
+			)
+PORT MAP(clk_in => clk_50,
+		 nrst => nrst,
+		 clk_out => MCLK);
+
+
+b2v_inst2 : controller_eff
+PORT MAP(mclk => clk_50,
+		 param_in => parameter,
+		 param_out => SYNTHESIZED_WIRE_6);
 
 
 b2v_inst3 : initializer
@@ -163,15 +191,31 @@ PORT MAP(clk => clk_50,
 		 data => data);
 
 
-b2v_inst9 : i2s_decoder
+b2v_inst4 : i2s_decoder_v2
 GENERIC MAP(d_width => 24
 			)
 PORT MAP(nrst => nrst,
 		 sck => BCLK,
 		 ws => ADC_LRCK,
 		 sd => ADC_DAT,
-		 data_left => SYNTHESIZED_WIRE_0,
-		 data_right => SYNTHESIZED_WIRE_1);
+		 data_left => SYNTHESIZED_WIRE_2,
+		 data_right => SYNTHESIZED_WIRE_4);
+
+
+b2v_inst5 : volume_eff_v2
+GENERIC MAP(d_width => 24
+			)
+PORT MAP(d_in => SYNTHESIZED_WIRE_2,
+		 param => SYNTHESIZED_WIRE_6,
+		 d_out => SYNTHESIZED_WIRE_0);
+
+
+b2v_inst6 : volume_eff_v2
+GENERIC MAP(d_width => 24
+			)
+PORT MAP(d_in => SYNTHESIZED_WIRE_4,
+		 param => SYNTHESIZED_WIRE_6,
+		 d_out => SYNTHESIZED_WIRE_1);
 
 
 END bdf_type;

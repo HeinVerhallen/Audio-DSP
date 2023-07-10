@@ -17,7 +17,7 @@ The functionality of the main board should be verified in the following manner:
 -Next, apply a known signal (e.g., a 1kHz sinusoidal waveform with an amplitude of 100mV) to the various inputs of the audio-DSP. If no filters are selected and the audio-DSP is essentially in a pass-through state, the same signal should appear on the selected outputs. The accuracy of this signal can be verified using an audio analyzer such as the AP SYS 2700.
 
 \subsection{Firmware}
-The firmware can be tested by simulating the VHDL code in Multisim. For this .do files are made to force input signals. Due to time constrains only the I2S decoder and encoder have been tested with real audio. 
+The firmware can be tested by simulating the VHDL code in Modelsim. For this .do files are made to force input signals. Due to time constrains only the I2S decoder and encoder have been tested with real audio. 
 
 \subsubsection{I2S decoder and encoder}
 For testing the I2S decoder and encoder, they are wired in series. So when a random data pattern is going in the decoder the encoder should output the same data pattern.
@@ -69,7 +69,7 @@ The results can be seen in figure \ref{fig:i2c-master}. In this result it can be
 \end{figure}
 
 \subsubsection{State-space BPF}
-Due to time constrains the BPF has not yet been tested in Multisim. 
+Due to time constrains the BPF has not yet been tested in Modelsim. 
 
 \section{Conclusions}
 

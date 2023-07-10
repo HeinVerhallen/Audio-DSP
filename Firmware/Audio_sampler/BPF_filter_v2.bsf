@@ -27,16 +27,16 @@ agreement for further details.
 	(port
 		(pt 0 32)
 		(input)
-		(text "d_in[d_width-1..0]" (rect 0 0 67 12)(font "Arial" ))
-		(text "d_in[d_width-1..0]" (rect 21 27 88 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32)(line_width 3))
+		(text "mclk" (rect 0 0 18 12)(font "Arial" ))
+		(text "mclk" (rect 21 27 39 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 1))
 	)
 	(port
 		(pt 0 48)
 		(input)
-		(text "nrst" (rect 0 0 15 12)(font "Arial" ))
-		(text "nrst" (rect 21 43 36 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48)(line_width 1))
+		(text "d_in[d_width-1..0]" (rect 0 0 67 12)(font "Arial" ))
+		(text "d_in[d_width-1..0]" (rect 21 43 88 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
 	)
 	(port
 		(pt 0 64)
@@ -68,7 +68,7 @@ agreement for further details.
 	)
 	(parameter
 		"d_width"
-		"8"
+		"24"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
@@ -78,7 +78,7 @@ agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"freq_res"
-		"400"
+		"1000"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing

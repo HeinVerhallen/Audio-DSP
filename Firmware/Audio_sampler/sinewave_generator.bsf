@@ -48,8 +48,8 @@ agreement for further details.
 	(port
 		(pt 264 48)
 		(output)
-		(text "valid" (rect 0 0 17 12)(font "Arial" ))
-		(text "valid" (rect 226 43 243 55)(font "Arial" ))
+		(text "o_avail" (rect 0 0 28 12)(font "Arial" ))
+		(text "o_avail" (rect 215 43 243 55)(font "Arial" ))
 		(line (pt 264 48)(pt 248 48)(line_width 1))
 	)
 	(parameter

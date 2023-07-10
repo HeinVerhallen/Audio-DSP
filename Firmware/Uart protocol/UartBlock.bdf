@@ -22,7 +22,7 @@ https://fpgasoftware.intel.com/eula.
 (header "graphic" (version "1.4"))
 (pin
 	(input)
-	(rect -168 312 8 328)
+	(rect -176 360 0 376)
 	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
 	(text "TXData[7..0]" (rect 9 0 70 12)(font "Arial" ))
 	(pt 176 8)
@@ -38,7 +38,7 @@ https://fpgasoftware.intel.com/eula.
 )
 (pin
 	(input)
-	(rect -168 296 8 312)
+	(rect -176 344 0 360)
 	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
 	(text "LoadByte" (rect 9 0 56 12)(font "Arial" ))
 	(pt 176 8)
@@ -54,7 +54,7 @@ https://fpgasoftware.intel.com/eula.
 )
 (pin
 	(input)
-	(rect -168 200 8 216)
+	(rect -184 216 -8 232)
 	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
 	(text "Clk" (rect 9 0 25 12)(font "Arial" ))
 	(pt 176 8)
@@ -70,7 +70,7 @@ https://fpgasoftware.intel.com/eula.
 )
 (pin
 	(input)
-	(rect -168 216 8 232)
+	(rect -184 232 -8 248)
 	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
 	(text "RX" (rect 9 0 23 12)(font "Arial" ))
 	(pt 176 8)
@@ -83,6 +83,22 @@ https://fpgasoftware.intel.com/eula.
 		(line (pt 117 12)(pt 121 8))
 	)
 	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
+)
+(pin
+	(input)
+	(rect -176 200 -8 216)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "Nrst" (rect 5 0 27 12)(font "Arial" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
 )
 (pin
 	(output)
@@ -102,7 +118,7 @@ https://fpgasoftware.intel.com/eula.
 )
 (pin
 	(output)
-	(rect 224 296 400 312)
+	(rect 224 328 400 344)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "TX" (rect 90 0 101 12)(font "Arial" ))
 	(pt 0 8)
@@ -134,7 +150,7 @@ https://fpgasoftware.intel.com/eula.
 )
 (pin
 	(output)
-	(rect 224 280 400 296)
+	(rect 224 312 400 328)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "TXActive" (rect 90 0 133 12)(font "Arial" ))
 	(pt 0 8)
@@ -150,7 +166,7 @@ https://fpgasoftware.intel.com/eula.
 )
 (pin
 	(output)
-	(rect 224 312 400 328)
+	(rect 224 344 400 360)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "TXDone" (rect 90 0 127 17)(font "Intel Clear" ))
 	(pt 0 8)
@@ -165,91 +181,56 @@ https://fpgasoftware.intel.com/eula.
 	)
 )
 (symbol
-	(rect 24 176 224 256)
-	(text "UART_RX" (rect 5 0 54 12)(font "Arial" ))
-	(text "inst" (rect 8 64 25 76)(font "Arial" ))
+	(rect 24 288 224 400)
+	(text "UART_TX" (rect 5 0 52 12)(font "Arial" ))
+	(text "inst5" (rect 8 96 31 108)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
-		(text "Clk" (rect 0 0 16 12)(font "Arial" ))
-		(text "Clk" (rect 21 27 37 39)(font "Arial" ))
+		(text "Nrst" (rect 0 0 21 12)(font "Arial" ))
+		(text "Nrst" (rect 21 27 42 39)(font "Arial" ))
 		(line (pt 0 32)(pt 16 32))
 	)
 	(port
 		(pt 0 48)
-		(input)
-		(text "RX_Serial" (rect 0 0 47 12)(font "Arial" ))
-		(text "RX_Serial" (rect 21 43 68 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 200 32)
-		(output)
-		(text "RX_DV" (rect 0 0 36 12)(font "Arial" ))
-		(text "RX_DV" (rect 149 27 185 39)(font "Arial" ))
-		(line (pt 200 32)(pt 184 32))
-	)
-	(port
-		(pt 200 48)
-		(output)
-		(text "RX_Byte[7..0]" (rect 0 0 69 12)(font "Arial" ))
-		(text "RX_Byte[7..0]" (rect 121 43 190 55)(font "Arial" ))
-		(line (pt 200 48)(pt 184 48)(line_width 3))
-	)
-	(parameter
-		"CLKS_PER_BIT"
-		"5208"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 184 64))
-	)
-	(annotation_block (parameter)(rect 24 136 224 176))
-)
-(symbol
-	(rect 24 256 224 368)
-	(text "UART_TX" (rect 5 0 52 12)(font "Arial" ))
-	(text "inst5" (rect 8 96 30 113)(font "Intel Clear" ))
-	(port
-		(pt 0 32)
 		(input)
 		(text "clk" (rect 0 0 14 12)(font "Arial" ))
-		(text "clk" (rect 21 27 35 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "TX_DV" (rect 0 0 34 12)(font "Arial" ))
-		(text "TX_DV" (rect 21 43 55 55)(font "Arial" ))
+		(text "clk" (rect 21 43 35 55)(font "Arial" ))
 		(line (pt 0 48)(pt 16 48))
 	)
 	(port
 		(pt 0 64)
 		(input)
+		(text "TX_DV" (rect 0 0 34 12)(font "Arial" ))
+		(text "TX_DV" (rect 21 59 55 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
 		(text "TX_Byte[7..0]" (rect 0 0 67 12)(font "Arial" ))
-		(text "TX_Byte[7..0]" (rect 21 59 88 71)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64)(line_width 3))
+		(text "TX_Byte[7..0]" (rect 21 75 88 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
 	)
 	(port
 		(pt 200 32)
 		(output)
 		(text "TX_Active" (rect 0 0 49 12)(font "Arial" ))
-		(text "TX_Active" (rect 138 27 187 39)(font "Arial" ))
+		(text "TX_Active" (rect 138 27 179 39)(font "Arial" ))
 		(line (pt 200 32)(pt 184 32))
 	)
 	(port
 		(pt 200 48)
 		(output)
 		(text "TX_Serial" (rect 0 0 44 12)(font "Arial" ))
-		(text "TX_Serial" (rect 142 43 186 55)(font "Arial" ))
+		(text "TX_Serial" (rect 142 43 179 55)(font "Arial" ))
 		(line (pt 200 48)(pt 184 48))
 	)
 	(port
 		(pt 200 64)
 		(output)
 		(text "TX_Done" (rect 0 0 43 12)(font "Arial" ))
-		(text "TX_Done" (rect 143 59 186 71)(font "Arial" ))
+		(text "TX_Done" (rect 143 59 179 71)(font "Arial" ))
 		(line (pt 200 64)(pt 184 64))
 	)
 	(parameter
@@ -260,27 +241,72 @@ https://fpgasoftware.intel.com/eula.
 	(drawing
 		(rectangle (rect 16 16 184 96))
 	)
-	(annotation_block (parameter)(rect 24 368 224 408))
+	(annotation_block (parameter)(rect 24 400 224 440))
+)
+(symbol
+	(rect 24 176 224 288)
+	(text "UART_RX" (rect 5 0 54 12)(font "Arial" ))
+	(text "inst" (rect 8 96 25 108)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "Nrst" (rect 0 0 21 12)(font "Arial" ))
+		(text "Nrst" (rect 21 27 42 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "Clk" (rect 0 0 16 12)(font "Arial" ))
+		(text "Clk" (rect 21 43 37 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "RX_Serial" (rect 0 0 47 12)(font "Arial" ))
+		(text "RX_Serial" (rect 21 59 68 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 200 32)
+		(output)
+		(text "RX_DV" (rect 0 0 36 12)(font "Arial" ))
+		(text "RX_DV" (rect 149 27 179 39)(font "Arial" ))
+		(line (pt 200 32)(pt 184 32))
+	)
+	(port
+		(pt 200 48)
+		(output)
+		(text "RX_Byte[7..0]" (rect 0 0 69 12)(font "Arial" ))
+		(text "RX_Byte[7..0]" (rect 121 43 179 55)(font "Arial" ))
+		(line (pt 200 48)(pt 184 48)(line_width 3))
+	)
+	(parameter
+		"CLKS_PER_BIT"
+		"5208"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 184 96))
+	)
+	(annotation_block (parameter)(rect 24 136 224 176))
 )
 (connector
-	(pt 24 288)
-	(pt 16 288)
-)
-(connector
-	(pt 16 288)
-	(pt 16 208)
-)
-(connector
-	(pt 24 320)
-	(pt 8 320)
+	(pt 24 368)
+	(pt 0 368)
 	(bus)
 )
 (connector
-	(pt 24 224)
-	(pt 8 224)
+	(pt 0 352)
+	(pt 24 352)
 )
 (connector
-	(pt 8 208)
+	(pt 24 320)
+	(pt 16 320)
+)
+(connector
+	(pt 16 320)
 	(pt 16 208)
 )
 (connector
@@ -288,7 +314,28 @@ https://fpgasoftware.intel.com/eula.
 	(pt 24 208)
 )
 (connector
-	(pt 8 304)
-	(pt 24 304)
+	(pt -8 240)
+	(pt 24 240)
+)
+(connector
+	(pt -8 208)
+	(pt 16 208)
+)
+(connector
+	(pt 8 336)
+	(pt 24 336)
+)
+(connector
+	(pt 8 336)
+	(pt 8 224)
+)
+(connector
+	(pt -8 224)
+	(pt 8 224)
+)
+(connector
+	(pt 8 224)
+	(pt 24 224)
 )
 (junction (pt 16 208))
+(junction (pt 8 224))

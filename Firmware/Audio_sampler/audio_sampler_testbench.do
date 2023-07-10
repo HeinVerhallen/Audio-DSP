@@ -32,6 +32,13 @@ force DAC_LRCK 1 0, 0 2560 -rep 5120
 
 force nrst 1
 
-run 10000000
+run 5000000
+force nrst 0
+run 40
+
+force nrst 1
+
+run 5000000
+#run 10000000
 
 

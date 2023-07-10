@@ -11,6 +11,7 @@ entity BPF_filter_v3 is
         freq_res    : integer := 1000);      --resonance frequency
     Port ( 
         mclk    : in std_logic;                             --master clock
+        nrst    : in std_logic;                             --active-low reset
         d_in    : in  std_logic_vector(d_width-1 downto 0); --input data
         i_avail : in  std_logic;                            --input data available
         param   : in  std_logic_vector(5 downto 0);         --gain parameter
@@ -20,95 +21,95 @@ entity BPF_filter_v3 is
 end BPF_filter_v3;
 
 architecture Behavioral of BPF_filter_v3 is
-    function compress (
-        a       : in unsigned;  --Value to be compressed
-        d_width : in integer    --The size where the input value needs to be compressed to
-    ) return unsigned is
-        constant max            : unsigned(d_width-1 downto 0) := (others => '1');  --minimal value for input value to be shifted
+    --function compress (
+    --    a       : in unsigned;  --Value to be compressed
+    --    d_width : in integer    --The size where the input value needs to be compressed to
+    --) return unsigned is
+    --    constant max            : unsigned(d_width-1 downto 0) := (others => '1');  --minimal value for input value to be shifted
 
-        variable temp_mirror    : unsigned(0 to a'length-1);        --mirrored temp value
-        variable shiftVal       : unsigned(a'length-1 downto 0);    --value that the input needs to be shifted
+    --    variable temp_mirror    : unsigned(0 to a'length-1);        --mirrored temp value
+    --    variable shiftVal       : unsigned(a'length-1 downto 0);    --value that the input needs to be shifted
 
-        variable temp_result    : unsigned(a'length*2-1 downto 0);  --temporary result
-        variable result         : unsigned(d_width-1 downto 0);     --final result
-    begin
-        --Input is larger than maximum 
-        if (a > max) then
-            --Mirror input
-            for i in 0 to a'length-1 loop
-                temp_mirror(i) := a(i);
-            end loop;
+    --    variable temp_result    : unsigned(a'length*2-1 downto 0);  --temporary result
+    --    variable result         : unsigned(d_width-1 downto 0);     --final result
+    --begin
+    --    --Input is larger than maximum 
+    --    if (a > max) then
+    --        --Mirror input
+    --        for i in 0 to a'length-1 loop
+    --            temp_mirror(i) := a(i);
+    --        end loop;
 
-            --Compute amount of shifts for the value to line up correctly
-            shiftVal := temp_mirror and not (temp_mirror - "1");
+    --        --Compute amount of shifts for the value to line up correctly
+    --        shiftVal := temp_mirror and not (temp_mirror - "1");
 
-            --Shift input value by computed shift value
-            temp_result := a * shiftVal;
+    --        --Shift input value by computed shift value
+    --        temp_result := a * shiftVal;
 
-            --Resize and set d_width amount of MSB to result
-            result := resize(temp_result(a'length-1 downto a'length-d_width), d_width);
-        else
-            --Set d_width amount of input bits to result
-            result := a(d_width-1 downto 0);
-        end if;
+    --        --Resize and set d_width amount of MSB to result
+    --        result := resize(temp_result(a'length-1 downto a'length-d_width), d_width);
+    --    else
+    --        --Set d_width amount of input bits to result
+    --        result := a(d_width-1 downto 0);
+    --    end if;
 
-        return result;
-    end compress;
+    --    return result;
+    --end compress;
 
-    function compress (
-        a       : in signed;    --Value to be compressed
-        d_width : in integer    --The size where the input value needs to be compressed to
-    ) return signed is
-        constant max_signed     : unsigned(d_width-2 downto 0) := (others => '1');  --minimal value for a negative valued input to be shifted
-        constant max_unsigned   : unsigned(d_width-1 downto 0) := (others => '1');  --minimal value for a positive valued input to be shifted
+    --function compress (
+    --    a       : in signed;    --Value to be compressed
+    --    d_width : in integer    --The size where the input value needs to be compressed to
+    --) return signed is
+    --    constant max_signed     : unsigned(d_width-2 downto 0) := (others => '1');  --minimal value for a negative valued input to be shifted
+    --    constant max_unsigned   : unsigned(d_width-1 downto 0) := (others => '1');  --minimal value for a positive valued input to be shifted
 
-        variable temp_a         : unsigned(a'length-1 downto 0);    --temporary input value
-        variable temp_mirror    : unsigned(0 to a'length-1);        --mirrored temp value
-        variable shiftVal       : unsigned(a'length-1 downto 0);    --value that the input needs to be shifted
+    --    variable temp_a         : unsigned(a'length-1 downto 0);    --temporary input value
+    --    variable temp_mirror    : unsigned(0 to a'length-1);        --mirrored temp value
+    --    variable shiftVal       : unsigned(a'length-1 downto 0);    --value that the input needs to be shifted
 
-        variable temp_result    : signed(a'length*2-1 downto 0);    --temporary result
-        variable result         : signed(d_width-1 downto 0);       --final result
-    begin
-        --Convert signed input to unsigned value
-        temp_a := unsigned(a);
+    --    variable temp_result    : signed(a'length*2-1 downto 0);    --temporary result
+    --    variable result         : signed(d_width-1 downto 0);       --final result
+    --begin
+    --    --Convert signed input to unsigned value
+    --    temp_a := unsigned(a);
 
-        --If signed make unsigned
-        if (temp_a(a'left) = '1') then 
-            temp_a := (not temp_a) + 1; 
-        end if;
+    --    --If signed make unsigned
+    --    if (temp_a(a'left) = '1') then 
+    --        temp_a := (not temp_a) + 1; 
+    --    end if;
 
-        if ((a(a'left) = '0' and temp_a > max_unsigned) or (a(a'left) = '1' and temp_a > max_signed)) then
-            --Mirror temp
-            for i in 0 to a'length-1 loop
-                temp_mirror(i) := temp_a(i);
-            end loop;
+    --    if ((a(a'left) = '0' and temp_a > max_unsigned) or (a(a'left) = '1' and temp_a > max_signed)) then
+    --        --Mirror temp
+    --        for i in 0 to a'length-1 loop
+    --            temp_mirror(i) := temp_a(i);
+    --        end loop;
 
-            --Compute amount of shifts for the value to line up correctly
-            shiftVal := ((temp_mirror and not (temp_mirror - 1)) / 2);
+    --        --Compute amount of shifts for the value to line up correctly
+    --        shiftVal := ((temp_mirror and not (temp_mirror - 1)) / 2);
 
-            --Correct for zero value
-            if (shiftVal < 1) then
-                shiftVal := shiftVal + 1;
-            end if;
+    --        --Correct for zero value
+    --        if (shiftVal < 1) then
+    --            shiftVal := shiftVal + 1;
+    --        end if;
 
-            --Shift input value by computed shift value
-            temp_result := a * signed(shiftVal);
+    --        --Shift input value by computed shift value
+    --        temp_result := a * signed(shiftVal);
 
-            --Resize and set d_width amount of MSB to result
-            result := resize(temp_result(a'length-1 downto a'length-d_width), d_width);
-        --Input is signed
-        elsif a(a'left) = '1' then
-            --Set d_width amount of input bits to result
-            result := a(d_width-1 downto 0);
+    --        --Resize and set d_width amount of MSB to result
+    --        result := resize(temp_result(a'length-1 downto a'length-d_width), d_width);
+    --    --Input is signed
+    --    elsif a(a'left) = '1' then
+    --        --Set d_width amount of input bits to result
+    --        result := a(d_width-1 downto 0);
 
-        --Input is unsigned
-        else
-            --Set d_width amount of input bits minus sign position bit to result
-            result := '0' & a(d_width-2 downto 0);
-        end if;
+    --    --Input is unsigned
+    --    else
+    --        --Set d_width amount of input bits minus sign position bit to result
+    --        result := '0' & a(d_width-2 downto 0);
+    --    end if;
 
-        return result;
-    end compress;
+    --    return result;
+    --end compress;
 
     constant twoPI : sfixed(31 downto -32) := to_sfixed(6.283185, 31, -32);
 
@@ -117,8 +118,8 @@ architecture Behavioral of BPF_filter_v3 is
     type matrix_B is array (0 to order-1) of sfixed(31 downto -32);
 
 begin
-    process(mclk)
-        variable gain                   : sfixed(31 downto -32) := to_sfixed(1.0, 31, -32);
+    process(mclk, nrst)
+        variable gain                   : sfixed(31 downto -32) := to_sfixed(2.0, 31, -32);
         variable unsigned_gain          : unsigned(param'length downto 0) := (param'length => '1', others => '0');  --make this 1 bit larger than param so it is never the same the first cycle!
         constant saturation_limit       : signed(d_width-1 downto 0) := (d_width-1 => '0', others => '1');
         constant fl_saturation_limit    : sfixed(31 downto -32) := to_sfixed(to_integer(unsigned(saturation_limit)), 31, -32);
@@ -147,63 +148,117 @@ begin
         variable lookup_gain : t_lookup_gain := (to_sfixed(0.050238, 31, -32), to_sfixed(0.056368, 31, -32), to_sfixed(0.063246, 31, -32), to_sfixed(0.070963, 31, -32), to_sfixed(0.079621, 31, -32), to_sfixed(0.089337, 31, -32), to_sfixed(0.100237, 31, -32), to_sfixed(0.112468, 31, -32), to_sfixed(0.126191, 31, -32), to_sfixed(0.141589, 31, -32), to_sfixed(0.158866, 31, -32), to_sfixed(0.178250, 31, -32), to_sfixed(0.200000, 31, -32), to_sfixed(0.224404, 31, -32), to_sfixed(0.251785, 31, -32), to_sfixed(0.282508, 31, -32), to_sfixed(0.316979, 31, -32), to_sfixed(0.355656, 31, -32), to_sfixed(0.399052, 31, -32), to_sfixed(0.447744, 31, -32), to_sfixed(0.502377, 31, -32), to_sfixed(0.563677, 31, -32), to_sfixed(0.632456, 31, -32), to_sfixed(0.709627, 31, -32), to_sfixed(0.796214, 31, -32), to_sfixed(0.893367, 31, -32), to_sfixed(1.002374, 31, -32), to_sfixed(1.124683, 31, -32), to_sfixed(1.261915, 31, -32), to_sfixed(1.415892, 31, -32), to_sfixed(1.588656, 31, -32), to_sfixed(1.782502, 31, -32), to_sfixed(2.000000, 31, -32), to_sfixed(2.244037, 31, -32), to_sfixed(2.517851, 31, -32), to_sfixed(2.825075, 31, -32), to_sfixed(3.169786, 31, -32), to_sfixed(3.556559, 31, -32), to_sfixed(3.990525, 31, -32), to_sfixed(4.477442, 31, -32), to_sfixed(5.023773, 31, -32), to_sfixed(5.636766, 31, -32), to_sfixed(6.324555, 31, -32), to_sfixed(7.096268, 31, -32), to_sfixed(7.962143, 31, -32), to_sfixed(8.933672, 31, -32), to_sfixed(10.023745, 31, -32), to_sfixed(11.246826, 31, -32), to_sfixed(12.619147, 31, -32), to_sfixed(14.158916, 31, -32), to_sfixed(15.886564, 31, -32), to_sfixed(17.825018, 31, -32), to_sfixed(20.000000, 31, -32), to_sfixed(22.440369, 31, -32), to_sfixed(25.178509, 31, -32), to_sfixed(28.250751, 31, -32), to_sfixed(31.697865, 31, -32), to_sfixed(35.565590, 31, -32), to_sfixed(39.905247, 31, -32), to_sfixed(44.774422, 31, -32), to_sfixed(50.237728, 31, -32), to_sfixed(56.367661, 31, -32), to_sfixed(63.245552, 31, -32), to_sfixed(70.962677, 31, -32));
 
     begin
-        if rising_edge(mclk) then
+        if nrst = '0' then
+            --Compute new coefficients
+            coef_A := (resize(-twoPI*to_sfixed(freq_res, 31, -32), 31, -32), to_sfixed(0.0, 31, -32), resize(-gain*twoPI*to_sfixed(freq_res, 31, -32), 31, -32), resize(-twoPI*to_sfixed(freq_res, 31, -32), 31, -32));
+            coef_B := (resize(twoPI*to_sfixed(freq_res, 31, -32), 31, -32), resize(gain*twoPI*to_sfixed(freq_res, 31, -32), 31, -32));
+
+            --Initialize discrete coefficient matrices
+            factorial       := to_sfixed(1.0, 31, -32);
+            sample_time     := resize(to_sfixed(1.0, 31, -32)/to_sfixed(freq_sample, 31, -32), 31, -32);
+            sample_time_pow := sample_time;
+
+            coef_A_pow      := coef_A;
+            fl_coef_Ad      := identity_matrix;
+            fl_coef_Bd      := (resize(coef_B(0)*sample_time, 31, -32), resize(coef_B(1)*sample_time, 31, -32));
+
+            --reset state matrix
+            for i in 0 to 1 loop
+                state(i) := to_sfixed(0.0, 31, -32);
+            end loop;
+
+            --Compute AT + A^2*T^2/2 + ...
+            compute_Ad_and_Bd_nrst : for i in 0 to 10 loop
+
+                --Compute Resulting Ad and Bd
+                for j in 0 to 1 loop
+                    --Compute Bd
+                    fl_coef_Bd(j) := resize(fl_coef_Bd(j) + (((coef_A_pow(j*2)*coef_B(0) + coef_A_pow(j*2+1)*coef_B(1))*sample_time_pow*sample_time)/(factorial * to_sfixed((i+2), 31, -32))), 31, -32);
+
+                    for k in 0 to 1 loop
+                        --Compute Ad
+                        fl_coef_Ad(j*2+k) := resize(fl_coef_Ad(j*2+k) + ((coef_A_pow(j*2+k)*sample_time_pow)/factorial), 31, -32);
+                    end loop;
+                end loop;
+
+                --Compute A to the power of n in temporary matrix 
+                for j in 0 to 1 loop
+                    for k in 0 to 1 loop
+                        coef_temp_A_pow(j*2+k) := resize(coef_A_pow(j*2)*coef_A(k) + coef_A_pow(j*2+1)*coef_A(2+k), 31, -32);
+                    end loop;
+                end loop;
+
+                --Copy temp to power of A matrix
+                coef_A_pow := coef_temp_A_pow;
+
+                --Compute T^n and n!
+                sample_time_pow := resize(sample_time_pow*sample_time, 31, -32);
+                factorial       := resize(factorial * to_sfixed((i+2), 31, -32), 31, -32);
+
+            end loop compute_Ad_and_Bd_nrst;
+        elsif rising_edge(mclk) then
             --Set output available low
             finished := '0';
 
-            if (unsigned_gain /= unsigned('0' & param)) then
-                unsigned_gain := unsigned('0' & param);
+            --if (unsigned_gain /= unsigned('0' & param)) then
+            --    unsigned_gain := unsigned('0' & param);
 
-                --Compute gain from dB input. Compensate the -6dB point at res_freq by multiplying by 2
-                --gain := to_sfixed(2.0, 31, -32) * (to_sfixed(10.0, 31, -32) ** ((to_sfixed(to_integer(unsigned(param)), 31, -32) - to_sfixed(32.0, 31, -32)) / to_sfixed(20.0, 31, -32)));
-                --gain := to_sfixed(2.0 * 10.0 ** ((real(to_integer(unsigned(param))) - 32.0) / 20.0), 31, -31);
-                --gain := lookup_gain(to_integer(unsigned(param)));
-                gain := to_sfixed(2.0, 31, -32);
+            --    --Compute gain from dB input. Compensate the -6dB point at res_freq by multiplying by 2
+            --    --gain := to_sfixed(2.0, 31, -32) * (to_sfixed(10.0, 31, -32) ** ((to_sfixed(to_integer(unsigned(param)), 31, -32) - to_sfixed(32.0, 31, -32)) / to_sfixed(20.0, 31, -32)));
+            --    --gain := to_sfixed(2.0 * 10.0 ** ((real(to_integer(unsigned(param))) - 32.0) / 20.0), 31, -31);
+            --    --gain := lookup_gain(to_integer(unsigned(param)));
+            --    gain := to_sfixed(2.0, 31, -32);
 
-                --Compute new coefficients
-                coef_A := (resize(-twoPI*to_sfixed(freq_res, 31, -32), 31, -32), to_sfixed(0.0, 31, -32), resize(-gain*twoPI*to_sfixed(freq_res, 31, -32), 31, -32), resize(-twoPI*to_sfixed(freq_res, 31, -32), 31, -32));
-                coef_B := (resize(twoPI*to_sfixed(freq_res, 31, -32), 31, -32), resize(gain*twoPI*to_sfixed(freq_res, 31, -32), 31, -32));
+            --    --Compute new coefficients
+            --    coef_A := (resize(-twoPI*to_sfixed(freq_res, 31, -32), 31, -32), to_sfixed(0.0, 31, -32), resize(-gain*twoPI*to_sfixed(freq_res, 31, -32), 31, -32), resize(-twoPI*to_sfixed(freq_res, 31, -32), 31, -32));
+            --    coef_B := (resize(twoPI*to_sfixed(freq_res, 31, -32), 31, -32), resize(gain*twoPI*to_sfixed(freq_res, 31, -32), 31, -32));
 
-                --Initialize discrete coefficient matrices
-                coef_A_pow      := coef_A;
-                fl_coef_Ad      := identity_matrix;
-                fl_coef_Bd      := (resize(coef_B(0)*sample_time, 31, -32), resize(coef_B(1)*sample_time, 31, -32));
+            --    --Initialize discrete coefficient matrices
+            --    coef_A_pow      := coef_A;
+            --    fl_coef_Ad      := identity_matrix;
+            --    fl_coef_Bd      := (resize(coef_B(0)*sample_time, 31, -32), resize(coef_B(1)*sample_time, 31, -32));
 
-                factorial       := to_sfixed(1.0, 31, -32);
-                sample_time_pow := sample_time;
+            --    factorial       := to_sfixed(1.0, 31, -32);
+            --    sample_time_pow := sample_time;
 
-                --Compute AT + A^2*T^2/2 + ...
-                compute_Ad_and_Bd : for i in 0 to 10 loop
+            --    --reset state matrix
+            --    for i in 0 to 1 loop
+            --        state(i) := to_sfixed(0.0, 31, -32);
+            --    end loop;
 
-                    --Compute Resulting Ad and Bd
-                    for j in 0 to 1 loop
-                        --Compute Bd
-                        fl_coef_Bd(j) := resize(fl_coef_Bd(j) + (((coef_A_pow(j*2)*coef_B(0) + coef_A_pow(j*2+1)*coef_B(1))*sample_time_pow*sample_time)/(factorial * to_sfixed((i+2), 31, -32))), 31, -32);
+            --    --Compute AT + A^2*T^2/2 + ...
+            --    compute_Ad_and_Bd : for i in 0 to 10 loop
 
-                        for k in 0 to 1 loop
-                            --Compute Ad
-                            fl_coef_Ad(j*2+k) := resize(fl_coef_Ad(j*2+k) + ((coef_A_pow(j*2+k)*sample_time_pow)/factorial), 31, -32);
-                        end loop;
-                    end loop;
+            --        --Compute Resulting Ad and Bd
+            --        for j in 0 to 1 loop
+            --            --Compute Bd
+            --            fl_coef_Bd(j) := resize(fl_coef_Bd(j) + (((coef_A_pow(j*2)*coef_B(0) + coef_A_pow(j*2+1)*coef_B(1))*sample_time_pow*sample_time)/(factorial * to_sfixed((i+2), 31, -32))), 31, -32);
 
-                    --Compute A to the power of n in temporary matrix 
-                    for j in 0 to 1 loop
-                        for k in 0 to 1 loop
-                            coef_temp_A_pow(j*2+k) := resize(coef_A_pow(j*2)*coef_A(k) + coef_A_pow(j*2+1)*coef_A(2+k), 31, -32);
-                        end loop;
-                    end loop;
+            --            for k in 0 to 1 loop
+            --                --Compute Ad
+            --                fl_coef_Ad(j*2+k) := resize(fl_coef_Ad(j*2+k) + ((coef_A_pow(j*2+k)*sample_time_pow)/factorial), 31, -32);
+            --            end loop;
+            --        end loop;
 
-                    --Copy temp to power of A matrix
-                    coef_A_pow := coef_temp_A_pow;
+            --        --Compute A to the power of n in temporary matrix 
+            --        for j in 0 to 1 loop
+            --            for k in 0 to 1 loop
+            --                coef_temp_A_pow(j*2+k) := resize(coef_A_pow(j*2)*coef_A(k) + coef_A_pow(j*2+1)*coef_A(2+k), 31, -32);
+            --            end loop;
+            --        end loop;
 
-                    --Compute T^n and n!
-                    sample_time_pow := resize(sample_time_pow*sample_time, 31, -32);
-                    factorial       := resize(factorial * to_sfixed((i+2), 31, -32), 31, -32);
+            --        --Copy temp to power of A matrix
+            --        coef_A_pow := coef_temp_A_pow;
 
-                end loop compute_Ad_and_Bd;
+            --        --Compute T^n and n!
+            --        sample_time_pow := resize(sample_time_pow*sample_time, 31, -32);
+            --        factorial       := resize(factorial * to_sfixed((i+2), 31, -32), 31, -32);
+
+            --    end loop compute_Ad_and_Bd;
 
             --sample is available and process is not currently active
-            elsif (i_avail = '1') then
+            --elsif (i_avail = '1') then
+            if (i_avail = '1') then
                 for i in 0 to 1 loop
                     temp_state(i) := resize(resize(fl_coef_Ad(i*2)*state(0), 31, -32) + resize(fl_coef_Ad(i*2+1)*state(1), 31, -32) + resize(fl_coef_Bd(i)*to_sfixed(to_integer(signed(d_in)), 31, -32), 31, -32), 31, -32);
                 end loop;
@@ -240,6 +295,8 @@ begin
                     --d_out <= std_logic_vector(compress(to_signed(temp_state(1), 32), d_width));
                     d_out <= std_logic_vector(to_signed(temp_state(1), d_width));
                 end if;
+                
+                --d_out <= d_in;
 
                 --Computation is finished
                 finished := '1';

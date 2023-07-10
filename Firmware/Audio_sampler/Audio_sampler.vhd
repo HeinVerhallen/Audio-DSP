@@ -15,7 +15,7 @@
 
 -- PROGRAM		"Quartus Prime"
 -- VERSION		"Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition"
--- CREATED		"Fri Jul 07 13:41:20 2023"
+-- CREATED		"Mon Jul 10 11:04:22 2023"
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all; 
@@ -31,6 +31,7 @@ ENTITY Audio_sampler IS
 		BCLK :  IN  STD_LOGIC;
 		DAC_LRCK :  IN  STD_LOGIC;
 		ADC_LRCK :  IN  STD_LOGIC;
+		effect_nrst :  IN  STD_LOGIC;
 		SDA :  INOUT  STD_LOGIC;
 		SCL :  INOUT  STD_LOGIC;
 		parameter :  IN  STD_LOGIC_VECTOR(5 DOWNTO 0);
@@ -124,6 +125,7 @@ GENERIC (d_width : INTEGER;
 			freq_sample : INTEGER
 			);
 	PORT(mclk : IN STD_LOGIC;
+		 nrst : IN STD_LOGIC;
 		 i_avail : IN STD_LOGIC;
 		 d_in : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
 		 param : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
@@ -221,30 +223,32 @@ PORT MAP(mclk => clk_50,
 		 sd => DAC_DAT);
 
 
-b2v_inst5 : bpf_filter_v3
-GENERIC MAP(d_width => 24,
-			freq_res => 1000,
-			freq_sample => 192000
-			)
-PORT MAP(mclk => clk_50,
-		 i_avail => i_avail_l,
-		 d_in => d_in_l,
-		 param => SYNTHESIZED_WIRE_2,
-		 o_avail => o_avail_l,
-		 d_out => d_out_l);
-
-
 b2v_inst6 : bpf_filter_v3
 GENERIC MAP(d_width => 24,
 			freq_res => 1000,
-			freq_sample => 192000
+			freq_sample => 48000
 			)
 PORT MAP(mclk => clk_50,
+		 nrst => nrst,
 		 i_avail => i_avail_r,
 		 d_in => d_in_r,
 		 param => SYNTHESIZED_WIRE_2,
 		 o_avail => o_avail_r,
 		 d_out => d_out_r);
+
+
+b2v_inst7 : bpf_filter_v3
+GENERIC MAP(d_width => 24,
+			freq_res => 1000,
+			freq_sample => 48000
+			)
+PORT MAP(mclk => clk_50,
+		 nrst => nrst,
+		 i_avail => i_avail_l,
+		 d_in => d_in_l,
+		 param => SYNTHESIZED_WIRE_2,
+		 o_avail => o_avail_l,
+		 d_out => d_out_l);
 
 
 END bdf_type;

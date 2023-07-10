@@ -116,8 +116,6 @@ architecture Behavioral of BPF_filter_v2 is
     type matrix_A is array (0 to 2*order-1) of real;
     type matrix_B is array (0 to order-1) of real;
 
-    signal state : matrix_B := (0.0, 0.0);
-
 begin
     process(mclk)
         variable gain                   : real := 0.0;
@@ -140,6 +138,7 @@ begin
         variable fl_coef_Ad : matrix_A := identity_matrix;
         variable fl_coef_Bd : matrix_B := (coef_B(0)*sample_time, coef_B(1)*sample_time);
 
+        variable state : matrix_B := (0.0, 0.0);
         variable temp_state : matrix_B;
 
         variable finished : std_logic := '0';
@@ -202,7 +201,11 @@ begin
                 for i in 0 to 1 loop
                     temp_state(i) := fl_coef_Ad(i*2)*state(0) + fl_coef_Ad(i*2+1)*state(1) + fl_coef_Bd(i)*real(to_integer(signed(d_in)));
                     
-                    state(i) <= temp_state(i);
+                    --state(i) := temp_state(i);                    
+                end loop;
+                
+                for i in 0 to 1 loop
+                    state(i) := temp_state(i);
                 end loop;
 
                 --Output is larger then integer maximum

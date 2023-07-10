@@ -70,9 +70,9 @@ agreement for further details.
 )
 (pin
 	(output)
-	(rect 832 248 1008 264)
+	(rect 832 248 1009 264)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "d_out[23..0]" (rect 90 0 149 12)(font "Arial" ))
+	(text "d_out_bpf[23..0]" (rect 90 0 171 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 0 8)(pt 52 8))
@@ -88,7 +88,7 @@ agreement for further details.
 	(output)
 	(rect 832 264 1008 280)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "o_avail" (rect 90 0 125 12)(font "Arial" ))
+	(text "o_avail_bpf" (rect 90 0 147 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 0 8)(pt 52 8))
@@ -219,12 +219,6 @@ agreement for further details.
 	(annotation_block (parameter)(rect 568 128 761 204))
 )
 (connector
-	(text "sinewave[23..0]" (rect 468 256 542 273)(font "Intel Clear" ))
-	(pt 568 272)
-	(pt 424 272)
-	(bus)
-)
-(connector
 	(pt 832 256)
 	(pt 808 256)
 	(bus)
@@ -240,11 +234,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(pt 512 304)
-	(pt 512 336)
-	(bus)
-)
-(connector
 	(pt 512 336)
 	(pt 128 336)
 	(bus)
@@ -256,10 +245,6 @@ agreement for further details.
 (connector
 	(pt 144 272)
 	(pt 144 216)
-)
-(connector
-	(pt 552 216)
-	(pt 552 256)
 )
 (connector
 	(pt 128 216)
@@ -278,8 +263,23 @@ agreement for further details.
 	(pt 832 272)
 )
 (connector
+	(pt 552 216)
+	(pt 552 256)
+)
+(connector
+	(pt 512 304)
+	(pt 512 336)
+	(bus)
+)
+(connector
 	(text "avail" (rect 491 272 514 289)(font "Intel Clear" ))
-	(pt 568 288)
 	(pt 424 288)
+	(pt 568 288)
+)
+(connector
+	(text "sinewave[23..0]" (rect 468 256 542 273)(font "Intel Clear" ))
+	(pt 424 272)
+	(pt 568 272)
+	(bus)
 )
 (junction (pt 144 216))

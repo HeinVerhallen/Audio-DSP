@@ -34,15 +34,15 @@ agreement for further details.
 	(port
 		(pt 0 48)
 		(input)
-		(text "param_in[5..0]" (rect 0 0 57 12)(font "Arial" ))
-		(text "param_in[5..0]" (rect 21 43 78 55)(font "Arial" ))
+		(text "param_in[6..0]" (rect 0 0 57 12)(font "Arial" ))
+		(text "param_in[6..0]" (rect 21 43 78 55)(font "Arial" ))
 		(line (pt 0 48)(pt 16 48)(line_width 3))
 	)
 	(port
 		(pt 224 32)
 		(output)
-		(text "param_out[5..0]" (rect 0 0 63 12)(font "Arial" ))
-		(text "param_out[5..0]" (rect 140 27 203 39)(font "Arial" ))
+		(text "param_out[6..0]" (rect 0 0 63 12)(font "Arial" ))
+		(text "param_out[6..0]" (rect 140 27 203 39)(font "Arial" ))
 		(line (pt 224 32)(pt 208 32)(line_width 3))
 	)
 	(drawing

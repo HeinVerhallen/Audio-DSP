@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    int start_dB    = 0;
+    int end_dB      = 80;
+    
+    for (int i = 0; i <= (end_dB - start_dB); i++)
+    {
+        float gain = pow(10.0, (i / 20.0));
+        
+        printf("to_sfixed(%f, 31, -32), ", gain);
+    }
+}

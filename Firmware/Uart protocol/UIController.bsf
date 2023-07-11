@@ -97,23 +97,16 @@ https://fpgasoftware.intel.com/eula.
 	(port
 		(pt 208 64)
 		(output)
-		(text "page1[3..0]" (rect 0 0 42 12)(font "Arial" ))
-		(text "page1[3..0]" (rect 145 59 187 71)(font "Arial" ))
+		(text "param1[15..0]" (rect 0 0 53 12)(font "Arial" ))
+		(text "param1[15..0]" (rect 134 59 187 71)(font "Arial" ))
 		(line (pt 208 64)(pt 192 64)(line_width 3))
 	)
 	(port
 		(pt 208 80)
 		(output)
-		(text "page2[3..0]" (rect 0 0 43 12)(font "Arial" ))
-		(text "page2[3..0]" (rect 144 75 187 87)(font "Arial" ))
-		(line (pt 208 80)(pt 192 80)(line_width 3))
-	)
-	(port
-		(pt 208 96)
-		(output)
 		(text "button[3..0]" (rect 0 0 43 12)(font "Arial" ))
-		(text "button[3..0]" (rect 144 91 187 103)(font "Arial" ))
-		(line (pt 208 96)(pt 192 96)(line_width 3))
+		(text "button[3..0]" (rect 144 75 187 87)(font "Arial" ))
+		(line (pt 208 80)(pt 192 80)(line_width 3))
 	)
 	(drawing
 		(rectangle (rect 16 16 192 160)(line_width 1))

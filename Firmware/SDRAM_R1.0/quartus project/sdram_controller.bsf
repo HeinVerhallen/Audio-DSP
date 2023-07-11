@@ -4,38 +4,38 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 2017  Intel Corporation. All rights reserved.
+Copyright (C) 2023  Intel Corporation. All rights reserved.
 Your use of Intel Corporation's design tools, logic functions 
-and other software and tools, and its AMPP partner logic 
+and other software and tools, and any partner logic 
 functions, and any output files from any of the foregoing 
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
 to the terms and conditions of the Intel Program License 
 Subscription Agreement, the Intel Quartus Prime License Agreement,
-the Intel MegaCore Function License Agreement, or other 
-applicable license agreement, including, without limitation, 
-that your use is for the sole purpose of programming logic 
-devices manufactured by Intel and sold by Intel or its 
-authorized distributors.  Please refer to the applicable 
-agreement for further details.
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 296 160)
+	(rect 16 16 336 192)
 	(text "sdram_controller" (rect 5 0 72 12)(font "Arial" ))
-	(text "inst" (rect 8 128 20 140)(font "Arial" ))
+	(text "inst" (rect 8 160 20 172)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
-		(text "SW_read" (rect 0 0 40 12)(font "Arial" ))
-		(text "SW_read" (rect 21 27 61 39)(font "Arial" ))
+		(text "read_enable" (rect 0 0 48 12)(font "Arial" ))
+		(text "read_enable" (rect 21 27 69 39)(font "Arial" ))
 		(line (pt 0 32)(pt 16 32)(line_width 1))
 	)
 	(port
 		(pt 0 48)
 		(input)
-		(text "SW_write" (rect 0 0 40 12)(font "Arial" ))
-		(text "SW_write" (rect 21 43 61 55)(font "Arial" ))
+		(text "write_enable" (rect 0 0 48 12)(font "Arial" ))
+		(text "write_enable" (rect 21 43 69 55)(font "Arial" ))
 		(line (pt 0 48)(pt 16 48)(line_width 1))
 	)
 	(port
@@ -53,48 +53,69 @@ agreement for further details.
 		(line (pt 0 80)(pt 16 80)(line_width 1))
 	)
 	(port
-		(pt 280 32)
+		(pt 0 96)
+		(input)
+		(text "Data_write[23..0]" (rect 0 0 67 12)(font "Arial" ))
+		(text "Data_write[23..0]" (rect 21 91 88 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 3))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "Data_address[24..0]" (rect 0 0 82 12)(font "Arial" ))
+		(text "Data_address[24..0]" (rect 21 107 103 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 3))
+	)
+	(port
+		(pt 320 32)
+		(output)
+		(text "Data_read[23..0]" (rect 0 0 67 12)(font "Arial" ))
+		(text "Data_read[23..0]" (rect 232 27 299 39)(font "Arial" ))
+		(line (pt 320 32)(pt 304 32)(line_width 3))
+	)
+	(port
+		(pt 320 48)
 		(output)
 		(text "sdramcontroller_address[24..0]" (rect 0 0 125 12)(font "Arial" ))
-		(text "sdramcontroller_address[24..0]" (rect 134 27 259 39)(font "Arial" ))
-		(line (pt 280 32)(pt 264 32)(line_width 3))
+		(text "sdramcontroller_address[24..0]" (rect 174 43 299 55)(font "Arial" ))
+		(line (pt 320 48)(pt 304 48)(line_width 3))
 	)
 	(port
-		(pt 280 48)
+		(pt 320 64)
 		(output)
 		(text "sdramcontroller_byteenable_n[1..0]" (rect 0 0 139 12)(font "Arial" ))
-		(text "sdramcontroller_byteenable_n[1..0]" (rect 120 43 259 55)(font "Arial" ))
-		(line (pt 280 48)(pt 264 48)(line_width 3))
+		(text "sdramcontroller_byteenable_n[1..0]" (rect 160 59 299 71)(font "Arial" ))
+		(line (pt 320 64)(pt 304 64)(line_width 3))
 	)
 	(port
-		(pt 280 64)
+		(pt 320 80)
 		(output)
 		(text "sdramcontroller_chipselect" (rect 0 0 105 12)(font "Arial" ))
-		(text "sdramcontroller_chipselect" (rect 154 59 259 71)(font "Arial" ))
-		(line (pt 280 64)(pt 264 64)(line_width 1))
+		(text "sdramcontroller_chipselect" (rect 194 75 299 87)(font "Arial" ))
+		(line (pt 320 80)(pt 304 80)(line_width 1))
 	)
 	(port
-		(pt 280 80)
+		(pt 320 96)
 		(output)
 		(text "sdramcontroller_writedata[15..0]" (rect 0 0 125 12)(font "Arial" ))
-		(text "sdramcontroller_writedata[15..0]" (rect 134 75 259 87)(font "Arial" ))
-		(line (pt 280 80)(pt 264 80)(line_width 3))
+		(text "sdramcontroller_writedata[15..0]" (rect 174 91 299 103)(font "Arial" ))
+		(line (pt 320 96)(pt 304 96)(line_width 3))
 	)
 	(port
-		(pt 280 96)
+		(pt 320 112)
 		(output)
 		(text "sdramcontroller_read_n" (rect 0 0 95 12)(font "Arial" ))
-		(text "sdramcontroller_read_n" (rect 164 91 259 103)(font "Arial" ))
-		(line (pt 280 96)(pt 264 96)(line_width 1))
+		(text "sdramcontroller_read_n" (rect 204 107 299 119)(font "Arial" ))
+		(line (pt 320 112)(pt 304 112)(line_width 1))
 	)
 	(port
-		(pt 280 112)
+		(pt 320 128)
 		(output)
 		(text "sdramcontroller_write_n" (rect 0 0 95 12)(font "Arial" ))
-		(text "sdramcontroller_write_n" (rect 164 107 259 119)(font "Arial" ))
-		(line (pt 280 112)(pt 264 112)(line_width 1))
+		(text "sdramcontroller_write_n" (rect 204 123 299 135)(font "Arial" ))
+		(line (pt 320 128)(pt 304 128)(line_width 1))
 	)
 	(drawing
-		(rectangle (rect 16 16 264 128)(line_width 1))
+		(rectangle (rect 16 16 304 160)(line_width 1))
 	)
 )

@@ -61,11 +61,13 @@ set_location_assignment PIN_H8 -to DAC_LRCK
 set_location_assignment PIN_Y16 -to nrst
 set_location_assignment PIN_J12 -to SCL
 set_location_assignment PIN_K12 -to SDA
-set_location_assignment PIN_V16 -to ack_err
 set_location_assignment PIN_G7 -to MCLK
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name BDF_FILE Audio_sampler_with_BPF.bdf
+set_global_assignment -name VHDL_FILE volume_eff_v2.vhd
+set_global_assignment -name VHDL_FILE i2s_encoder_v2.vhd
+set_global_assignment -name VHDL_FILE i2s_decoder_v2.vhd
+set_global_assignment -name VHDL_FILE BPF_filter_v3.vhd
+set_global_assignment -name BDF_FILE BPF_filter_v3_sinewave_test.bdf
 set_global_assignment -name VHDL_FILE BPF_filter_v2.vhd
 set_global_assignment -name VHDL_FILE sinewave_generator.vhd
 set_global_assignment -name VHDL_FILE ../multiplier_rounder.vhd
@@ -87,4 +89,32 @@ set_global_assignment -name VHDL_FILE signal_processor.vhd
 set_global_assignment -name VHDL_FILE shift_register.vhd
 set_global_assignment -name VHDL_FILE BPF_filter.vhd
 set_global_assignment -name BDF_FILE BPF_filter_sinewave_test.bdf
+set_global_assignment -name VHDL_FILE volume_effect.vhd
+set_global_assignment -name VHDL_FILE controller_eff.vhd
+set_global_assignment -name BDF_FILE Audio_sampler_testbench.bdf
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_location_assignment PIN_AB12 -to sw0
+set_location_assignment PIN_AC12 -to sw1
+set_location_assignment PIN_AF9 -to sw2
+set_location_assignment PIN_AF10 -to sw3
+set_location_assignment PIN_AD11 -to sw4
+set_location_assignment PIN_AD12 -to sw5
+set_location_assignment PIN_AE11 -to sw6
+set_location_assignment PIN_AC9 -to sw7
+set_location_assignment PIN_AD10 -to sw8
+set_location_assignment PIN_AE12 -to sw9
+set_location_assignment PIN_V16 -to led0
+set_location_assignment PIN_W16 -to led1
+set_location_assignment PIN_V17 -to led2
+set_location_assignment PIN_V18 -to led3
+set_location_assignment PIN_W17 -to led4
+set_location_assignment PIN_W19 -to led5
+set_location_assignment PIN_Y19 -to led6
+set_location_assignment PIN_W20 -to led7
+set_location_assignment PIN_W21 -to led8
+set_location_assignment PIN_Y21 -to led9
+set_global_assignment -name QIP_FILE PLL_audio_codec.qip
+set_global_assignment -name SIP_FILE PLL_audio_codec.sip
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

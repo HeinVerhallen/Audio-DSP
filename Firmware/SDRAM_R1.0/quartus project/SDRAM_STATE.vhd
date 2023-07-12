@@ -8,18 +8,21 @@ entity SDRAM_STATE is
 
 port (
 -------------inputs---------------
-CLK										:in	  std_logic_vector;
-NRST									:in	  std_logic_vector;
---------------outputs-------------
-wire_addr                     : out   std_logic_vector(12 downto 0);                    --            wire.addr
-wire_ba                       : out   std_logic_vector(1 downto 0);                     --                .ba
+CLK										:in	  std_logic;
+NRST									:in	  std_logic;
+--------------output control-------------
+wire_addr                     : out   std_logic_vector(12 downto 0) := (others => '0');                   --            wire.addr
+wire_ba                       : out   std_logic_vector(1 downto 0) := (others => '0');                   --                .ba
 wire_cas_n                    : out   std_logic;                                        --                .cas_n
 wire_cke                      : out   std_logic;                                        --                .cke
 wire_cs_n                     : out   std_logic;                                        --                .cs_n
 wire_dq                       : inout std_logic_vector(15 downto 0) := (others => '0'); --                .dq
-wire_dqm                      : out   std_logic_vector(1 downto 0);                     --                .dqm
+wire_dqm                      : out   std_logic_vector(1 downto 0) := (others => '0');                     --                .dqm
 wire_ras_n                    : out   std_logic;                                        --                .ras_n
-wire_we_n                     : out   std_logic                                         --                .we_n
+wire_we_n                     : out   std_logic;                                         --                .we_n
+
+--------output-------------
+Read_data :out std_logic_vector (15 downto 0) := (others => '0')
 	);
 end entity SDRAM_STATE;
 
@@ -29,14 +32,21 @@ TYPE STATE IS (State_NOP , State_Precharge, State_Idle, State_AutoRefresh, State
 SIGNAl Current_state: STATE:= State_Idle;
 SIGNAL Next_state: STATE:= State_Idle;
 
-TYPE ORDER is (ST0, ST1, ST2, ST3, ST4, ST5, ST6, ST7, ST8, ST9 , ST10, ST11, ST12, ST13, ST14, ST15, ST16, ST17, ST18);
+TYPE ORDER is (ST0, ST1, ST2, ST3, ST4, ST5, ST6, ST7, ST8, ST9 , ST10, ST11, ST12, ST13, ST14, ST15, ST16, ST17, ST18, ST19);
 SIGNAL Current_Order: ORDER:= ST0;
 SIGNAL Next_Order: ORDER:= ST0;
 
+
+
+
+
 BEGIN
+
+wire_cke <= '1';
+
 PROCESS (CLK, NRST)
 BEGIN
-if (NRST = 0) then	
+if NRST = '0' then	
 	Current_state <= State_Idle;
 	Current_Order <= ST0;
 elsif rising_edge(CLK) then	
@@ -91,12 +101,16 @@ BEGIN
 			wire_ras_n <= 	'1';
 			wire_cas_n <= 	'0';
 			wire_we_n <= 	'1';
+			wire_dq <= (others => 'Z');
+			read_data <= wire_dq;
+			
 
 		when State_Write => -------------- write row state
 			wire_cs_n <= 	'0';
 			wire_ras_n <= 	'1';
 			wire_cas_n <= 	'0';
 			wire_we_n <= 	'0';
+			wire_dq <= "0000000000000011";
 
 	end case;
 
@@ -132,6 +146,7 @@ BEGIN
 		when ST8 => 
 			Next_state <= State_NOP;
 			Next_Order <= ST9; 
+			wire_dqm <= "11";
 		when ST9 => 
 			Next_state <= State_Active;
 			Next_Order <= ST10; 
@@ -140,19 +155,22 @@ BEGIN
 			Next_Order <= ST11; 
 		when ST11 => 
 			Next_state <= State_Write;
-			Next_Order <= ST12; 
+			Next_Order <= ST12;
+			wire_dqm <= "00";
 		when ST12 => 
 			Next_state <= State_NOP;
 			Next_Order <= ST13; 
+			wire_dqm <= "11";
 		when ST13 => 
-			Next_state <= State_Read;
+			Next_state <= State_NOP;
 			Next_Order <= ST14; 
 		when ST14 => 
 			Next_state <= State_NOP;
 			Next_Order <= ST15; 
 		when ST15 => 
-			Next_state <= State_NOP;
+			Next_state <= State_Read;
 			Next_Order <= ST16; 
+			wire_dqm <= "00";
 		when ST16 => 
 			Next_state <= State_NOP;
 			Next_Order <= ST17; 
@@ -160,6 +178,9 @@ BEGIN
 			Next_state <= State_NOP;
 			Next_Order <= ST18; 
 		when ST18 => 
+			Next_state <= State_NOP;
+			Next_Order <= ST19; 
+		when ST19 => 
 			Next_state <= State_Precharge;
 			Next_Order <= ST0; 
 	end case;

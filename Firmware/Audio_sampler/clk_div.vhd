@@ -21,13 +21,14 @@ begin
         if nrst = '0' then
             cnt := 0;
         elsif rising_edge(clk_in) then
-            cnt := cnt + 1;
 
             if cnt < (div / 2) then
                 clk_out <= '0';
             else 
                 clk_out <= '1';
             end if;
+            
+            cnt := cnt + 1;
 
             if cnt > div - 1 then
                 cnt := 0;

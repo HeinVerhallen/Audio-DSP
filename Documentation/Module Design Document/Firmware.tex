@@ -52,3 +52,39 @@ In order to test the band-pass filter effect and the other effects, a sinewave g
     \sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \dots
     \label{eq:taylor-series-sin}
 \end{equation}
+
+\subsection{Effects}
+In order to create the effects, they were first created in Matlab to test which parameters would be important and what method of making the effect would be effective. 
+\noindent
+A paper \cite{Guitar_Effects_Processor_Using_DSP} written by Alexander J. Czubek and Gorav Raheja mentioned Simulink models for certain digital effects which needed to be implemented in this project. The Simulink models have been rewritten into Matlab code and was tested with a simple clean guitar sample to hear if the effects would work. 
+\par
+\noindent
+The only downside is that the sample in Matlab is not processed real time. Matlab knows the samples and the order of them. So to test these effects a for-loop was written to resample the original sample so that the code could see it as a real time signal instead of a pre given file.
+
+\subsubsection{Flanger}
+For the flanger, a phaser was made that multiplied the samples of the audio file with a sinewave. This sinewave was then added up to the original audio and played back to hear the effect.
+\begin{figure}[ht]
+    \includegraphics[width=\linewidth]{flanger.png}
+    \caption{Simulink model of a flanger effect}
+    \label{fig:flangersimulink}
+\end{figure}
+
+\subsubsection{Chorus}
+The chorus effect was created with a simular phaser as the flanger. But instead of one phaser it uses four that are all one factor higher than the previous phaser. To a musician this sounds as a harmonic made of four flangers. 
+
+\begin{figure}[ht]
+    \includegraphics[width=\linewidth]{chorus.png}
+    \caption{Simulink model of a chorus effect}
+    \label{fig:chorussimulink}
+\end{figure}
+
+\subsubsection{Delay / echo}
+The delay was the easiest of these effects to make. The delay adds a previously played delay to the original sound. 
+
+\begin{figure}[ht]
+    \includegraphics[width=\linewidth]{delay.png}
+    \caption{Simulink model of a delay}
+    \label{fig:delaysimulink}
+\end{figure}
+
+\newpage

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file path="PLL_audio_codec_sim/PLL_audio_codec.vho" type="VHDL" />
+ <topLevel name="PLL_audio_codec" />
+ <deviceFamily name="cyclonev" />
+</simPackage>

@@ -14,10 +14,11 @@ The functionality of the main board should be verified in the following manner:
 -Perform a thorough visual inspection, with a focus on the soldering process. Check for short circuits, open connections, solder balls, and other defects.
 -Power the main board from a lab power supply with low current limit settings. This will limit the dissipated power in case of a short circuit or module defect, enabling identification and resolution of the issue. A thermal camera can be used to inspect the PCBA for hotspots.
 -Verify the presence and correctness of all power rails.
+-Verify that the output of the GPIO pins corresponds to the desired outcome.(e.g. check the SLCK).
 -Next, apply a known signal (e.g., a 1kHz sinusoidal waveform with an amplitude of 100mV) to the various inputs of the audio-DSP. If no filters are selected and the audio-DSP is essentially in a pass-through state, the same signal should appear on the selected outputs. The accuracy of this signal can be verified using an audio analyzer such as the AP SYS 2700.
 
 \subsection{Firmware}
-The firmware can be tested by simulating the VHDL code in Multisim. For this .do files are made to force input signals. Due to time constrains only the I2S decoder and encoder have been tested with real audio. 
+The firmware can be tested by simulating the VHDL code in Modelsim. For this .do files are made to force input signals. Due to time constrains only the I2S decoder and encoder have been tested with real audio. 
 
 \subsubsection{I2S decoder and encoder}
 For testing the I2S decoder and encoder, they are wired in series. So when a random data pattern is going in the decoder the encoder should output the same data pattern.
@@ -47,7 +48,11 @@ Since no other plausible causes emerged after further investigation, it was deci
 %https://nl.mouser.com/datasheet/2/678/AV02_0551EN_DS_HSMx_Cxxx_25Mar2022-1827675.pdf
 
 \subsubsection{Main board}
-Due to the limited time, this verification has not been done yet.
+\paragraph{inspection} Before connecting every module together and placing every component on the main board it is indeed ascertain that the board has flux and solder paste residue together with solder balls that can cause short circuits, therefore the PCBA will be cleaned in the ultrasonic bath, before doing this it is important to know which components are suitable for this. The relays and electrolytic capacitors are not suitable for this, therefore they are soldered after cleaning.  visual inspection has been done on the main board and the power delivery modules. In the second visual inspection there are no signs of shorts and the components are connected properly.\\
+
+\paragraph{Power inspection}
+
+The PCBA is inspected and no short circuit is detected. The next step is to check all the power modules within the PCBA with current limiting, so that the board will not be catch on fire if there is somehow still a short. This has been done with a power supply limited to 1A. All the power rails are tested and every power delivery module is working properly at the desired voltage. The 12V buck converter that is going to the FPGA is tested separately first with four 33 resistors connected in parallel which will give 1.5A of current at 12V. The buck was still below 50°C. 
 
 \subsection{Firmware}
 \subsubsection{I2S encoder and decoder}
@@ -69,7 +74,7 @@ The results can be seen in figure \ref{fig:i2c-master}. In this result it can be
 \end{figure}
 
 \subsubsection{State-space BPF}
-Due to time constrains the BPF has not yet been tested in Multisim. 
+Due to time constrains the BPF has not yet been tested in Modelsim. 
 
 \section{Conclusions}
 

@@ -1,21 +1,25 @@
 \section{Method}
-Time has not yet allowed for the creation of a neat and detailed test plan. However, before the voltage regulator boards are soldered onto the main board, they need to be thoroughly tested to verify their functionality. The plan is to create a test table for this purpose, similar to the specification of ICs in datasheets.
+Time has not yet allowed for the creation of a verry neat and detailed total test plan. As described in the paragraphs below, the individual vertical riser boards and voltage regulator were thoroughly tested to ensure proper functionality. Subsequently, the main board was tested. In parallel, the firmware was also tested.
 
 \subsection{Hardware}
 \subsubsection{Voltage regulators}
 For the voltage regulator modules, the following parameters need to be measured to demonstrate proper operation:
--Thorough visual inspection, especially focusing on the soldering process. This includes checking for short circuits, open connections, solder balls, and other defects.
--The converter should be powered from a lab power supply with low current limit settings. In case of a short circuit or other module defect, the dissipated power will be limited, allowing for the identification and resolution of the issue.
--The output voltage of the converter should be observed using an oscilloscope. Attention should be paid to the absolute accuracy and the amplitude of the ripple voltage.
--The temperature of the PCBA should be monitored to ensure that the module does not get too hot, which could potentially shorten its lifespan.
+\begin{itemize}
+\item Thorough visual inspection, especially focusing on the soldering process. This includes checking for short circuits, open connections, solder balls, and other defects.
+\item The converter should be powered from a lab power supply with low current limit settings. In case of a short circuit or other module defect, the dissipated power will be limited, allowing for the identification and resolution of the issue.
+\item The output voltage of the converter should be observed using an oscilloscope. Attention should be paid to the absolute accuracy and the amplitude of the ripple voltage.
+\item The temperature of the PCBA should be monitored to ensure that the module does not get too hot, which could potentially shorten its lifespan.
+\end{itemize}  
 
 \subsubsection{Main board}
 The functionality of the main board should be verified in the following manner:
--Perform a thorough visual inspection, with a focus on the soldering process. Check for short circuits, open connections, solder balls, and other defects.
--Power the main board from a lab power supply with low current limit settings. This will limit the dissipated power in case of a short circuit or module defect, enabling identification and resolution of the issue. A thermal camera can be used to inspect the PCBA for hotspots.
--Verify the presence and correctness of all power rails.
--Verify that the output of the GPIO pins corresponds to the desired outcome.(e.g. check the SLCK).
--Next, apply a known signal (e.g., a 1kHz sinusoidal waveform with an amplitude of 100mV) to the various inputs of the audio-DSP. If no filters are selected and the audio-DSP is essentially in a pass-through state, the same signal should appear on the selected outputs. The accuracy of this signal can be verified using an audio analyzer such as the AP SYS 2700.
+\begin{itemize}
+\item Perform a thorough visual inspection, with a focus on the soldering process. Check for short circuits, open connections, solder balls, and other defects.
+\item Power the main board from a lab power supply with low current limit settings. This will limit the dissipated power in case of a short circuit or module defect, enabling identification and resolution of the issue. A thermal camera can be used to inspect the PCBA for hotspots.
+\item Verify the presence and correctness of all power rails.
+\item Verify that the output of the GPIO pins corresponds to the desired outcome.(e.g. check the SLCK).
+\item Next, apply a known signal (e.g., a 1kHz sinusoidal waveform with an amplitude of 100mV) to the various inputs of the audio-DSP. If no filters are selected and the audio-DSP is essentially in a pass-through state, the same signal should appear on the selected outputs. The accuracy of this signal can be verified using an audio analyzer such as the AP SYS 2700.
+\end{itemize}  
 
 \subsection{Firmware}
 The firmware can be tested by simulating the VHDL code in Modelsim. For this .do files are made to force input signals. Due to time constrains only the I2S decoder and encoder have been tested with real audio. 
@@ -107,4 +111,4 @@ The board cannot be tested further than the power supplies, because the clock is
 \subsection{Firmware}
 The I2S decoder, I2S encoder and I2C master work as expected. Therefore it is possible to sample audio using the ADC and DAC of the FPGA board. This has been tested and verified that this works. 
 
-Due to time constrains further testing and implementation of the effects has not been conducted. 
+Due to time constrains further testing and implementation of the effects has not been conducted.

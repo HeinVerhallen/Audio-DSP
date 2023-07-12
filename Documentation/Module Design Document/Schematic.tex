@@ -1,7 +1,7 @@
 The electrical diagram of the audio DSP is divided into multiple separate diagrams to allow for the electronics to be divided into different modules. For this purpose, most voltage regulators have their own schematic, enabling them to be placed as vertical riser boards on the main board. This minimizes the risk and allows for separate testing of these voltage regulators. Custom symbols and footprints have been created in KiCAD for all these voltage regulators, so they can be used on the main board as if they were off-the-shelf components. Additionally, this saves space by better utilizing the vertical space of the product.
 
 \subsubsection{Buck converter}
-The following text relates to the schematic displayed in appendix \ref{Appendix_buck_schematic}.
+The following text relates to the schematic displayed in appendix \ref{Appendix_buck_schematic} in \nameref{chap:appendix-C-schematics}..
 
 The buck converters are based around the MAX17634C IC from Maxim Integrated. This IC was chosen due to its attractive price, excellent performance as indicated by the datasheet, availability, and small footprint.
 
@@ -17,9 +17,9 @@ A SEPIC (single-ended primary-inductor converter) is based on the LT3579 from An
 The calculations made for the SEPIC can be found in appendix \ref{Appendix_SEPIC_calculations}
 
 \subsubsection{Discrete low noise linear regulator}
-The following text relates to the schematic displayed in appendix \ref{Appendix_lin_schematic}.
+The following text relates to the schematic displayed in appendix \ref{Appendix_lin_schematic} in \nameref{chap:appendix-C-schematics}..
 
-The discrete low-noise linear regulator is symmetrically constructed, and thus only one half is described. Firstly, the regulator consists of a capacitance multiplier. Effectively, this circuit behaves like an RC low-pass filter, where the capacitance of the capacitor is determined by the capacitance at the base of the transistor multiplied by the hFE (current gain) of the transistor. This allows for achieving a very low corner frequency without using high resistance values or very large and expensive capacitors. Both options are undesirable due to either the maximum current or the price and size considerations.
+The discrete low-noise linear regulator is symmetrically constructed, and thus only the top half is described. Firstly, the regulator consists of a capacitance multiplier. Effectively, this circuit behaves like an RC low-pass filter, where the capacitance of the capacitor is determined by the capacitance at the base of the transistor multiplied by the hFE (current gain) of the transistor. This allows for achieving a very low corner frequency without using high resistance values or very large and expensive capacitors. Both options are undesirable due to either the maximum current or the price and size considerations.
 
 The cutoff frequency of a standard RC filter can be calculated as shown in \ref{eq:fc_RC}.
 \begin{equation}
@@ -33,13 +33,13 @@ The cutoff frequency of a capacitance multiplier can be calculated as shown in \
     \label{eq:fc_cap_mul}
 \end{equation}
 
-A second-order capacitance multiplier was utilized to further enhance the damping of the power ripple while avoiding excessive voltage drop across the capacitance multiplier or the need for unnecessarily large components.
+A second-order capacitance multiplier was utilized to further enhance the damping of the power ripple while avoiding excessive voltage drop across the capacitance multiplier or the need for unnecessarily large components. This block consists of R4, R5, R3, C5, C6 and Q1.
 
 Then the circuit has a buffer capacitor C9 which buffers the voltage.
 
 Q2 and Q3, together with R2 and R1, form a current source where the current can be set by means of R1. The current through D1 can be calculated as shown in \ref{eq:ILED}.
 \begin{equation}
-    ID1=\frac{VBEQ2}{R1}
+    ID1=\frac{V_{BE}Q2}{R1}
     \label{eq:ILED}
 \end{equation}
 
@@ -54,28 +54,28 @@ C2 limits the bandwidth of the power supply, preventing it from oscillating due 
 C10 is a buffer capacitor that further lowers the output noise of this circuit and ensures that the output of this power supply remains low impedance. It also serves as an energy reservoir for supplying additional current to the output when needed.
 
 \subsubsection{Main board}
-The following text relates to the schematic displayed in appendix \ref{Appendix_main_schematic}.
+The following text relates to the schematic displayed in figure \ref{Appendix_main_schematic} in \nameref{chap:appendix-C-schematics}.
 
-The main board is based on the block diagram shown in Figure \ref{fig:arch-front-end} and is subdivided into multiple pages to keep the schematic organized and readable. The ADCs have their own page for every two channels, the DACs have their own page for every two channels, there is a page dedicated to the power supplies, and last but not least, there is a page for the connections to the FPGA board.
+The main board is based on the block diagram shown in figure \ref{fig:arch-front-end} and is subdivided into multiple pages to keep the schematic organized and readable. The ADCs have their own page for every two channels, the DACs have their own page for every two channels, there is a page dedicated to the power supplies, and last but not least, there is a page for the connections to the FPGA board.
 
-The front-end of channels 1 and 2 consists of an input selection relay followed by a LPF (low-pass filter) to suppress RF (radio frequency) interference. The inputs are equipped with TVS diodes for ESD protection. Next in line is the PGA2311P volume controller, which independently adjusts the volume of both inputs based on volume settings obtained via I2C from the FPGA. Since the PGA2311P operates on 5V logic while the FPGA operates around 3.3V logic, a TXS0102 level translator is placed in between. This is a bidirectional level translator as the I2C protocol transmits data bidirectionally. Some additional logic is implemented around this chip to ensure proper startup.
+The front-end of channels 1 and 2 consists of an input selection relay followed by a LPF (low-pass filter) to suppress RF (radio frequency) interference. The inputs are equipped with TVS diodes for ESD protection. Next in line is the PGA2311P volume controller, which independently adjusts the volume of both inputs based on volume settings obtained via I2C from the FPGA. Since the PGA2311P operates on 5V logic while the FPGA operates around 3.3 V logic, a TXS0102 level translator is placed in between. This is a bidirectional level translator as the I2C protocol transmits data bidirectionally. Some additional logic is implemented around this chip to ensure proper startup.
 
 The outputs of the volume controller are fed into an LM4562 buffer OpAmp to ensure that the subsequent differential LPF is not affected by the undefined output impedance of the PGA2311P volume controller. This impedance can be approximated based on the maximum output current of the IC, but it does not guarantee that the signal still meets the low-noise specification of the IC.
 
-The balanced LPF is built around the OPA1632 FDA (fully differential amplifier). It is a second-order LPF that simultaneously provides an offset voltage to the output voltage, which is supplied by the PCM1804 ADC. The signal is then filtered by an RC filter and buffered by an LM4562 OpAmp.
+The balanced LPF is built around the OPA1632 FDA (fully differential amplifier). The OPA1632 is used because of its exelent performance and its reasonable price. It is a second-order LPF that simultaneously provides an offset voltage to the output voltage, which is supplied by the PCM1804 ADC. The signal is then filtered by an RC filter and buffered by an LM4562 OpAmp.
 
-The outputs of the PGA2311P are also simultaneously tapped for the VU metering, which each consist of a precision rectifier and four comparators.
+The outputs of the PGA2311P are also simultaneously tapped for the VU metering by some isolation resistors, which each consist of a precision rectifier and four comparators.
 
 The ADC is equipped with EMI reduction resistors to limit the noise caused by the relatively high dv/dt of the I2S bus.
 
-Furthermore, the entire analog section of the main board schematic is implemented differentially. This has been achieved, where necessary, by placing 0-ohm resistors to strategically connect the signals to ground, allowing the differential amplifiers to ensure that the voltages at desired locations are precisely as intended. 
-This reduces the sensitivity of the circuits to noise and ground loops significantly.
+Furthermore, the entire analog section of the main board schematic is implemented differentially. This has been achieved, where necessary, by placing 0-Ohm resistors to strategically connect the signals to ground, allowing the differential amplifiers to ensure that the voltages at desired locations are precisely as intended. 
+This reduces the sensitivity of the circuits to noise and ground loops significantly. Reference \cite{putzeys} gives more information about this design decision.
 
 The front-end of channels 3 and 4 resembles that of channels 1 and 2 but does not include the selection relay and volume controller. Additionally, this entire page is balanced, allowing these two inputs to achieve the best specifications.
 
 The back-end is divided into three pages, with output channels 1 and 2 being the most comprehensive. These channels include XLR, RCA, and jack connections. Output channels 3 to 6 are identical, except for the absence of RCA and jack outputs. All channels feature the PCM1789 DAC and external reconstruction filters (LPF). The voltage is slightly attenuated for the RCA and jack outputs, while it is slightly amplified to meet the standard amplitudes for XLR connections.
 
-The sensitive analog ICs are each equipped with standard 100nF decoupling capacitors, 22uF buffer capacitors, and low-ohm series resistors to suppress CLC oscillations in the PCB design.
+The sensitive analog ICs are each equipped with standard 100nF decoupling capacitors, 22 uF buffer capacitors, and low-ohm series resistors to suppress CLC oscillations in the PCB design. Reference \cite{Supply_decoupling} gives more information about this design decision.
 
 The FPGA page consists solely of the two GPIO connectors of the DE1-SOC board and all the connections to and from them. Since a 40-pin flat cable will be attached to each GPIO header, with the individual wires alternating columns and carrying various relatively high-frequency signals up to 24.576 MHz, it is important here as well to have a short return path for these signals. To ensure this, all pins of the right connector column of these GPIO connectors are connected to GND on both sides of these cables. This has been done hardware-wise on the side of the main board and firmware-wise on the side of the DE1-SOC.
 

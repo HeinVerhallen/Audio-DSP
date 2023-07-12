@@ -18,7 +18,6 @@ begin
         
     begin
         if rising_edge(mclk) then
---            param_out <= "100000";
             param_out <= param_in;
         end if;
     end process;

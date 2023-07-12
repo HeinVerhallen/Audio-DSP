@@ -77,6 +77,6 @@ The back-end is divided into three pages, with output channels 1 and 2 being the
 
 The sensitive analog ICs are each equipped with standard 100nF decoupling capacitors, 22uF buffer capacitors, and low-ohm series resistors to suppress CLC oscillations in the PCB design.
 
-The FPGA page consists solely of the two GPIO connectors of the DE1-SOC board and all the connections to and from them.
+The FPGA page consists solely of the two GPIO connectors of the DE1-SOC board and all the connections to and from them. Since a 40-pin flat cable will be attached to each GPIO header, with the individual wires alternating columns and carrying various relatively high-frequency signals up to 24.576 MHz, it is important here as well to have a short return path for these signals. To ensure this, all pins of the right connector column of these GPIO connectors are connected to GND on both sides of these cables. This has been done hardware-wise on the side of the main board and firmware-wise on the side of the DE1-SOC.
 
 The power supplies page consists of all the power supply modules previously described in this section. The supply rails are equipped with test points to facilitate the qualification of the board.

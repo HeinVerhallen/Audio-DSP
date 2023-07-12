@@ -1,12 +1,12 @@
-Due to time constraints the project has not yet been finished. Most parts have been tested and work as expected, but some parts still have to be implemented and tested according to the planning. Some more time is needed to finish the Project.
-\par
-\noindent The following recommendations have been made to help the project work/ work better:
+Due to time constraints and unexpected and unknown bugs in the FPGA board the project could not be finished within time. Most parts have been tested and work as expected, but some parts still have to be implemented and tested. More time is needed to finish the project.
+
+The following recommendations are made for continuation of the project:
 
 \begin{itemize}
     \setlength\itemsep{-0.3em} %MAKES THE GAP SMALLER BETWEEN 2 ITEMS
-    \item Do not use FFT for the processing, use a direct approach instead or use a way more powerful processor
+    \item It is only possible to implement FFT when choosing an FPGA with a sufficient amount of local memory to store all the samples necessary for the FFT. 
+    \item Implement fixed point notation and computation from scratch.
     \item Look into the clock signals from the FPGA board to the main PCB
-    \item Investigate if there are other FPGA boards available which do support the needed 24.576 MHz output frequency on their GPIO pins
+    \item Investigate if there are other FPGA boards available which do support the needed 24.576 MHz output frequency on their GPIO pins and have overall better specifications that suite this project. 
     \item Indicate on the UI screen which option is selected
-    \item Make a less enthusiastic project planning
 \end{itemize}

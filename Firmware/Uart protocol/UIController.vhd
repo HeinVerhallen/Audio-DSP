@@ -1,271 +1,342 @@
-LIBRARY IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.ALL;
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.NUMERIC_STD.all;
 
-ENTITY UIController IS
-PORT(
-	Nrst			: IN STD_LOGIC;
-	Clk			: IN STD_LOGIC;
-	Dataready	: IN STD_LOGIC;
-	RXData		: IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-	TXDone		: IN STD_LOGIC;
-	leftInput	: IN STD_LOGIC;
-	rightInput	: IN STD_LOGIC;
-	pressInput	: IN STD_LOGIC;
-	loadbyte		: OUT STD_LOGIC;
-	TXData		: OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-	page1			: OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
-	page2			: OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
-	button		: OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
+entity UIController is
+generic(
+	bufferSize 			: integer := 64;
+	numberOfPages 		: integer := 28;
+	numberOfChannels	: integer := 6;
+	maxElements			: integer := 7;
+	settingsData		: integer := 143;
+	numberOfEffects		: integer := 5;
+	effectRegisterSize	: integer := 32;
 );
 
-END ENTITY UIController;
+port(
+	Nrst		: in std_logic;
+	Clk			: in std_logic;
+	Dataready	: in std_logic;
+	RXData		: in std_logic_vector(7 downto 0);
+	TXDone		: in std_logic;
+	leftInput	: in std_logic;
+	rightInput	: in std_logic;
+	pressInput	: in std_logic;
+	loadbyte	: out std_logic;
+	TXData		: out std_logic_vector(7 downto 0);
+	param1		: out std_logic_vector(15 downto 0);
+	button		: out std_logic_vector(3 downto 0)
+	parameters	: OUT std_logic_vector(numberOfEffects*effectRegisterSize*numberOfChannels-1 downto 0); 	--ch1(159 downto 0). CH2(319 downto 160), CH3(479 downto 320), CH4(639 downto 480), CH5(799 downto 640), CH6(959 downto 800),
+	--inputselect	: OUT std_logic_vector(17 downto 0)		--CH1(2 downto 0), CH2(5 downto 3), CH3(8 downto 6), CH4(11 downto 9), CH5(14 downto 12), CH16(17 downto 15), 
+);
 
-ARCHITECTURE RTL OF UIcontroller IS
+end entity UIController;
 
---FUNCTION convertToPercentage (maxValue		: INTEGER;
---										minValue 	: INTEGER;
---										currentVal	: INTEGER) RETURN INTEGER IS
---BEGIN
---	
---
---END FUNCTION;
---
---FUNCTION convertFromPercentage (	maxValue		: INTEGER;
---											minValue 	: INTEGER;
---											percentage	: INTEGER) RETURN INTEGER IS
---BEGIN
---	
---
---END FUNCTION;
+architecture RTL OF UIcontroller is
 
-TYPE t_SM_TX IS (IDLE, LOAD, BUSY);
-TYPE t_SM_RX IS (RECEIVING, STOP1, STOP2, STOP3, FULL);
+type t_SM_TX is (IDLE, LOAD, BUSY);
+type t_SM_RX is (RECEIVING, StoP1, StoP2, StoP3, FULL);
+type FifoBuffer 	is ARRAY(bufferSize-1 downto 0) 					OF std_logic_vector(7 downto 0);
+type pageArray 		is ARRAY(0 to numberOfPages-1, 0 to maxElements-1)	OF integer RANGE 0 to 256;
+type effectArray 	is ARRAY(0 to numberofChannels-1)					OF unsigned(31 downto 0);
+type routingArray	is ARRAY (0 to numberOfChannels-1)					OF unsigned(15 downto 0);
+type stepArray		is ARRAY (0 to 11)									OF unsigned(31 downto 0);
 
-CONSTANT bufferSize 			: INTEGER := 64;
-CONSTANT numberOfPages 		: INTEGER := 28;
-CONSTANT numberOfChannels	: INTEGER := 6;
-CONSTANT maxElements			: INTEGER := 7;
-CONSTANT settingsData		: INTEGER := 143;
+constant volumepos 	: integer := 0;
+constant eqpos		: integer := 1;
+constant gainpos	: integer := 2;
+constant delaypos	: integer := 3;
+constant reverbpos	: integer := 4;
 
-TYPE FIFOBuffer IS ARRAY(bufferSize-1 DOWNTO 0) OF STD_LOGIC_VECTOR(7 downto 0);
+constant homeScreen		: integer := 000;
+constant signalRouting	: integer := 001;
+constant inputSelect1	: integer := 002;
+constant inputSelect2	: integer := 003;
+constant outputrouting1	: integer := 004;
+constant outputrouting2	: integer := 005;
+constant outputrouting3	: integer := 006;
+constant firstchannel1	: integer := 007;
+constant firstchannel2	: integer := 008;
+constant secondchannel1	: integer := 009;
+constant secondchannel2 : integer := 010;
+constant effects1		: integer := 011;
+constant effects2		: integer := 012;
+constant effectselect1	: integer := 013;
+constant effectselect2	: integer := 014;
+constant gain			: integer := 015;
+constant jackgain		: integer := 016;
+constant equalizer		: integer := 017;
+constant delay			: integer := 018;
+constant reverb			: integer := 019;
+constant channelvolume	: integer := 20;
 
-SIGNAL SM_TX 			: t_SM_TX := IDLE;
-SIGNAL SM_RX 			: t_SM_RX := RECEIVING;
-SIGNAL inputBuffer 	: FIFOBuffer;
-SIGNAL outputBuffer	: FIFOBuffer;
-SIGNAL emptyBuffer	: FIFOBuffer := (OTHERS => "XXXXXXXX");
-SIGNAL updatepage		: INTEGER	:= 0;
+constant presets		: integer := 021;
+constant loadpreset1	: integer := 022;
+constant loadpreset2	: integer := 023;
+constant loadconfirm	: integer := 024;
+constant adjustpreset1	: integer := 025;
+constant adjustpreset2	: integer := 026;
+constant adjustconfirm	: integer := 027;
 
-BEGIN
-	PROCESS( Clk, Nrst )
-	CONSTANT homeScreen			: INTEGER := 000;
-	CONSTANT signalRouting		: INTEGER := 001;
-	CONSTANT inputSelect1		: INTEGER := 002;
-	CONSTANT inputSelect2		: INTEGER := 003;
-	CONSTANT channel121			: INTEGER := 004;
-	CONSTANT channel122			: INTEGER := 005;
-	CONSTANT channel34			: INTEGER := 006;
-	CONSTANT channel5				: INTEGER := 007;
-	CONSTANT firstchannel1		: INTEGER := 008;
-	CONSTANT firstchannel2		: INTEGER := 009;
-	CONSTANT secondchannel1		: INTEGER := 010;
-	CONSTANT secondchannel2 	: INTEGER := 011;
-	CONSTANT effects1				: INTEGER := 012;
-	CONSTANT effects2				: INTEGER := 013;
-	CONSTANT effectselect1		: INTEGER := 014;
-	CONSTANT effectselect2		: INTEGER := 015;
-	CONSTANT gain					: INTEGER := 016;
-	CONSTANT jackgain				: INTEGER := 017;
-	CONSTANT equalizer			: INTEGER := 018;
-	CONSTANT delay					: INTEGER := 019;
-	CONSTANT reverb				: INTEGER := 020;
-	CONSTANT presets				: INTEGER := 021;
-	CONSTANT loadpreset1			: INTEGER := 022;
-	CONSTANT loadpreset2			: INTEGER := 023;
-	CONSTANT loadconfirm			: INTEGER := 024;
-	CONSTANT adjustpreset1		: INTEGER := 025;
-	CONSTANT adjustpreset2		: INTEGER := 026;
-	CONSTANT adjustconfirm		: INTEGER := 027;
+
+constant channel1		: integer := 94; 
+constant channel2		: integer := 95; 
+constant channel3		: integer := 96; 
+constant channel4		: integer := 97; 
+constant channel5		: integer := 98; 
+constant channel6		: integer := 99;
+
+constant RCA1			: integer := 100;
+constant RCA2			: integer := 101;
+constant TRS1			: integer := 102;
+constant TRS2			: integer := 103;
+constant XLR1			: integer := 104;
+constant XLR2			: integer := 105;
+constant USB			: integer := 106;
 	
-	CONSTANT RCA1					: INTEGER := 100;
-	CONSTANT RCA2					: INTEGER := 101;
-	CONSTANT TRS1					: INTEGER := 102;
-	CONSTANT TRS2					: INTEGER := 103;
-	CONSTANT XLR1					: INTEGER := 104;
-	CONSTANT XLR2					: INTEGER := 105;
-	CONSTANT USB					: INTEGER := 106;
+constant firstCH1		: integer := 107;
+constant firstCH2		: integer := 108;
+constant firstCH3		: integer := 109;
+constant firstCH4		: integer := 110;
+constant firstCH5		: integer := 111;
+constant firstCH6		: integer := 112;
+constant secondCH1		: integer := 113;
+constant secondCH2		: integer := 114;
+constant secondCH3		: integer := 115;
+constant secondCH4		: integer := 116;
+constant secondCH5		: integer := 117;
 	
-	CONSTANT firstCH1				: INTEGER := 107;
-	CONSTANT firstCH2				: INTEGER := 108;
-	CONSTANT firstCH3				: INTEGER := 109;
-	CONSTANT firstCH4				: INTEGER := 110;
-	CONSTANT firstCH5				: INTEGER := 111;
-	CONSTANT firstCH6				: INTEGER := 112;
-	CONSTANT secondCH1			: INTEGER := 113;
-	CONSTANT secondCH2			: INTEGER := 114;
-	CONSTANT secondCH3			: INTEGER := 115;
-	CONSTANT secondCH4			: INTEGER := 116;
-	CONSTANT secondCH5			: INTEGER := 117;
+constant CH1			: integer := 118;
+constant CH2			: integer := 119;
+constant CH3			: integer := 120;
+constant CH4			: integer := 121;
+constant CH5			: integer := 122;
+constant CH6			: integer := 123;
+constant gainselect		: integer := 124;
+constant channelgain	: integer := 125;
+constant inputgain		: integer := 126;
+constant f0				: integer := 127;
+constant f1				: integer := 128;
+constant f2				: integer := 129;
+constant f3				: integer := 130;
+constant f4				: integer := 131;
+constant dtime			: integer := 132;
+constant feedback		: integer := 133;
+constant mix			: integer := 134;
+constant chvolume		: integer := 135;
+constant rlength		: integer := 136;
+constant rsize			: integer := 137;
 	
-	CONSTANT CH1					: INTEGER := 118;
-	CONSTANT CH2					: INTEGER := 119;
-	CONSTANT CH3					: INTEGER := 120;
-	CONSTANT CH4					: INTEGER := 121;
-	CONSTANT CH5					: INTEGER := 122;
-	CONSTANT CH6					: INTEGER := 123;
-	CONSTANT volume				: INTEGER := 124;
-	CONSTANT channelgain			: INTEGER := 125;
-	CONSTANT inputgain			: INTEGER := 126;
-	CONSTANT f0						: INTEGER := 127;
-	CONSTANT f1						: INTEGER := 128;
-	CONSTANT f2						: INTEGER := 129;
-	CONSTANT f3						: INTEGER := 130;
-	CONSTANT f4						: INTEGER := 131;
-	CONSTANT dtime					: INTEGER := 132;
-	CONSTANT feedback				: INTEGER := 133;
-	CONSTANT mix					: INTEGER := 134;
-	CONSTANT rlength				: INTEGER := 135;
-	CONSTANT rsize					: INTEGER := 136;
-	
-	CONSTANT preset1				: INTEGER := 137;
-	CONSTANT preset2				: INTEGER := 138;
-	CONSTANT preset3				: INTEGER := 139;
-	CONSTANT preset4				: INTEGER := 140;
-	CONSTANT preset5				: INTEGER := 141;
-	CONSTANT preset6				: INTEGER := 142;
-	CONSTANT changepreset1		: INTEGER := 143;
-	CONSTANT changepreset2		: INTEGER := 144;
-	CONSTANT changepreset3		: INTEGER := 145;
-	CONSTANT changepreset4		: INTEGER := 146;
-	CONSTANT changepreset5		: INTEGER := 147;
-	CONSTANT changepreset6		: INTEGER := 148;
-	CONSTANT confirmload			: INTEGER := 149;
-	CONSTANT confirmadjust		: INTEGER := 150;
-	
-	VARIABLE pressedFunction 	: INTEGER := 0;
-	VARIABLE highlighted 		: INTEGER := 0;
-	VARIABLE currentPage 		: INTEGER := 0;
-	VARIABLE activeChannel		: INTEGER := 0;
-	
-	VARIABLE outputhead			: INTEGER RANGE 0 TO bufferSize 	:= 0;
-	VARIABLE outputtail			: INTEGER RANGE 0 TO bufferSize 	:= 0;
-	VARIABLE inputhead			: INTEGER RANGE 0 TO bufferSize 	:= 0;
-	VARIABLE inputBufferLevel 	: INTEGER RANGE 0 TO bufferSize 	:= 0;
-	VARIABLE outputBufferLevel	: INTEGER RANGE 0 TO bufferSize 	:= 0;
-	
-	
-	TYPE pageArray 	IS ARRAY	(0 TO numberOfPages-1, 0 TO maxElements-1)	OF INTEGER RANGE 0 TO 256;
-	TYPE effectArray 	IS ARRAY	(0 TO numberofChannels-1)							OF UNSIGNED(31 DOWNTO 0);
-	TYPE routingArray	IS ARRAY (0 TO numberOfChannels-1)							OF UNSIGNED(15 DOWNTO 0);
-	
-	CONSTANT functions : pageArray := (
-	(signalRouting	,effects1		,presets			,0					,0					,0					,3),--0  homeScreen
-	(inputSelect1	,firstChannel1	,homeScreen		,0					,0					,0					,3),--1  signalRouting
-	(channel121		,channel121		,channel34		,inputSelect2	,0					,0					,4),--2  inputSelect1
-	(channel34		,channel5		,inputSelect1	,signalRouting	,0					,0					,4),--3  inputSelect2
-	(RCA1				,RCA2				,TRS1				,channel122		,0					,0					,4),--4  channel121
-	(TRS2				,channel121		,inputSelect1	,0					,0					,0					,3),--5  channel122
-	(XLR1				,XLR2				,inputSelect1	,0					,0					,0					,3),--6  channel34
-	(USB				,inputSelect1	,0					,0					,0					,0					,2),--7  channel5
-	(firstCH1		,firstCH2		,firstCH3		,firstchannel2	,0					,0					,4),--8  firstchannel1
-	(firstCH4		,firstCH5		,firstCH6		,firstchannel1	,signalRouting	,0					,5),--9  firstchannel2
-	(secondCH1		,secondCH2		,secondCH3		,secondchannel2,0					,0					,4),--10 secondchannel1 A
-	(secondCH4		,secondCH5		,secondchannel1,firstchannel1	,0					,0					,4),--11 secondchannel2 B
-	(CH1				,CH2				,CH3				,effects2		,0					,0					,4),--12 effects1			C
-	(CH4				,CH5				,CH6				,effects1		,homescreen		,0					,5),--13 effects2			D
-	(equalizer		,volume			,delay			,effectselect2	,0					,0					,4),--14 effectselect1	E
-	(reverb			,effectselect1	,effects1		,0					,0					,0					,3),--15 effectselect2	F
-	(channelgain	,effectselect1	,0					,0					,0					,0					,2),--16 gain
-	(inputgain		,channelgain	,effectselect1	,0					,0					,0					,3),--17 jackgain
-	(f0				,f1				,f2				,f3				,f4				,effectselect1	,6),--18 equalizer
-	(dtime			,feedback		,mix				,effectselect1	,0					,0					,4),--19 Delay
-	(rLength			,rSize			,effectselect1	,0					,0					,0					,3),--20 Reverb
-	(loadpreset1	,adjustpreset1	,homescreen		,0					,0					,0					,3),--21 presets
-	(preset1			,preset2			,preset3			,loadpreset2	,0					,0					,4),--22 loadpreset1
-	(preset4			,preset5			,preset6			,loadpreset1	,presets			,0					,5),--23 loadpreset2
-	(confirmLoad	,loadpreset1	,0					,0					,0					,0					,2),--24 loadconfirm
-	(changepreset1	,changepreset2	,changepreset3	,adjustpreset2	,0					,0					,4),--25 adjustpreset1
-	(changepreset4	,changepreset5	,changepreset6	,adjustpreset1	,presets			,0					,5),--26 adjustpreset2
-	(confirmAdjust	,adjustpreset1	,0					,0					,0					,0					,2) --27 adjustconfirm
+constant preset1		: integer := 138;
+constant preset2		: integer := 139;
+constant preset3		: integer := 140;
+constant preset4		: integer := 141;
+constant preset5		: integer := 142;
+constant preset6		: integer := 143;
+constant changepreset1	: integer := 144;
+constant changepreset2	: integer := 145;
+constant changepreset3	: integer := 146;
+constant changepreset4	: integer := 147;
+constant changepreset5	: integer := 148;
+constant changepreset6	: integer := 149;
+constant confirmload	: integer := 150;
+constant confirmadjust	: integer := 151;
+constant functions : pageArray := (
+	(signalRouting	,effects1		,presets		,0				,0				,0				,3),--0  homeScreen
+	(inputSelect1	,firstChannel1	,homeScreen		,0				,0				,0				,3),--1  signalRouting
+	(channel1		,channel2		,channel3		,inputSelect2	,signalRouting	,0				,5),--2  inputSelect1
+	(channel4		,channel5		,channel6		,inputSelect1	,signalRouting	,0				,4),--3  inputSelect2
+	(RCA1			,RCA2			,TRS1			,outputrouting2	,inputSelect1	,0				,5),--4  outputrouting1
+	(TRS2			,XLR1			,XLR2			,outputrouting3	,inputSelect1	,0				,5),--5  outputrouting2
+	(USB			,outputrouting3	,inputSelect1	,0				,0				,0				,3),--6  outputrouting3
+	(firstCH1		,firstCH2		,firstCH3		,firstchannel2	,signalRouting	,0				,5),--7  firstchannel1
+	(firstCH4		,firstCH5		,firstCH6		,firstchannel1	,signalRouting	,0				,5),--8  firstchannel2
+	(secondCH1		,secondCH2		,secondCH3		,secondchannel2	,firstchannel1	,0				,5),--9  secondchannel1
+	(secondCH4		,secondCH5		,secondchannel1	,firstchannel1	,0				,0				,4),--10 secondchannel2
+	(CH1			,CH2			,CH3			,effects2		,homescreen		,0				,5),--11 effects1
+	(CH4			,CH5			,CH6			,effects1		,homescreen		,0				,5),--12 effects2
+	(equalizer		,gainselect		,delay			,effectselect2	,effects1		,0				,5),--13 effectselect1
+	(reverb			,channelvolume	,effectselect1	,effects1		,0				,0				,3),--14 effectselect2
+	(channelgain	,effectselect1	,0				,0				,0				,0				,2),--15 gain
+	(inputgain		,channelgain	,effectselect1	,0				,0				,0				,3),--16 jackgain
+	(f0				,f1				,f2				,f3				,f4				,effectselect1	,6),--17 equalizer
+	(dtime			,feedback		,mix			,effectselect1	,0				,0				,4),--18 Delay
+	(rLength		,rSize			,effectselect1	,0				,0				,0				,3),--19 Reverb
+	(channelvolume	,effectselect1	,0				,0				,0				,0				,2),--20 channelvolume
+	(loadpreset1	,adjustpreset1	,homescreen		,0				,0				,0				,3),--21 presets
+	(preset1		,preset2		,preset3		,loadpreset2	,presets		,0				,4),--22 loadpreset1
+	(preset4		,preset5		,preset6		,loadpreset1	,presets		,0				,5),--23 loadpreset2
+	(confirmLoad	,loadpreset1	,0				,0				,0				,0				,2),--24 loadconfirm
+	(changepreset1	,changepreset2	,changepreset3	,adjustpreset2	,presets		,0				,4),--25 adjustpreset1
+	(changepreset4	,changepreset5	,changepreset6	,adjustpreset1	,presets		,0				,5),--26 adjustpreset2
+	(confirmAdjust	,adjustpreset1	,0				,0				,0				,0				,2) --27 adjustconfirm
 	);
+
+constant stepsize : stepArray := ("00000000000000000000000011111111", "00000000000000000000000000111111", "00000000000000000000000000111111", "00000000000000000000000000111111", "00000000000000000000000000111111", "00000000000000000000000000111111", "00000000000000000000111111111111", "00000000000000000000001111111111", "00000000000000000000001111111111", "00000000000000001111111111111111", "00000000000000001111111111111111", "11111111111111111111111111111111");
+
+SIGNAL SM_TX 		: t_SM_TX := IDLE;
+SIGNAL SM_RX 		: t_SM_RX := RECEIVING;
+
+procedure updateregister(
+	effect 											: inout effectArray;
+	size, offset, pressedfunction, activechannel	: in 	integer;
+	parameters 										: out 	std_logic_vector(numberOfEffects*effectRegisterSize*numberOfChannels-1 downto 0); 
+) is
+
+	--give x a good descriptive name
+	constant x : integer := 126;
+	variable maxcount : unsigned(31 downto 0);
+	variable currenteffect : unsigned(31 downto 0);
+
+begin
+	maxcount := stepsize(pressedfunction-126);
+	currenteffect := effect(activechannel)(offset+size downto offset);
+ 	if currenteffect > maxcount  then
+		effect(activechannel)(offset+size downto offset) := maxcount(size downto 0);
+	elsif currenteffect = maxcount and to_integer(count) = 1 then
+		effect(activechannel)(offset+size downto offset) := maxcount(size downto 0);
+	elsif currenteffect < "0" then
+		effect(activechannel)(offset+size downto offset) := (OTHERS => '0');
+	elsif currenteffect = "0" and to_integer(count) = 65535  then
+		effect(activechannel)(offset+size downto offset) := (OTHERS => '0');
+	else
+		effect(activechannel)(offset+size downto offset) = currenteffect + count(size downto 0);
+ 	end if;
+end procedure updateregister;
+
+PROCEDURE gotopage (
+	page : IN integer RANGE 0 to numberOfPages;
+	outputhead, outputBufferLevel : INOUT integer;
+	outputBuffer : INOUT FifOBuffer) is
+begin
+	REPORT "Page: " & integer'image(page);
+	outputBuffer(outputhead) := "01110000"; --p
+	outputhead := (outputhead + 1) mod bufferSize;
+	outputBufferLevel := (outputBufferLevel + 1);
+	outputBuffer(outputhead) := "01100001"; --a
+	outputhead := (outputhead + 1) mod bufferSize;
+	outputBufferLevel := (outputBufferLevel + 1);
+	outputBuffer(outputhead) := "01100111"; --g
+	outputhead := (outputhead + 1) mod bufferSize;
+	outputBufferLevel := (outputBufferLevel + 1);
+	outputBuffer(outputhead) := "01100101"; --e
+	outputhead := (outputhead + 1) mod bufferSize;
+	outputBufferLevel := (outputBufferLevel + 1);
+	outputBuffer(outputhead) := "00100000"; --SPACE
+	outputhead := (outputhead + 1) mod bufferSize;
+	outputBufferLevel := (outputBufferLevel + 1);
+	if page >= 10 then
+		--ecode page number(tens)
+		outputBuffer(outputhead) := "0011" & std_logic_vector(to_unsigned(page / 10, 4)) ; --0
+		outputhead := (outputhead + 1) mod bufferSize;
+		outputBufferLevel := (outputBufferLevel + 1);
+	end if;
+
+	--decode page number (ones)
+	outputBuffer(outputhead) := "0011" & std_logic_vector(to_unsigned(page mod 10, 4)); --0
+	outputhead := (outputhead + 1) mod bufferSize;
+	outputBufferLevel := (outputBufferLevel + 1);
+
+	outputBuffer(outputhead) := "11111111"; --0xFF
+	outputhead := (outputhead + 1) mod bufferSize;
+	outputBufferLevel := (outputBufferLevel + 1);
+	outputBuffer(outputhead) := "11111111"; --0xFF
+	outputhead := (outputhead + 1) mod bufferSize;
+	outputBufferLevel := (outputBufferLevel + 1);
+	outputBuffer(outputhead) := "11111111"; --0xFF
+	outputhead := (outputhead + 1) mod bufferSize;
+	outputBufferLevel := (outputBufferLevel + 1);
+end PROCEDURE gotopage;
+
+begin
+process( Clk, Nrst )
+	VARIABLE EqualizerA : effectArray := (
+		"00100000100000100000100000100000", --channel 1(0dB, 0dB, 0dB, 0dB, 0dB)
+		"00100000100000100000100000100000", --channel 2(0dB, 0dB, 0dB, 0dB, 0dB) 
+		"00100000100000100000100000100000", --channel 3(0dB, 0dB, 0dB, 0dB, 0dB)
+		"00100000100000100000100000100000", --channel 4(0dB, 0dB, 0dB, 0dB, 0dB)
+		"00100000100000100000100000100000", --channel 5(0dB, 0dB, 0dB, 0dB, 0dB)
+		"00100000100000100000100000100000"  --channel 6(0dB, 0dB, 0dB, 0dB, 0dB)
+	);
+
+	VARIABLE GainA : effectArray := (
+		"00000000000000000000000000000000", -- channel 1 (gain, level)
+		"00000000000000000000000000000000", -- channel 2 (gain, level)
+		"00000000000000000000000000000000", -- channel 3 (gain, level)
+		"00000000000000000000000000000000", -- channel 4 (gain, level)
+		"00000000000000000000000000000000", -- channel 5 (gain, level)
+		"00000000000000000000000000000000"  -- channel 6 (gain, level)
+	);
+
+	VARIABLE DelayA	: effectArray := (
+		"00000000000000000000000000000000", -- channel 1 (0,01x, 0ms, 1ms)
+		"00000000000000000000000000000000", -- channel 2 (0,01x, 0ms, 1ms)
+		"00000000000000000000000000000000", -- channel 3 (0,01x, 0ms, 1ms)
+		"00000000000000000000000000000000", -- channel 4 (0,01x, 0ms, 1ms)
+		"00000000000000000000000000000000", -- channel 5 (0,01x, 0ms, 1ms)
+		"00000000000000000000000000000000"  -- channel 6 (0,01x, 0ms, 1ms)
+	);
+
+	VARIABLE ReverbA	: effectArray := (
+		"00000000000000000000000000000000", -- channel 1 (0ms, 1ms)
+		"00000000000000000000000000000000", -- channel 2 (0ms, 1ms)
+		"00000000000000000000000000000000", -- channel 3 (0ms, 1ms)
+		"00000000000000000000000000000000", -- channel 4 (0ms, 1ms)
+		"00000000000000000000000000000000", -- channel 5 (0ms, 1ms)
+		"00000000000000000000000000000000"  -- channel 6 (0ms, 1ms)
+	);
+
+	VARIABLE VolumeA	: effectArray := (
+		"00000000000000000000000000000000",
+		"00000000000000000000000000000000",
+		"00000000000000000000000000000000",
+		"00000000000000000000000000000000",
+		"00000000000000000000000000000000",
+		"00000000000000000000000000000000"
+	);
+
+	VARIABLE outputrouting : routingArray := (
+		"0010011000101000",	--channel 1 (input 3, RCA, +3dB, no link)
+		"0010011000101000",	--channel 2 (input 3, RCA, +3dB, no link)
+		"0010011000101000",	--channel 3 (input 3, RCA, +3dB, no link)
+		"0011011000101000",	--channel 4 (input 4, RCA, +3dB, no link)
+		"0011011000101000",	--channel 5 (input 4, RCA, +3dB, no link)
+		"0011011000101000"	--channel 6 (input 4, RCA, +3dB, no link)
+	);
+
+	VARIABLE pressedFunction 	: integer := 0;
+	VARIABLE highlighted 		: integer := 0;
+	VARIABLE currentPage 		: integer := 0;
+	VARIABLE activeChannel		: integer := 0;
+	VARIABLE navMenu			: integer RANGE 0 to 1 := 1;
+	VARIABLE updateparameter	: integer RANGE 0 to 1 := 0;
+	VARIABLE parameterchanged	: integer RANGE 0 to 1 := 0;
 	
-CONSTANT routingmask 		: UNSIGNED(settingsData-1 DOWNTO 0) := "111_0_00000000_000_00000000000000000000000000000000_000000000000_0000000000_0000000000_0000000000000000_0000000000000000_000000_000000_000000_000000_000000_00";
-CONSTANT sourceselectmask	: UNSIGNED(settingsData-1 DOWNTO 0) := "000_1_00000000_000_00000000000000000000000000000000_000000000000_0000000000_0000000000_0000000000000000_0000000000000000_000000_000000_000000_000000_000000_00";
-CONSTANT inputlevelmask		: UNSIGNED(settingsData-1 DOWNTO 0) := "000_0_11111111_000_00000000000000000000000000000000_000000000000_0000000000_0000000000_0000000000000000_0000000000000000_000000_000000_000000_000000_000000_00";
-CONSTANT linkchannelmask	: UNSIGNED(settingsData-1 DOWNTO 0) := "000_0_00000000_111_00000000000000000000000000000000_000000000000_0000000000_0000000000_0000000000000000_0000000000000000_000000_000000_000000_000000_000000_00";
-CONSTANT gainlevelmask		: UNSIGNED(settingsData-1 DOWNTO 0) := "000_0_00000000_000_11111111111111111111111111111111_000000000000_0000000000_0000000000_0000000000000000_0000000000000000_000000_000000_000000_000000_000000_00";
-CONSTANT delaytimemask		: UNSIGNED(settingsData-1 DOWNTO 0) := "000_0_00000000_000_00000000000000000000000000000000_111111111111_0000000000_0000000000_0000000000000000_0000000000000000_000000_000000_000000_000000_000000_00";
-CONSTANT delayfeedbackmask	: UNSIGNED(settingsData-1 DOWNTO 0) := "000_0_00000000_000_00000000000000000000000000000000_000000000000_1111111111_0000000000_0000000000000000_0000000000000000_000000_000000_000000_000000_000000_00";
-CONSTANT delaymixmask		: UNSIGNED(settingsData-1 DOWNTO 0) := "000_0_00000000_000_00000000000000000000000000000000_000000000000_0000000000_1111111111_0000000000000000_0000000000000000_000000_000000_000000_000000_000000_00";
-CONSTANT reverblengthmask	: UNSIGNED(settingsData-1 DOWNTO 0) := "000_0_00000000_000_00000000000000000000000000000000_000000000000_0000000000_0000000000_1111111111111111_0000000000000000_000000_000000_000000_000000_000000_00";
-CONSTANT reverbsizemask		: UNSIGNED(settingsData-1 DOWNTO 0) := "000_0_00000000_000_00000000000000000000000000000000_000000000000_0000000000_0000000000_0000000000000000_1111111111111111_000000_000000_000000_000000_000000_00";
-CONSTANT gainf0mask			: UNSIGNED(settingsData-1 DOWNTO 0) := "000_0_00000000_000_00000000000000000000000000000000_000000000000_0000000000_0000000000_0000000000000000_0000000000000000_111111_000000_000000_000000_000000_00";
-CONSTANT gainf1mask			: UNSIGNED(settingsData-1 DOWNTO 0) := "000_0_00000000_000_00000000000000000000000000000000_000000000000_0000000000_0000000000_0000000000000000_0000000000000000_000000_111111_000000_000000_000000_00";
-CONSTANT gainf2mask			: UNSIGNED(settingsData-1 DOWNTO 0) := "000_0_00000000_000_00000000000000000000000000000000_000000000000_0000000000_0000000000_0000000000000000_0000000000000000_000000_000000_111111_000000_000000_00";
-CONSTANT gainf3mask			: UNSIGNED(settingsData-1 DOWNTO 0) := "000_0_00000000_000_00000000000000000000000000000000_000000000000_0000000000_0000000000_0000000000000000_0000000000000000_000000_000000_000000_111111_000000_00";
-CONSTANT gainf4mask			: UNSIGNED(settingsData-1 DOWNTO 0) := "000_0_00000000_000_00000000000000000000000000000000_000000000000_0000000000_0000000000_0000000000000000_0000000000000000_000000_000000_000000_000000_111111_00";
-
-VARIABLE Equalizer : effectArray := (
-	"00100000100000100000100000100000", --channel 1(0dB, 0dB, 0dB, 0dB, 0dB)
-	"00100000100000100000100000100000", --channel 2(0dB, 0dB, 0dB, 0dB, 0dB) 
-	"00100000100000100000100000100000", --channel 3(0dB, 0dB, 0dB, 0dB, 0dB)
-	"00100000100000100000100000100000", --channel 4(0dB, 0dB, 0dB, 0dB, 0dB)
-	"00100000100000100000100000100000", --channel 5(0dB, 0dB, 0dB, 0dB, 0dB)
-	"00100000100000100000100000100000"  --channel 6(0dB, 0dB, 0dB, 0dB, 0dB)
-);
-
-VARIABLE Gain : effectArray := (
-	"00000000000000000000000000000000", -- channel 1
-	"00000000000000000000000000000000", -- channel 2
-	"00000000000000000000000000000000", -- channel 3
-	"00000000000000000000000000000000", -- channel 4
-	"00000000000000000000000000000000", -- channel 5
-	"00000000000000000000000000000000"  -- channel 6
-);
-
-VARIABLE Delay	: effectArray := (
-	"00000000000000000000000000000000", -- channel 1 (0,01x, 0ms, 1ms)
-	"00000000000000000000000000000000", -- channel 2 (0,01x, 0ms, 1ms)
-	"00000000000000000000000000000000", -- channel 3 (0,01x, 0ms, 1ms)
-	"00000000000000000000000000000000", -- channel 4 (0,01x, 0ms, 1ms)
-	"00000000000000000000000000000000", -- channel 5 (0,01x, 0ms, 1ms)
-	"00000000000000000000000000000000"  -- channel 6 (0,01x, 0ms, 1ms)
-);
-
-VARIABLE Reverb	: effectArray := (
-	"00000000000000000000000000000000", -- channel 1 (0ms, 1ms)
-	"00000000000000000000000000000000", -- channel 2 (0ms, 1ms)
-	"00000000000000000000000000000000", -- channel 3 (0ms, 1ms)
-	"00000000000000000000000000000000", -- channel 4 (0ms, 1ms)
-	"00000000000000000000000000000000", -- channel 5 (0ms, 1ms)
-	"00000000000000000000000000000000"  -- channel 6 (0ms, 1ms)
-);
-
-VARIABLE outputrouting : routingArray := (
-	"0010011000101000", --channel 1 (input 3, RCA, +3dB, no link)
-	"0010011000101000", --channel 2 (input 3, RCA, +3dB, no link)
-	"0010011000101000", --channel 3 (input 3, RCA, +3dB, no link)
-	"0011011000101000", --channel 4 (input 4, RCA, +3dB, no link)
-	"0011011000101000", --channel 5 (input 4, RCA, +3dB, no link)
-	"0011011000101000", --channel 6 (input 4, RCA, +3dB, no link)
-);
+	VARIABLE outputhead			: integer RANGE 0 to bufferSize 	:= 0;
+	VARIABLE outputtail			: integer RANGE 0 to bufferSize 	:= 0;
+	VARIABLE inputhead			: integer RANGE 0 to bufferSize 	:= 0;
+	VARIABLE inputBufferLevel 	: integer RANGE 0 to bufferSize 	:= 0;
+	VARIABLE outputBufferLevel	: integer RANGE 0 to bufferSize 	:= 0;
+	VARIABLE pressState 		: std_logic := '1';
+	VARIABLE leftState 			: std_logic := '1';
+	VARIABLE rightState 		: std_logic := '1';
 	
-	VARIABLE pressState 	: STD_LOGIC := '1';
-	VARIABLE leftState 	: STD_LOGIC := '1';
-	VARIABLE rightState 	: STD_LOGIC := '1';
+	VARIABLE touchPage			: integer 	:= 0;
+	VARIABLE touchelement		: integer 	:= 0;
+	VARIABLE count				: unsigned(31 downto 0) := (others => '0');
+
+	VARIABLE inputBuffer 	: FifOBuffer;
+	VARIABLE outputBuffer	: FifOBuffer;
+	VARIABLE emptyBuffer	: FifOBuffer := (others => "XXXXXXXX");
+	VARIABLE updatepage		: integer	:= 0;
 	
-	VARIABLE touchPage	: INTEGER 	:= 0;
-	VARIABLE touchelement: INTEGER 	:= 0;
-	
-	BEGIN
-		button <= STD_LOGIC_VECTOR(TO_UNSIGNED(highlighted, 4));
-		IF Nrst = '0' THEN
+	begin
+		button <= std_logic_vector(to_unsigned(highlighted, 4));
+		if Nrst = '0' THEN
 			--reset outputs
-			page1 		<= "0000";
-			page2			<= "0000";
 			button 		<= "0000";
 			TXData 		<= "00000000";
+			param1		<= "0000000000000000";
 			
 			--reset input variables
 			pressState 			:= '1';
@@ -281,310 +352,315 @@ VARIABLE outputrouting : routingArray := (
 			--inputtail			:= 0;
 			inputBufferLevel	:= 0;
 			outputBufferLevel	:= 0;
+			navMenu := 1;
 			
-		ELSIF RISING_EDGE(clk) THEN
+		elsif RisING_EDGE(clk) THEN
 			--buffer the incoming data
-			IF Dataready = '1' AND inputBufferLevel < bufferSize THEN
-				inputBuffer(inputhead) <= RXData;
+			if Dataready = '1' AND inputBufferLevel < bufferSize THEN
+				inputBuffer(inputhead) := RXData;
 				inputhead := (inputhead + 1) mod bufferSize;
 				inputBufferLevel := inputBufferLevel + 1;
-			END IF;
+			end if;
 			
 			--process the incoming data
-			IF inputhead >=3 THEN
-				IF inputBuffer(inputhead-1) = "11111111" AND inputBuffer(inputhead-2) = "11111111" AND inputBuffer(inputhead-3) = "11111111" THEN
-					IF inputBufferLevel >= 7 THEN
-						touchPage 	:= TO_INTEGER(UNSIGNED(inputBuffer(inputhead-6)));
-						touchElement:= TO_INTEGER(UNSIGNED(inputBuffer(inputhead-5))) - 2;
+			if inputhead >=3 THEN
+				if inputBuffer(inputhead-1) = "11111111" AND inputBuffer(inputhead-2) = "11111111" AND inputBuffer(inputhead-3) = "11111111" THEN
+					if inputBufferLevel >= 7 THEN
+						touchPage 	:= to_integer(unsigned(inputBuffer(inputhead-6)));
+						if touchPage = outputrouting2 OR touchPage = inputselect2 THEN
+							touchElement := to_integer(unsigned(inputBuffer(inputhead-5))) - 5;
+						else
+							touchElement := to_integer(unsigned(inputBuffer(inputhead-5))) - 2;
+						end if;
 						pressedFunction := functions(touchPage, touchElement);
-						updatepage <= 1;
-					END IF;
-					inputBuffer <= emptyBuffer;
+						updatepage := 1;
+					end if;
+					inputBuffer := emptyBuffer;
 					inputhead 			:= 0;
 					--inputtail 			:= 0;
 					inputBufferLevel 	:= 0;
-				END IF;
-			END IF;
+				end if;
+			end if;
 			
 			--process button inputs
-			IF pressInput = NOT pressState THEN
+			if pressInput = NOT pressState THEN
 				pressState := pressInput;
-				IF pressState = '0' AND outputBufferLevel < bufferSize-10 THEN
-				REPORT "currentPage: " & INTEGER'IMAGE(currentPage);
+				if pressState = '0' AND outputBufferLevel < bufferSize-10 THEN
 					pressedFunction := functions(currentPage, highlighted);
-					updatepage <= 1;
-				END IF;
-			END IF;
+					updatepage := 1;
+				end if;
+			end if;
 			
-			IF rightState = NOT rightInput THEN
+			if rightState = NOT rightInput THEN
 				rightState := rightInput;
-				IF rightState = '0' THEN
-					highlighted := (highlighted + 1) MOD functions(currentPage, maxElements-1);
-				END IF;
-			END IF;
+				if rightState = '0' THEN
+					--REPORT "navMenu: " & integer'IMAGE(navMenu);
+					if navMenu = 1 THEN
+						highlighted := (highlighted + 1) mod functions(currentPage, maxElements-1);
+					else
+						count := count + "0000000000000001";
+						updateparameter := 1;
+					end if;
+				end if;
+			end if;
 			
-			IF leftState = NOT leftInput THEN
+			if leftState = NOT leftInput THEN
 				leftState := leftInput;
-				IF leftState = '0' THEN
-					IF highlighted >= 1 THEN
-						highlighted := highlighted - 1;
-					ELSE
-						highlighted := functions(currentpage, maxElements-1) - 1;
-					END IF;
-				END IF;
-			END IF;
+				if leftState = '0' THEN
+				--REPORT "navMenu: " & integer'IMAGE(navMenu);
+					if navMenu = 1 THEN
+						if highlighted >= 1 THEN
+							highlighted := highlighted - 1;
+						else
+							highlighted := functions(currentpage, maxElements-1) - 1;
+						end if;
+					else
+						count := count - "0000000000000001";
+						updateparameter := 1;
+					end if;
+				end if;
+			end if;
 			
-			IF updatePage = 1 THEN
-				updatepage <= 0;
+			if updatePage = 1 THEN
+				updatepage := 0;
 				highlighted := 0;
-				CASE pressedFunction IS
-						WHEN homescreen TO adjustconfirm		=> pressedFunction := pressedFunction;
-						WHEN RCA1 TO USB 							=> pressedFunction := signalRouting;
-						
-						WHEN CH1 TO CH6 							=> activeChannel := pressedFunction - 117;
-																			pressedFunction := effectselect1;
-																			
-						WHEN volume									=> IF activeChannel = 3 OR activeChannel = 4 THEN
-																				pressedFunction := jackgain;
-																			ELSE
-																				pressedFunction := gain;
-																			END IF;
-																			
-						WHEN firstCH1 TO firstCH6				=> activeChannel := pressedFunction - firstCH1;
-																			pressedFunction := secondChannel1;
-																			
-						WHEN secondCH1 TO secondCH5			=> outputroutng(activeChannel)(2 DOWNTO 0) := UNSIGNED(pressedfunction - secondCH1); 
-																			pressedFunction := signalRouting;
-						
-						WHEN channelgain TO mix					=> pressedFunction := pressedFunction;
-						
-						WHEN preset1 TO preset6					=> pressedFunction := loadconfirm;
-						
-						WHEN changepreset1 TO changepreset6	=> pressedFunction := adjustconfirm;
-						
-						WHEN confirmLoad TO confirmAdjust	=> pressedFunction := homescreen;
-						
-						WHEN OTHERS									=> pressedFunction := homescreen;
-					END CASE;
+				case pressedFunction is
+						when homescreen to adjustconfirm	=> 
+							pressedFunction := pressedFunction;
+						when RCA1 to USB 					=> 
+							outputrouting(activechannel)(14 downto 11) := to_unsigned(pressedFunction - RCA1, 4);
+							pressedFunction := signalRouting;
+						when CH1 to CH6 					=> 	
+							activeChannel := pressedFunction - 117;
+							pressedFunction := effectselect1;										
+						when gainselect							=> 	
+							if activeChannel = 3 OR activeChannel = 4 THEN
+								pressedFunction := jackgain;
+							else
+								pressedFunction := gain;
+							end if;										
+						when firstCH1 to firstCH6			=> 	
+							activeChannel := pressedFunction - firstCH1;
+							pressedFunction := secondChannel1;
+																		
+						when secondCH1 to secondCH5			=> 	
+							outputrouting(activeChannel)(2 downto 0) := to_unsigned(pressedfunction - secondCH1, 3); 
+							pressedFunction := signalRouting;
+						when inputgain to chvolume		=>
+							navMenu := (navMenu + 1) mod 2;
+						when preset1 to preset6				=> 	
+							pressedFunction := loadconfirm;
+						when changepreset1 to changepreset6	=> 	
+							pressedFunction := adjustconfirm;
+						when confirmLoad to confirmAdjust	=> 	
+							pressedFunction := homescreen;
+						when others							=> 	
+							pressedFunction := homescreen;
+					end case;
 				
-				--goto function update page
-				outputBuffer(outputhead) <= "01110000"; --p
-				outputhead := (outputhead + 1) MOD bufferSize;
-				outputBufferLevel := (outputBufferLevel + 1);
-				outputBuffer(outputhead) <= "01100001"; --a
-				outputhead := (outputhead + 1) MOD bufferSize;
-				outputBufferLevel := (outputBufferLevel + 1);
-				outputBuffer(outputhead) <= "01100111"; --g
-				outputhead := (outputhead + 1) MOD bufferSize;
-				outputBufferLevel := (outputBufferLevel + 1);
-				outputBuffer(outputhead) <= "01100101"; --e
-				outputhead := (outputhead + 1) MOD bufferSize;
-				outputBufferLevel := (outputBufferLevel + 1);
-				outputBuffer(outputhead) <= "00100000"; --SPACE
-				outputhead := (outputhead + 1) MOD bufferSize;
-				outputBufferLevel := (outputBufferLevel + 1);
-				
-				CASE pressedFunction IS
-					WHEN 0 to 9 =>	outputBuffer(outputhead) <= "0011" & STD_LOGIC_VECTOR(TO_UNSIGNED(pressedFunction, 4)); --page
-										page1 <= STD_LOGIC_VECTOR(TO_UNSIGNED(pressedFunction, 4));
-										page2 <= "0000";
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										
-					WHEN 10 		=> outputBuffer(outputhead) <= "00110001" ; --1
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										outputBuffer(outputhead) <= "00110000" ; --0
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										page1 <= "0000";
-										page2 <= "0001";
-										
-					WHEN 11 		=>	outputBuffer(outputhead) <= "00110001" ; --1
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										outputBuffer(outputhead) <= "00110001" ; --1
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										page1 <= "0001";
-										page2 <= "0001";
-										
-					WHEN 12		=>	outputBuffer(outputhead) <= "00110001" ; --1
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										outputBuffer(outputhead) <= "00110010" ; --2
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										page1 <= "0010";
-										page2 <= "0001";
-										
-					WHEN 13 		=>	outputBuffer(outputhead) <= "00110001" ; --1
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										outputBuffer(outputhead) <= "00110011" ; --3
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										page1 <= "0011";
-										page2 <= "0001";
-										
-					WHEN 14 		=>	outputBuffer(outputhead) <= "00110001" ; --1
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										outputBuffer(outputhead) <= "00110100" ; --4
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										page1 <= "0100";
-										page2 <= "0001";
-										
-					WHEN 15 		=>	outputBuffer(outputhead) <= "00110001" ; --1
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										outputBuffer(outputhead) <= "00110101" ; --5
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										page1 <= "0101";
-										page2 <= "0001";
-										
-					WHEN 16 		=>	outputBuffer(outputhead) <= "00110001" ; --1
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										outputBuffer(outputhead) <= "00110110" ; --6
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										page1 <= "0110";
-										page2 <= "0001";
-										
-					WHEN 17 		=>	outputBuffer(outputhead) <= "00110001" ; --1
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										outputBuffer(outputhead) <= "00110111" ; --7
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										page1 <= "0111";
-										page2 <= "0001";
-										
-					WHEN 18 		=>	outputBuffer(outputhead) <= "00110001" ; --1
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										outputBuffer(outputhead) <= "00111000" ; --8
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										page1 <= "1000";
-										page2 <= "0001";
-										
-					WHEN 19 		=>	outputBuffer(outputhead) <= "00110001" ; --1
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										outputBuffer(outputhead) <= "00111001" ; --9
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										page1 <= "1001";
-										page2 <= "0001";
-										
-					WHEN 20 		=>	outputBuffer(outputhead) <= "00110010" ; --2
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										outputBuffer(outputhead) <= "00110000" ; --0
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										page1 <= "0000";
-										page2 <= "0010";
-										
-					WHEN 21 		=>	outputBuffer(outputhead) <= "00110010" ; --2
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										outputBuffer(outputhead) <= "00110001" ; --1
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										page1 <= "0001";
-										page2 <= "0010";
-										
-					WHEN 22		=>	outputBuffer(outputhead) <= "00110010" ; --2
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										outputBuffer(outputhead) <= "00110010" ; --2
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										page1 <= "0010";
-										page2 <= "0010";
-										
-					WHEN 23 		=>	outputBuffer(outputhead) <= "00110010" ; --2
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										outputBuffer(outputhead) <= "00110011" ; --3
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										page1 <= "0011";
-										page2 <= "0010";
-										
-					WHEN 24 		=>	outputBuffer(outputhead) <= "00110010" ; --2
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										outputBuffer(outputhead) <= "00110100" ; --4
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										page1 <= "0100";
-										page2 <= "0010";
-										
-					WHEN 25 		=>	outputBuffer(outputhead) <= "00110010" ; --2
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										outputBuffer(outputhead) <= "00110101" ; --5
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										page1 <= "0101";
-										page2 <= "0010";
-										
-					WHEN 26 		=>	outputBuffer(outputhead) <= "00110010" ; --2
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										outputBuffer(outputhead) <= "00110110" ; --6
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										page1 <= "0110";
-										page2 <= "0010";
-										
-					WHEN 27 		=>	outputBuffer(outputhead) <= "00110010" ; --2
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										outputBuffer(outputhead) <= "00110111" ; --7
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										page1 <= "0111";
-										page2 <= "0010";
-										
-					WHEN OTHERS => outputBuffer(outputhead) <= "00110000" ; --0
-										outputhead := (outputhead + 1) MOD bufferSize;
-										outputBufferLevel := (outputBufferLevel + 1);
-										page1 <= "0000";
-										page2 <= "0000";
-				END CASE;
-				outputBuffer(outputhead) <= "11111111"; --0xFF
-				outputhead := (outputhead + 1) MOD bufferSize;
-				outputBufferLevel := (outputBufferLevel + 1);
-				outputBuffer(outputhead) <= "11111111"; --0xFF
-				outputhead := (outputhead + 1) MOD bufferSize;
-				outputBufferLevel := (outputBufferLevel + 1);
-				outputBuffer(outputhead) <= "11111111"; --0xFF
-				outputhead := (outputhead + 1) MOD bufferSize;
-				outputBufferLevel := (outputBufferLevel + 1);
-				currentPage := pressedFunction;
-			END IF;
+				if pressedFunction < numberOfPages then
+					gotopage(pressedfunction, outputhead, outputBufferLevel, outputBuffer);
+					currentPage := pressedfunction;	
+				end if;
+			end if;
 			
+--			if updateparameter = 1 THEN
+--				updateparameter := 0;
+				
+				procedure updateregister(
+					effect 											: inout effectArray;
+					size, offset, pressedfunction, activechannel	: in 	integer;
+					parameters 										: out 	std_logic_vector(numberOfEffects*effectRegisterSize*numberOfChannels-1 downto 0); 
+				) is
+				updateregister()
+
+--				case pressedfunction is
+--					when inputgain =>
+--						if outputrouting(activechannel)(7 downto 0) > stepsize(pressedFunction - inputgain) THEN
+--							outputrouting(activechannel)(7 downto 0) := stepsize(pressedFunction - inputgain)(7 downto 0);
+--						elsif outputrouting(activechannel)(7 downto 0) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
+--							outputrouting(activechannel)(7 downto 0) := stepsize(pressedFunction - inputgain)(7 downto 0);
+--						elsif outputrouting(activechannel)(7 downto 0) < "00000000" THEN
+--							outputrouting(activechannel)(7 downto 0) := "00000000";
+--						elsif outputrouting(activechannel)(7 downto 0) = "00000000" AND to_integer(count) = 65535 THEN
+--							outputrouting(activechannel)(7 downto 0) := "00000000";
+--						else
+--							parameterchanged := 1;
+--							outputrouting(activechannel)(7 downto 0) := outputrouting(activechannel)(7 downto 0) + count(7 downto 0);
+--						end if;
+--					when f0	 =>
+--						if EqualizerA(activechannel)(5 downto 0) > stepsize(pressedFunction - inputgain) THEN
+--							EqualizerA(activechannel)(5 downto 0) := stepsize(pressedFunction - inputgain)(5 downto 0);
+--						elsif EqualizerA(activechannel)(5 downto 0) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
+--							EqualizerA(activechannel)(5 downto 0) := stepsize(pressedFunction - inputgain)(5 downto 0);
+--						elsif EqualizerA(activechannel)(5 downto 0) < "000000" THEN
+--							EqualizerA(activechannel)(5 downto 0) := "000000";
+--						elsif EqualizerA(activechannel)(5 downto 0) = "000000" AND to_integer(count) = 65535 THEN
+--							EqualizerA(activechannel)(5 downto 0) := "000000";
+--						else
+--							parameterchanged := 1;
+--							EqualizerA(activechannel)(5 downto 0) := EqualizerA(activechannel)(5 downto 0) + count(5 downto 0);
+--						end if;
+--						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-eqpos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*eqpos)) <= std_logic_vector(EqualizerA(activechannel));
+--					when f1	 => 
+--						if EqualizerA(activechannel)(11 downto 6) > stepsize(pressedFunction - inputgain) THEN
+--							EqualizerA(activechannel)(11 downto 6) := stepsize(pressedFunction - inputgain)(5 downto 0);
+--						elsif EqualizerA(activechannel)(11 downto 6) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
+--							EqualizerA(activechannel)(11 downto 6) := stepsize(pressedFunction - inputgain)(5 downto 0);
+--						elsif EqualizerA(activechannel)(11 downto 6) < "000000" THEN
+--							EqualizerA(activechannel)(11 downto 6) := "000000";
+--						elsif EqualizerA(activechannel)(11 downto 6) = "000000" AND to_integer(count) = 65535 THEN
+--							EqualizerA(activechannel)(11 downto 6) := "000000";
+--						else
+--							parameterchanged := 1;
+--							EqualizerA(activechannel)(11 downto 6) := EqualizerA(activechannel)(11 downto 6) + count(5 downto 0);
+--						end if;
+--						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-eqpos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*eqpos)) <= std_logic_vector(EqualizerA(activechannel));
+--					when f2	 => 
+--						if EqualizerA(activechannel)(17 downto 12) > stepsize(pressedFunction - inputgain) THEN
+--							EqualizerA(activechannel)(17 downto 12) := stepsize(pressedFunction - inputgain)(5 downto 0);
+--						elsif EqualizerA(activechannel)(17 downto 12) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
+--							EqualizerA(activechannel)(17 downto 12) := stepsize(pressedFunction - inputgain)(5 downto 0);
+--						elsif EqualizerA(activechannel)(17 downto 12) < "000000" THEN
+--							EqualizerA(activechannel)(17 downto 12) := "000000";
+--						elsif EqualizerA(activechannel)(17 downto 12) = "000000" AND to_integer(count) = 65535 THEN
+--							EqualizerA(activechannel)(17 downto 12) := "000000";
+--						else
+--							parameterchanged := 1;
+--							EqualizerA(activechannel)(17 downto 12) := EqualizerA(activechannel)(17 downto 12) + count(5 downto 0);
+--						end if;
+--						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-eqpos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*eqpos)) <= std_logic_vector(EqualizerA(activechannel));
+--					when f3	 => 
+--						if EqualizerA(activechannel)(23 downto 18) > stepsize(pressedFunction - inputgain) THEN
+--							EqualizerA(activechannel)(23 downto 18) := stepsize(pressedFunction - inputgain)(5 downto 0);
+--						elsif EqualizerA(activechannel)(23 downto 18) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
+--							EqualizerA(activechannel)(23 downto 18) := stepsize(pressedFunction - inputgain)(5 downto 0);
+--						elsif EqualizerA(activechannel)(23 downto 18) < "000000" THEN
+--							EqualizerA(activechannel)(23 downto 18) := "000000";
+--						elsif EqualizerA(activechannel)(23 downto 18) = "000000" AND to_integer(count) = 65535 THEN
+--							EqualizerA(activechannel)(23 downto 18) := "000000";
+--						else
+--							parameterchanged := 1;
+--							EqualizerA(activechannel)(23 downto 18) := EqualizerA(activechannel)(23 downto 18) + count(5 downto 0);
+--						end if;
+--						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-eqpos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*eqpos)) <= std_logic_vector(EqualizerA(activechannel));
+--					when f4	 => 
+--						if EqualizerA(activechannel)(29 downto 24) > stepsize(pressedFunction - inputgain) THEN
+--							EqualizerA(activechannel)(29 downto 24) := stepsize(pressedFunction - inputgain)(5 downto 0);
+--						elsif EqualizerA(activechannel)(29 downto 24) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
+--							EqualizerA(activechannel)(29 downto 24) := stepsize(pressedFunction - inputgain)(5 downto 0);
+--						elsif EqualizerA(activechannel)(29 downto 24) < "000000" THEN
+--							EqualizerA(activechannel)(29 downto 24) := "000000";
+--						elsif EqualizerA(activechannel)(29 downto 24) = "000000" AND to_integer(count) = 65535 THEN
+--							EqualizerA(activechannel)(29 downto 24) := "000000";
+--						else
+--							parameterchanged := 1;
+--							EqualizerA(activechannel)(29 downto 24) := EqualizerA(activechannel)(29 downto 24) + count(5 downto 0);
+--						end if;
+--						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-eqpos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*eqpos)) <= std_logic_vector(EqualizerA(activechannel));
+--					when dtime => 
+--						if DelayA(activechannel)(11 downto 0) > stepsize(pressedFunction - inputgain) THEN
+--							DelayA(activechannel)(11 downto 0) := stepsize(pressedFunction - inputgain)(11 downto 0);
+--						elsif DelayA(activechannel)(11 downto 0) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
+--							DelayA(activechannel)(11 downto 0) := stepsize(pressedFunction - inputgain)(11 downto 0);
+--						elsif DelayA(activechannel)(11 downto 0) < "000000000000" THEN
+--							DelayA(activechannel)(11 downto 0) := "000000000000";
+--						elsif DelayA(activechannel)(11 downto 0) = "000000000000" AND to_integer(count) = 65535 THEN
+--							DelayA(activechannel)(11 downto 0) := "000000000000";
+--						else
+--							parameterchanged := 1;
+--							DelayA(activechannel)(11 downto 0) := DelayA(activechannel)(11 downto 0) + count(11 downto 0);
+--						end if;
+--						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-delaypos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*delaypos)) <= std_logic_vector(DelayA(activechannel));
+--					when feedback => 
+--						if DelayA(activechannel)(21 downto 12) > stepsize(pressedFunction - inputgain) THEN
+--							DelayA(activechannel)(21 downto 12) := stepsize(pressedFunction - inputgain)(9 downto 0);
+--						elsif DelayA(activechannel)(21 downto 12) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
+--							DelayA(activechannel)(21 downto 12) := stepsize(pressedFunction - inputgain)(9 downto 0);
+--						elsif DelayA(activechannel)(21 downto 12) < "0000000000" THEN
+--							DelayA(activechannel)(21 downto 12) := "0000000000";
+--						elsif DelayA(activechannel)(21 downto 12) = "0000000000" AND to_integer(count) = 65535 THEN
+--							DelayA(activechannel)(21 downto 12) := "0000000000";
+--						else
+--							parameterchanged := 1;
+--							DelayA(activechannel)(21 downto 12) := DelayA(activechannel)(21 downto 12) + count(9 downto 0);
+--						end if;
+--						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-delaypos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*delaypos)) <= std_logic_vector(DelayA(activechannel));
+--					when mix => 
+--						if DelayA(activechannel)(31 downto 22) > stepsize(pressedFunction - inputgain) THEN
+--							DelayA(activechannel)(31 downto 22) := stepsize(pressedFunction - inputgain)(9 downto 0);
+--						elsif DelayA(activechannel)(31 downto 22) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
+--							DelayA(activechannel)(31 downto 22) := stepsize(pressedFunction - inputgain)(9 downto 0);
+--						elsif DelayA(activechannel)(31 downto 22) < "0000000000" THEN
+--							DelayA(activechannel)(31 downto 22) := "0000000000";
+--						elsif DelayA(activechannel)(31 downto 22) = "0000000000" AND to_integer(count) = 65535 THEN
+--							DelayA(activechannel)(31 downto 22) := "0000000000";
+--						else
+--							parameterchanged := 1;
+--							DelayA(activechannel)(31 downto 22) := DelayA(activechannel)(31 downto 22) + count(9 downto 0);
+--						end if;
+--						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-delaypos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*delaypos)) <= std_logic_vector(DelayA(activechannel));
+--					when rlength => 
+--						if ReverbA(activechannel)(15 downto 0) > stepsize(pressedFunction - inputgain) THEN
+--							ReverbA(activechannel)(15 downto 0) := stepsize(pressedFunction - inputgain)(15 downto 0);
+--						elsif ReverbA(activechannel)(15 downto 0) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
+--							ReverbA(activechannel)(15 downto 0) := stepsize(pressedFunction - inputgain)(15 downto 0);
+--						elsif ReverbA(activechannel)(15 downto 0) < "0000000000000000" THEN
+--							ReverbA(activechannel)(15 downto 0) := "0000000000000000";
+--						elsif ReverbA(activechannel)(15 downto 0) = "0000000000000000" AND to_integer(count) = 65535 THEN
+--							ReverbA(activechannel)(15 downto 0) := "0000000000000000";
+--						else
+--							parameterchanged := 1;
+--							ReverbA(activechannel)(15 downto 0) := ReverbA(activechannel)(15 downto 0) + count(15 downto 0);
+--						end if;
+--						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-reverbpos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*reverbpos)) <= std_logic_vector(ReverbA(activechannel));
+--					when rsize => 
+--						if ReverbA(activechannel)(31 downto 16) > stepsize(pressedFunction - inputgain) THEN
+--							ReverbA(activechannel)(31 downto 16) := stepsize(pressedFunction - inputgain)(15 downto 0);
+--						elsif ReverbA(activechannel)(31 downto 16) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
+--							ReverbA(activechannel)(31 downto 16) := stepsize(pressedFunction - inputgain)(15 downto 0);
+--						elsif ReverbA(activechannel)(31 downto 16) < "0000000000000000" THEN
+--							ReverbA(activechannel)(31 downto 16) := "0000000000000000";
+--						elsif ReverbA(activechannel)(31 downto 16) = "0000000000000000" AND to_integer(count) = 65535 THEN
+--							ReverbA(activechannel)(31 downto 16) := "0000000000000000";
+--						else
+--							parameterchanged := 1;
+--							ReverbA(activechannel)(31 downto 16) := ReverbA(activechannel)(31 downto 16) + count(15 downto 0);
+--						end if;
+--						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-reverbpos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*reverbpos)) <= std_logic_vector(ReverbA(activechannel));
+--					when channelvolume =>
+--						if VolumeA(activechannel)(31 downto 0) > stepsize(pressedFunction - inputgain) THEN
+--							VolumeA(activechannel)(31 downto 0) := stepsize(pressedFunction - inputgain)(31 downto 0);
+--						elsif VolumeA(activechannel)(31 downto 0) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
+--							VolumeA(activechannel)(31 downto 0) := stepsize(pressedFunction - inputgain)(31 downto 0);
+--						elsif VolumeA(activechannel)(31 downto 0) < "0000000000000000" THEN
+--							VolumeA(activechannel)(31 downto 0) := "00000000000000000000000000000000";
+--						elsif VolumeA(activechannel)(31 downto 0) = "0000000000000000" AND to_integer(count) = 65535 THEN
+--							VolumeA(activechannel)(31 downto 0) := "00000000000000000000000000000000";
+--						else
+--							parameterchanged := 1;
+--							VolumeA(activechannel)(31 downto 0) := ReverbA(activechannel)(31 downto 0) + count(31 downto 0);
+--						end if;
+--						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-volumepos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*volumepos)) <= std_logic_vector(VolumeA(activechannel));
+--					when others =>
+--				end case;
+--				count := "00000000000000000000000000000000";
+--			end if;
+
 			--output the data from the outputBuffer
-			CASE SM_TX IS
-				WHEN IDLE => IF outputBufferLevel > 0 THEN SM_TX <= LOAD; ELSE SM_TX <= IDLE; END IF; --if head and tail have the same value there is no data available so then stay in IDLE
-				WHEN LOAD => 
+			case SM_TX is
+				when IDLE => if outputBufferLevel > 0 THEN SM_TX <= LOAD; else SM_TX <= IDLE; end if; --if head and tail have the same value there is no data available so then stay in IDLE
+				when LOAD => 
 					TXData <= outputBuffer(outputtail);	--output the oldest byte in the buffer
-					outputtail := (outputtail+1) MOD bufferSize;		--increment the tail value
+					outputtail := (outputtail+1) mod bufferSize;		--increment the tail value
 					outputBufferLevel := outputBufferLevel - 1;
 					loadByte <= '1';					--let the transmitter know the data is ready					
 					SM_TX <= BUSY;
-				WHEN BUSY =>
+				when BUSY =>
 					loadByte <= '0';
-					IF TXDone = '1' THEN SM_TX <= IDLE; ELSE SM_TX <= BUSY; END IF; --If TXDone is high the transmitter has finished transmitting the data so go back to IDLE
-				WHEN OTHERS => SM_TX <= IDLE;
-			END CASE;
-		END IF;
-	END PROCESS;
-END RTL;
+					if TXDone = '1' THEN SM_TX <= IDLE; else SM_TX <= BUSY; end if; --if TXDone is high the transmitter has finished transmitting the data so go back to IDLE
+				when others => SM_TX <= IDLE;
+			end case;
+		end if;
+	end process;
+end RTL;

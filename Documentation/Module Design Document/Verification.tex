@@ -31,6 +31,9 @@ The state-space BPF is tested by inputting a sine wave outputted from a sine wav
 
 The best way to check if the band-pass filter works is by changing the frequency of the input sine wave over time to create a kind of frequency spectrum of the band-pass filter response. 
 
+\subsubsection{Effects}
+All the effects are tested by inputting a sine wave to the effect and looking at the result. This approach with a simple sine wave input is chosen because with a sine wave input it is very simple to predict the outcome of the effect and then confirm if it works as expected.
+
 \section{Results}
 
 \subsection{Hardware}
@@ -58,28 +61,15 @@ The PCBA is inspected and no short circuit is detected. The next step is to chec
 
 \subsection{Firmware}
 \subsubsection{I2S encoder and decoder}
-The results of this test can be found in figure \ref{fig:i2s-dec-enc}. These results show that the I2S encoder and decoder work as expected. 
-
-\begin{figure}[!ht]
-    \includegraphics[width=\linewidth, keepaspectratio]{Audio_sampler_result.png}
-    \caption{Simulation result of I2S decoder and encoder}
-    \label{fig:i2s-dec-enc}
-\end{figure}
+The results of this test can be found in figure \ref{fig:sim_result_i2s_dec_enc}. These results show that the I2S encoder and decoder work as expected. 
 
 \subsubsection{I2C master}
-The results can be seen in figure \ref{fig:i2c-master}. In this result it can be seen that the I2C master works as expected according to the protocol standards.
-
-\begin{figure}[!ht]
-    \includegraphics[width=\linewidth, keepaspectratio]{I2C_master_result.png}
-    \caption{Simulation result of I2C master}
-    \label{fig:i2c-master}
-\end{figure}
+The results can be seen in figure \ref{fig:sim_result_i2c-master}. In this result it can be seen that the I2C master works as expected according to the protocol standards.
 
 \subsubsection{State-space BPF}
-Due to time constrains the BPF has not yet been tested in Modelsim. 
 
 \subsubsection{Effects}
-
+\paragraph{Volume control}
 
 \section{Conclusions}
 

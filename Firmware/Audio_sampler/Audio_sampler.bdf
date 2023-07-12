@@ -843,76 +843,6 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect 736 208 976 288)
-	(text "volume_eff_v2" (rect 5 0 81 12)(font "Arial" ))
-	(text "inst6" (rect 8 64 31 76)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "d_in[d_width-1..0]" (rect 0 0 86 12)(font "Arial" ))
-		(text "d_in[d_width-1..0]" (rect 21 27 107 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32)(line_width 3))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "param[6..0]" (rect 0 0 56 12)(font "Arial" ))
-		(text "param[6..0]" (rect 21 43 77 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48)(line_width 3))
-	)
-	(port
-		(pt 240 32)
-		(output)
-		(text "d_out[d_width-1..0]" (rect 0 0 93 12)(font "Arial" ))
-		(text "d_out[d_width-1..0]" (rect 141 27 219 39)(font "Arial" ))
-		(line (pt 240 32)(pt 224 32)(line_width 3))
-	)
-	(parameter
-		"d_width"
-		"24"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 224 64))
-	)
-	(annotation_block (parameter)(rect 736 160 912 200))
-)
-(symbol
-	(rect 736 72 976 152)
-	(text "volume_eff_v2" (rect 5 0 81 12)(font "Arial" ))
-	(text "inst5" (rect 8 64 31 76)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "d_in[d_width-1..0]" (rect 0 0 86 12)(font "Arial" ))
-		(text "d_in[d_width-1..0]" (rect 21 27 107 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32)(line_width 3))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "param[6..0]" (rect 0 0 56 12)(font "Arial" ))
-		(text "param[6..0]" (rect 21 43 77 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48)(line_width 3))
-	)
-	(port
-		(pt 240 32)
-		(output)
-		(text "d_out[d_width-1..0]" (rect 0 0 93 12)(font "Arial" ))
-		(text "d_out[d_width-1..0]" (rect 141 27 219 39)(font "Arial" ))
-		(line (pt 240 32)(pt 224 32)(line_width 3))
-	)
-	(parameter
-		"d_width"
-		"24"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 224 64))
-	)
-	(annotation_block (parameter)(rect 736 24 912 64))
-)
-(symbol
 	(rect 1104 272 1264 416)
 	(text "PLL_audio_codec" (rect 27 -1 148 15)(font "Arial" (font_size 10)))
 	(text "inst7" (rect 8 128 31 140)(font "Arial" ))
@@ -996,6 +926,76 @@ agreement for further details.
 		(line (pt 13 25)(pt 31 16))
 		(circle (rect 31 12 39 20))
 	)
+)
+(symbol
+	(rect 736 208 976 288)
+	(text "volume_eff_v2" (rect 5 0 81 12)(font "Arial" ))
+	(text "inst6" (rect 8 64 31 76)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "d_in[d_width-1..0]" (rect 0 0 86 12)(font "Arial" ))
+		(text "d_in[d_width-1..0]" (rect 21 27 107 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "param[6..0]" (rect 0 0 56 12)(font "Arial" ))
+		(text "param[6..0]" (rect 21 43 77 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
+	)
+	(port
+		(pt 240 32)
+		(output)
+		(text "d_out[d_width-1..0]" (rect 0 0 93 12)(font "Arial" ))
+		(text "d_out[d_width-1..0]" (rect 141 27 219 39)(font "Arial" ))
+		(line (pt 240 32)(pt 224 32)(line_width 3))
+	)
+	(parameter
+		"d_width"
+		"24"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 224 64))
+	)
+	(annotation_block (parameter)(rect 736 160 912 200))
+)
+(symbol
+	(rect 736 72 976 152)
+	(text "volume_eff_v2" (rect 5 0 81 12)(font "Arial" ))
+	(text "inst5" (rect 8 64 31 76)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "d_in[d_width-1..0]" (rect 0 0 86 12)(font "Arial" ))
+		(text "d_in[d_width-1..0]" (rect 21 27 107 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "param[6..0]" (rect 0 0 56 12)(font "Arial" ))
+		(text "param[6..0]" (rect 21 43 77 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
+	)
+	(port
+		(pt 240 32)
+		(output)
+		(text "d_out[d_width-1..0]" (rect 0 0 93 12)(font "Arial" ))
+		(text "d_out[d_width-1..0]" (rect 141 27 219 39)(font "Arial" ))
+		(line (pt 240 32)(pt 224 32)(line_width 3))
+	)
+	(parameter
+		"d_width"
+		"24"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 224 64))
+	)
+	(annotation_block (parameter)(rect 736 24 912 64))
 )
 (connector
 	(pt 664 432)

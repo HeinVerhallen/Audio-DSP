@@ -61,7 +61,7 @@ A paper \cite{Guitar_Effects_Processor_Using_DSP} written by Alexander J. Czubek
 The only downside is that the sample in Matlab is not processed real time. Matlab knows the samples and the order of them. So to test these effects a for-loop was written to resample the original sample so that the code could see it as a real time signal instead of a pre given file.
 
 \subsubsection{Volume control}
-The volume control is made by amplifying the input signal with a certain gain level. After the amplification the signal has to be manually clipped if out of range of the variable type. So the volume controller can be seen as an amplifier block with a saturation block. The VHDL code of this effect can be found in \nameref{}.
+The volume control is made by amplifying the input signal with a certain gain level. After the amplification the signal has to be manually clipped if out of range of the variable type. So the volume controller can be seen as an amplifier block with a saturation block. The VHDL code of this effect can be found in \nameref{chap:appendix-B-vhdl}.
 
 \subsubsection{Distortion}
 Distortion is an effect that is heard when a signal level goes beyond the saturation level. This causes the signal to go into saturation and clip (see figure \ref{fig:saturated_signal}). Normally in audio you never want distortion as this is not bearable to listen to. But for musicians, especially guitarists, the distortion effect is very popular. This is because it gives the guitar sound a lot of sustain and higher harmonics, making it very popular in rock and metal genres. 
@@ -75,7 +75,7 @@ Distortion is an effect that is heard when a signal level goes beyond the satura
 
 So in order to make a distortion effect, the input signal needs to go into saturation. To do this, the input signal needs to be amplified a lot. So an amplifier is needed with a saturation block to clip the signal. This results in a distorted signal when you amplify the signal enough.
 
-When the signal is amplified enough to reach the saturation point it is being distorted. But it is also very loud. Therefore it is necessary to add an attenuator after the amplifier and saturation blocks. With this attenuator the user is able to adjust the audio level of the distorted signal back to a much more bearable audio level, without changing the amount of distortion. The VHDL code of this effect can be found in \nameref{}.
+When the signal is amplified enough to reach the saturation point it is being distorted. But it is also very loud. Therefore it is necessary to add an attenuator after the amplifier and saturation blocks. With this attenuator the user is able to adjust the audio level of the distorted signal back to a much more bearable audio level, without changing the amount of distortion. The VHDL code of this effect can be found in \nameref{chap:appendix-B-vhdl}.
 
 \subsubsection{Flanger}
 A flanger effect delays each sample with a varying delay time adjusted by a sine wave. The delayed sample is then added to the original sample. The Simulink model of the flanger effect is seen in figure \ref{fig:flangersimulink}.

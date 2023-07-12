@@ -391,8 +391,8 @@ BEGIN
 END logic;
 \end{lstlisting}
 
-\section*{State-space BPF code}
-\addcontentsline{toc}{section}{State-space BPF code}
+\section*{State-space band-pass filter}
+\addcontentsline{toc}{section}{State-space band-pass filter}
 \begin{lstlisting}
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -636,8 +636,8 @@ begin
 end Behavioral;
 \end{lstlisting}
 
-\section*{Sinewave generator code}
-\addcontentsline{toc}{section}{Sinewave generator code}
+\section*{Sinewave generator}
+\addcontentsline{toc}{section}{Sinewave generator}
 \begin{lstlisting}
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -704,6 +704,47 @@ begin
     end process;
 end Behavioral;
 \end{lstlisting}
+
+\section*{Volume control effect}
+\addcontentsline{toc}{section}{Volume control effect}
+\begin{lstlisting}
+    library IEEE;
+    use IEEE.STD_LOGIC_1164.ALL;
+    use IEEE.NUMERIC_STD.ALL;
+    use ieee.fixed_pkg.all;
+    use IEEE.math_real.all;
+    
+    entity volume_eff_v2 is
+        GENERIC(
+            d_width     : integer := 24);         --data width of input and output
+        Port ( 
+            d_in    : in  std_logic_vector(d_width-1 downto 0); --input data
+            param   : in  std_logic_vector(6 downto 0);         --gain parameter
+            d_out   : out std_logic_vector(d_width-1 downto 0) --output data
+            ); 
+    end volume_eff_v2;
+    
+    architecture Behavioral of volume_eff_v2 is
+        signal gain : sfixed(31 downto -32) := to_sfixed(2.0, 31, -32);
+    
+    begin
+        process(d_in)
+        begin
+            d_out <= std_logic_vector(to_signed(resize(to_sfixed(signed(d_in), 31, -32) * gain, 31, -32), d_width));
+        end process;
+    
+        process(param)
+            type t_lookup_gain is array (0 to 127) of sfixed(31 downto -32);
+            --Lookup gain ranging from -87dB to 40dB
+            constant lookup_gain : t_lookup_gain := ();     --too large to put in report
+        begin
+            gain <= lookup_gain(to_integer(unsigned(param)));
+        end process;
+    end Behavioral;
+\end{lstlisting}
+
+\section*{Distortion effect}
+\addcontentsline{toc}{section}{Distortion effect}
 
 \section*{rotary decoder}
 \addcontentsline{toc}{section}{rotary decoder}

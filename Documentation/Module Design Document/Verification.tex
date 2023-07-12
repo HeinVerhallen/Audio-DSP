@@ -7,12 +7,12 @@ For the voltage regulator modules, the following parameters need to be measured 
 -Thorough visual inspection, especially focusing on the soldering process. This includes checking for short circuits, open connections, solder balls, and other defects.
 -The converter should be powered from a lab power supply with low current limit settings. In case of a short circuit or other module defect, the dissipated power will be limited, allowing for the identification and resolution of the issue.
 -The output voltage of the converter should be observed using an oscilloscope. Attention should be paid to the absolute accuracy and the amplitude of the ripple voltage.
--The temperature of the PCBA should be monitored to ensure that the module does not get too hot, which could potentially shorten its lifespan.
+-The temperature of the PCB should be monitored to ensure that the module does not get too hot, which could potentially shorten its lifespan.
 
 \subsubsection{Main board}
 The functionality of the main board should be verified in the following manner:
 -Perform a thorough visual inspection, with a focus on the soldering process. Check for short circuits, open connections, solder balls, and other defects.
--Power the main board from a lab power supply with low current limit settings. This will limit the dissipated power in case of a short circuit or module defect, enabling identification and resolution of the issue. A thermal camera can be used to inspect the PCBA for hotspots.
+-Power the main board from a lab power supply with low current limit settings. This will limit the dissipated power in case of a short circuit or module defect, enabling identification and resolution of the issue. A thermal camera can be used to inspect the PCB for hotspots.
 -Verify the presence and correctness of all power rails.
 -Verify that the output of the GPIO pins corresponds to the desired outcome.(e.g. check the SLCK).
 -Next, apply a known signal (e.g., a 1kHz sinusoidal waveform with an amplitude of 100mV) to the various inputs of the audio-DSP. If no filters are selected and the audio-DSP is essentially in a pass-through state, the same signal should appear on the selected outputs. The accuracy of this signal can be verified using an audio analyzer such as the AP SYS 2700.
@@ -40,7 +40,7 @@ Due to the limited time, this verification has not been done yet.
 The output voltage of the SEPIC with a 1A load is shown in figure \ref{fig:Verification_SEPIC_1A_Load}. It can be observed that the ripple voltage reasonably matches the calculated and simulated values. In figure \ref{fig:Verification_SEPIC_1A_Load}, some very high-frequency voltage spikes are visible on the output, but the author of this report is convinced that this is due to the large ground loop during measurement because no ground spring was available for the oscilloscope probe at Fontys. For this reason, the author quickly improvised a solution using a piece of wire, as shown in figure \ref{fig:Improvised_GND_spring}. This reduced the measured ripple voltage from over 40mVpp to approximately 4mVpp.
 
 \subsubsection{Linear voltage regulator}
-After conducting a thorough visual inspection, it became apparent that a thorough cleaning of the PCBA was necessary. This was because the solder paste used left behind a significant amount of residue. Therefore, the linear voltage regulators were cleaned in an ultrasonic cleaner.
+After conducting a thorough visual inspection, it became apparent that a thorough cleaning of the PCB was necessary. This was because the solder paste used left behind a significant amount of residue. Therefore, the linear voltage regulators were cleaned in an ultrasonic cleaner.
 
 Subsequently, the linear regulators were connected to a lab power supply with current limiting. However, it quickly became evident that the regulators were not functioning properly. After performing several simulations in LTspice, it was suspected that the LEDs, which serve as low-noise voltage references, might have been soldered incorrectly. However, after consulting the datasheet again with several group members, it was confirmed that the LEDs were indeed soldered correctly according to the datasheet.
 
@@ -48,11 +48,11 @@ Since no other plausible causes emerged after further investigation, it was deci
 %https://nl.mouser.com/datasheet/2/678/AV02_0551EN_DS_HSMx_Cxxx_25Mar2022-1827675.pdf
 
 \subsubsection{Main board}
-\paragraph{inspection} Before connecting every module together and placing every component on the main board it is indeed ascertain that the board has flux and solder paste residue together with solder balls that can cause short circuits, therefore the PCBA will be cleaned in the ultrasonic bath, before doing this it is important to know which components are suitable for this. The relays and electrolytic capacitors are not suitable for this, therefore they are soldered after cleaning.  visual inspection has been done on the main board and the power delivery modules. In the second visual inspection there are no signs of shorts and the components are connected properly.\\
+\paragraph{inspection} Before connecting every module together and placing every component on the main board it is indeed ascertain that the board has flux and solder paste residue together with solder balls that can cause short circuits, therefore the PCB will be cleaned in the ultrasonic bath, before doing this it is important to know which components are suitable for this. The relays and electrolytic capacitors are not suitable for this, therefore they are soldered after cleaning.  visual inspection has been done on the main board and the power delivery modules. In the second visual inspection there are no signs of shorts and the components are connected properly.
 
 \paragraph{Power inspection}
 
-The PCBA is inspected and no short circuit is detected. The next step is to check all the power modules within the PCBA with current limiting, so that the board will not be catch on fire if there is somehow still a short. This has been done with a power supply limited to 1A. All the power rails are tested and every power delivery module is working properly at the desired voltage. The 12V buck converter that is going to the FPGA is tested separately first with four 33 resistors connected in parallel which will give 1.5A of current at 12V. The buck was still below 50°C. 
+The PCB is inspected and no short circuit is detected. The next step is to check all the power modules within the PCBA with current limiting, so that the board will not be catch on fire if there is somehow still a short. This has been done with a power supply limited to 1A. All the power rails are tested and every power delivery module is working properly at the desired voltage. The 12V buck converter that is going to the FPGA is tested separately first with four 33 resistors connected in parallel which will give 1.5A of current at 12V. The buck was still below 50°C. 
 
 \subsection{Firmware}
 \subsubsection{I2S encoder and decoder}

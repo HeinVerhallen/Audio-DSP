@@ -89,7 +89,7 @@ The results of the volume control effect simulation can be seen in figure \ref{f
 The volume control has been tested with the De1-SoC FPGA board and the volume of the audio signal could be adjusted as expected. The test with the board consisted of the whole sampling system, e.g. I2S encoder, I2S decoder and I2C master blocks. 
 
 \paragraph{Delay}
-
+For the delay effect an SDRAM controller had to be writen using VHDL. The code has been tested using modelsim and works as expected. previous to making the controller work with 24 bit samples the controller has been tested with 16 bit data on the De1-Soc board. There we where able to store data in the SDRAM and than read it to a seven segment display. the delay effect it self has been writen but not yet verified. This is because some issues with the DE1-Soc board as mentioned in other verification chapters.
 
 \section{Conclusions}
 \subsection{Hardware}

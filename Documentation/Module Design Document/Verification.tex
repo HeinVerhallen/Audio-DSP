@@ -89,7 +89,7 @@ The results of the volume control effect simulation can be seen in figure \ref{f
 The volume control has been tested with the De1-SoC FPGA board and the volume of the audio signal could be adjusted as expected. The test with the board consisted of the whole sampling system, e.g. I2S encoder, I2S decoder and I2C master blocks. 
 
 \paragraph{Delay}
-For the delay effect an SDRAM controller had to be writen using VHDL. The code has been tested using modelsim and works as expected. previous to making the controller work with 24 bit samples the controller has been tested with 16 bit data on the De1-Soc board. There we where able to store data in the SDRAM and than read it to a seven segment display. the delay effect it self has been writen but not yet verified. This is because some issues with the DE1-Soc board as mentioned in other verification chapters.
+For the delay effect an SDRAM controller had to be written using VHDL. The code has been tested using modelsim and works as expected. previous to making the controller work with 24 bit samples the controller has been tested with 16 bit data on the De1-Soc board. There we where able to store data in the SDRAM and than read it to a seven segment display. the delay effect it self has been written but not yet verified. This is because some issues with the DE1-Soc board as mentioned in other verification chapters.
 
 \section{Conclusions}
 \subsection{Hardware}
@@ -112,10 +112,8 @@ The buck converters appears to be functioning as intended, all of the buck conve
 \item 2x 12V buck converter
 \item 15V buck converter
 \end{itemize}  
-All of these buck converters have been tested and verified. This can be viewed in \ref{Appendix-Vertical riser boards} Vertical riser boards. The voltages and temperatures are well within desired specs. The output ripple is ~8-10mV respectivly which is very close to what the datasheet has provided. 
+All of these buck converters have been tested and verified. This can be viewed in \ref{Appendix-Vertical riser boards} Vertical riser boards. The voltages and temperatures are well within desired specs. The output ripple is ~8-10mV respectively which is very close to what the datasheet has provided. 
 
-\subsubsection{Main board}
-The board cannot be tested further than the power supplies, because the clock is not giving the desired output. This gives a bottleneck to test all the other components and IC's.
 
 \subsection{Firmware}
 The I2S decoder, I2S encoder and I2C master work as expected. Therefore it is possible to sample audio using the ADC and DAC of the FPGA board. This has been tested and verified that this works on the De1-SoC FPGA board. 

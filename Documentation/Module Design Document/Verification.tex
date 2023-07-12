@@ -29,7 +29,7 @@ The I2C master is tested by simply writing and reading data with the protocol an
 \subsubsection{State-space BPF}
 The state-space BPF is tested by inputting a sine wave outputted from a sine wave generator. By using a sine wave as an input it is very easy to expect the outcome. For instance when having the BPF resonance frequency at 1kHz and inputting a 1kHz sine wave, it is expected that the output sine wave has the same amplitude compared to the input sine wave. And when the frequency of the input sine wave does not match that of the BPF resonance frequency, it will be attenuated. 
 
-The best way to check if the band-pass filter works is by changing the frequency of the input sine wave over time to create a kind of frequency spectrum of the band-pass filter response. 
+The best way to check if the band-pass filter works is by changing the frequency of the input sine wave over time to create a frequency spectrum of the band-pass filter response. 
 
 \subsubsection{Effects}
 All the effects are tested by inputting a sine wave to the effect and looking at the result. This approach with a simple sine wave input is chosen because with a sine wave input it is very simple to predict the outcome of the effect and then confirm if it works as expected.
@@ -121,5 +121,5 @@ The I2S decoder, I2S encoder and I2C master work as expected. Therefore it is po
 
 The BPF and volume control effect work in simulation as expected. Unfortunately only the volume control effect works with the whole sampling system on the De1-SoC FPGA board. 
 
-There where various unexpected and unknown bugs when trying to implement the system in the De1-SoC FPGA board. This could have been caused by the fact that most effects use the fixed point package for computing the variables in fixed point. But it could also be caused by the lack of memory capacity of the De1-SoC FPGA board. Therefore it is advised to first remake all the effects with a hand-written fixed point notation and computation VHDL code. And secondly it is advised to look into better FPGA boards that have much better computation power and memory capacity.
+There where various unexpected and unknown bugs when trying to implement the effects in the De1-SoC FPGA board. This could have been caused by the fact that all effects use the fixed point package for computing the variables in fixed point. But it could also be caused by the lack of memory capacity of the De1-SoC FPGA board. Therefore it is advised to first remake all the effects with a hand-written fixed point notation and computation VHDL code. And secondly it is advised to look into better FPGA boards that have much better computation power and memory capacity.
 

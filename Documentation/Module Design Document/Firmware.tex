@@ -97,7 +97,10 @@ The chorus effect is created with similarities to the flanger effect. But instea
 \end{figure}
 
 \subsubsection{Delay / echo}
-The delay was the easiest of these effects to make. The delay adds a delayed sample to the original sound. The simulink model of the delay effect is seen in figure \ref{fig:delaysimulink}.
+The delay effect is one of the easier effects to realise. To delay an audio signal the samples have to be stored in memory for the wanted delay time. To implement this for this project we have to use de SDRAM. The SDRAM that is on the DE1-Soc board has a data bus off 16 bit with 4 banks of storage for a total of around 500 Mbit. This is enough for the project to make a delay.
+\par
+\noindent To be able to use the SDRAM a SDRAM controller has to be written to be able to read and write data form and to the SDRAM IC. For the  project the data is 24 bit so two write commands have to be send to be able to store a sample. The same is the case for reading a sample from memory. To send something to de SDRAM u will have to give a 24 bit sample along with the address and enable the write command. If u want to read something from the SDRAM you will have to send the address of the wanted write and then enable the read line. 
+\noindent The simulink model of the delay effect is seen in figure \ref{fig:delaysimulink}.
 
 \begin{figure}[ht]
     \centering

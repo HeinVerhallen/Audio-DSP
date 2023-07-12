@@ -1,3 +1,12 @@
-Because of time constrains the project is not yet finished. Some parts have been tested and work as expected. But most parts of the project including the main board and the firmware have not been finished according to the planning.
+Due to time constraints the project has not yet been finished. Most parts have been tested and work as expected, but some parts still have to be implemented and tested according to the planning. Some more time is needed to finish the Project.
+\par
+\noindent The following recommendations have been made to help the project work/ work better:
 
-So more time is needed to finish the PCBs and assemble the Audio-DSP. As a recommendation regarding the firmware, it would have been a better approach to not use FFT as a processing method but use the direct approach instead. 
+\begin{itemize}
+    \setlength\itemsep{-0.3em} %MAKES THE GAP SMALLER BETWEEN 2 ITEMS
+    \item Do not use FFT for the processing, use a direct approach instead or use a way more powerful processor
+    \item Look into the clock signals from the FPGA board to the main PCB
+    \item Investigate if there are other FPGA boards available which do support the needed 24.576 MHz output frequency on their GPIO pins
+    \item Indicate on the UI screen which option is selected
+    \item Make a less enthusiastic project planning
+\end{itemize}

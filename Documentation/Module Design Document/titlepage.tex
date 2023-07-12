@@ -29,29 +29,88 @@ Fontys Hogescholen, De Rondom 1, 5612 AP Eindhoven \\
 \listoffigures
 \thispagestyle{empty}
 
-
 \listoftables
 \thispagestyle{empty}
 
 \newpage
 \pagestyle{plain}
 
-\chapter*{Revision history}
+\chapter*{Report contribution}	%Fill-in only regarding the report contribution.
 \begin{table}[!h]
 	\centering
-\begin{tabular}{|c|c|}
+\begin{tabular}{|c|c|c|}
 		\hline
-\textbf{Person} & \textbf{chapter} \\ \hline
-Busse				& Introduction \\ \hline
-All					& Problem Description \\ \hline
-All					& Research \\ \hline
-All					& Concept Development \\ \hline
-Robin				& Realization-schematic \\ \hline
-Silas \& Mahmud		& Realization-PCB \\ \hline
-Busse				& Realization-case \\ \hline
-Youri				& Realization-firmware \\ \hline
-Hein \& Busse		& Realization-UI \\ \hline
-Mahmud				& Verification \\ \hline
+\textbf{Chapter} & \textbf{Paragraph} & \textbf{Person} \\ \hline
+Problem Description			& Background					& All	 			\\ \hline
+Introduction				& NA							& Busse 			\\ \hline
+							& Problem description			& Robin				\\ \hline
+							& Project goals					& All				\\ \hline
+							& Requirements					& All 				\\ \hline
+							& Project scope					& All 				\\ \hline
+							& Boundary condition			& All				\\ \hline
+							& Project approach				& All				\\ \hline
+							& Verification method			& All				\\ \hline
+Research 					& Research objectives			& All 				\\ \hline
+							& Research questions			& All 				\\ \hline
+							& Research approach				& All 				\\ \hline
+							& Results						& All 				\\ \hline
+Concept Development 		& Concept overview				& All				\\ \hline
+							& Front-end						& Robin				\\ \hline
+							& Audio-DSP						& Youri				\\ \hline
+							& Back-end						& Robin				\\ \hline
+							& Interfacing					& Robin				\\ \hline
+							& Architecture					& NA				\\ \hline
+							& Front-end						& Robin				\\ \hline
+							& Audio-DSP						& Youri				\\ \hline
+							& Back-end						& Robin				\\ \hline
+							& Power supplies				& Mahmud \& Robin	\\ \hline
+							& Modules						& 					\\ \hline
+							& UI							& Hein \& Busse		\\ \hline
+							& Hardware programming			& 					\\ \hline
+							& Hardware design				& 					\\ \hline
+							& Design decissions				& 					\\ \hline
+Realization					& Hardware						& NA				\\ \hline
+							& Schematic						& Robin				\\ \hline
+							& Printed circuit board			& Silas				\\ \hline
+							& Case							& Busse				\\ \hline
+							& Firmware						& Youri				\\ \hline
+							& I2S decoder and encoder		& Youri				\\ \hline
+							& I2C controller				& Youri				\\ \hline
+							& Band-pass filter				& Youri				\\ \hline
+							& Sinewave generator			& Youri				\\ \hline
+							& Effects						& 					\\ \hline
+							& User interface				& Hein \& Busse		\\ \hline
+							& User interface				& Hein \& Busse		\\ \hline
+Verification				& Method						& Robin, tekst updaten					\\ \hline
+							& Hardware						& Mahmud \& Robin	\\ \hline
+							& Firmware						& Youri \& Hein		\\ \hline
+							& Results						& 					\\ \hline
+							& Hardware						& Mahmud \& Robin tekst updaten?					\\ \hline
+							& Firmware						& Youri					\\ \hline
+							& Conclusions					& Mahmud \& Robin tekst updaten?					\\ \hline
+							& Hardware						& 					\\ \hline
+							& Firmware						& 					\\ \hline
+Conclusions					& NA							& Silas				\\ \hline
+Recommendations				& NA							& Silas				\\ \hline
+Bibliography				& NA							& Busse				\\ \hline
+Appendix A: State-space		& NA							& Youri				\\ \hline
+Appendix B: VHDL code		& I2S decoder					& Youri				\\ \hline
+							& I2S encoder					& Youri				\\ \hline
+							& I2C master					& Youri				\\ \hline
+							& State-space BPF code			& Youri				\\ \hline
+							& Sinewave generator code		& Youri				\\ \hline
+Appendix C: Schematics		& Buck converter schematic		& Mahmud			\\ \hline
+							& SEPIC schematic				& Silas				\\ \hline
+							& Linear regulator schematic	& Silas				\\ \hline
+							& Main board schematic			& Silas				\\ \hline
+							& Buck converter calculations	& Silas				\\ \hline
+							& SEPIC calculations			& Robin				\\ \hline
+Appendix D: UI design		& Main menu						& 					\\ \hline
+							& Adjust preset menu			& 					\\ \hline
+Appendix E: Case			& Top view						& Busse				\\ \hline
+							& Front view					& Busse				\\ \hline
+							& Rear view						& Busse				\\ \hline
+Appendix F: Verification	& Ground spring					& Robin				\\ \hline
 
 \end{tabular}
 \caption{Revision list of the document}
@@ -68,18 +127,19 @@ Mahmud				& Verification \\ \hline
 	\centering
 \begin{tabular}{|c|c|}
 	\hline
-\textbf{Abbreviation} & \textbf{Explanation}        \\ \hline
-DSP 					& Digital Signal Processor    \\ \hline
-ADC 					& Analog-to-Digital Converter \\ \hline
-DAC 					& Digital-to-Analog Converter \\ \hline
-RAM 					& Random access memory	    \\ \hline
-SINAD 				& Signal to noise and distortion \\ \hline
-TRS 					& Tip ring sleeve connector (jack) \\ \hline
-FPGA 					& Field programmable gate array \\ \hline
-CH 						& Channel					\\ \hline
-FFT 					& Fast Fourier Transform	\\ \hline
-BPF 					& Band-Pass Filter			\\ \hline
-SEPIC         & Single-ended primary-inductor converter			\\ \hline
+\textbf{Abbreviation} & \textbf{Explanation}	\\ \hline
+DSP 					& Digital Signal Processor    				\\ \hline
+ADC 					& Analog-to-Digital Converter 				\\ \hline
+BPF 					& Band-Pass Filter							\\ \hline
+CH 						& Channel									\\ \hline
+DAC 					& Digital-to-Analog Converter 				\\ \hline
+FFT 					& Fast Fourier Transform					\\ \hline
+FPGA 					& Field programmable gate array 			\\ \hline
+GBW 					& Gain Bandwidth Product 					\\ \hline
+RAM 					& Random Access Memory	    				\\ \hline
+SEPIC        			& Single-Ended Primary-Inductor Converter	\\ \hline
+SINAD 					& Signal to noise and distortion 			\\ \hline
+TRS 					& Tip ring sleeve connector (jack) 			\\ \hline
 
 \end{tabular}
 \caption{List of commonly used Abbreviations}

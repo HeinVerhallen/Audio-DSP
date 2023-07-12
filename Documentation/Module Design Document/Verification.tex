@@ -72,12 +72,15 @@ The results of this test can be found in figure \ref{fig:sim_result_i2s_dec_enc}
 The results can be seen in figure \ref{fig:sim_result_i2c-master}. In this result it can be seen that the I2C master works as expected according to the protocol standards.
 
 \subsubsection{State-space BPF}
+For testing the state-space BPF it is very easy to see if it works by checking the frequency response. For the test a resonance frequency for BPF of 400Hz is chosen. Then the sine wave changes its frequency every 10ms. The frequency start at 25Hz and steps up in octaves. The end frequency is 51200Hz as this is far beyond the range of the sampling frequency. The result of this test is seen in \nameref{chap:appendix-G-simulation-results}. 
+
+As expected, the amplitude of the sine wave at the matching resonance frequency of 400Hz is equal to the input amplitude. And when the frequency goes an octave lesser or higher in frequency the amplitude is $\frac{\sqrt{2}}{2}$ times the input amplitude (-3dB). This is a result that is expected from a BPF, therefore it is shown that the BPF works in simulation.
 
 \subsubsection{Effects}
 \paragraph{Volume control}
 
-\section{Conclusions}
 
+\section{Conclusions}
 \subsection{Hardware}
 
 \subsubsection{Buck}

@@ -66,20 +66,22 @@ The volume control is made by amplifying the input signal with a certain gain le
 \subsubsection{Distortion}
 Distortion is an effect that is heard when a signal level goes beyond the saturation level. This causes the signal to go into saturation and clip (see figure \ref{fig:saturated_signal}). Normally in audio you never want distortion as this is not bearable to listen to. But for musicians, especially guitarists, the distortion effect is very popular. This is because it gives the guitar sound a lot of sustain and higher harmonics, making it very popular in rock and metal genres. 
 
-So in order to make a distortion effect, the input signal needs to go into saturation. To do this, the input signal needs to be amplified a lot. So an amplifier is needed with a saturation block to clip the signal. This results in a distorted signal when you amplify the signal enough.
-
-When the signal is amplified enough to reach the saturation point it is being distorted. But it is also very loud. Therefore it is necessary to add an attenuator after the amplifier and saturation blocks. With this attenuator the user is able to adjust the audio level of the distorted signal back to a much more bearable audio level, without changing the amount of distortion. The VHDL code of this effect can be found in \nameref{}.
-
 \begin{figure}[ht]
+    \centering
     \includegraphics[width=0.5\linewidth]{Signal-Saturation-and-Gain-Control.png}
     \caption{Saturated signal}
     \label{fig:saturated_signal}
 \end{figure}
 
+So in order to make a distortion effect, the input signal needs to go into saturation. To do this, the input signal needs to be amplified a lot. So an amplifier is needed with a saturation block to clip the signal. This results in a distorted signal when you amplify the signal enough.
+
+When the signal is amplified enough to reach the saturation point it is being distorted. But it is also very loud. Therefore it is necessary to add an attenuator after the amplifier and saturation blocks. With this attenuator the user is able to adjust the audio level of the distorted signal back to a much more bearable audio level, without changing the amount of distortion. The VHDL code of this effect can be found in \nameref{}.
+
 \subsubsection{Flanger}
 A flanger effect delays each sample with a varying delay time adjusted by a sine wave. The delayed sample is then added to the original sample. The Simulink model of the flanger effect is seen in figure \ref{fig:flangersimulink}.
 
 \begin{figure}[ht]
+    \centering
     \includegraphics[width=0.5\linewidth]{flanger.png}
     \caption{Simulink model of a flanger effect}
     \label{fig:flangersimulink}
@@ -98,6 +100,7 @@ The chorus effect is created with similarities to the flanger effect. But instea
 The delay was the easiest of these effects to make. The delay adds a delayed sample to the original sound. The simulink model of the delay effect is seen in figure \ref{fig:delaysimulink}.
 
 \begin{figure}[ht]
+    \centering
     \includegraphics[width=0.5\linewidth]{delay.png}
     \caption{Simulink model of a delay}
     \label{fig:delaysimulink}

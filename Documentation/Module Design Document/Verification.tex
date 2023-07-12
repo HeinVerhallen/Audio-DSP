@@ -66,18 +66,30 @@ After doing visual inspection and vertical riser board inspection, it is safe to
 
 \subsection{Firmware}
 \subsubsection{I2S encoder and decoder}
-The results of this test can be found in figure \ref{fig:sim_result_i2s_dec_enc}. These results show that the I2S encoder and decoder work as expected. 
+The results of this test can be found in figure \ref{fig:sim_result_i2s_dec_enc} in \nameref{chap:appendix-G-simulation-results}. These results show that the I2S encoder and decoder work as expected. 
 
 \subsubsection{I2C master}
-The results can be seen in figure \ref{fig:sim_result_i2c-master}. In this result it can be seen that the I2C master works as expected according to the protocol standards.
+The results can be seen in figure \ref{fig:sim_result_i2c-master} in \nameref{chap:appendix-G-simulation-results}. In this result it can be seen that the I2C master works as expected according to the protocol standards.
+
+\subsubsection{Sampler}
+In order to be able to sample audio it is necessary to use both the I2S decoder and encoder and the I2C master. After both these blocks have been verified in the simulations, they have been tested together in the De1-SoC FPGA board to form a sampler. This sampler sampled the audio via the FPGA board, decoded the samples with the I2S decoder. Then the decoded data would simply go directly to the I2S encoder and after that to the DAC so it was possible to hear the audio that has been inputted in the FPGA board. It has been verified that this works on the De1-SoC FPGA board.
 
 \subsubsection{State-space BPF}
-For testing the state-space BPF it is very easy to see if it works by checking the frequency response. For the test a resonance frequency for BPF of 400Hz is chosen. Then the sine wave changes its frequency every 10ms. The frequency start at 25Hz and steps up in octaves. The end frequency is 51200Hz as this is far beyond the range of the sampling frequency. The result of this test is seen in \nameref{chap:appendix-G-simulation-results}. 
+For testing the state-space BPF it is very easy to see if it works by checking the frequency response. For the test a resonance frequency for BPF of 400Hz is chosen. Then the sine wave changes its frequency every 10ms. The frequency start at 25Hz and steps up in octaves. The end frequency is 51200Hz as this is far beyond the range of the sampling frequency. The result of this test is seen in figure \ref{fig:sim_result_bpf} in \nameref{chap:appendix-G-simulation-results}. 
 
 As expected, the amplitude of the sine wave at the matching resonance frequency of 400Hz is equal to the input amplitude. And when the frequency goes an octave lesser or higher in frequency the amplitude is $\frac{\sqrt{2}}{2}$ times the input amplitude (-3dB). This is a result that is expected from a BPF, therefore it is shown that the BPF works in simulation.
 
+Unfortunately the BPF is not able to work with real audio in the De1-SoC FPGA board for a yet unknown reason. Most likely it is caused by the fact the compiler programs the hardware in such a way that it gives an unexpected result. This could be caused by the use the fixed point package in VHDL, which is used for the computation in the BPF. To overcome this problem it is advised to design the fixed point notation and computation of the BPF from scratch to have full control over how the compiler programs the hardware. 
+
 \subsubsection{Effects}
 \paragraph{Volume control}
+In the simulation of the volume control effect a sine wave is continuously input to the effect and the gain parameter changes over time. The gain starts at the smallest amount of gain possible for the effect, e.g. -87dB and ends at the largest amount of gain possible for the effect, e.g. 40dB. Because the volume control has a saturation at the maximum and minimum of the variable range, it is expected that it will clip at too high gains. 
+
+The results of the volume control effect simulation can be seen in figure \ref{fig:sim_result_vol_ctrl} in \nameref{chap:appendix-G-simulation-results}. As can be seen the signal is being amplified correctly by the gain and the signal will be clipped at too high gains. Therefore it has been verified that the volume control effect works in simulation.
+
+The volume control has been tested with the De1-SoC FPGA board and the volume of the audio signal could be adjusted as expected. The test with the board consisted of the whole sampling system, e.g. I2S encoder, I2S decoder and I2C master blocks. 
+
+\paragraph{Delay}
 
 
 \section{Conclusions}
@@ -96,6 +108,9 @@ Due to the limited time, this verification has not yet been completed.
 Due to the limited time, this verification has not been done yet.
 
 \subsection{Firmware}
-The I2S decoder, I2S encoder and I2C master work as expected. Therefore it is possible to sample audio using the ADC and DAC of the FPGA board. This has been tested and verified that this works. 
+The I2S decoder, I2S encoder and I2C master work as expected. Therefore it is possible to sample audio using the ADC and DAC of the FPGA board. This has been tested and verified that this works on the De1-SoC FPGA board. 
 
-Due to time constrains further testing and implementation of the effects has not been conducted. 
+The BPF and volume control effect work in simulation as expected. Unfortunately only the volume control effect works with the whole sampling system on the De1-SoC FPGA board. 
+
+There where various unexpected and unknown bugs when trying to implement the system in the De1-SoC FPGA board. This could have been caused by the fact that most effects use the fixed point package for computing the variables in fixed point. But it could also be caused by the lack of memory capacity of the De1-SoC FPGA board. Therefore it is advised to first remake all the effects with a hand-written fixed point notation and computation VHDL code. And secondly it is advised to look into better FPGA boards that have much better computation power and memory capacity.
+

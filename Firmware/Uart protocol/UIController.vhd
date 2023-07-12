@@ -10,7 +10,7 @@ generic(
 	maxElements			: integer := 7;
 	settingsData		: integer := 143;
 	numberOfEffects		: integer := 5;
-	effectRegisterSize	: integer := 32;
+	effectRegisterSize	: integer := 32
 );
 
 port(
@@ -25,8 +25,8 @@ port(
 	loadbyte	: out std_logic;
 	TXData		: out std_logic_vector(7 downto 0);
 	param1		: out std_logic_vector(15 downto 0);
-	button		: out std_logic_vector(3 downto 0)
-	parameters	: OUT std_logic_vector(numberOfEffects*effectRegisterSize*numberOfChannels-1 downto 0); 	--ch1(159 downto 0). CH2(319 downto 160), CH3(479 downto 320), CH4(639 downto 480), CH5(799 downto 640), CH6(959 downto 800),
+	button		: out std_logic_vector(3 downto 0);
+	parameters	: OUT std_logic_vector(numberOfEffects*effectRegisterSize*numberOfChannels-1 downto 0) 	--ch1(159 downto 0). CH2(319 downto 160), CH3(479 downto 320), CH4(639 downto 480), CH5(799 downto 640), CH6(959 downto 800),
 	--inputselect	: OUT std_logic_vector(17 downto 0)		--CH1(2 downto 0), CH2(5 downto 3), CH3(8 downto 6), CH4(11 downto 9), CH5(14 downto 12), CH16(17 downto 15), 
 );
 
@@ -68,7 +68,7 @@ constant jackgain		: integer := 016;
 constant equalizer		: integer := 017;
 constant delay			: integer := 018;
 constant reverb			: integer := 019;
-constant channelvolume	: integer := 20;
+constant channelvolume	: integer := 020;
 
 constant presets		: integer := 021;
 constant loadpreset1	: integer := 022;
@@ -156,13 +156,13 @@ constant functions : pageArray := (
 	(CH1			,CH2			,CH3			,effects2		,homescreen		,0				,5),--11 effects1
 	(CH4			,CH5			,CH6			,effects1		,homescreen		,0				,5),--12 effects2
 	(equalizer		,gainselect		,delay			,effectselect2	,effects1		,0				,5),--13 effectselect1
-	(reverb			,channelvolume	,effectselect1	,effects1		,0				,0				,3),--14 effectselect2
+	(reverb			,channelvolume	,effectselect1	,effects1		,0				,0				,4),--14 effectselect2
 	(channelgain	,effectselect1	,0				,0				,0				,0				,2),--15 gain
 	(inputgain		,channelgain	,effectselect1	,0				,0				,0				,3),--16 jackgain
 	(f0				,f1				,f2				,f3				,f4				,effectselect1	,6),--17 equalizer
 	(dtime			,feedback		,mix			,effectselect1	,0				,0				,4),--18 Delay
 	(rLength		,rSize			,effectselect1	,0				,0				,0				,3),--19 Reverb
-	(channelvolume	,effectselect1	,0				,0				,0				,0				,2),--20 channelvolume
+	(chvolume		,effectselect1	,0				,0				,0				,0				,2),--20 channelvolume
 	(loadpreset1	,adjustpreset1	,homescreen		,0				,0				,0				,3),--21 presets
 	(preset1		,preset2		,preset3		,loadpreset2	,presets		,0				,4),--22 loadpreset1
 	(preset4		,preset5		,preset6		,loadpreset1	,presets		,0				,5),--23 loadpreset2
@@ -180,27 +180,25 @@ SIGNAL SM_RX 		: t_SM_RX := RECEIVING;
 procedure updateregister(
 	effect 											: inout effectArray;
 	size, offset, pressedfunction, activechannel	: in 	integer;
-	parameters 										: out 	std_logic_vector(numberOfEffects*effectRegisterSize*numberOfChannels-1 downto 0); 
+	count											: in	unsigned(31 downto 0)
 ) is
 
 	--give x a good descriptive name
 	constant x : integer := 126;
 	variable maxcount : unsigned(31 downto 0);
-	variable currenteffect : unsigned(31 downto 0);
 
 begin
 	maxcount := stepsize(pressedfunction-126);
-	currenteffect := effect(activechannel)(offset+size downto offset);
- 	if currenteffect > maxcount  then
-		effect(activechannel)(offset+size downto offset) := maxcount(size downto 0);
-	elsif currenteffect = maxcount and to_integer(count) = 1 then
-		effect(activechannel)(offset+size downto offset) := maxcount(size downto 0);
-	elsif currenteffect < "0" then
-		effect(activechannel)(offset+size downto offset) := (OTHERS => '0');
-	elsif currenteffect = "0" and to_integer(count) = 65535  then
-		effect(activechannel)(offset+size downto offset) := (OTHERS => '0');
+ 	if effect(activechannel)(offset+size-1 downto offset) > maxcount  then
+		effect(activechannel)(offset+size-1 downto offset) := maxcount(size-1 downto 0);
+	elsif effect(activechannel)(offset+size-1 downto offset) = maxcount and to_integer(count) = 1 then
+		effect(activechannel)(offset+size-1 downto offset) := maxcount(size-1 downto 0);
+	elsif effect(activechannel)(offset+size-1 downto offset) < "0" then
+		effect(activechannel)(offset+size-1 downto offset) := (OTHERS => '0');
+	elsif effect(activechannel)(offset+size-1 downto offset) = "0" and to_integer(count) = 65535  then
+		effect(activechannel)(offset+size-1 downto offset) := (OTHERS => '0');
 	else
-		effect(activechannel)(offset+size downto offset) = currenteffect + count(size downto 0);
+		effect(activechannel)(offset+size-1 downto offset) := effect(activechannel)(offset+size-1 downto offset) + count(size-1 downto 0);
  	end if;
 end procedure updateregister;
 
@@ -383,41 +381,32 @@ process( Clk, Nrst )
 			end if;
 			
 			--process button inputs
-			if pressInput = NOT pressState THEN
-				pressState := pressInput;
-				if pressState = '0' AND outputBufferLevel < bufferSize-10 THEN
-					pressedFunction := functions(currentPage, highlighted);
-					updatepage := 1;
-				end if;
+			if pressInput = '1' and outputBufferLevel < bufferSize-10 THEN
+				pressedFunction := functions(currentPage, highlighted);
+				updatepage := 1;
 			end if;
 			
-			if rightState = NOT rightInput THEN
-				rightState := rightInput;
-				if rightState = '0' THEN
-					--REPORT "navMenu: " & integer'IMAGE(navMenu);
-					if navMenu = 1 THEN
-						highlighted := (highlighted + 1) mod functions(currentPage, maxElements-1);
-					else
-						count := count + "0000000000000001";
-						updateparameter := 1;
-					end if;
-				end if;
-			end if;
-			
-			if leftState = NOT leftInput THEN
-				leftState := leftInput;
-				if leftState = '0' THEN
+			if rightInput = '1' THEN
 				--REPORT "navMenu: " & integer'IMAGE(navMenu);
-					if navMenu = 1 THEN
-						if highlighted >= 1 THEN
-							highlighted := highlighted - 1;
-						else
-							highlighted := functions(currentpage, maxElements-1) - 1;
-						end if;
+				if navMenu = 1 THEN
+					highlighted := (highlighted + 1) mod functions(currentPage, maxElements-1);
+				else
+					count := count + "0000000000000001";
+					updateparameter := 1;
+				end if;
+			end if;
+			
+			if leftInput = '1' then
+				--REPORT "navMenu: " & integer'IMAGE(navMenu);
+				if navMenu = 1 THEN
+					if highlighted >= 1 THEN
+						highlighted := highlighted - 1;
 					else
-						count := count - "0000000000000001";
-						updateparameter := 1;
+						highlighted := functions(currentpage, maxElements-1) - 1;
 					end if;
+				else
+					count := count - "0000000000000001";
+					updateparameter := 1;
 				end if;
 			end if;
 			
@@ -425,37 +414,47 @@ process( Clk, Nrst )
 				updatepage := 0;
 				highlighted := 0;
 				case pressedFunction is
-						when homescreen to adjustconfirm	=> 
+						when homescreen to adjustconfirm => 
 							pressedFunction := pressedFunction;
-						when RCA1 to USB 					=> 
+							
+						when RCA1 to USB => 
 							outputrouting(activechannel)(14 downto 11) := to_unsigned(pressedFunction - RCA1, 4);
 							pressedFunction := signalRouting;
-						when CH1 to CH6 					=> 	
+
+						when CH1 to CH6 => 	
 							activeChannel := pressedFunction - 117;
-							pressedFunction := effectselect1;										
-						when gainselect							=> 	
+							pressedFunction := effectselect1;
+
+						when gainselect	=> 	
 							if activeChannel = 3 OR activeChannel = 4 THEN
 								pressedFunction := jackgain;
 							else
 								pressedFunction := gain;
-							end if;										
-						when firstCH1 to firstCH6			=> 	
+							end if;		
+
+						when firstCH1 to firstCH6 => 	
 							activeChannel := pressedFunction - firstCH1;
 							pressedFunction := secondChannel1;
 																		
-						when secondCH1 to secondCH5			=> 	
+						when secondCH1 to secondCH5	=> 	
 							outputrouting(activeChannel)(2 downto 0) := to_unsigned(pressedfunction - secondCH1, 3); 
 							pressedFunction := signalRouting;
-						when inputgain to chvolume		=>
+
+						when inputgain to chvolume	=>
 							navMenu := (navMenu + 1) mod 2;
-						when preset1 to preset6				=> 	
+
+						when preset1 to preset6	=> 	
 							pressedFunction := loadconfirm;
+
 						when changepreset1 to changepreset6	=> 	
 							pressedFunction := adjustconfirm;
+
 						when confirmLoad to confirmAdjust	=> 	
 							pressedFunction := homescreen;
+
 						when others							=> 	
 							pressedFunction := homescreen;
+
 					end case;
 				
 				if pressedFunction < numberOfPages then
@@ -464,18 +463,12 @@ process( Clk, Nrst )
 				end if;
 			end if;
 			
---			if updateparameter = 1 THEN
---				updateparameter := 0;
-				
-				procedure updateregister(
-					effect 											: inout effectArray;
-					size, offset, pressedfunction, activechannel	: in 	integer;
-					parameters 										: out 	std_logic_vector(numberOfEffects*effectRegisterSize*numberOfChannels-1 downto 0); 
-				) is
-				updateregister()
+			if updateparameter = 1 THEN
+				updateparameter := 0;
 
---				case pressedfunction is
---					when inputgain =>
+				case pressedfunction is
+					--when inputgain =>
+						--updateregister(outputrouting, 8, 0, pressedfunction, activechannel, count);
 --						if outputrouting(activechannel)(7 downto 0) > stepsize(pressedFunction - inputgain) THEN
 --							outputrouting(activechannel)(7 downto 0) := stepsize(pressedFunction - inputgain)(7 downto 0);
 --						elsif outputrouting(activechannel)(7 downto 0) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
@@ -488,7 +481,8 @@ process( Clk, Nrst )
 --							parameterchanged := 1;
 --							outputrouting(activechannel)(7 downto 0) := outputrouting(activechannel)(7 downto 0) + count(7 downto 0);
 --						end if;
---					when f0	 =>
+				when f0	 =>
+					updateregister(EqualizerA, 6, 0, pressedfunction, activechannel, count);
 --						if EqualizerA(activechannel)(5 downto 0) > stepsize(pressedFunction - inputgain) THEN
 --							EqualizerA(activechannel)(5 downto 0) := stepsize(pressedFunction - inputgain)(5 downto 0);
 --						elsif EqualizerA(activechannel)(5 downto 0) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
@@ -502,7 +496,8 @@ process( Clk, Nrst )
 --							EqualizerA(activechannel)(5 downto 0) := EqualizerA(activechannel)(5 downto 0) + count(5 downto 0);
 --						end if;
 --						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-eqpos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*eqpos)) <= std_logic_vector(EqualizerA(activechannel));
---					when f1	 => 
+					when f1	 => 
+						updateregister(EqualizerA, 6, 6, pressedfunction, activechannel, count);
 --						if EqualizerA(activechannel)(11 downto 6) > stepsize(pressedFunction - inputgain) THEN
 --							EqualizerA(activechannel)(11 downto 6) := stepsize(pressedFunction - inputgain)(5 downto 0);
 --						elsif EqualizerA(activechannel)(11 downto 6) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
@@ -516,7 +511,8 @@ process( Clk, Nrst )
 --							EqualizerA(activechannel)(11 downto 6) := EqualizerA(activechannel)(11 downto 6) + count(5 downto 0);
 --						end if;
 --						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-eqpos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*eqpos)) <= std_logic_vector(EqualizerA(activechannel));
---					when f2	 => 
+					when f2	 => 
+						updateregister(EqualizerA, 6, 12, pressedfunction, activechannel, count);
 --						if EqualizerA(activechannel)(17 downto 12) > stepsize(pressedFunction - inputgain) THEN
 --							EqualizerA(activechannel)(17 downto 12) := stepsize(pressedFunction - inputgain)(5 downto 0);
 --						elsif EqualizerA(activechannel)(17 downto 12) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
@@ -530,7 +526,8 @@ process( Clk, Nrst )
 --							EqualizerA(activechannel)(17 downto 12) := EqualizerA(activechannel)(17 downto 12) + count(5 downto 0);
 --						end if;
 --						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-eqpos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*eqpos)) <= std_logic_vector(EqualizerA(activechannel));
---					when f3	 => 
+					when f3	 =>  
+						updateregister(EqualizerA, 6, 18, pressedfunction, activechannel, count);
 --						if EqualizerA(activechannel)(23 downto 18) > stepsize(pressedFunction - inputgain) THEN
 --							EqualizerA(activechannel)(23 downto 18) := stepsize(pressedFunction - inputgain)(5 downto 0);
 --						elsif EqualizerA(activechannel)(23 downto 18) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
@@ -544,7 +541,8 @@ process( Clk, Nrst )
 --							EqualizerA(activechannel)(23 downto 18) := EqualizerA(activechannel)(23 downto 18) + count(5 downto 0);
 --						end if;
 --						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-eqpos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*eqpos)) <= std_logic_vector(EqualizerA(activechannel));
---					when f4	 => 
+					when f4	 =>  
+						updateregister(EqualizerA, 6, 0, pressedfunction, activechannel, count);
 --						if EqualizerA(activechannel)(29 downto 24) > stepsize(pressedFunction - inputgain) THEN
 --							EqualizerA(activechannel)(29 downto 24) := stepsize(pressedFunction - inputgain)(5 downto 0);
 --						elsif EqualizerA(activechannel)(29 downto 24) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
@@ -558,7 +556,8 @@ process( Clk, Nrst )
 --							EqualizerA(activechannel)(29 downto 24) := EqualizerA(activechannel)(29 downto 24) + count(5 downto 0);
 --						end if;
 --						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-eqpos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*eqpos)) <= std_logic_vector(EqualizerA(activechannel));
---					when dtime => 
+					when dtime =>   
+						updateregister(DelayA, 12, 0, pressedfunction, activechannel, count);
 --						if DelayA(activechannel)(11 downto 0) > stepsize(pressedFunction - inputgain) THEN
 --							DelayA(activechannel)(11 downto 0) := stepsize(pressedFunction - inputgain)(11 downto 0);
 --						elsif DelayA(activechannel)(11 downto 0) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
@@ -572,7 +571,8 @@ process( Clk, Nrst )
 --							DelayA(activechannel)(11 downto 0) := DelayA(activechannel)(11 downto 0) + count(11 downto 0);
 --						end if;
 --						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-delaypos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*delaypos)) <= std_logic_vector(DelayA(activechannel));
---					when feedback => 
+					when feedback =>   
+						updateregister(DelayA, 12, 12, pressedfunction, activechannel, count);
 --						if DelayA(activechannel)(21 downto 12) > stepsize(pressedFunction - inputgain) THEN
 --							DelayA(activechannel)(21 downto 12) := stepsize(pressedFunction - inputgain)(9 downto 0);
 --						elsif DelayA(activechannel)(21 downto 12) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
@@ -586,7 +586,8 @@ process( Clk, Nrst )
 --							DelayA(activechannel)(21 downto 12) := DelayA(activechannel)(21 downto 12) + count(9 downto 0);
 --						end if;
 --						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-delaypos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*delaypos)) <= std_logic_vector(DelayA(activechannel));
---					when mix => 
+					when mix =>   
+						updateregister(DelayA, 10, 22, pressedfunction, activechannel, count);
 --						if DelayA(activechannel)(31 downto 22) > stepsize(pressedFunction - inputgain) THEN
 --							DelayA(activechannel)(31 downto 22) := stepsize(pressedFunction - inputgain)(9 downto 0);
 --						elsif DelayA(activechannel)(31 downto 22) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
@@ -600,7 +601,8 @@ process( Clk, Nrst )
 --							DelayA(activechannel)(31 downto 22) := DelayA(activechannel)(31 downto 22) + count(9 downto 0);
 --						end if;
 --						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-delaypos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*delaypos)) <= std_logic_vector(DelayA(activechannel));
---					when rlength => 
+					when rlength =>   
+						updateregister(ReverbA, 16, 0, pressedfunction, activechannel, count);
 --						if ReverbA(activechannel)(15 downto 0) > stepsize(pressedFunction - inputgain) THEN
 --							ReverbA(activechannel)(15 downto 0) := stepsize(pressedFunction - inputgain)(15 downto 0);
 --						elsif ReverbA(activechannel)(15 downto 0) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
@@ -614,7 +616,8 @@ process( Clk, Nrst )
 --							ReverbA(activechannel)(15 downto 0) := ReverbA(activechannel)(15 downto 0) + count(15 downto 0);
 --						end if;
 --						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-reverbpos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*reverbpos)) <= std_logic_vector(ReverbA(activechannel));
---					when rsize => 
+					when rsize =>   
+						updateregister(ReverbA, 16, 16, pressedfunction, activechannel, count);
 --						if ReverbA(activechannel)(31 downto 16) > stepsize(pressedFunction - inputgain) THEN
 --							ReverbA(activechannel)(31 downto 16) := stepsize(pressedFunction - inputgain)(15 downto 0);
 --						elsif ReverbA(activechannel)(31 downto 16) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
@@ -628,7 +631,8 @@ process( Clk, Nrst )
 --							ReverbA(activechannel)(31 downto 16) := ReverbA(activechannel)(31 downto 16) + count(15 downto 0);
 --						end if;
 --						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-reverbpos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*reverbpos)) <= std_logic_vector(ReverbA(activechannel));
---					when channelvolume =>
+					when channelvolume =>  
+						updateregister(VolumeA, 32, 0, pressedfunction, activechannel, count);
 --						if VolumeA(activechannel)(31 downto 0) > stepsize(pressedFunction - inputgain) THEN
 --							VolumeA(activechannel)(31 downto 0) := stepsize(pressedFunction - inputgain)(31 downto 0);
 --						elsif VolumeA(activechannel)(31 downto 0) > stepsize(pressedFunction - inputgain) AND to_integer(count) = 1 THEN
@@ -642,10 +646,10 @@ process( Clk, Nrst )
 --							VolumeA(activechannel)(31 downto 0) := ReverbA(activechannel)(31 downto 0) + count(31 downto 0);
 --						end if;
 --						parameters((numberOfEffects*effectRegisterSize+activechannel*numberOfEffects*effectRegisterSize) - (effectregistersize*(numberOfEffects-1-volumepos)) downto (activechannel*numberOfEffects*effectRegisterSize) + (effectRegisterSize*volumepos)) <= std_logic_vector(VolumeA(activechannel));
---					when others =>
---				end case;
---				count := "00000000000000000000000000000000";
---			end if;
+					when others =>
+				end case;
+				count := "00000000000000000000000000000000";
+			end if;
 
 			--output the data from the outputBuffer
 			case SM_TX is

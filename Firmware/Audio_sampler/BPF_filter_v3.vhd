@@ -163,9 +163,9 @@ begin
             fl_coef_Bd      := (resize(coef_B(0)*sample_time, 31, -32), resize(coef_B(1)*sample_time, 31, -32));
 
             --reset state matrix
-            for i in 0 to 1 loop
-                state(i) := to_sfixed(0.0, 31, -32);
-            end loop;
+            --for i in 0 to 1 loop
+            --    state(i) := to_sfixed(0.0, 31, -32);
+            --end loop;
 
             --Compute AT + A^2*T^2/2 + ...
             compute_Ad_and_Bd_nrst : for i in 0 to 10 loop
@@ -200,65 +200,65 @@ begin
             --Set output available low
             finished := '0';
 
-            --if (unsigned_gain /= unsigned('0' & param)) then
-            --    unsigned_gain := unsigned('0' & param);
+            if (unsigned_gain /= unsigned('0' & param)) then
+                unsigned_gain := unsigned('0' & param);
 
-            --    --Compute gain from dB input. Compensate the -6dB point at res_freq by multiplying by 2
-            --    --gain := to_sfixed(2.0, 31, -32) * (to_sfixed(10.0, 31, -32) ** ((to_sfixed(to_integer(unsigned(param)), 31, -32) - to_sfixed(32.0, 31, -32)) / to_sfixed(20.0, 31, -32)));
-            --    --gain := to_sfixed(2.0 * 10.0 ** ((real(to_integer(unsigned(param))) - 32.0) / 20.0), 31, -31);
-            --    --gain := lookup_gain(to_integer(unsigned(param)));
-            --    gain := to_sfixed(2.0, 31, -32);
+                --Compute gain from dB input. Compensate the -6dB point at res_freq by multiplying by 2
+                --gain := to_sfixed(2.0, 31, -32) * (to_sfixed(10.0, 31, -32) ** ((to_sfixed(to_integer(unsigned(param)), 31, -32) - to_sfixed(32.0, 31, -32)) / to_sfixed(20.0, 31, -32)));
+                --gain := to_sfixed(2.0 * 10.0 ** ((real(to_integer(unsigned(param))) - 32.0) / 20.0), 31, -31);
+                gain := lookup_gain(to_integer(unsigned(param)));
+                --gain := to_sfixed(2.0, 31, -32);
 
-            --    --Compute new coefficients
-            --    coef_A := (resize(-twoPI*to_sfixed(freq_res, 31, -32), 31, -32), to_sfixed(0.0, 31, -32), resize(-gain*twoPI*to_sfixed(freq_res, 31, -32), 31, -32), resize(-twoPI*to_sfixed(freq_res, 31, -32), 31, -32));
-            --    coef_B := (resize(twoPI*to_sfixed(freq_res, 31, -32), 31, -32), resize(gain*twoPI*to_sfixed(freq_res, 31, -32), 31, -32));
+                --Compute new coefficients
+                coef_A := (resize(-twoPI*to_sfixed(freq_res, 31, -32), 31, -32), to_sfixed(0.0, 31, -32), resize(-gain*twoPI*to_sfixed(freq_res, 31, -32), 31, -32), resize(-twoPI*to_sfixed(freq_res, 31, -32), 31, -32));
+                coef_B := (resize(twoPI*to_sfixed(freq_res, 31, -32), 31, -32), resize(gain*twoPI*to_sfixed(freq_res, 31, -32), 31, -32));
 
-            --    --Initialize discrete coefficient matrices
-            --    coef_A_pow      := coef_A;
-            --    fl_coef_Ad      := identity_matrix;
-            --    fl_coef_Bd      := (resize(coef_B(0)*sample_time, 31, -32), resize(coef_B(1)*sample_time, 31, -32));
+                --Initialize discrete coefficient matrices
+                coef_A_pow      := coef_A;
+                fl_coef_Ad      := identity_matrix;
+                fl_coef_Bd      := (resize(coef_B(0)*sample_time, 31, -32), resize(coef_B(1)*sample_time, 31, -32));
 
-            --    factorial       := to_sfixed(1.0, 31, -32);
-            --    sample_time_pow := sample_time;
+                factorial       := to_sfixed(1.0, 31, -32);
+                sample_time_pow := sample_time;
 
-            --    --reset state matrix
-            --    for i in 0 to 1 loop
-            --        state(i) := to_sfixed(0.0, 31, -32);
-            --    end loop;
+                --reset state matrix
+                --for i in 0 to 1 loop
+                --    state(i) := to_sfixed(0.0, 31, -32);
+                --end loop;
 
-            --    --Compute AT + A^2*T^2/2 + ...
-            --    compute_Ad_and_Bd : for i in 0 to 10 loop
+                --Compute AT + A^2*T^2/2 + ...
+                compute_Ad_and_Bd : for i in 0 to 10 loop
 
-            --        --Compute Resulting Ad and Bd
-            --        for j in 0 to 1 loop
-            --            --Compute Bd
-            --            fl_coef_Bd(j) := resize(fl_coef_Bd(j) + (((coef_A_pow(j*2)*coef_B(0) + coef_A_pow(j*2+1)*coef_B(1))*sample_time_pow*sample_time)/(factorial * to_sfixed((i+2), 31, -32))), 31, -32);
+                    --Compute Resulting Ad and Bd
+                    for j in 0 to 1 loop
+                        --Compute Bd
+                        fl_coef_Bd(j) := resize(fl_coef_Bd(j) + (((coef_A_pow(j*2)*coef_B(0) + coef_A_pow(j*2+1)*coef_B(1))*sample_time_pow*sample_time)/(factorial * to_sfixed((i+2), 31, -32))), 31, -32);
 
-            --            for k in 0 to 1 loop
-            --                --Compute Ad
-            --                fl_coef_Ad(j*2+k) := resize(fl_coef_Ad(j*2+k) + ((coef_A_pow(j*2+k)*sample_time_pow)/factorial), 31, -32);
-            --            end loop;
-            --        end loop;
+                        for k in 0 to 1 loop
+                            --Compute Ad
+                            fl_coef_Ad(j*2+k) := resize(fl_coef_Ad(j*2+k) + ((coef_A_pow(j*2+k)*sample_time_pow)/factorial), 31, -32);
+                        end loop;
+                    end loop;
 
-            --        --Compute A to the power of n in temporary matrix 
-            --        for j in 0 to 1 loop
-            --            for k in 0 to 1 loop
-            --                coef_temp_A_pow(j*2+k) := resize(coef_A_pow(j*2)*coef_A(k) + coef_A_pow(j*2+1)*coef_A(2+k), 31, -32);
-            --            end loop;
-            --        end loop;
+                    --Compute A to the power of n in temporary matrix 
+                    for j in 0 to 1 loop
+                        for k in 0 to 1 loop
+                            coef_temp_A_pow(j*2+k) := resize(coef_A_pow(j*2)*coef_A(k) + coef_A_pow(j*2+1)*coef_A(2+k), 31, -32);
+                        end loop;
+                    end loop;
 
-            --        --Copy temp to power of A matrix
-            --        coef_A_pow := coef_temp_A_pow;
+                    --Copy temp to power of A matrix
+                    coef_A_pow := coef_temp_A_pow;
 
-            --        --Compute T^n and n!
-            --        sample_time_pow := resize(sample_time_pow*sample_time, 31, -32);
-            --        factorial       := resize(factorial * to_sfixed((i+2), 31, -32), 31, -32);
+                    --Compute T^n and n!
+                    sample_time_pow := resize(sample_time_pow*sample_time, 31, -32);
+                    factorial       := resize(factorial * to_sfixed((i+2), 31, -32), 31, -32);
 
-            --    end loop compute_Ad_and_Bd;
+                end loop compute_Ad_and_Bd;
 
             --sample is available and process is not currently active
-            --elsif (i_avail = '1') then
-            if (i_avail = '1') then
+            elsif (i_avail = '1') then
+            --if (i_avail = '1') then
                 for i in 0 to 1 loop
                     temp_state(i) := resize(resize(fl_coef_Ad(i*2)*state(0), 31, -32) + resize(fl_coef_Ad(i*2+1)*state(1), 31, -32) + resize(fl_coef_Bd(i)*to_sfixed(to_integer(signed(d_in)), 31, -32), 31, -32), 31, -32);
                 end loop;

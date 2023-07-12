@@ -15,7 +15,7 @@
 
 -- PROGRAM		"Quartus Prime"
 -- VERSION		"Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition"
--- CREATED		"Tue Jul 11 19:11:59 2023"
+-- CREATED		"Wed Jul 12 09:33:56 2023"
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all; 
@@ -31,8 +31,10 @@ ENTITY rotaryknob IS
 		Nrst :  IN  STD_LOGIC;
 		clk :  IN  STD_LOGIC;
 		press :  OUT  STD_LOGIC;
-		left :  OUT  STD_LOGIC;
-		right :  OUT  STD_LOGIC
+		right :  OUT  STD_LOGIC;
+		a :  OUT  STD_LOGIC;
+		b :  OUT  STD_LOGIC;
+		left_left :  OUT  STD_LOGIC
 	);
 END rotaryknob;
 
@@ -69,6 +71,8 @@ SIGNAL	SYNTHESIZED_WIRE_1 :  STD_LOGIC;
 
 
 BEGIN 
+a <= SYNTHESIZED_WIRE_0;
+b <= SYNTHESIZED_WIRE_1;
 
 
 
@@ -98,7 +102,7 @@ PORT MAP(Nrst => Nrst,
 		 Clk => clk,
 		 A => SYNTHESIZED_WIRE_0,
 		 B => SYNTHESIZED_WIRE_1,
-		 LeftOut => left,
+		 LeftOut => left_left,
 		 RightOut => right);
 
 

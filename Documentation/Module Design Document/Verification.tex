@@ -27,7 +27,9 @@ For testing the I2S decoder and encoder, they are wired in series. So when a ran
 The I2C master is tested by simply writing and reading data with the protocol and verifying that the protocol works correctly according to the I2C protocol standards. 
 
 \subsubsection{State-space BPF}
-The state-space BPF is tested by inputting a sine wave outputted from a sine wave generator. By using a sine wave as an input it is very easy to expect the outcome. For instance when having the BPF resonance frequency at 1kHz and inputting a 1kHz sine wave, it is expected that the output sine wave has no attenuation compared to the input sine wave. And when the frequency of the input sine wave does not match that of the BPF resonance frequency, it will be attenuated. 
+The state-space BPF is tested by inputting a sine wave outputted from a sine wave generator. By using a sine wave as an input it is very easy to expect the outcome. For instance when having the BPF resonance frequency at 1kHz and inputting a 1kHz sine wave, it is expected that the output sine wave has the same amplitude compared to the input sine wave. And when the frequency of the input sine wave does not match that of the BPF resonance frequency, it will be attenuated. 
+
+The best way to check if the band-pass filter works is by changing the frequency of the input sine wave over time to create a kind of frequency spectrum of the band-pass filter response. 
 
 \section{Results}
 
@@ -75,6 +77,9 @@ The results can be seen in figure \ref{fig:i2c-master}. In this result it can be
 
 \subsubsection{State-space BPF}
 Due to time constrains the BPF has not yet been tested in Modelsim. 
+
+\subsubsection{Effects}
+
 
 \section{Conclusions}
 

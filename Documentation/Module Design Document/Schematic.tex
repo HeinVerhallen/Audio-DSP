@@ -12,7 +12,7 @@ The calculations made for the buck converters can be found in appendix \ref{Appe
 \subsubsection{Single-ended primary-inductor converter}
 The following text relates to the schematic displayed in appendix \ref{Appendix_SEPIC_schematic}.
 
-A SEPIC (Single-ended primary-inductor converter) is based on the LT3579 from Analog Devices. This choice was primarily made due to its availability and relatively high allowable voltage drop of 40V between the input and output. The relatively high allowable voltage drop is crucial because the SEPIC is used to generate a negative voltage, and the voltage drop encompasses the input voltage plus the output voltage. Many of the available SEPIC controllers had a maximum allowable voltage drop of 30V or less, which is too tight for this application as it leaves virtually no margin.
+A SEPIC (single-ended primary-inductor converter) is based on the LT3579 from Analog Devices. This choice was primarily made due to its availability and relatively high allowable voltage drop of 40 V between the input and output. The relatively high allowable voltage drop is crucial because the SEPIC is used to generate a negative voltage, and the voltage drop encompasses the input voltage plus the output voltage. Many of the available SEPIC controllers had a maximum allowable voltage drop of 30 V or less, which is too tight for this application as it leaves virtually no margin.
 
 The calculations made for the SEPIC can be found in appendix \ref{Appendix_SEPIC_calculations}
 
@@ -21,18 +21,37 @@ The following text relates to the schematic displayed in appendix \ref{Appendix_
 
 The discrete low-noise linear regulator is symmetrically constructed, and thus only one half is described. Firstly, the regulator consists of a capacitance multiplier. Effectively, this circuit behaves like an RC low-pass filter, where the capacitance of the capacitor is determined by the capacitance at the base of the transistor multiplied by the hFE (current gain) of the transistor. This allows for achieving a very low corner frequency without using high resistance values or very large and expensive capacitors. Both options are undesirable due to either the maximum current or the price and size considerations.
 
-
 The cutoff frequency of a standard RC filter can be calculated as shown in \ref{eq:fc_RC}.
 \begin{equation}
     fc=\frac{1}{2 \pi R C}
     \label{eq:fc_RC}
 \end{equation}
 
-The cutoff frequency of the capacitance multiplier can be calculated as shown in \ref{eq:fc_cap_mul}:
+The cutoff frequency of a capacitance multiplier can be calculated as shown in \ref{eq:fc_cap_mul}:
 \begin{equation}
     fc=\frac{1}{2 \pi R C \beta}
     \label{eq:fc_cap_mul}
 \end{equation}
+
+A second-order capacitance multiplier was utilized to further enhance the damping of the power ripple while avoiding excessive voltage drop across the capacitance multiplier or the need for unnecessarily large components.
+
+Then the circuit has a buffer capacitor C9 which buffers the voltage.
+
+Q2 and Q3, together with R2 and R1, form a current source where the current can be set by means of R1. The current through D1 can be calculated as shown in \ref{eq:ILED}.
+\begin{equation}
+    ID1=\frac{VBEQ2}{R1}
+    \label{eq:ILED}
+\end{equation}
+
+The reference voltage of the voltage follower is created by LED D1. A red LED is used because LEDs of this color produce the least amount of noise. The disadvantage of using an LED instead of, for example, a zenerdiode is that the absolute accuracy of the power supply is not optimal. The output voltage depends on the current flowing through the LED and the temperature of the LED. However, a zenerdiode is highly unsuitable for this application due to the large amount of noise it produces. By using a current source, the forward voltage of the LED and hence the output voltage remains stable regardless of any fluctuations in the input voltage.
+
+U1A is an OpAmp configured as a voltage follower, which provides the stabilized voltage by following the constant voltage across D1. The LM4562 from Texas Instruments was chosen for its excellent performance and relatively low price. Its key features include a low THD+N of 0.00003 \% typical in 600 Ω and a gain bandwidth product (GBW) of 55 MHz.This OpAmp cannot deliver the required output current of 500 mA, so it is equipped with transistor Q4, which amplifies the current.
+
+R6 and R7 form a voltage divider that provides negative feedback by feeding back the output voltage to the inverting input of the OpAmp. Capacitor C2 is necessary to stabilize the circuit across different loads and frequencies of the output current.
+
+C2 limits the bandwidth of the power supply, preventing it from oscillating due to high-frequency variations in the output current.
+
+C10 is a buffer capacitor that further lowers the output noise of this circuit and ensures that the output of this power supply remains low impedance. It also serves as an energy reservoir for supplying additional current to the output when needed.
 
 \subsubsection{Main board}
 The following text relates to the schematic displayed in appendix \ref{Appendix_main_schematic}.
@@ -48,7 +67,6 @@ The balanced LPF is built around the OPA1632 FDA (fully differential amplifier).
 The outputs of the PGA2311P are also simultaneously tapped for the VU metering, which each consist of a precision rectifier and four comparators.
 
 The ADC is equipped with EMI reduction resistors to limit the noise caused by the relatively high dv/dt of the I2S bus.
-
 
 Furthermore, the entire analog section of the main board schematic is implemented differentially. This has been achieved, where necessary, by placing 0-ohm resistors to strategically connect the signals to ground, allowing the differential amplifiers to ensure that the voltages at desired locations are precisely as intended. 
 This reduces the sensitivity of the circuits to noise and ground loops significantly.

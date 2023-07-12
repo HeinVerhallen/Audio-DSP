@@ -416,6 +416,10 @@ process( Clk, Nrst )
 				case pressedFunction is
 						when homescreen to adjustconfirm => 
 							pressedFunction := pressedFunction;
+
+						when channel1 to channel6 => 
+							activechannel := pressedfunction - channel1 + 1;
+							pressedFunction := outputrouting1;
 							
 						when RCA1 to USB => 
 							outputrouting(activechannel)(14 downto 11) := to_unsigned(pressedFunction - RCA1, 4);

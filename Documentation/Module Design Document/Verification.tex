@@ -38,25 +38,23 @@ All the effects are tested by inputting a sine wave to the effect and looking at
 
 \subsection{Hardware}
 
-\subsubsection{Buck}
-Due to the limited time, this verification has not been done yet.
 
-\subsubsection{Linear voltage regulator}
-After conducting a thorough visual inspection, it became apparent that a thorough cleaning of the PCBA was necessary. This was because the solder paste used left behind a significant amount of residue. Therefore, the linear voltage regulators were cleaned in an ultrasonic cleaner.
 
-Subsequently, the linear regulators were connected to a lab power supply with current limiting. However, it quickly became evident that the regulators were not functioning properly. After performing several simulations in LTspice, it was suspected that the LEDs, which serve as low-noise voltage references, might have been soldered incorrectly. However, after consulting the datasheet again with several group members, it was confirmed that the LEDs were indeed soldered correctly according to the datasheet.
-
-Since no other plausible causes emerged after further investigation, it was decided to desolder one of the LEDs and measure it out of circuit using a multimeter to determine its polarity and threshold voltage. To the astonishment of the group, it was discovered that the Broadcom datasheet for the HSMH-C170 LED did not match the LEDs actually supplied. The polarity marking in the datasheet was the exact opposite of the actual component. It is unknown whether an incorrect batch was delivered or if the datasheet itself is genuinely incorrect.
-%https://nl.mouser.com/datasheet/2/678/AV02_0551EN_DS_HSMx_Cxxx_25Mar2022-1827675.pdf
 
 \subsubsection{Main board}
-\paragraph{inspection} Before connecting every module together and placing every component on the main board it is indeed ascertain that the board has flux and solder paste residue together with solder balls that can cause short circuits, therefore the PCBA will be cleaned in the ultrasonic bath, before doing this it is important to know which components are suitable for this. The relays and electrolytic capacitors are not suitable for this, therefore they are soldered after cleaning.  visual inspection has been done on the main board and the power delivery modules. In the second visual inspection there are no signs of shorts and the components are connected properly.
+\paragraph{Inspection} Before connecting every module together and placing every component on the main board it is indeed ascertain that the board has flux and solder paste residue together with solder balls that can cause short circuits, therefore the PCBA will be cleaned in the ultrasonic bath, before doing this it is important to know which components are suitable for this. The relays and electrolytic capacitors are not suitable for this, therefore they are soldered after cleaning.  visual inspection has been done on the main board and the power delivery modules. In the second visual inspection there are no signs of shorts and the components are connected properly.
 \paragraph{Visual inspection} 
 
 Before connecting every module together and placing every component on the main board it is indeed ascertain that the board has flux and solder paste residue together with solder balls that can cause short circuits, therefore the PCBA will be cleaned in the ultrasonic bath, before doing this it is important to know which components are suitable for this. The relays and electrolytic capacitors are not suitable for this, therefore they are soldered after cleaning.  visual inspection has been done on the main board and the power delivery modules. In the second visual inspection there are no signs of shorts and the components are connected properly.
 
 \paragraph{Vertical riser board}
-The vertical riser boards have to be tested before placing it on the main board. These have been tested individually on ripple(not for the linear regulators, no equipment available to measure), output voltage and temperature. See \ref{Appendix-Vertical riser boards} Vertical riser boards in chapter \ref{chap:Appendix-Verification} verification for the outcomes. For the Sepic the output ripple is ~5mV and output is -15.11V which is within specs, the temperature is 70°C at 1A which is feasible but if there is more power required an extra fan can be attached to cool the converter more. The buck converters(see \ref{pdf:5V Buck converter} 5V buck - \ref{pdf:15V Buck converter} 15V buck) in the beginning all had an output of ~1v. This was because the feedback resistors were exchanged together. Therefore they had to be exchanged again and the problem is solved. The output voltage of all the buck converters are within spec. The ripple is ~8-10mV which is also within spec range. The temperature of all the buck converters are below 45°C at 1A. The output of the linear regulators (see \ref{pdf:12V linear regulator-1}12V lin reg up and till \ref{pdf:5V linear regulator-2}5V lin reg) are within specs and the temperature is 80°C at 1A, they won't be conducting more current than that so the temp is within spec range.
+The vertical riser boards have to be tested before placing it on the main board. These have been tested individually on ripple(not for the linear regulators, no equipment available to measure), output voltage and temperature. See \ref{Appendix-Vertical riser boards} Vertical riser boards in chapter \ref{chap:Appendix-Verification} verification for the outcomes.  \subparagraph{SEPIC} For the SEPIC the output ripple is ~5mV and output is -15.11V which is within specs, the temperature is 70°C at 1A which is feasible but if there is more power required an extra fan can be attached to cool the converter more. 
+\subparagraph{Buck converters} The buck converters(see \ref{pdf:5V Buck converter} 5V buck - \ref{pdf:15V Buck converter} 15V buck) in the beginning all had an output of ~1v. This was because the feedback resistors were exchanged together. Therefore they had to be exchanged again and the problem is solved. The output voltage of all the buck converters are within spec. The ripple is ~8-10mV which is also within spec range. The temperature of all the buck converters are below 45°C at 1A. 
+\subparagraph{Linear voltage regulators} After performing several simulations in LTspice, it was suspected that the LEDs, which serve as low-noise voltage references, might have been soldered incorrectly. However, after consulting the datasheet again with several group members, it was confirmed that the LEDs were indeed soldered correctly according to the datasheet.
+
+Since no other plausible causes emerged after further investigation, it was decided to desolder one of the LEDs and measure it out of circuit using a multimeter to determine its polarity and threshold voltage. To the astonishment of the group, it was discovered that the Broadcom datasheet for the HSMH-C170 LED did not match the LEDs actually supplied. The polarity marking in the datasheet was the exact opposite of the actual component. It is unknown whether an incorrect batch was delivered or if the datasheet itself is genuinely incorrect.
+%https://nl.mouser.com/datasheet/2/678/AV02_0551EN_DS_HSMx_Cxxx_25Mar2022-1827675.pdf
+The output of the linear regulators (see \ref{pdf:12V linear regulator-1}12V lin reg up and till \ref{pdf:5V linear regulator-2}5V lin reg) are within specs and the temperature is 80°C at 1A, they won't be conducting more current than that so the temp is within spec range.
 
 \paragraph{Main board power}
 The PCBA is inspected and no short circuit is detected. The next step is to check all the power modules within the PCBA with current limiting, so that the board will not be catch on fire if there is somehow still a short. This has been done with a power supply limited to 1A. All the power rails are tested and every power delivery module is working properly at the desired voltage. The 12V buck converter that is going to the FPGA is tested separately first with four 33 resistors connected in parallel which will give 1.5A of current at 12V. The buck is still below 50°C. Therefore it is safe to power the fpga with the 12V buck converter
@@ -80,17 +78,28 @@ The results can be seen in figure \ref{fig:sim_result_i2c-master}. In this resul
 
 \subsection{Hardware}
 
-\subsubsection{Buck}
-Due to the limited time, this verification has not been done yet.
-
-\subsubsection{SEPIC}
-The SEPIC appears to be functioning well after some quick measurements. With an input voltage of +12V, it generates a stable -15V output voltage, and the voltage ripple remains nearly constant regardless of the output current. This aligns with the calculations and simulations. Additionally, the amplitude of the output ripple voltage closely matches the calculated and simulated values.
-
-\subsubsection{Linear voltage regulator}
-Due to the limited time, this verification has not yet been completed.
-
 \subsubsection{Main board}
 Due to the limited time, this verification has not been done yet.
+\paragraph{SEPIC}
+The SEPIC appears to be functioning well after some quick measurements. With an input voltage of +12V, it generates a stable -15V output voltage, and the voltage ripple remains nearly constant regardless of the output current. This aligns with the calculations and simulations. Additionally, the amplitude of the output ripple voltage closely matches the calculated and simulated values.
+
+\paragraph{Linear voltage regulator}
+The linear voltage regulator appears to be functioning as intended, the 5V regulators powered by the +8V input of the buck converter, the +12V linear regulators are powered by +-15V buck converters and have all the desired output voltage. These are:
+ 
+All of these linear regulators have been tested and verified. This can be viewed in \ref{Appendix-Vertical riser boards} Vertical riser boards. The voltages and temperatures are well within desired specs. The output ripple is not measurable with the equipment we have on school so these cannot be verified.
+
+\paragraph{Buck converters}
+The buck converters appears to be functioning as intended, all of the buck converters are powered by the +24V input of the power supply and have all the desired output voltage. These are:
+\begin{itemize}
+\item 5V buck converter
+\item 8V buck converter
+\item 2x 12V buck converter
+\item 15V buck converter
+\end{itemize}  
+All of these buck converters have been tested and verified. This can be viewed in \ref{Appendix-Vertical riser boards} Vertical riser boards. The voltages and temperatures are well within desired specs. The output ripple is ~8-10mV respectivly which is very close to what the datasheet has provided. 
+
+\paragraph{Main board}
+The board cannot be tested further than the power supplies, because the clock is not giving the desired output. This gives a bottleneck to test all the other components and IC's.
 
 \subsection{Firmware}
 The I2S decoder, I2S encoder and I2C master work as expected. Therefore it is possible to sample audio using the ADC and DAC of the FPGA board. This has been tested and verified that this works. 

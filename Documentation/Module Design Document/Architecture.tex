@@ -39,7 +39,7 @@ In figure \ref{fig:arch-top} you see the architecture design of the Audio-DSP. C
 
 The MUX in each of the signal processor managers is controlled via a 3-bit select line. This select line comes from the controller. For the controller to be able to handle all the multiplexers in each signal processor manager, 3-bits $\cdot$ 6 channels = 18 bits are needed. To select the RCA or 6.35mm jack input a 2-bit line select is used.
 
-\bf{Dit met parameters uitleg nog veranderen!}
+*Dit met parameters uitleg nog veranderen!*
 
 In the signal processor block there are effects that modify the chosen input signal. These modification can be configured by using parameters. Each effect has its own parameters, e.g. a delay effect has the parameters delay time and feedback. For simplicity the size of the parameter data bus is 32-bit, which is the same size as an integer type. This makes calculations much simpler. If the project is able to meet all the requirements regarding the amount of effects, each channel would have 20 effects. Each effects then has a parameter bus of 32-bit, resulting in a parameters bus going to the signal processor block with a size equal to: $32\cdot20=640 bits$. The controller needs to send all the parameters to all the signal processors, as there are six channels the amount of data the controller needs to send over the parameters bus is equal to $640\cdot6=3840 bits$. 
 

@@ -13,6 +13,8 @@ The design was started with a diagram with all the necessary screens and informa
 
 The channel based layout is a layout where the user first selects the main functionality (signal routing, effects or presets) and after that selects the channel giving the user specific controls for the selected channel all in one place. Lets take a look at the previous example in the function based layout. In this case the user would navigate to the effect section, than select the channel to modify and lastly selecting the effect, in this case the equalizer.
 
+The final UI design is shown in \nameref{chap:appendix-D-UIdesign}.
+
 \begin{figure}[ht]
     \includegraphics[width=\linewidth]{functionbasedUI}
     \caption{Function Based UI Design for a liquidCrystal screen}
@@ -42,8 +44,14 @@ The TX block is capable of sending a single byte at a time. When the ready line 
 \paragraph{RX}
 The RX block is capable of receiving a single byte at a time. When a full byte has been received the data gets put on the Byte line and the ready line will be high for a single clock cycle.
 
-\paragraph{Memory}
-The memory block is a simple register which stores frames of 32 bits at an address. It has 7 bit addresses meaning 128 frames can be stored, which is enough to hold the 120 frames which are necessary to store the 120 effect parameters.
+\paragraph{Rotary decoder}
+The function of the rotary decoder is to translate the rotary knobs signals to signals the menu controller understands, meaning the output of the decoder is a pulse when the knob is either turned to the right, turned to the left or pressed. \ref{fig:rotary-decoder} shows the diagram of the decoder. there are 2 different debounce blocks, because the rotary encoder signals need to be detected on both the rising edge, as well as the falling edge. The push input only needs to be detected on the rising edge and ignored on the falling edge. The decoder block determines the direction the rotary knob is turned.
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{rotaryknob.jpg}
+    \caption{block diagram of the rotary decoder}
+    \label{fig:rotary-decoder} 
+\end{figure}
 
 \paragraph{Nextion screen}
 The nextion screen used in this project is an 3,5" discovery version screen with 320x480 pixels. The screen has its own controller which is responsible for handling incoming commands, send commands when the screen is touched and most importantly load the menu's to the screen. Figure \ref{fig:mainmenu} shows the home screen of the UI. These screens are designed in Adobe and imported to the Nextion environment with invisible buttons on top of the image.

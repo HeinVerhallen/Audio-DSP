@@ -28,8 +28,8 @@ Architecture arch of initializer is
     constant reg_ADC_path       : std_logic_vector(15 downto 0) := x"0850"; --disable boost, mute, bypass and sidetone, line input select to ADC, select DAC, -9dB side tone attenuation
     constant reg_DAC_path       : std_logic_vector(15 downto 0) := x"0a06"; --disable boost, mute, bypass and sidetone, line input select to ADC, select DAC, -9dB side tone attenuation
     constant reg_data_format    : std_logic_vector(15 downto 0) := x"0e4a"; --i2s-format, 24-bit, enable master mode
-    --constant reg_sample_ctrl    : std_logic_vector(15 downto 0) := x"101c"; --96kHz
-    constant reg_sample_ctrl    : std_logic_vector(15 downto 0) := x"1000"; --48kHz
+    constant reg_sample_ctrl    : std_logic_vector(15 downto 0) := x"101c"; --96kHz
+    --constant reg_sample_ctrl    : std_logic_vector(15 downto 0) := x"1000"; --48kHz
     constant reg_activate       : std_logic_vector(15 downto 0) := x"1201"; --activate sampling
     constant reg_power_init     : std_logic_vector(15 downto 0) := x"0c10"; --all power on except OUTPD
     constant reg_power_on       : std_logic_vector(15 downto 0) := x"0c00"; --all power on

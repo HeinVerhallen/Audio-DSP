@@ -1,3 +1,12 @@
-Because of time constrains the project is not yet finished. Some parts have been tested and work as expected. But most parts of the project including the main board and the firmware have not been finished according to the planning.
+Due to time constraints and unexpected and unknown bugs in the FPGA board the project could not be finished within time. Most parts have been tested and work as expected, but some parts still have to be implemented and tested. More time is needed to finish the project.
 
-So more time is needed to finish the PCBs and assemble the Audio-DSP. As a recommendation regarding the firmware, it would have been a better approach to not use FFT as a processing method but use the direct approach instead. 
+The following recommendations are made for continuation of the project:
+
+\begin{itemize}
+    \setlength\itemsep{-0.3em} %MAKES THE GAP SMALLER BETWEEN 2 ITEMS
+    \item It is only possible to implement FFT when choosing an FPGA with a sufficient amount of local memory to store all the samples necessary for the FFT. 
+    \item Implement fixed point notation and computation from scratch.
+    \item Look into the clock signals from the FPGA board to the main PCB
+    \item Investigate if there are other FPGA boards available which do support the needed 24.576 MHz output frequency on their GPIO pins and have overall better specifications that suite this project. 
+    \item Indicate on the UI screen which option is selected
+\end{itemize}

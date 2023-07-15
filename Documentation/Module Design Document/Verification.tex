@@ -1,20 +1,25 @@
 \section{Method}
-Time has not yet allowed for the creation of a neat and detailed test plan. However, before the voltage regulator boards are soldered onto the main board, they need to be thoroughly tested to verify their functionality. The plan is to create a test table for this purpose, similar to the specification of ICs in datasheets.
+Time has not yet allowed for the creation of a very neat and detailed total test plan. As described in the paragraphs below, the individual vertical riser boards and voltage regulator were thoroughly tested to ensure proper functionality. Subsequently, the main board was tested. In parallel, the firmware was also tested.
 
 \subsection{Hardware}
 \subsubsection{Voltage regulators}
 For the voltage regulator modules, the following parameters need to be measured to demonstrate proper operation:
--Thorough visual inspection, especially focusing on the soldering process. This includes checking for short circuits, open connections, solder balls, and other defects.
--The converter should be powered from a lab power supply with low current limit settings. In case of a short circuit or other module defect, the dissipated power will be limited, allowing for the identification and resolution of the issue.
--The output voltage of the converter should be observed using an oscilloscope. Attention should be paid to the absolute accuracy and the amplitude of the ripple voltage.
--The temperature of the PCBA should be monitored to ensure that the module does not get too hot, which could potentially shorten its lifespan.
+\begin{itemize}
+\item Thorough visual inspection, especially focusing on the soldering process. This includes checking for short circuits, open connections, solder balls, and other defects.
+\item The converter should be powered from a lab power supply with low current limit settings. In case of a short circuit or other module defect, the dissipated power will be limited, allowing for the identification and resolution of the issue.
+\item The output voltage of the converter should be observed using an oscilloscope. Attention should be paid to the absolute accuracy and the amplitude of the ripple voltage.
+\item The temperature of the PCBA should be monitored to ensure that the module does not get too hot, which could potentially shorten its lifespan.
+\end{itemize}  
 
 \subsubsection{Main board}
 The functionality of the main board should be verified in the following manner:
--Perform a thorough visual inspection, with a focus on the soldering process. Check for short circuits, open connections, solder balls, and other defects.
--Power the main board from a lab power supply with low current limit settings. This will limit the dissipated power in case of a short circuit or module defect, enabling identification and resolution of the issue. A thermal camera can be used to inspect the PCBA for hotspots.
--Verify the presence and correctness of all power rails.
--Next, apply a known signal (e.g., a 1kHz sinusoidal waveform with an amplitude of 100mV) to the various inputs of the audio-DSP. If no filters are selected and the audio-DSP is essentially in a pass-through state, the same signal should appear on the selected outputs. The accuracy of this signal can be verified using an audio analyzer such as the AP SYS 2700.
+\begin{itemize}
+\item Perform a thorough visual inspection, with a focus on the soldering process. Check for short circuits, open connections, solder balls, and other defects.
+\item Power the main board from a lab power supply with low current limit settings. This will limit the dissipated power in case of a short circuit or module defect, enabling identification and resolution of the issue. A thermal camera can be used to inspect the PCBA for hotspots.
+\item Verify the presence and correctness of all power rails.
+\item Verify that the output of the GPIO pins corresponds to the desired outcome.(e.g. check the SLCK).
+\item Next, apply a known signal (e.g., a 1kHz sinusoidal waveform with an amplitude of 100mV) to the various inputs of the audio-DSP. If no filters are selected and the audio-DSP is essentially in a pass-through state, the same signal should appear on the selected outputs. The accuracy of this signal can be verified using an audio analyzer such as the AP SYS 2700.
+\end{itemize}  
 
 \subsection{Firmware}
 The firmware can be tested by simulating the VHDL code in Modelsim. For this .do files are made to force input signals. Due to time constrains only the I2S decoder and encoder have been tested with real audio. 
@@ -26,68 +31,93 @@ For testing the I2S decoder and encoder, they are wired in series. So when a ran
 The I2C master is tested by simply writing and reading data with the protocol and verifying that the protocol works correctly according to the I2C protocol standards. 
 
 \subsubsection{State-space BPF}
-The state-space BPF is tested by inputting a sine wave outputted from a sine wave generator. By using a sine wave as an input it is very easy to expect the outcome. For instance when having the BPF resonance frequency at 1kHz and inputting a 1kHz sine wave, it is expected that the output sine wave has no attenuation compared to the input sine wave. And when the frequency of the input sine wave does not match that of the BPF resonance frequency, it will be attenuated. 
+The state-space BPF is tested by inputting a sine wave outputted from a sine wave generator. By using a sine wave as an input it is very easy to expect the outcome. For instance when having the BPF resonance frequency at 1kHz and inputting a 1kHz sine wave, it is expected that the output sine wave has the same amplitude compared to the input sine wave. And when the frequency of the input sine wave does not match that of the BPF resonance frequency, it will be attenuated. 
+
+The best way to check if the band-pass filter works is by changing the frequency of the input sine wave over time to create a kind of frequency spectrum of the band-pass filter response. 
+
+\subsubsection{Effects}
+All the effects are tested by inputting a sine wave to the effect and looking at the result. This approach with a simple sine wave input is chosen because with a sine wave input it is very simple to predict the outcome of the effect and then confirm if it works as expected.
 
 \section{Results}
 
 \subsection{Hardware}
 
-\subsubsection{Buck}
-Due to the limited time, this verification has not been done yet.
+\subsubsection{Main board}
+\subparagraph{Inspection} Before connecting every module together and placing every component on the main board it is indeed ascertain that the board has flux and solder paste residue together with solder balls that can cause short circuits, therefore the PCBA will be cleaned in the ultrasonic bath, before doing this it is important to know which components are suitable for this. The relays and electrolytic capacitors are not suitable for this, therefore they are soldered after cleaning.  visual inspection has been done on the main board and the power delivery modules. In the second visual inspection there are no signs of shorts and the components are connected properly.
+\subparagraph{Visual inspection} 
 
-\subsubsection{SEPIC}
-The output voltage of the SEPIC with a 1A load is shown in figure \ref{fig:Verification_SEPIC_1A_Load}. It can be observed that the ripple voltage reasonably matches the calculated and simulated values. In figure \ref{fig:Verification_SEPIC_1A_Load}, some very high-frequency voltage spikes are visible on the output, but the author of this report is convinced that this is due to the large ground loop during measurement because no ground spring was available for the oscilloscope probe at Fontys. For this reason, the author quickly improvised a solution using a piece of wire, as shown in figure \ref{fig:Improvised_GND_spring}. This reduced the measured ripple voltage from over 40mVpp to approximately 4mVpp.
+Before connecting every module together and placing every component on the main board it is indeed ascertain that the board has flux and solder paste residue together with solder balls that can cause short circuits, therefore the PCBA will be cleaned in the ultrasonic bath, before doing this it is important to know which components are suitable for this. The relays and electrolytic capacitors are not suitable for this, therefore they are soldered after cleaning.  visual inspection has been done on the main board and the power delivery modules. In the second visual inspection there are no signs of shorts and the components are connected properly.
 
-\subsubsection{Linear voltage regulator}
-After conducting a thorough visual inspection, it became apparent that a thorough cleaning of the PCBA was necessary. This was because the solder paste used left behind a significant amount of residue. Therefore, the linear voltage regulators were cleaned in an ultrasonic cleaner.
-
-Subsequently, the linear regulators were connected to a lab power supply with current limiting. However, it quickly became evident that the regulators were not functioning properly. After performing several simulations in LTspice, it was suspected that the LEDs, which serve as low-noise voltage references, might have been soldered incorrectly. However, after consulting the datasheet again with several group members, it was confirmed that the LEDs were indeed soldered correctly according to the datasheet.
+\subparagraph{Vertical riser board}
+The vertical riser boards have to be tested before placing it on the main board. These have been tested individually on ripple(not for the linear regulators, no equipment available to measure), output voltage and temperature. See \ref{Appendix-Vertical riser boards} Vertical riser boards in chapter \ref{chap:Appendix-Verification} verification for the outcomes.  \subparagraph{SEPIC} For the SEPIC the output ripple is ~5mV and output is -15.11V which is within specs, the temperature is 70°C at 1A which is feasible but if there is more power required an extra fan can be attached to cool the converter more. 
+\subparagraph{Buck converters} The buck converters(see \ref{pdf:5V Buck converter} 5V buck - \ref{pdf:15V Buck converter} 15V buck) in the beginning all had an output of ~1v. This was because the feedback resistors were exchanged together. Therefore they had to be exchanged again and the problem is solved. The output voltage of all the buck converters are within spec. The ripple is ~8-10mV which is also within spec range. The temperature of all the buck converters are below 45°C at 1A. 
+\subparagraph{Linear voltage regulators} After performing several simulations in LTspice, it was suspected that the LEDs, which serve as low-noise voltage references, might have been soldered incorrectly. However, after consulting the datasheet again with several group members, it was confirmed that the LEDs were indeed soldered correctly according to the datasheet.
 
 Since no other plausible causes emerged after further investigation, it was decided to desolder one of the LEDs and measure it out of circuit using a multimeter to determine its polarity and threshold voltage. To the astonishment of the group, it was discovered that the Broadcom datasheet for the HSMH-C170 LED did not match the LEDs actually supplied. The polarity marking in the datasheet was the exact opposite of the actual component. It is unknown whether an incorrect batch was delivered or if the datasheet itself is genuinely incorrect.
 %https://nl.mouser.com/datasheet/2/678/AV02_0551EN_DS_HSMx_Cxxx_25Mar2022-1827675.pdf
+The output of the linear regulators (see \ref{pdf:12V linear regulator-1}12V lin reg up and till \ref{pdf:5V linear regulator-2}5V lin reg) are within specs and the temperature is 80°C at 1A, they won't be conducting more current than that so the temp is within spec range.
 
-\subsubsection{Main board}
-Due to the limited time, this verification has not been done yet.
+\paragraph{Main board power}
+The PCBA is inspected and no short circuit is detected. The next step is to check all the power modules within the PCBA with current limiting, so that the board will not be catch on fire if there is still somehow a short. This has been done with a lab bench power supply limited to 1A. All the power rails are tested and every power delivery module is working properly at the desired voltage. The 12V buck converter that is going to the FPGA is tested separately first with four 33 resistors connected in parallel which will give 1.5A of current at 12V. The buck is still below 50°C. Therefore it is safe to power the fpga with the 12V buck converter
+
+\paragraph{FPGA GPIO}
+After doing visual inspection and vertical riser board inspection, it is safe to connect the fpga with the main board using flat cables. Unfortunately after connecting the the main board with the fpga it is stated that it didn't work after connecting the laptop using an RCA-cable to the audio dsp. The first thing that has been checked is the output of the clock going to the mainboard from the fpga. Doing so it has been identified that indeed the clock was not being transmitted correctly via the gpio pins of the DE1-SOC. In figure \ref{fig:Appendix-24.576MHz clock output} 24.576MHz clock output it is clearly visible that the 24.567MHz signal is clearly filtered due to parasitic capacitances in the signal path. Those effecting the paths are the following components Mosfets, diodes and the 47 ohm resistor at the GPIO pins. In figure \ref{fig:Appendix-50MHz clock output} 50MHz clock output is visible that the signal is even more weakened which makes it evident it is due to parasitic capacitances. In figure \ref{fig:Appendix-1MHz clock output} 1MHz clock output it is visible that the rising edge of the clock is already behaving capacitive. To be sure that the underlying issue is on all boards and not specifically on this board we have tested the clock output on another board and unfortunately the outcome is the same.
 
 \subsection{Firmware}
 \subsubsection{I2S encoder and decoder}
-The results of this test can be found in figure \ref{fig:i2s-dec-enc}. These results show that the I2S encoder and decoder work as expected. 
-
-\begin{figure}[!ht]
-    \includegraphics[width=\linewidth, keepaspectratio]{Audio_sampler_result.png}
-    \caption{Simulation result of I2S decoder and encoder}
-    \label{fig:i2s-dec-enc}
-\end{figure}
+The results of this test can be found in figure \ref{fig:sim_result_i2s_dec_enc} in \nameref{chap:appendix-G-simulation-results}. These results show that the I2S encoder and decoder work as expected. 
 
 \subsubsection{I2C master}
-The results can be seen in figure \ref{fig:i2c-master}. In this result it can be seen that the I2C master works as expected according to the protocol standards.
+The results can be seen in figure \ref{fig:sim_result_i2c-master} in \nameref{chap:appendix-G-simulation-results}. In this result it can be seen that the I2C master works as expected according to the protocol standards.
 
-\begin{figure}[!ht]
-    \includegraphics[width=\linewidth, keepaspectratio]{I2C_master_result.png}
-    \caption{Simulation result of I2C master}
-    \label{fig:i2c-master}
-\end{figure}
+\subsubsection{Sampler}
+In order to be able to sample audio it is necessary to use both the I2S decoder and encoder and the I2C master. After both these blocks have been verified in the simulations, they have been tested together in the De1-SoC FPGA board to form a sampler. This sampler sampled the audio via the FPGA board, decoded the samples with the I2S decoder. Then the decoded data would simply go directly to the I2S encoder and after that to the DAC so it was possible to hear the audio that has been inputted in the FPGA board. It has been verified that this works on the De1-SoC FPGA board.
 
 \subsubsection{State-space BPF}
-Due to time constrains the BPF has not yet been tested in Modelsim. 
+For testing the state-space BPF it is very easy to see if it works by checking the frequency response. For the test a resonance frequency for BPF of 400Hz is chosen. Then the sine wave changes its frequency every 10ms. The frequency start at 25Hz and steps up in octaves. The end frequency is 51200Hz as this is far beyond the range of the sampling frequency. The result of this test is seen in figure \ref{fig:sim_result_bpf} in \nameref{chap:appendix-G-simulation-results}. 
+
+As expected, the amplitude of the sine wave at the matching resonance frequency of 400Hz is equal to the input amplitude. And when the frequency goes an octave lesser or higher in frequency the amplitude is $\frac{\sqrt{2}}{2}$ times the input amplitude (-3dB). This is a result that is expected from a BPF, therefore it is shown that the BPF works in simulation.
+
+Unfortunately the BPF is not able to work with real audio in the De1-SoC FPGA board for a yet unknown reason. Most likely it is caused by the fact the compiler programs the hardware in such a way that it gives an unexpected result. This could be caused by the use the fixed point package in VHDL, which is used for the computation in the BPF. To overcome this problem it is advised to design the fixed point notation and computation of the BPF from scratch to have full control over how the compiler programs the hardware. 
+
+\subsubsection{Effects}
+\paragraph{Volume control}
+In the simulation of the volume control effect a sine wave is continuously input to the effect and the gain parameter changes over time. The gain starts at the smallest amount of gain possible for the effect, e.g. -87dB and ends at the largest amount of gain possible for the effect, e.g. 40dB. Because the volume control has a saturation at the maximum and minimum of the variable range, it is expected that it will clip at too high gains. 
+
+The results of the volume control effect simulation can be seen in figure \ref{fig:sim_result_vol_ctrl} in \nameref{chap:appendix-G-simulation-results}. As can be seen the signal is being amplified correctly by the gain and the signal will be clipped at too high gains. Therefore it has been verified that the volume control effect works in simulation.
+
+The volume control has been tested with the De1-SoC FPGA board and the volume of the audio signal could be adjusted as expected. The test with the board consisted of the whole sampling system, e.g. I2S encoder, I2S decoder and I2C master blocks. 
+
+\paragraph{Delay}
+For the delay effect an SDRAM controller had to be written using VHDL. The code has been tested using modelsim and works as expected. previous to making the controller work with 24 bit samples the controller has been tested with 16 bit data on the De1-Soc board. There we where able to store data in the SDRAM and than read it to a seven segment display. the delay effect it self has been written but not yet verified. This is because some issues with the DE1-Soc board as mentioned in other verification chapters.
 
 \section{Conclusions}
-
 \subsection{Hardware}
 
-\subsubsection{Buck}
-Due to the limited time, this verification has not been done yet.
-
+\subsubsection{Main board}
+The working of the main board has been verified and works. All the local voltages have been checked and now short is found. To see if the board fully works according to specification some firmware still needs to be implemented. Some IC's still have to be setup to check if they work.
 \subsubsection{SEPIC}
 The SEPIC appears to be functioning well after some quick measurements. With an input voltage of +12V, it generates a stable -15V output voltage, and the voltage ripple remains nearly constant regardless of the output current. This aligns with the calculations and simulations. Additionally, the amplitude of the output ripple voltage closely matches the calculated and simulated values.
 
 \subsubsection{Linear voltage regulator}
-Due to the limited time, this verification has not yet been completed.
+The linear voltage regulator appears to be functioning as intended, the 5V regulators powered by the +8V input of the buck converter, the +12V linear regulators are powered by +-15V buck converters and have all the desired output voltage. These are:
+ 
+All of these linear regulators have been tested and verified. This can be viewed in \ref{Appendix-Vertical riser boards} Vertical riser boards. The voltages and temperatures are well within desired specs. The output ripple is not measurable with the equipment we have on school so these cannot be verified.
 
-\subsubsection{Main board}
-Due to the limited time, this verification has not been done yet.
+\subsubsection{Buck converters}
+The buck converters appears to be functioning as intended, all of the buck converters are powered by the +24V input of the power supply and have all the desired output voltage. These are:
+\begin{itemize}
+\item 5V buck converter
+\item 8V buck converter
+\item 2x 12V buck converter
+\item 15V buck converter
+\end{itemize}  
+All of these buck converters have been tested and verified. This can be viewed in \ref{Appendix-Vertical riser boards} Vertical riser boards. The voltages and temperatures are well within desired specs. The output ripple is ~8-10mV respectively which is very close to what the datasheet has provided. 
+
 
 \subsection{Firmware}
-The I2S decoder, I2S encoder and I2C master work as expected. Therefore it is possible to sample audio using the ADC and DAC of the FPGA board. This has been tested and verified that this works. 
+The I2S decoder, I2S encoder and I2C master work as expected. Therefore it is possible to sample audio using the ADC and DAC of the FPGA board. This has been tested and verified that this works on the De1-SoC FPGA board. 
 
-Due to time constrains further testing and implementation of the effects has not been conducted. 
+The BPF and volume control effect work in simulation as expected. Unfortunately only the volume control effect works with the whole sampling system on the De1-SoC FPGA board. 
+
+There where various unexpected and unknown bugs when trying to implement the effects in the De1-SoC FPGA board. This could have been caused by the fact that all effects use the fixed point package for computing the variables in fixed point. But it could also be caused by the lack of memory capacity of the De1-SoC FPGA board. Therefore it is advised to first remake all the effects with a hand-written fixed point notation and computation VHDL code. And secondly it is advised to look into better FPGA boards that have much better computation power and memory capacity.

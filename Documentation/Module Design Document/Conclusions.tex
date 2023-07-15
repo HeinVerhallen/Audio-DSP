@@ -1,1 +1,16 @@
-Due to time constrains the hardware main board has not yet been delivered and therefore it could not be assembled and tested altogether. The firmware is also not yet implemented so not every effect could have been tested. Therefore it is not yet known whether the system works correctly or not. This has to be verified once the PCBs are ready and the firmware has been implemented in the FPGA. 
+The hardware main board has been tested for as far as possible and works, the measured voltages are as expected and no shorts are found. Also all the vertical riser boards have been tested and validated as shown in the verification chapter, te results are in line with the simulation and calculation results.
+
+During testing of the DE1-SOC board a problem has been found. The clock signal that goes from the FPGA to the DACs and ADCs is not working properly. The output of the DE1-SOC FPGA board seems to be to capacitive due to parasitics of the board design and therefore the clock signal gets filtered down and is not picked up by the ADCs and DACs. The schematic of the FPGA board shows that there is a 47 Ohm series resistor, this in combination with the RDS(on) of the internal switching FETs of the Cyclone-V and the capacitance of the TVS diode in parallel with the parasitic capacitance of the PCB seems to cause the clock signal to be filtered out as an RC-LPF. The measurements where done on the DE1-SOC board that was not connected to the Main board of the DSP to exclude our main board and flat cable from this conclusion.
+
+The I2S decoder, I2S encoder and I2C master work as expected. Therefore it is possible to
+sample audio using the ADC and DAC of the FPGA board. This has been tested and verified
+that this works on the De1-SoC FPGA board. 
+
+The BPF and volume control effect work in simulation as expected. Unfortunately only the
+volume control effect works with the whole sampling system on the De1-SoC FPGA board.
+
+There where various unexpected and unknown bugs when trying to implement the effects in
+the DE1-SoC FPGA board. This could have been caused by the fact that all effects use the fixed
+point package for computing the variables in fixed point. But it could also be caused by the lack
+of memory capacity of the De1-SoC FPGA board. 
+

@@ -1,20 +1,65 @@
-\chapter*{Appendix F: Verification} \label{chap:Appendix-C-Verification}
-\addcontentsline{toc}{chapter}{Appendix F: Verification}  
+\chapter*{Appendix F: Verification} \label{chap:Appendix-Verification}
+\addcontentsline{toc}{chapter}{Appendix F: Verification}
+In the next page the vertical riser boards will be shown in this way:
 
-\section*{Sepic converter load} \label{Appendix-SEPIC-converter-load}
-\phantomsection
-\addcontentsline{toc}{section}{Sepic converter load}
+\begin{itemize}
+    \item Vertical riser boards
+   \begin{itemize}
+    \item -15V Sepic
+    \item 12V linear regulator-1
+    \item 12V linear regulator-2
+    \item 5V linear regulator-1
+    \item 5V linear regulator-2
+    \item 5V buck converter
+    \item 8V buck converter
+    \item 12V buck converter
+    \item 15V buck converter
+   \end{itemize}  
+	\item DE1-SOC GPIO Clock output
+	\begin{itemize}
+	\item 24.576MHz clock output
+	\item 50MHz clock output
+	\item 1MHz clock output
+	\end{itemize}
+	\item Ground spring
+\end{itemize}
+\newpage
+\section{Vertical riser boards} \label{Appendix-Vertical riser boards}
+
+\includepdf[pages=1,scale=.8,pagecommand={\section*{-15V sepic}\label{pdf:Appendix-15V sepic}},linktodoc=true]{Supply verification.pdf}
+\includepdf[pages=2,scale=.8,pagecommand={\section*{12V linear regulator-1}\label{pdf:12V linear regulator-1}},linktodoc=true]{Supply verification.pdf}
+\includepdf[pages=3,scale=.8,pagecommand={\section*{12V linear regulator-2}\label{pdf:12V linear regulator-2}},linktodoc=true]{Supply verification.pdf}
+\includepdf[pages=4,scale=.8,pagecommand={\section*{5V linear regulator-1}\label{pdf:5V linear regulator-1}},linktodoc=true]{Supply verification.pdf}
+\includepdf[pages=5,scale=.8,pagecommand={\section*{5V linear regulator-2}\label{pdf:5V linear regulator-2}},linktodoc=true]{Supply verification.pdf}
+\includepdf[pages=6,scale=.8,pagecommand={\section*{5V Buck converter}\label{pdf:5V Buck converter}},linktodoc=true]{Supply verification.pdf}
+\includepdf[pages=7,scale=.8,pagecommand={\section*{8V Buck converter}\label{pdf:8V Buck converter}},linktodoc=true]{Supply verification.pdf}
+\includepdf[pages=8,scale=.8,pagecommand={\section*{12V Buck converter}\label{pdf:12V Buck converter}},linktodoc=true]{Supply verification.pdf}
+\includepdf[pages=9,scale=.8,pagecommand={\section*{15V Buck converter}\label{pdf:15V Buck converter}},linktodoc=true]{Supply verification.pdf}
+
+\newpage
+
+\section{DE1-SOC GPIO Clock output} \label{Appendix-DE1-SOC GPIO Clock output}
 \begin{figure}[!htb]
-    \includegraphics[height=.35\textheight]{SEPIC_1A_load.png}
-    \caption{SEPIC output voltage at 1A load}
-    \label{fig:Verification_SEPIC_1A_Load}
+    \includegraphics[height=.4\textheight]{25MHz_clock_fpga_GPIO0_0.png}
+   \label{fig:Appendix-24.576MHz clock output}
+   \caption{24.576MHz clock output}
+\end{figure}
+\begin{figure}[!htb]
+    \includegraphics[height=.4\textheight]{50MHz_clock_fpga_GPIO_0_5.png}
+    \caption{50MHz clock output}
+   \label{fig:Appendix-50MHz clock output}
+\end{figure}
+\begin{figure}[!htb]
+    \includegraphics[height=.4\textheight]{1MHz_clock_fpga_GPIO_0_5.png}
+    \caption{1MHz clock output}
+   \label{fig:Appendix-1MHz clock output}
 \end{figure}
 \newpage
 
-\section*{Ground spring} \label{Appendix-Ground-spring}
-\addcontentsline{toc}{section}{Ground spring}
+
+\section{Ground spring} \label{Appendix-Ground-spring}
 \begin{figure}[!htb]
-    \includegraphics[height=.8\textheight]{Improvised_GND_spring.png}
+    \includegraphics[height=.3\textheight]{Improvised_GND_spring.png}
     \caption{Improvised GND spring}
     \label{fig:Improvised_GND_spring}
 \end{figure}
